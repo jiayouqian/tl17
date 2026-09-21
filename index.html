@@ -1519,21 +1519,8 @@ function goManual() {
 }
 
 function goHome() {
-  // 直接看当前显示的是哪个版本的页面
-  var isOld = document.getElementById('page-old').classList.contains('active') || 
-              document.getElementById('page-gifts-old').classList.contains('active') || 
-              document.getElementById('page-manual-old').classList.contains('active');
-  var isNew = document.getElementById('page-new').classList.contains('active') || 
-              document.getElementById('page-gifts').classList.contains('active') || 
-              document.getElementById('page-manual').classList.contains('active');
-  
-  if (isOld) {
-    switchPage('old');
-  } else if (isNew) {
-    switchPage('new');
-  } else {
-    switchPage('home');
-  }
+  // 点首页永远跳回版本选择首页
+  switchVersion('home');
 }
 
 function goGroup() {
