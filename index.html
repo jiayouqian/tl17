@@ -276,7 +276,7 @@
 <div class="wrap">
 
   <div class="topbar">
-    <b id="topbar-title">天龙17职业</b>
+    <b id="topbar-title">天龙17职业港版</b>
     <small id="topbar-sub">双版本任选 · 畅玩武侠</small>
   </div>
 
@@ -1385,19 +1385,19 @@
 </div>
 
   <div class="tabbar">
-    <button class="active" data-page="home" onclick="switchPage('home')">
+    <button class="active" data-page="home" onclick="goHome()">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       首页
     </button>
-    <button data-page="gifts" onclick="switchPage('gifts')">
+    <button data-page="gifts" onclick="goGifts()">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
       礼包码
     </button>
-    <button data-page="manual" onclick="switchPage('manual')">
+    <button data-page="manual" onclick="goManual()">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       游戏手册
     </button>
-    <button data-page="group" onclick="switchPage('group')">
+    <button data-page="group" onclick="goGroup()">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
       客服
     </button>
@@ -1463,7 +1463,10 @@ function switchPage(name) {
   window.scrollTo(0, 0);
 }
 
+var currentVersion = 'home'; // 'home' | 'new' | 'old'
+
 function switchVersion(v) {
+  currentVersion = v;
   if (v === 'new') {
     document.getElementById('topbar-title').textContent = '魔幻天龙17职业';
     document.getElementById('topbar-sub').textContent = '0.01折新服 · 17职业';
@@ -1473,10 +1476,32 @@ function switchVersion(v) {
     document.getElementById('topbar-sub').textContent = '超高比例1:4000 · 17职业';
     switchPage('old');
   } else if (v === 'home') {
-    document.getElementById('topbar-title').textContent = '天龙17职业';
+    document.getElementById('topbar-title').textContent = '天龙17职业港版';
     document.getElementById('topbar-sub').textContent = '双版本任选 · 畅玩武侠';
     switchPage('home');
   }
+}
+
+function goHome() {
+  if (currentVersion === 'new') switchPage('new');
+  else if (currentVersion === 'old') switchPage('old');
+  else switchPage('home');
+}
+
+function goGifts() {
+  if (currentVersion === 'new') switchPage('gifts');
+  else if (currentVersion === 'old') switchPage('gifts-old');
+  else switchPage('gifts');
+}
+
+function goManual() {
+  if (currentVersion === 'new') switchPage('manual');
+  else if (currentVersion === 'old') switchPage('manual-old');
+  else switchPage('manual');
+}
+
+function goGroup() {
+  switchPage('group');
 }
 
 function showCopyModal() {
