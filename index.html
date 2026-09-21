@@ -282,43 +282,44 @@
 
   <!-- ===== 版本选择页（首页） ===== -->
   <div class="page active" id="page-home">
-    <div class="hero">
-      <img class="hero-bg" src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Uu4fbUJwJoCAjSxJqrMc7WRdnbb" alt="天龙17职业">
+    <div style="padding:40px 20px 20px; text-align:center;">
+      <div style="font-size:14px; color:var(--ink-dim); letter-spacing:4px; margin-bottom:8px;">17职业 · 双版本任选</div>
+      <h1 style="font-size:32px; color:var(--gold); font-weight:900; letter-spacing:6px; line-height:1.2;">天龙手游</h1>
+      <div style="font-size:16px; color:var(--ink); margin-top:8px; opacity:.8;">选你喜欢的版本，开始畅玩</div>
     </div>
 
-    <div style="padding:16px; margin-top:10px;">
-      <div style="font-size:14px; color:var(--ink-dim); margin-bottom:14px; text-align:center;">请选择你要玩的版本</div>
-      
+    <div style="padding:0 16px; margin-top:20px;">
       <!-- 新版卡片 -->
-      <a href="#" onclick="switchVersion('new');return false;" style="display:block; padding:20px; background:linear-gradient(135deg, rgba(232,182,76,.15), rgba(232,182,76,.05)); border:1px solid rgba(232,182,76,.3); border-radius:16px; text-decoration:none; color:var(--ink); margin-bottom:14px;">
-        <div style="display:flex; align-items:center; margin-bottom:8px;">
-          <span style="font-size:28px;">🆕</span>
-          <b style="font-size:18px; color:var(--gold); margin-left:10px;">魔幻天龙 · 新版</b>
+      <a href="#" onclick="switchVersion('new');return false;" style="display:block; padding:24px; background:linear-gradient(135deg, rgba(232,182,76,.2), rgba(232,182,76,.05)); border:1px solid rgba(232,182,76,.4); border-radius:16px; text-decoration:none; color:var(--ink); margin-bottom:16px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:0; right:0; padding:6px 12px; background:var(--gold); color:#000; font-size:11px; font-weight:700; border-radius:0 16px 0 12px;">推荐</div>
+        <div style="display:flex; align-items:center; margin-bottom:12px;">
+          <span style="font-size:32px;">🆕</span>
+          <b style="font-size:20px; color:var(--gold); margin-left:12px;">魔幻天龙 · 新版</b>
         </div>
-        <div style="font-size:13px; color:var(--ink-dim); line-height:1.7;">
+        <div style="font-size:13px; color:var(--ink-dim); line-height:1.8;">
           ✅ 0.01折服 · 1元=648额度<br>
           ✅ 上线送2000万绑元 + 5重楼 + 6神兽<br>
           ✅ 副本活动掉充值卡，每天白嫖几万
         </div>
-        <div style="margin-top:12px; text-align:right; font-size:13px; color:var(--gold); font-weight:600;">进入新版 ›</div>
+        <div style="margin-top:16px; text-align:right; font-size:14px; color:var(--gold); font-weight:700;">进入新版 ›</div>
       </a>
 
       <!-- 老版卡片 -->
-      <a href="#" onclick="switchVersion('old');return false;" style="display:block; padding:20px; background:linear-gradient(135deg, rgba(100,180,255,.15), rgba(100,180,255,.05)); border:1px solid rgba(100,180,255,.3); border-radius:16px; text-decoration:none; color:var(--ink);">
-        <div style="display:flex; align-items:center; margin-bottom:8px;">
-          <span style="font-size:28px;">🎮</span>
-          <b style="font-size:18px; color:#64b4ff; margin-left:10px;">天龙畅玩版 · 老版</b>
+      <a href="#" onclick="switchVersion('old');return false;" style="display:block; padding:24px; background:linear-gradient(135deg, rgba(100,180,255,.2), rgba(100,180,255,.05)); border:1px solid rgba(100,180,255,.4); border-radius:16px; text-decoration:none; color:var(--ink);">
+        <div style="display:flex; align-items:center; margin-bottom:12px;">
+          <span style="font-size:32px;">🎮</span>
+          <b style="font-size:20px; color:#64b4ff; margin-left:12px;">天龙畅玩版 · 老版</b>
         </div>
-        <div style="font-size:13px; color:var(--ink-dim); line-height:1.7;">
+        <div style="font-size:13px; color:var(--ink-dim); line-height:1.8;">
           ✅ 超高比例 · 最高1:4000+<br>
           ✅ 上线送千万元宝 + 6血脉神兽 + 6重楼<br>
           ✅ 地宫5层无限刷绑元 · BOSS爆高级幻化
         </div>
-        <div style="margin-top:12px; text-align:right; font-size:13px; color:#64b4ff; font-weight:600;">进入老版 ›</div>
+        <div style="margin-top:16px; text-align:right; font-size:14px; color:#64b4ff; font-weight:700;">进入老版 ›</div>
       </a>
     </div>
 
-    <div class="tip" style="margin:0 16px;">⚠️ 务必通过本页链接注册，后续充值/礼包问题才能售后！</div>
+    <div class="tip" style="margin:20px 16px 0;">⚠️ 务必通过本页链接注册，后续充值/礼包问题才能售后！</div>
   </div>
 
   <!-- ===== 魔幻新版页面 ===== -->
@@ -327,6 +328,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       版本选择
     </a>
+
+    <div class="hero">
+      <img class="hero-bg" src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Uu4fbUJwJoCAjSxJqrMc7WRdnbb" alt="魔幻天龙17职业">
+    </div>
 
     <div class="pitch">
       <div class="pitch-item"><b>0.01折</b><span>1元=648额度</span></div>
