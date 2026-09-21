@@ -280,12 +280,53 @@
     <small>0.01折新服 · 17职业</small>
   </div>
 
-  <!-- ===== 首页 ===== -->
+  <!-- ===== 版本选择页（首页） ===== -->
   <div class="page active" id="page-home">
-
     <div class="hero">
-      <img class="hero-bg" src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Uu4fbUJwJoCAjSxJqrMc7WRdnbb" alt="魔幻天龙17职业">
+      <img class="hero-bg" src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Uu4fbUJwJoCAjSxJqrMc7WRdnbb" alt="天龙17职业">
     </div>
+
+    <div style="padding:16px; margin-top:10px;">
+      <div style="font-size:14px; color:var(--ink-dim); margin-bottom:14px; text-align:center;">请选择你要玩的版本</div>
+      
+      <!-- 新版卡片 -->
+      <a href="#" onclick="switchVersion('new');return false;" style="display:block; padding:20px; background:linear-gradient(135deg, rgba(232,182,76,.15), rgba(232,182,76,.05)); border:1px solid rgba(232,182,76,.3); border-radius:16px; text-decoration:none; color:var(--ink); margin-bottom:14px;">
+        <div style="display:flex; align-items:center; margin-bottom:8px;">
+          <span style="font-size:28px;">🆕</span>
+          <b style="font-size:18px; color:var(--gold); margin-left:10px;">魔幻天龙 · 新版</b>
+        </div>
+        <div style="font-size:13px; color:var(--ink-dim); line-height:1.7;">
+          ✅ 0.01折服 · 1元=648额度<br>
+          ✅ 上线送2000万绑元 + 5重楼 + 6神兽<br>
+          ✅ 副本活动掉充值卡，每天白嫖几万
+        </div>
+        <div style="margin-top:12px; text-align:right; font-size:13px; color:var(--gold); font-weight:600;">进入新版 ›</div>
+      </a>
+
+      <!-- 老版卡片 -->
+      <a href="#" onclick="switchVersion('old');return false;" style="display:block; padding:20px; background:linear-gradient(135deg, rgba(100,180,255,.15), rgba(100,180,255,.05)); border:1px solid rgba(100,180,255,.3); border-radius:16px; text-decoration:none; color:var(--ink);">
+        <div style="display:flex; align-items:center; margin-bottom:8px;">
+          <span style="font-size:28px;">🎮</span>
+          <b style="font-size:18px; color:#64b4ff; margin-left:10px;">天龙畅玩版 · 老版</b>
+        </div>
+        <div style="font-size:13px; color:var(--ink-dim); line-height:1.7;">
+          ✅ 超高比例 · 最高1:4000+<br>
+          ✅ 上线送千万元宝 + 6血脉神兽 + 6重楼<br>
+          ✅ 地宫5层无限刷绑元 · BOSS爆高级幻化
+        </div>
+        <div style="margin-top:12px; text-align:right; font-size:13px; color:#64b4ff; font-weight:600;">进入老版 ›</div>
+      </a>
+    </div>
+
+    <div class="tip" style="margin:0 16px;">⚠️ 务必通过本页链接注册，后续充值/礼包问题才能售后！</div>
+  </div>
+
+  <!-- ===== 魔幻新版页面 ===== -->
+  <div class="page" id="page-new">
+    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      版本选择
+    </a>
 
     <div class="pitch">
       <div class="pitch-item"><b>0.01折</b><span>1元=648额度</span></div>
@@ -327,6 +368,73 @@
       <!-- 备用链接按钮 -->
       <div style="margin-top:10px; text-align:center;">
         <button onclick="showCopyModal()" style="padding:8px 24px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:20px; font-size:12px; cursor:pointer;">
+          🔗 按钮点不开？点这里复制链接
+        </button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>联系客服</h2></div>
+      <a class="cs-entry" href="#" onclick="switchPage('group');return false;">
+        <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2.5" style="width:24px; height:24px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <div class="cs-text">
+          <b>联系客服</b>
+          <span>QQ群 · 代理QQ · 微信，任选一种联系我</span>
+        </div>
+        <div class="cs-arrow">›</div>
+      </a>
+    </div>
+
+    <div class="tip">特别提醒：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
+  <!-- ===== 畅玩老版页面 ===== -->
+  <div class="page" id="page-old">
+    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      版本选择
+    </a>
+
+    <div class="pitch">
+      <div class="pitch-item"><b>超高比例</b><span>最高1:4000+</span></div>
+      <div class="pitch-item"><b>千万元宝</b><span>上线直接领</span></div>
+      <div class="pitch-item"><b>地宫刷绑</b><span>5层无限刷绑元</span></div>
+    </div>
+
+    <a class="manual-entry" href="#" onclick="switchPage('manual-old');return false;">
+      <div class="left">
+        <b>完整攻略手册</b>
+        <span>升级/战力提升/技能指点/副本活动 全攻略</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>新手礼包码</h2></div>
+      <a class="manual-entry" href="#" onclick="switchPage('gifts-old');return false;">
+        <div class="left">
+          <b>超多礼包免费领</b>
+          <span>6个1 / 6个6 / 6个9 / VIP码 全免费</span>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">
+      <span class="bar"></span><h2 style="display:inline;">立即注册下载</h2>
+      <span style="font-size:24px; color:#64b4ff; font-weight:900; margin-left:16px;">邀请码</span>
+      <b style="color:#64b4ff; font-size:24px; letter-spacing:3px; margin-left:8px;">PPAP</b>
+    </div>
+      <div class="cta">
+        <a class="primary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
+        <a class="download" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载游戏</a>
+        <a class="secondary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">兑换码 / 充值</a>
+      </div>
+
+      <!-- 备用链接按钮 -->
+      <div style="margin-top:10px; text-align:center;">
+        <button onclick="showCopyModalOld()" style="padding:8px 24px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:20px; font-size:12px; cursor:pointer;">
           🔗 按钮点不开？点这里复制链接
         </button>
       </div>
@@ -511,6 +619,104 @@
     <div class="tip">特别提示：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
   </div>
 
+  <!-- ===== 老版礼包码页 ===== -->
+  <div class="page" id="page-gifts-old">
+    <a class="back-btn" href="#" onclick="switchPage('old');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回老版
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>新手礼包码</h2></div>
+      <div style="font-size:13px; color:var(--ink-dim); padding:0 16px 12px;">进入游戏后，左上角"精彩活动"输入兑换码即可领取</div>
+    </div>
+
+    <div class="sec" style="margin:0 16px 12px; background:var(--card); border-radius:12px; padding:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">📦 基础CDK礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">输入：111111（6个1）</p>
+        </div>
+        <button onclick="copyText('111111', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">⚔️ 重楼材料礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">输入：666666（6个6）</p>
+        </div>
+        <button onclick="copyText('666666', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🏆 试炼材料礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">输入：999999（6个9）</p>
+        </div>
+        <button onclick="copyText('999999', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🎁 重开补偿礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">100万绑银 + 7级体力石×3 + 保星石×20</p>
+        </div>
+        <button onclick="copyText('TL12345', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🎁 重楼链补偿</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">重楼链 + 100万绑元 + 100保星符</p>
+        </div>
+        <button onclick="copyText('TL1111', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🎁 延迟公测补偿</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">地煞精华×50 + 新莽神符×10 + 100万绑元</p>
+        </div>
+        <button onclick="copyText('BC888', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+    </div>
+
+    <div class="sec" style="margin:0 16px 12px; background:var(--card); border-radius:12px; padding:16px;">
+      <div style="font-size:14px; color:var(--gold); margin-bottom:12px; font-weight:600;">VIP礼包码（全部免费）</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <button onclick="copyText('VIP666', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">VIP666</button>
+        <button onclick="copyText('VIP888', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">VIP888</button>
+        <button onclick="copyText('TL666', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL666</button>
+        <button onclick="copyText('TL888', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL888</button>
+        <button onclick="copyText('TL999', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL999</button>
+        <button onclick="copyText('TL9999', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL9999</button>
+        <button onclick="copyText('TL520', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL520</button>
+      </div>
+    </div>
+
+    <div class="tip">特别提示：注册账号密码需"小写字母+数字"组合，不可纯数字！邀请码PPAP已自动填好。</div>
+  </div>
+
+  <!-- ===== 老版攻略页 ===== -->
+  <div class="page" id="page-manual-old">
+    <a class="back-btn" href="#" onclick="switchPage('old');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回老版
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>老版完整攻略</h2></div>
+      <div style="padding:16px; background:var(--card); border-radius:12px; font-size:13px; line-height:1.8;">
+        📖 新手起号攻略<br>
+        📈 升级路线攻略<br>
+        ⚔️ 战力提升全攻略（宝石/神器/授印/暗器/神兽/内丹/披风/武魂/经脉/龙纹）<br>
+        🎯 全门派技能指点<br>
+        🎮 副本活动改动<br>
+        🛒 商店新增物品<br>
+        💰 累计充值奖励<br><br>
+        <span style="color:var(--ink-dim);">详细攻略内容正在整理中，敬请期待！</span>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== 进群页 ===== -->
   <div class="page" id="page-group">
     <a class="back-btn" href="#" onclick="switchPage('home');return false;">
@@ -607,6 +813,31 @@
   </div>
 </div>
 
+<!-- 老版备用链接弹窗 -->
+<div id="copyModalOld" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:999; align-items:center; justify-content:center;" onclick="hideCopyModalOld()">
+  <div style="background:var(--card); border-radius:16px; padding:20px; width:90%; max-width:380px;" onclick="event.stopPropagation()">
+    <div style="font-size:16px; color:#64b4ff; margin-bottom:16px; font-weight:600; text-align:center;">🔗 复制链接到浏览器打开</div>
+    
+    <div style="margin-bottom:12px; padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📥 游戏下载链接</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">https://hftl.jinkeyan.wang/HFTL.html</div>
+        <button onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html', this)" style="flex-shrink:0; padding:8px 16px; background:#64b4ff; color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <div style="padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📝 注册 + 兑换码网站</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">http://tlbb.hfynxx.top/PPAP</div>
+        <button onclick="copyText('http://tlbb.hfynxx.top/PPAP', this)" style="flex-shrink:0; padding:8px 16px; background:#64b4ff; color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <button onclick="hideCopyModalOld()" style="width:100%; margin-top:16px; padding:10px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:8px; font-size:14px; cursor:pointer;">关闭</button>
+  </div>
+</div>
+
 <script>
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -615,12 +846,28 @@ function switchPage(name) {
   window.scrollTo(0, 0);
 }
 
+function switchVersion(v) {
+  if (v === 'new') {
+    switchPage('new');
+  } else if (v === 'old') {
+    switchPage('old');
+  }
+}
+
 function showCopyModal() {
   document.getElementById('copyModal').style.display = 'flex';
 }
 
 function hideCopyModal() {
   document.getElementById('copyModal').style.display = 'none';
+}
+
+function showCopyModalOld() {
+  document.getElementById('copyModalOld').style.display = 'flex';
+}
+
+function hideCopyModalOld() {
+  document.getElementById('copyModalOld').style.display = 'none';
 }
 </script>
 
