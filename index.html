@@ -1482,23 +1482,58 @@ function switchVersion(v) {
   }
 }
 
-function goHome() {
-  if (currentVersion === 'new') switchPage('new');
-  else if (currentVersion === 'old') switchPage('old');
-  else switchPage('home');
-}
-
 function goGifts() {
-  alert('当前版本: ' + currentVersion);
-  if (currentVersion === 'new') switchPage('gifts');
-  else if (currentVersion === 'old') switchPage('gifts-old');
-  else switchPage('gifts');
+  // 直接看当前显示的是哪个版本的页面
+  var isOld = document.getElementById('page-old').classList.contains('active') || 
+              document.getElementById('page-gifts-old').classList.contains('active') || 
+              document.getElementById('page-manual-old').classList.contains('active');
+  var isNew = document.getElementById('page-new').classList.contains('active') || 
+              document.getElementById('page-gifts').classList.contains('active') || 
+              document.getElementById('page-manual').classList.contains('active');
+  
+  if (isOld) {
+    switchPage('gifts-old');
+  } else if (isNew) {
+    switchPage('gifts');
+  } else {
+    switchPage('gifts');
+  }
 }
 
 function goManual() {
-  if (currentVersion === 'new') switchPage('manual');
-  else if (currentVersion === 'old') switchPage('manual-old');
-  else switchPage('manual');
+  // 直接看当前显示的是哪个版本的页面
+  var isOld = document.getElementById('page-old').classList.contains('active') || 
+              document.getElementById('page-gifts-old').classList.contains('active') || 
+              document.getElementById('page-manual-old').classList.contains('active');
+  var isNew = document.getElementById('page-new').classList.contains('active') || 
+              document.getElementById('page-gifts').classList.contains('active') || 
+              document.getElementById('page-manual').classList.contains('active');
+  
+  if (isOld) {
+    switchPage('manual-old');
+  } else if (isNew) {
+    switchPage('manual');
+  } else {
+    switchPage('manual');
+  }
+}
+
+function goHome() {
+  // 直接看当前显示的是哪个版本的页面
+  var isOld = document.getElementById('page-old').classList.contains('active') || 
+              document.getElementById('page-gifts-old').classList.contains('active') || 
+              document.getElementById('page-manual-old').classList.contains('active');
+  var isNew = document.getElementById('page-new').classList.contains('active') || 
+              document.getElementById('page-gifts').classList.contains('active') || 
+              document.getElementById('page-manual').classList.contains('active');
+  
+  if (isOld) {
+    switchPage('old');
+  } else if (isNew) {
+    switchPage('new');
+  } else {
+    switchPage('home');
+  }
 }
 
 function goGroup() {
