@@ -1489,6 +1489,7 @@ function goHome() {
 }
 
 function goGifts() {
+  alert('当前版本: ' + currentVersion);
   if (currentVersion === 'new') switchPage('gifts');
   else if (currentVersion === 'old') switchPage('gifts-old');
   else switchPage('gifts');
