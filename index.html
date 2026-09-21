@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f0c09'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='%23e8b64c' font-weight='900'%3E天%3C/text%3E%3C/svg%3E">
+<title>魔幻天龙17职业 · 0.01折新服</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --gold: #e8b64c;
+    --gold-light: #f5d78a;
+    --gold-dark: #b8842a;
+    --bg: #0f0c09;
+    --card: #1a1510;
+    --card2: #221b13;
+    --ink: #f0e6d2;
+    --ink-dim: #9c8763;
+    --red: #c0392b;
+  }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6;
+  }
+  .wrap { max-width:480px; margin:0 auto; padding-bottom:80px; }
+
+  /* ===== 顶部标题栏 ===== */
+  .topbar {
+    position:sticky; top:0; z-index:100;
+    background:rgba(15,12,9,.92); backdrop-filter:blur(12px);
+    padding:12px 16px; text-align:center;
+    border-bottom:1px solid rgba(232,182,76,.15);
+  }
+  .topbar b { font-size:16px; color: var(--gold); letter-spacing:2px; }
+  .topbar small { display:block; font-size:10px; color:var(--ink-dim); margin-top:2px; }
+
+  .page { display:none; }
+  .page.active { display:block; }
+
+  /* ===== Hero ===== */
+  .hero { position:relative; overflow:hidden; }
+  .hero-bg { width:100%; display:block; }
+  .hero-mask {
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(15,12,9,.1) 0%,rgba(15,12,9,.55) 55%,var(--bg) 100%);
+  }
+  .hero-text { position:absolute; left:20px; right:20px; bottom:24px; }
+  .hero-tag {
+    display:inline-block; padding:4px 14px;
+    background:linear-gradient(135deg,rgba(232,182,76,.25),rgba(232,182,76,.1));
+    border:1px solid var(--gold);
+    border-radius:20px; font-size:11px; color:var(--gold); margin-bottom:10px;
+  }
+  .hero-text h1 {
+    font-size:34px; font-weight:900; color:#fff; line-height:1.15;
+    text-shadow:0 2px 16px rgba(0,0,0,.5);
+  }
+  .hero-text h1 span {
+    background:linear-gradient(180deg,#f5d78a,#d4a03c);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .hero-sub { font-size:14px; color:#e8dcc8; margin-top:8px; }
+
+  /* ===== 核心卖点 ===== */
+  .pitch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:16px; }
+  .pitch-item {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.2);
+    border-radius:14px; padding:14px 6px; text-align:center;
+  }
+  .pitch-item b {
+    display:block; font-size:16px; font-weight:900;
+    background:linear-gradient(180deg,#f5d78a,#d4a03c);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .pitch-item span { font-size:11px; color:var(--ink-dim); }
+
+  /* ===== 手册大入口 ===== */
+  .manual-entry {
+    margin:0 16px 20px; padding:18px 20px;
+    background:linear-gradient(135deg,rgba(232,182,76,.2),rgba(232,182,76,.05));
+    border:1px solid rgba(232,182,76,.4);
+    border-radius:14px; display:flex; align-items:center; justify-content:space-between;
+    cursor:pointer; text-decoration:none;
+  }
+  .manual-entry .left b { display:block; font-size:17px; color:#fff; }
+  .manual-entry .left span { font-size:12px; color:var(--ink-dim); }
+  .manual-entry .arrow {
+    width:38px; height:38px; border-radius:50%;
+    background:linear-gradient(135deg,#e8b64c,#b8842a);
+    color:#14100c; display:flex; align-items:center; justify-content:center;
+    font-size:20px; font-weight:900;
+  }
+
+  /* ===== 区块 ===== */
+  .sec { padding:0 16px; margin-bottom:24px; }
+  .sec-title {
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .sec-title .bar {
+    width:4px; height:18px;
+    background:linear-gradient(180deg,#f5d78a,#b8842a);
+    border-radius:2px;
+  }
+  .sec-title h2 { font-size:18px; color:#fff; font-weight:700; }
+
+  /* ===== 礼包码 ===== */
+  .gift {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.25);
+    border-radius:16px; padding:16px; margin-bottom:12px;
+    position:relative; overflow:hidden;
+    box-shadow:0 4px 16px rgba(0,0,0,.2);
+  }
+  .gift::before {
+    content:""; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .gift .head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .gift .name { font-size:15px; color:#fff; font-weight:700; }
+  .gift .badge {
+    font-size:10px; padding:3px 10px; border-radius:10px;
+    background:rgba(232,182,76,.15); color:var(--gold);
+  }
+  .code-row { display:flex; gap:10px; align-items:center; }
+  .code-box {
+    flex:1; padding:12px 14px; background:rgba(15,12,9,.6);
+    border:1px dashed rgba(232,182,76,.5); border-radius:10px;
+    font-size:20px; font-weight:900; color:var(--gold); letter-spacing:3px;
+    text-align:center;
+  }
+  .copy-btn {
+    padding:10px 18px; background:linear-gradient(135deg,rgba(232,182,76,.2),rgba(232,182,76,.05));
+    border:1px solid rgba(232,182,76,.4);
+    border-radius:10px; color:var(--gold); font-size:13px; cursor:pointer; font-weight:700;
+  }
+  .gift ul { list-style:none; margin-top:10px; }
+  .gift ul li { font-size:13px; color:#c9b89a; padding:3px 0; }
+  .gift ul li::before { content:"◆ "; color:var(--gold); font-size:10px; }
+
+  /* ===== CTA ===== */
+  .cta { display:flex; flex-direction:column; gap:10px; }
+  .cta a {
+    display:block; padding:16px; text-align:center; border-radius:14px;
+    font-size:16px; font-weight:700; text-decoration:none;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .cta a:active { transform:scale(.98); }
+  .cta a.primary {
+    background:linear-gradient(135deg,#f5d78a,#b8842a);
+    color:#14100c;
+    box-shadow:0 6px 24px rgba(232,182,76,.4), inset 0 1px 0 rgba(255,255,255,.3);
+    font-size:17px;
+  }
+  .cta a.secondary {
+    background:linear-gradient(180deg,rgba(232,182,76,.12),rgba(232,182,76,.04));
+    border:1px solid rgba(232,182,76,.4);
+    color:var(--gold);
+  }
+  .cta a.download {
+    background:linear-gradient(135deg,#ff6b35,#e74c3c);
+    color:#fff;
+    box-shadow:0 6px 24px rgba(231,76,60,.35), inset 0 1px 0 rgba(255,255,255,.2);
+    font-size:17px;
+  }
+
+  /* ===== 进群 ===== */
+  .qr-card {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.25);
+    border-radius:14px; padding:16px; text-align:center;
+  }
+  .qr-card img { width:100%; max-width:260px; border-radius:10px; display:block; margin:0 auto; }
+  .qr-card p { margin-top:10px; font-size:13px; color:#c9b89a; }
+
+  .tip {
+    margin:16px; padding:14px;
+    background:rgba(232,182,76,.06);
+    border-left:3px solid var(--gold);
+    border-radius:0 8px 8px 0;
+    font-size:12px; color:var(--ink-dim); line-height:1.7;
+  }
+
+  /* ===== 手册页 ===== */
+  .manual-img { margin-bottom:8px; }
+  .manual-img img { width:100%; display:block; }
+  .manual-img p {
+    padding:10px 16px 18px; font-size:12px; color:var(--ink-dim); text-align:center;
+  }
+
+  /* ===== 底部固定导航 ===== */
+  .tabbar {
+    position:fixed; bottom:0; left:0; right:0; z-index:100;
+    background:rgba(15,12,9,.97); backdrop-filter:blur(12px);
+    border-top:1px solid rgba(232,182,76,.15);
+    display:flex; max-width:480px; margin:0 auto;
+  }
+  .tabbar button {
+    flex:1; padding:10px 5px 8px; background:none; border:none; cursor:pointer;
+    color:var(--ink-dim); font-size:11px;
+    transition:color .2s;
+  }
+  .tabbar button.active { color:var(--gold); font-weight:700; }
+  .tabbar button.active .icon { transform:scale(1.1); }
+  .tabbar button .icon { width:22px; height:22px; display:block; margin:0 auto 3px; transition:transform .2s; }
+
+  /* ===== 联系卡片 ===== */
+  .contact-card {
+    background:var(--card); border-radius:16px; padding:16px;
+    display:flex; align-items:center; gap:14px;
+    border:1px solid rgba(232,182,76,.15);
+  }
+  .contact-icon {
+    width:48px; height:48px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:900; font-size:16px;
+    flex-shrink:0;
+  }
+  .contact-info { flex:1; min-width:0; }
+  .contact-label { font-size:12px; color:var(--ink-dim); margin-bottom:4px; }
+  .contact-num { font-size:18px; font-weight:800; color:var(--ink); letter-spacing:.5px; }
+  .contact-copy {
+    padding:8px 16px; border-radius:20px; border:none;
+    background:linear-gradient(135deg,var(--gold),#b8862f);
+    color:#1a1408; font-size:13px; font-weight:700;
+    cursor:pointer; flex-shrink:0;
+  }
+
+  /* ===== 联系客服入口 ===== */
+  .cs-entry {
+    display:flex; align-items:center; gap:14px;
+    background:linear-gradient(135deg,rgba(232,182,76,.12),rgba(232,182,76,.04));
+    border:1px solid rgba(232,182,76,.25);
+    border-radius:16px; padding:16px 18px;
+    text-decoration:none;
+  }
+  .cs-icon {
+    width:44px; height:44px; border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),#b8862f);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    flex-shrink:0;
+  }
+  .cs-text { flex:1; }
+  .cs-text b { display:block; font-size:16px; color:var(--ink); margin-bottom:4px; }
+  .cs-text span { font-size:12px; color:var(--ink-dim); }
+  .cs-arrow { font-size:24px; color:var(--gold); font-weight:700; }
+
+  /* ===== 代理码提示 ===== */
+  .agent-code {
+    margin:12px 20px 0; padding:12px 16px;
+    background:linear-gradient(135deg,rgba(232,182,76,.15),rgba(232,182,76,.05));
+    border:1px dashed var(--gold);
+    border-radius:12px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .agent-code .label { font-size:12px; color:var(--ink-dim); }
+  .agent-code .code {
+    font-size:20px; font-weight:900; color:var(--gold);
+    letter-spacing:3px;
+  }
+  .agent-code .tip { font-size:11px; color:var(--ink-dim); margin-left:auto; }
+
+  /* ===== 返回按钮 ===== */
+  .back-btn {
+    display:flex; align-items:center; gap:6px;
+    padding:12px 16px;
+    color:var(--gold); font-size:14px; font-weight:600;
+    cursor:pointer; text-decoration:none;
+  }
+  .back-btn svg { width:18px; height:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <b>魔幻天龙17职业</b>
+    <small>0.01折新服 · 17职业</small>
+  </div>
+
+  <!-- ===== 首页 ===== -->
+  <div class="page active" id="page-home">
+
+    <div class="hero">
+      <img class="hero-bg" src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Uu4fbUJwJoCAjSxJqrMc7WRdnbb" alt="魔幻天龙17职业">
+    </div>
+
+    <div class="pitch">
+      <div class="pitch-item"><b>0.01折</b><span>1元=648额度</span></div>
+      <div class="pitch-item"><b>2000万绑元</b><span>上线直接领</span></div>
+      <div class="pitch-item"><b>副本掉卡</b><span>打怪就有充值卡</span></div>
+    </div>
+
+    <a class="manual-entry" href="#" onclick="switchPage('manual');return false;">
+      <div class="left">
+        <b>游戏手册</b>
+        <span>福利码 · 充值档位 · 幻化战力 · 藏宝图全攻略</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>公测礼包码</h2></div>
+      <a class="manual-entry" href="#" onclick="switchPage('gifts');return false;">
+        <div class="left">
+          <b>5个公测礼包免费领</b>
+          <span>经验/绑元/坐骑/时装/重楼/神兽 全部免费</span>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">
+      <span class="bar"></span><h2 style="display:inline;">立即注册下载</h2>
+      <span style="font-size:24px; color:#ff3b30; font-weight:900; margin-left:16px;">代理码</span>
+      <b style="color:#ff3b30; font-size:24px; letter-spacing:3px; margin-left:8px;">MZSP</b>
+    </div>
+      <div class="cta">
+        <a class="primary" href="https://tlbbb.hfynxx.top/MZSP">注册账号</a>
+        <a class="download" href="https://wrtl.ququ.im/WRTL.html">立即下载游戏</a>
+        <a class="secondary" href="https://tlbbb.hfynxx.top/MZSP">玩家后台 / 充值</a>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>联系客服</h2></div>
+      <a class="cs-entry" href="#" onclick="switchPage('group');return false;">
+        <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2.5" style="width:24px; height:24px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <div class="cs-text">
+          <b>联系客服</b>
+          <span>QQ群 · 代理QQ · 微信，任选一种联系我</span>
+        </div>
+        <div class="cs-arrow">›</div>
+      </a>
+    </div>
+
+    <div class="tip">特别提醒：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
+  <!-- ===== 游戏手册页 ===== -->
+  <div class="page" id="page-manual">
+    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回首页
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>免费福利</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/J5o8bOYoloTwKlxZpa3c68q2nPg" alt="免费福利馈赠">
+      <p>每日/每周/等级全送充值卡，零氪也能玩</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>0.01折充值</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/CTOebD8pHo2dn5xLohgcDfTAnae" alt="0.01折江湖钜惠令">
+      <p>1元=648充值额度，六档任选</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Z9TAbdEtSoVeluxGuWuc9QdWn2f" alt="充值体系总览">
+      <p>首充/周饷/月契/永契全档位</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>活动玩法</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/MfN7bU2zloC0dlxFVYlc9Gd1nub" alt="七日寻重楼">
+      <p>七日寻重楼 · 连充7天拿全套幻化</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>幻化总览</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/TMU8bXbdforvFvx3E1BcBIAKntc" alt="幻化总览">
+      <p>赤龙苗刀/开天神斧/墨羽披风/虎啸星陨枪/金荷武魂/山河与共称号</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>幻化战力榜</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/ERCsbYz2qowXUUxCbQRcLJzynHh" alt="披风幻化战力榜">
+      <p>披风幻化战力榜 TOP11</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/TaGTb5uW9o18fgxg66Acw1nFnAb" alt="神器幻化战力榜">
+      <p>神器幻化战力榜 TOP30</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Ju3NbBv3Uoy1VzxtS5mciXYLnqe" alt="武魂幻化战力榜">
+      <p>武魂幻化战力榜 TOP30</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Rrv0bOoe1oOjD9xKbvEcxMjmnid" alt="称号战力榜">
+      <p>称号战力榜 TOP50+</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>藏宝图寻宝</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/INVUbGPEvojWdNxbnF8cyEB4neg" alt="藏宝图寻宝大全">
+      <p>密径/稀世/绝世三档寻宝玩法</p>
+    </div>
+
+  </div>
+
+  <!-- ===== 礼包码页 ===== -->
+  <div class="page" id="page-gifts">
+    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回首页
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>公测礼包码</h2></div>
+      <p style="padding:0 20px; font-size:13px; color:var(--ink-dim); margin-bottom:16px;">
+        进入游戏后左上角找到「精彩活动」输入兑换码即可领取。
+        <br><br>
+        <b style="color:var(--gold);">一键领全部：</b>输入 <span style="color:var(--gold); font-weight:bold;">111111</span>（6个1），一次性领完下面5个礼包所有奖励！
+      </p>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1001 · 等级坐骑时装</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1001</div>
+          <button class="copy-btn" onclick="copyText('MH1001', this)">复制</button>
+        </div>
+        <ul>
+          <li>8500万经验（50万×170）</li>
+          <li>188.8万绑元（18880×100）</li>
+          <li>冥羽 永久坐骑</li>
+          <li>金庭云罗 永久时装</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1002 · 成长材料礼包</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1002</div>
+          <button class="copy-btn" onclick="copyText('MH1002', this)">复制</button>
+        </div>
+        <ul>
+          <li>100万银两、1000万铜钱、10万帮贡</li>
+          <li>新莽神符×10、地煞强化精华×200</li>
+          <li>1886万绑元（18880×999）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1003 · 神兽元神礼包</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1003</div>
+          <button class="copy-btn" onclick="copyText('MH1003', this)">复制</button>
+        </div>
+        <ul>
+          <li>六大神兽元神各550个</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1004 · 重楼五件套</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1004</div>
+          <button class="copy-btn" onclick="copyText('MH1004', this)">复制</button>
+        </div>
+        <ul>
+          <li>重楼五件套各1</li>
+          <li>保星符福袋×50</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1005 · 公测江湖豪礼</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1005</div>
+          <button class="copy-btn" onclick="copyText('MH1005', this)">复制</button>
+        </div>
+        <ul>
+          <li>储备元宝200万、绑定元宝3000万</li>
+          <li>蓝田玉令×20、宝石提升符×20</li>
+          <li>暗器修炼石×100、天罡强化精华×99</li>
+          <li>新莽神符×50</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">特别提示：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
+  <!-- ===== 进群页 ===== -->
+  <div class="page" id="page-group">
+    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回首页
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>联系客服</h2></div>
+      <p style="padding:0 20px; font-size:14px; color:var(--gold); margin-bottom:16px; text-align:center; font-weight:600;">
+        进群领福利 · 有问题直接找我
+      </p>
+    </div>
+
+    <div class="sec">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:linear-gradient(135deg,#12B7F5,#0A84D8);">QQ</div>
+        <div class="contact-info">
+          <div class="contact-label">玩家交流群（进群领福利）</div>
+          <div class="contact-num" onclick="copyText('680598747', this)">680598747</div>
+        </div>
+        <button class="contact-copy" onclick="copyText('680598747', this)">复制</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:linear-gradient(135deg,#12B7F5,#0A84D8);">QQ</div>
+        <div class="contact-info">
+          <div class="contact-label">代理QQ号（直接加）</div>
+          <div class="contact-num" onclick="copyText('354261705', this)">354261705</div>
+        </div>
+        <button class="contact-copy" onclick="copyText('354261705', this)">复制</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:linear-gradient(135deg,#07C160,#06AD56);">微信</div>
+        <div class="contact-info">
+          <div class="contact-label">微信号（微信咨询）</div>
+          <div class="contact-num" onclick="copyText('qun680598747', this)">qun680598747</div>
+        </div>
+        <button class="contact-copy" onclick="copyText('qun680598747', this)">复制</button>
+      </div>
+    </div>
+
+    <div class="tip">特别提示：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+</div>
+
+  <div class="tabbar">
+    <button class="active" data-page="home" onclick="switchPage('home')">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      首页
+    </button>
+    <button data-page="gifts" onclick="switchPage('gifts')">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+      礼包码
+    </button>
+    <button data-page="manual" onclick="switchPage('manual')">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      游戏手册
+    </button>
+    <button data-page="group" onclick="switchPage('group')">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      客服
+    </button>
+  </div>
+
+</div>
+
+<script>
+function switchPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  window.scrollTo(0, 0);
+}
+</script>
+
+<script>
+function saveQRCode() {
+  var img = document.querySelector('#page-group .qr-card img');
+  var canvas = document.createElement('canvas');
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  canvas.toBlob(function(blob) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'qq-group-qrcode.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    alert('二维码已下载，请在相册或下载文件夹查看');
+  }, 'image/png');
+}
+</script>
+
+<script>
+function copyText(text, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    var oldText = btn.textContent;
+    btn.textContent = '已复制';
+    setTimeout(function() { btn.textContent = oldText; }, 2000);
+  } catch(e) {
+    alert('复制失败，请手动长按复制');
+  }
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
