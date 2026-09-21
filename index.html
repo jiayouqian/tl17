@@ -276,8 +276,8 @@
 <div class="wrap">
 
   <div class="topbar">
-    <b>魔幻天龙17职业</b>
-    <small>0.01折新服 · 17职业</small>
+    <b id="topbar-title">天龙17职业</b>
+    <small id="topbar-sub">双版本任选 · 畅玩武侠</small>
   </div>
 
   <!-- ===== 版本选择页（首页） ===== -->
@@ -327,7 +327,7 @@
 
   <!-- ===== 魔幻新版页面 ===== -->
   <div class="page" id="page-new">
-    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       版本选择
     </a>
@@ -398,7 +398,7 @@
 
   <!-- ===== 畅玩老版页面 ===== -->
   <div class="page" id="page-old">
-    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       版本选择
     </a>
@@ -469,7 +469,7 @@
 
   <!-- ===== 游戏手册页 ===== -->
   <div class="page" id="page-manual">
-    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       返回首页
     </a>
@@ -541,7 +541,7 @@
 
   <!-- ===== 礼包码页 ===== -->
   <div class="page" id="page-gifts">
-    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       返回首页
     </a>
@@ -1336,7 +1336,7 @@
 
   <!-- ===== 进群页 ===== -->
   <div class="page" id="page-group">
-    <a class="back-btn" href="#" onclick="switchPage('home');return false;">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       返回首页
     </a>
@@ -1465,9 +1465,17 @@ function switchPage(name) {
 
 function switchVersion(v) {
   if (v === 'new') {
+    document.getElementById('topbar-title').textContent = '魔幻天龙17职业';
+    document.getElementById('topbar-sub').textContent = '0.01折新服 · 17职业';
     switchPage('new');
   } else if (v === 'old') {
+    document.getElementById('topbar-title').textContent = '天龙畅玩版';
+    document.getElementById('topbar-sub').textContent = '超高比例1:4000 · 17职业';
     switchPage('old');
+  } else if (v === 'home') {
+    document.getElementById('topbar-title').textContent = '天龙17职业';
+    document.getElementById('topbar-sub').textContent = '双版本任选 · 畅玩武侠';
+    switchPage('home');
   }
 }
 
