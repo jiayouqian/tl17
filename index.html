@@ -1519,8 +1519,10 @@ function goManual() {
 }
 
 function goHome() {
-  // 点首页永远跳回版本选择首页
-  switchVersion('home');
+  // 直接跳回版本选择首页
+  document.getElementById('topbar-title').textContent = '天龙17职业港版';
+  document.getElementById('topbar-sub').textContent = '双版本任选 · 畅玩武侠';
+  switchPage('home');
 }
 
 function goGroup() {
