@@ -324,25 +324,11 @@
         <a class="secondary" href="https://tlbbb.hfynxx.top/MZSP" target="_blank">玩家后台 / 充值</a>
       </div>
 
-      <!-- 备用复制链接 -->
-      <div style="margin-top:12px; padding:12px; background:var(--card2); border-radius:12px; border:1px dashed rgba(232,182,76,.3);">
-        <div style="font-size:12px; color:var(--gold); margin-bottom:8px; font-weight:600;">🔗 按钮点不开？点下面复制链接到浏览器打开</div>
-        
-        <div style="margin-bottom:8px; padding:8px; background:var(--card); border-radius:6px;">
-          <div style="font-size:11px; color:var(--ink-dim); margin-bottom:3px;">📥 游戏下载链接</div>
-          <div style="display:flex; gap:6px; align-items:center;">
-            <div style="flex:1; font-size:10px; color:var(--ink); word-break:break-all; line-height:1.3;">https://wrtl.ququ.im/WRTL.html</div>
-            <button onclick="copyText('https://wrtl.ququ.im/WRTL.html', this)" style="flex-shrink:0; padding:5px 10px; background:var(--gold); color:#000; border:none; border-radius:5px; font-size:11px; font-weight:600; cursor:pointer;">复制</button>
-          </div>
-        </div>
-
-        <div style="padding:8px; background:var(--card); border-radius:6px;">
-          <div style="font-size:11px; color:var(--ink-dim); margin-bottom:3px;">📝 注册 + 后台充值链接</div>
-          <div style="display:flex; gap:6px; align-items:center;">
-            <div style="flex:1; font-size:10px; color:var(--ink); word-break:break-all; line-height:1.3;">https://tlbbb.hfynxx.top/MZSP</div>
-            <button onclick="copyText('https://tlbbb.hfynxx.top/MZSP', this)" style="flex-shrink:0; padding:5px 10px; background:var(--gold); color:#000; border:none; border-radius:5px; font-size:11px; font-weight:600; cursor:pointer;">复制</button>
-          </div>
-        </div>
+      <!-- 备用链接按钮 -->
+      <div style="margin-top:10px; text-align:center;">
+        <button onclick="showCopyModal()" style="padding:8px 24px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:20px; font-size:12px; cursor:pointer;">
+          🔗 按钮点不开？点这里复制链接
+        </button>
       </div>
     </div>
 
@@ -596,12 +582,45 @@
 
 </div>
 
+<!-- 备用链接弹窗 -->
+<div id="copyModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:999; align-items:center; justify-content:center;" onclick="hideCopyModal()">
+  <div style="background:var(--card); border-radius:16px; padding:20px; width:90%; max-width:380px;" onclick="event.stopPropagation()">
+    <div style="font-size:16px; color:var(--gold); margin-bottom:16px; font-weight:600; text-align:center;">🔗 复制链接到浏览器打开</div>
+    
+    <div style="margin-bottom:12px; padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📥 游戏下载链接</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">https://wrtl.ququ.im/WRTL.html</div>
+        <button onclick="copyText('https://wrtl.ququ.im/WRTL.html', this)" style="flex-shrink:0; padding:8px 16px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <div style="padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📝 注册 + 后台充值链接</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">https://tlbbb.hfynxx.top/MZSP</div>
+        <button onclick="copyText('https://tlbbb.hfynxx.top/MZSP', this)" style="flex-shrink:0; padding:8px 16px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <button onclick="hideCopyModal()" style="width:100%; margin-top:16px; padding:10px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:8px; font-size:14px; cursor:pointer;">关闭</button>
+  </div>
+</div>
+
 <script>
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('active', b.dataset.page === name));
   window.scrollTo(0, 0);
+}
+
+function showCopyModal() {
+  document.getElementById('copyModal').style.display = 'flex';
+}
+
+function hideCopyModal() {
+  document.getElementById('copyModal').style.display = 'none';
 }
 </script>
 
