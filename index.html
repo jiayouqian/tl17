@@ -193,21 +193,38 @@
     padding:10px 16px 18px; font-size:12px; color:var(--ink-dim); text-align:center;
   }
 
-  /* ===== 攻略图美化 ===== */
-  #manual img {
-    border-radius: 8px !important;
-    box-shadow: 0 4px 16px rgba(0,0,0,.3);
-    margin: 8px 0 !important;
-  }
-
-  /* ===== 手册展开内容美化 ===== */
+  /* ===== 攻略内容文本美化 ===== */
   #manual .page div[style*="display:none"] {
     padding: 16px !important;
     background: rgba(0,0,0,.15);
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 12px 12px;
+    font-size: 13px !important;
+    line-height: 2 !important;
+  }
+  #manual b {
+    color: var(--gold) !important;
+    font-weight: 700;
+  }
+  #manual br + br {
+    margin-top: 8px;
   }
 
-  /* ===== 底部导航优化 ===== */
+  /* ===== 门派按钮美化 ===== */
+  #manual .page button[onclick^="toggleSection"] {
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: 1px solid rgba(232,182,76,.1) !important;
+  }
+  #manual .page div[style*="margin-top:8px"] {
+    border-radius: 12px !important;
+    border: 1px solid rgba(232,182,76,.1) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    overflow: hidden;
+  }
+
+
   .tabbar button {
     flex:1; padding:12px 0; background:transparent; border:none;
     color:var(--ink-dim); font-size:11px; cursor:pointer;
