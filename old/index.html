@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f0c09'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='%23e8b64c' font-weight='900'%3E天%3C/text%3E%3C/svg%3E">
+<title>天龙畅玩版 · 17职业超高比例</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --gold: #e8b64c;
+    --gold-light: #f5d78a;
+    --gold-dark: #b8842a;
+    --bg: #0f0c09;
+    --card: #1a1510;
+    --card2: #221b13;
+    --ink: #f0e6d2;
+    --ink-dim: #9c8763;
+    --red: #c0392b;
+  }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6;
+  }
+  .wrap { max-width:480px; margin:0 auto; padding-bottom:80px; }
+
+  /* ===== 顶部标题栏 ===== */
+  .topbar {
+    position:sticky; top:0; z-index:100;
+    background:rgba(15,12,9,.92); backdrop-filter:blur(12px);
+    padding:12px 16px; text-align:center;
+    border-bottom:1px solid rgba(232,182,76,.15);
+  }
+  .topbar b { font-size:16px; color: var(--gold); letter-spacing:2px; }
+  .topbar small { display:block; font-size:10px; color:var(--ink-dim); margin-top:2px; }
+
+  .page { display:none; }
+  .page.active { display:block; }
+
+  /* ===== Hero ===== */
+  .hero { position:relative; overflow:hidden; }
+  .hero-bg { width:100%; display:block; }
+  .hero-mask {
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(15,12,9,.1) 0%,rgba(15,12,9,.55) 55%,var(--bg) 100%);
+  }
+  .hero-text { position:absolute; left:20px; right:20px; bottom:24px; }
+  .hero-tag {
+    display:inline-block; padding:4px 14px;
+    background:linear-gradient(135deg,rgba(232,182,76,.25),rgba(232,182,76,.1));
+    border:1px solid var(--gold);
+    border-radius:20px; font-size:11px; color:var(--gold); margin-bottom:10px;
+  }
+  .hero-text h1 {
+    font-size:34px; font-weight:900; color:#fff; line-height:1.15;
+    text-shadow:0 2px 16px rgba(0,0,0,.5);
+  }
+  .hero-text h1 span {
+    background:linear-gradient(180deg,#f5d78a,#d4a03c);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .hero-sub { font-size:14px; color:#e8dcc8; margin-top:8px; }
+
+  /* ===== 核心卖点 ===== */
+  .pitch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:16px; }
+  .pitch-item {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.2);
+    border-radius:14px; padding:14px 6px; text-align:center;
+  }
+  .pitch-item b {
+    display:block; font-size:16px; font-weight:900;
+    background:linear-gradient(180deg,#f5d78a,#d4a03c);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .pitch-item span { font-size:11px; color:var(--ink-dim); }
+
+  /* ===== 手册大入口 ===== */
+  .manual-entry {
+    margin:0 16px 20px; padding:18px 20px;
+    background:linear-gradient(135deg,rgba(232,182,76,.2),rgba(232,182,76,.05));
+    border:1px solid rgba(232,182,76,.4);
+    border-radius:14px; display:flex; align-items:center; justify-content:space-between;
+    cursor:pointer; text-decoration:none;
+  }
+  .manual-entry .left b { display:block; font-size:17px; color:#fff; }
+  .manual-entry .left span { font-size:12px; color:var(--ink-dim); }
+  .manual-entry .arrow {
+    width:38px; height:38px; border-radius:50%;
+    background:linear-gradient(135deg,#e8b64c,#b8842a);
+    color:#14100c; display:flex; align-items:center; justify-content:center;
+    font-size:20px; font-weight:900;
+  }
+
+  /* ===== 区块 ===== */
+  .sec { padding:0 16px; margin-bottom:24px; }
+  .sec-title {
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .sec-title .bar {
+    width:4px; height:18px;
+    background:linear-gradient(180deg,#f5d78a,#b8842a);
+    border-radius:2px;
+  }
+  .sec-title h2 { font-size:18px; color:#fff; font-weight:700; }
+
+  /* ===== 礼包码 ===== */
+  .gift {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.25);
+    border-radius:16px; padding:16px; margin-bottom:12px;
+    position:relative; overflow:hidden;
+    box-shadow:0 4px 16px rgba(0,0,0,.2);
+  }
+  .gift::before {
+    content:""; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .gift .head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .gift .name { font-size:15px; color:#fff; font-weight:700; }
+  .gift .badge {
+    font-size:10px; padding:3px 10px; border-radius:10px;
+    background:rgba(232,182,76,.15); color:var(--gold);
+  }
+  .code-row { display:flex; gap:10px; align-items:center; }
+  .code-box {
+    flex:1; padding:12px 14px; background:rgba(15,12,9,.6);
+    border:1px dashed rgba(232,182,76,.5); border-radius:10px;
+    font-size:20px; font-weight:900; color:var(--gold); letter-spacing:3px;
+    text-align:center;
+  }
+  .copy-btn {
+    padding:10px 18px; background:linear-gradient(135deg,rgba(232,182,76,.2),rgba(232,182,76,.05));
+    border:1px solid rgba(232,182,76,.4);
+    border-radius:10px; color:var(--gold); font-size:13px; cursor:pointer; font-weight:700;
+  }
+  .gift ul { list-style:none; margin-top:10px; }
+  .gift ul li { font-size:13px; color:#c9b89a; padding:3px 0; }
+  .gift ul li::before { content:"◆ "; color:var(--gold); font-size:10px; }
+
+  /* ===== CTA ===== */
+  .cta { display:flex; flex-direction:column; gap:10px; }
+  .cta a {
+    display:block; padding:16px; text-align:center; border-radius:14px;
+    font-size:16px; font-weight:700; text-decoration:none;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .cta a:active { transform:scale(.98); }
+  .cta a.primary {
+    background:linear-gradient(135deg,#f5d78a,#b8842a);
+    color:#14100c;
+    box-shadow:0 6px 24px rgba(232,182,76,.4), inset 0 1px 0 rgba(255,255,255,.3);
+    font-size:17px;
+  }
+  .cta a.secondary {
+    background:linear-gradient(180deg,rgba(232,182,76,.12),rgba(232,182,76,.04));
+    border:1px solid rgba(232,182,76,.4);
+    color:var(--gold);
+  }
+  .cta a.download {
+    background:linear-gradient(135deg,#ff6b35,#e74c3c);
+    color:#fff;
+    box-shadow:0 6px 24px rgba(231,76,60,.35), inset 0 1px 0 rgba(255,255,255,.2);
+    font-size:17px;
+  }
+
+  /* ===== 进群 ===== */
+  .qr-card {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.25);
+    border-radius:14px; padding:16px; text-align:center;
+  }
+  .qr-card img { width:100%; max-width:260px; border-radius:10px; display:block; margin:0 auto; }
+  .qr-card p { margin-top:10px; font-size:13px; color:#c9b89a; }
+
+  .tip {
+    margin:16px; padding:14px;
+    background:rgba(232,182,76,.06);
+    border-left:3px solid var(--gold);
+    border-radius:0 8px 8px 0;
+    font-size:12px; color:var(--ink-dim); line-height:1.7;
+  }
+
+  /* ===== 手册页 ===== */
+  .manual-img { margin-bottom:8px; }
+  .manual-img img { width:100%; display:block; }
+  .manual-img p {
+    padding:10px 16px 18px; font-size:12px; color:var(--ink-dim); text-align:center;
+  }
+
+  /* ===== 底部固定导航 ===== */
+  .tabbar {
+    position:fixed; bottom:0; left:0; right:0; z-index:100;
+    background:rgba(15,12,9,.97); backdrop-filter:blur(12px);
+    border-top:1px solid rgba(232,182,76,.15);
+    display:flex; max-width:480px; margin:0 auto;
+  }
+  .tabbar button {
+    flex:1; padding:10px 5px 8px; background:none; border:none; cursor:pointer;
+    color:var(--ink-dim); font-size:11px;
+    transition:color .2s;
+  }
+  .tabbar button.active { color:var(--gold); font-weight:700; }
+  .tabbar button.active .icon { transform:scale(1.1); }
+  .tabbar button .icon { width:22px; height:22px; display:block; margin:0 auto 3px; transition:transform .2s; }
+
+  /* ===== 联系卡片 ===== */
+  .contact-card {
+    background:var(--card); border-radius:16px; padding:16px;
+    display:flex; align-items:center; gap:14px;
+    border:1px solid rgba(232,182,76,.15);
+  }
+  .contact-icon {
+    width:48px; height:48px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:900; font-size:16px;
+    flex-shrink:0;
+  }
+  .contact-info { flex:1; min-width:0; }
+  .contact-label { font-size:12px; color:var(--ink-dim); margin-bottom:4px; }
+  .contact-num { font-size:18px; font-weight:800; color:var(--ink); letter-spacing:.5px; }
+  .contact-copy {
+    padding:8px 16px; border-radius:20px; border:none;
+    background:linear-gradient(135deg,var(--gold),#b8862f);
+    color:#1a1408; font-size:13px; font-weight:700;
+    cursor:pointer; flex-shrink:0;
+  }
+
+  /* ===== 联系客服入口 ===== */
+  .cs-entry {
+    display:flex; align-items:center; gap:14px;
+    background:linear-gradient(135deg,rgba(232,182,76,.12),rgba(232,182,76,.04));
+    border:1px solid rgba(232,182,76,.25);
+    border-radius:16px; padding:16px 18px;
+    text-decoration:none;
+  }
+  .cs-icon {
+    width:44px; height:44px; border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),#b8862f);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+    flex-shrink:0;
+  }
+  .cs-text { flex:1; }
+  .cs-text b { display:block; font-size:16px; color:var(--ink); margin-bottom:4px; }
+  .cs-text span { font-size:12px; color:var(--ink-dim); }
+  .cs-arrow { font-size:24px; color:var(--gold); font-weight:700; }
+
+  /* ===== 代理码提示 ===== */
+  .agent-code {
+    margin:12px 20px 0; padding:12px 16px;
+    background:linear-gradient(135deg,rgba(232,182,76,.15),rgba(232,182,76,.05));
+    border:1px dashed var(--gold);
+    border-radius:12px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .agent-code .label { font-size:12px; color:var(--ink-dim); }
+  .agent-code .code {
+    font-size:20px; font-weight:900; color:var(--gold);
+    letter-spacing:3px;
+  }
+  .agent-code .tip { font-size:11px; color:var(--ink-dim); margin-left:auto; }
+
+  /* ===== 返回按钮 ===== */
+  .back-btn {
+    display:flex; align-items:center; gap:6px;
+    padding:12px 16px;
+    color:var(--gold); font-size:14px; font-weight:600;
+    cursor:pointer; text-decoration:none;
+  }
+  .back-btn svg { width:18px; height:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <b id="topbar-title">天龙畅玩版</b>
+    <small id="topbar-sub">超高比例1:4000 · 17职业</small>
+  </div>
+
+  <!-- ===== 版本选择页（首页） ===== -->
+  <div class="page" id="page-home">
+    <div style="padding:24px 16px 16px; text-align:center;">
+      <h1 style="font-size:28px; color:var(--gold); font-weight:900; letter-spacing:4px; margin-bottom:6px;">天龙17职业</h1>
+      <div style="font-size:13px; color:var(--ink-dim);">双版本任选 · 选你喜欢的开始畅玩</div>
+    </div>
+
+    <div style="padding:0 16px; margin-top:16px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <!-- 新版卡片 -->
+        <a href="#" onclick="switchVersion('new');return false;" style="display:block; padding:28px 16px; background:linear-gradient(180deg, rgba(232,182,76,.3), rgba(232,182,76,.08)); border:2px solid rgba(232,182,76,.6); border-radius:20px; text-decoration:none; color:var(--ink); position:relative; overflow:hidden; box-shadow:0 8px 32px rgba(232,182,76,.15);">
+          <div style="position:absolute; top:0; left:0; right:0; padding:5px; background:linear-gradient(90deg, #e8b64c, #b8842a); color:#000; font-size:11px; font-weight:800; text-align:center; letter-spacing:1px;">🔥 强烈推荐</div>
+          <div style="text-align:center; margin:20px 0 14px;">
+            <span style="font-size:48px;">🆕</span>
+          </div>
+          <b style="display:block; font-size:18px; color:var(--gold); text-align:center; margin-bottom:10px; letter-spacing:2px;">魔幻新版</b>
+          <div style="font-size:12px; color:var(--ink); line-height:1.9; text-align:center; opacity:.9;">
+            0.01折服<br>
+            上线5000万绑元<br>
+            5重楼 + 6神兽<br>
+            副本掉充值卡
+          </div>
+          <div style="margin-top:18px; text-align:center; font-size:14px; color:var(--gold); font-weight:800;">立即进入 →</div>
+        </a>
+
+        <!-- 老版卡片 -->
+        <a href="#" onclick="switchVersion('old');return false;" style="display:block; padding:28px 16px; background:linear-gradient(180deg, rgba(100,180,255,.3), rgba(100,180,255,.08)); border:2px solid rgba(100,180,255,.6); border-radius:20px; text-decoration:none; color:var(--ink); position:relative; overflow:hidden; box-shadow:0 8px 32px rgba(100,180,255,.15);">
+          <div style="text-align:center; margin:20px 0 14px;">
+            <span style="font-size:48px;">🎮</span>
+          </div>
+          <b style="display:block; font-size:18px; color:#64b4ff; text-align:center; margin-bottom:10px; letter-spacing:2px;">畅玩老版</b>
+          <div style="font-size:12px; color:var(--ink); line-height:1.9; text-align:center; opacity:.9;">
+            超高比例1:4000<br>
+            上线1100万绑元<br>
+            5重楼 + 6神兽<br>
+            地宫无限刷绑元
+          </div>
+          <div style="margin-top:18px; text-align:center; font-size:14px; color:#64b4ff; font-weight:800;">立即进入 →</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="tip" style="margin:24px 16px 0;">⚠️ 务必通过本页链接注册，后续充值/礼包问题才能售后！</div>
+  </div>
+
+  <!-- ===== 魔幻新版页面 ===== -->
+  <div class="page" id="page-new">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      版本选择
+    </a>
+
+    <div class="hero">
+      <img class="hero-bg" src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Uu4fbUJwJoCAjSxJqrMc7WRdnbb" alt="魔幻天龙17职业">
+    </div>
+
+    <div class="pitch">
+      <div class="pitch-item"><b>0.01折</b><span>1元=648额度</span></div>
+      <div class="pitch-item"><b>5000万绑元</b><span>上线直接领</span></div>
+      <div class="pitch-item"><b>副本掉卡</b><span>打怪就有充值卡</span></div>
+    </div>
+
+    <a class="manual-entry" href="#" onclick="switchPage('manual');return false;">
+      <div class="left">
+        <b>游戏手册</b>
+        <span>福利码 · 充值档位 · 幻化战力 · 藏宝图全攻略</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>公测礼包码</h2></div>
+      <a class="manual-entry" href="#" onclick="switchPage('gifts');return false;">
+        <div class="left">
+          <b>5个公测礼包免费领</b>
+          <span>经验/绑元/坐骑/时装/重楼/神兽 全部免费</span>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">
+      <span class="bar"></span><h2 style="display:inline;">立即注册下载</h2>
+      <span style="font-size:24px; color:#ff3b30; font-weight:900; margin-left:16px;">代理码</span>
+      <b style="color:#ff3b30; font-size:24px; letter-spacing:3px; margin-left:8px;">MZSP</b>
+    </div>
+      <div class="cta">
+        <a class="primary" href="https://tlbbb.hfynxx.top/MZSP" target="_blank">注册账号</a>
+        <a class="download" href="https://wrtl.ququ.im/WRTL.html" target="_blank">立即下载游戏</a>
+        <a class="secondary" href="https://tlbbb.hfynxx.top/MZSP" target="_blank">玩家后台 / 充值</a>
+      </div>
+
+      <!-- 备用链接按钮 -->
+      <div style="margin-top:10px; text-align:center;">
+        <button onclick="showCopyModal()" style="padding:8px 24px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:20px; font-size:12px; cursor:pointer;">
+          🔗 按钮点不开？点这里复制链接
+        </button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>联系客服</h2></div>
+      <a class="cs-entry" href="#" onclick="switchPage('group');return false;">
+        <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2.5" style="width:24px; height:24px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <div class="cs-text">
+          <b>联系客服</b>
+          <span>QQ群 · 代理QQ · 微信，任选一种联系我</span>
+        </div>
+        <div class="cs-arrow">›</div>
+      </a>
+    </div>
+
+    <div class="tip">特别提醒：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
+  <!-- ===== 畅玩老版页面 ===== -->
+  <div class="page active" id="page-old">
+    <!-- 畅玩版首页不需要返回按钮 -->
+
+    <div class="hero">
+      <img class="hero-bg" src="https://aka.doubaocdn.com/s/ecDoa10uEh" alt="天龙畅玩版17职业">
+    </div>
+
+    <div class="pitch">
+      <div class="pitch-item"><b>超高比例</b><span>最高1:4000+</span></div>
+      <div class="pitch-item"><b>千万元宝</b><span>上线直接领</span></div>
+      <div class="pitch-item"><b>地宫刷绑</b><span>5层无限刷绑元</span></div>
+    </div>
+
+    <a class="manual-entry" href="#" onclick="switchPage('manual-old');return false;">
+      <div class="left">
+        <b>完整攻略手册</b>
+        <span>升级/战力提升/技能指点/副本活动 全攻略</span>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>新手礼包码</h2></div>
+      <a class="manual-entry" href="#" onclick="switchPage('gifts-old');return false;">
+        <div class="left">
+          <b>超多礼包免费领</b>
+          <span>6个1 / 6个6 / 6个9 / VIP码 全免费</span>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">
+      <span class="bar"></span><h2 style="display:inline;">立即注册下载</h2>
+      <span style="font-size:24px; color:#64b4ff; font-weight:900; margin-left:16px;">邀请码</span>
+      <b style="color:#64b4ff; font-size:24px; letter-spacing:3px; margin-left:8px;">PPAP</b>
+    </div>
+      <div class="cta">
+        <a class="primary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
+        <a class="download" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载游戏</a>
+        <a class="secondary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">玩家后台 / 充值</a>
+      </div>
+
+      <!-- 备用链接按钮 -->
+      <div style="margin-top:10px; text-align:center;">
+        <button onclick="showCopyModalOld()" style="padding:8px 24px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:20px; font-size:12px; cursor:pointer;">
+          🔗 按钮点不开？点这里复制链接
+        </button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>联系客服</h2></div>
+      <a class="cs-entry" href="#" onclick="switchPage('group');return false;">
+        <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2.5" style="width:24px; height:24px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <div class="cs-text">
+          <b>联系客服</b>
+          <span>QQ群 · 代理QQ · 微信，任选一种联系我</span>
+        </div>
+        <div class="cs-arrow">›</div>
+      </a>
+    </div>
+
+    <div class="tip">特别提醒：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
+  <!-- ===== 游戏手册页 ===== -->
+  <div class="page" id="page-manual">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回首页
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>免费福利</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/J5o8bOYoloTwKlxZpa3c68q2nPg" alt="免费福利馈赠">
+      <p>每日/每周/等级全送充值卡，零氪也能玩</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>0.01折充值</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/CTOebD8pHo2dn5xLohgcDfTAnae" alt="0.01折江湖钜惠令">
+      <p>1元=648充值额度，六档任选</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Z9TAbdEtSoVeluxGuWuc9QdWn2f" alt="充值体系总览">
+      <p>首充/周饷/月契/永契全档位</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>活动玩法</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/MfN7bU2zloC0dlxFVYlc9Gd1nub" alt="七日寻重楼">
+      <p>七日寻重楼 · 连充7天拿全套幻化</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>幻化总览</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/TMU8bXbdforvFvx3E1BcBIAKntc" alt="幻化总览">
+      <p>赤龙苗刀/开天神斧/墨羽披风/虎啸星陨枪/金荷武魂/山河与共称号</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>幻化战力榜</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/ERCsbYz2qowXUUxCbQRcLJzynHh" alt="披风幻化战力榜">
+      <p>披风幻化战力榜 TOP11</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/TaGTb5uW9o18fgxg66Acw1nFnAb" alt="神器幻化战力榜">
+      <p>神器幻化战力榜 TOP30</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Ju3NbBv3Uoy1VzxtS5mciXYLnqe" alt="武魂幻化战力榜">
+      <p>武魂幻化战力榜 TOP30</p>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Rrv0bOoe1oOjD9xKbvEcxMjmnid" alt="称号战力榜">
+      <p>称号战力榜 TOP50+</p>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>藏宝图寻宝</h2></div>
+    </div>
+    <div class="manual-img">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/INVUbGPEvojWdNxbnF8cyEB4neg" alt="藏宝图寻宝大全">
+      <p>密径/稀世/绝世三档寻宝玩法</p>
+    </div>
+
+  </div>
+
+  <!-- ===== 礼包码页 ===== -->
+  <div class="page" id="page-gifts">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回首页
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>公测礼包码</h2></div>
+      <p style="padding:0 20px; font-size:13px; color:var(--ink-dim); margin-bottom:16px;">
+        进入游戏后左上角找到「精彩活动」输入兑换码即可领取。
+        <br><br>
+        <b style="color:var(--gold);">一键领全部：</b>输入 <span style="color:var(--gold); font-weight:bold;">111111</span>（6个1），一次性领完下面5个礼包所有奖励！
+      </p>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1001 · 等级坐骑时装</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1001</div>
+          <button class="copy-btn" onclick="copyText('MH1001', this)">复制</button>
+        </div>
+        <ul>
+          <li>8500万经验（50万×170）</li>
+          <li>188.8万绑元（18880×100）</li>
+          <li>冥羽 永久坐骑</li>
+          <li>金庭云罗 永久时装</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1002 · 成长材料礼包</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1002</div>
+          <button class="copy-btn" onclick="copyText('MH1002', this)">复制</button>
+        </div>
+        <ul>
+          <li>100万银两、1000万铜钱、10万帮贡</li>
+          <li>新莽神符×10、地煞强化精华×200</li>
+          <li>1886万绑元（18880×999）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1003 · 神兽元神礼包</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1003</div>
+          <button class="copy-btn" onclick="copyText('MH1003', this)">复制</button>
+        </div>
+        <ul>
+          <li>六大神兽元神各550个</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1004 · 重楼五件套</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1004</div>
+          <button class="copy-btn" onclick="copyText('MH1004', this)">复制</button>
+        </div>
+        <ul>
+          <li>重楼五件套各1</li>
+          <li>保星符福袋×50</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="gift">
+        <div class="head"><span class="name">MH1005 · 公测江湖豪礼</span><span class="badge">免费</span></div>
+        <div class="code-row">
+          <div class="code-box">MH1005</div>
+          <button class="copy-btn" onclick="copyText('MH1005', this)">复制</button>
+        </div>
+        <ul>
+          <li>储备元宝200万、绑定元宝3000万</li>
+          <li>蓝田玉令×20、宝石提升符×20</li>
+          <li>暗器修炼石×100、天罡强化精华×99</li>
+          <li>新莽神符×50</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">特别提示：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
+  <!-- ===== 老版礼包码页 ===== -->
+  <div class="page" id="page-gifts-old">
+    <a class="back-btn" href="#" onclick="switchPage('old');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回老版
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>新手礼包码</h2></div>
+      <div style="font-size:13px; color:var(--ink-dim); padding:0 16px 12px;">进入游戏后，左上角"精彩活动"输入兑换码即可领取</div>
+    </div>
+
+    <div class="sec" style="margin:0 16px 12px; background:var(--card); border-radius:12px; padding:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">📦 基础CDK礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">输入：111111（6个1）</p>
+        </div>
+        <button onclick="copyText('111111', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">⚔️ 重楼材料礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">输入：666666（6个6）</p>
+        </div>
+        <button onclick="copyText('666666', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🏆 试炼材料礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">输入：999999（6个9）</p>
+        </div>
+        <button onclick="copyText('999999', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🎁 重开补偿礼包</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">100万绑银 + 7级体力石×3 + 保星石×20</p>
+        </div>
+        <button onclick="copyText('TL12345', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🎁 重楼链补偿</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">重楼链 + 100万绑元 + 100保星符</p>
+        </div>
+        <button onclick="copyText('TL1111', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08);">
+        <div>
+          <b style="font-size:15px;">🎁 延迟公测补偿</b>
+          <p style="font-size:12px; color:var(--ink-dim); margin-top:4px;">地煞精华×50 + 新莽神符×10 + 100万绑元</p>
+        </div>
+        <button onclick="copyText('BC888', this)" style="padding:6px 14px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:12px; font-weight:600;">复制</button>
+      </div>
+    </div>
+
+    <div class="sec" style="margin:0 16px 12px; background:var(--card); border-radius:12px; padding:16px;">
+      <div style="font-size:14px; color:var(--gold); margin-bottom:12px; font-weight:600;">VIP礼包码（全部免费）</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <button onclick="copyText('VIP666', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">VIP666</button>
+        <button onclick="copyText('VIP888', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">VIP888</button>
+        <button onclick="copyText('TL666', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL666</button>
+        <button onclick="copyText('TL888', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL888</button>
+        <button onclick="copyText('TL999', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL999</button>
+        <button onclick="copyText('TL9999', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL9999</button>
+        <button onclick="copyText('TL520', this)" style="padding:10px; background:var(--card2); color:var(--ink); border:1px solid rgba(232,182,76,.3); border-radius:8px; font-size:13px; cursor:pointer;">TL520</button>
+      </div>
+    </div>
+
+    <div class="tip">特别提示：注册账号密码需"小写字母+数字"组合，不可纯数字！邀请码PPAP已自动填好。</div>
+  </div>
+
+  <!-- ===== 老版攻略页 ===== -->
+  <div class="page" id="page-manual-old">
+    <a class="back-btn" href="#" onclick="switchPage('old');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回老版
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>老版完整攻略</h2></div>
+    </div>
+
+    <!-- 新手攻略 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide1')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        📖 新手起号攻略
+        <span id="guide1-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide1" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        <b>📝 注册攻略：</b><br>
+        1. 注册账号，上线创建角色<br>
+        2. 去新手奖励网页把礼包领一下<br>
+        3. 账号密码需"小写字母+数字"组合，不可纯数字<br><br>
+
+        <b>🎁 新手兑换码（精彩活动输入）：</b><br>
+        111111：CDK礼包<br>
+        666666：重楼材料（重楼链不见了的自助恢复）<br>
+        999999：试炼材料（试炼材料丢了的补偿）<br>
+        TL12345：重开福利补偿（100万绑银 + 7级体力石头3× + 装备保星石20×）<br>
+        TL1111：补偿礼包（重楼链 + 100万绑元 + 100保星符）<br>
+        BC888：延迟公测补偿（地煞精华×50 + 新莽神符×10 + 100万绑元）<br>
+        VIP666 / VIP888 / TL666 / TL888 / TL999 / TL9999 / TL520：新手CDK<br><br>
+
+        <b>💡 实用小技巧：</b><br>
+        ✅ <b>百万珍兽经验丹获取：</b>在银两商店买皮皮虾或者以上的宝宝，孵化出来洗练到完美，然后直接放生就会获得百万+宝宝经验丹<br>
+        ✅ <b>抢宝宝技能书：</b>商会买宝宝技能书每两分钟都会刷新上架，注意去抢就可以了<br>
+        ✅ <b>老虎/麒麟/玄武：</b>大多数是用于附体，不用花太多资源
+      </div>
+    </div>
+
+    <!-- 升级攻略 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide2')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        📈 升级路线攻略
+        <span id="guide2-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide2" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        1级开始做主线+支线<br>
+        →17级打满全身5级宝石去打试练<br>
+        →打到不能打以后把试炼箱子领一下<br>
+        →20级以后可以直接吃经验丹升级，可以直接吃到75级<br>
+        →75级以后升级通过清主线、支线、桃花岛、海域任务、挂地宫、做武林悬赏<br><br>
+        💡 <b>建议：</b>想卡级的建议卡89级，人比较多，能打的活动也多，最低也要卡79级，第一天极限能升到79级。<br><br>
+        ⚠️ <b>注意：</b>49级以后每升5级需要修炼点满才能继续升级，帮贡可以去帮会宴请/吃席（推荐）或者元宝商城买（不推荐），69级、79级、89级需要回到帮会找"吴维"进行等级突破。
+      </div>
+    </div>
+
+    <!-- 战力提升攻略 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide3')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        ⚔️ 战力提升全攻略
+        <span id="guide3-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide3" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        <b>① 宝石打造</b><br>
+        可以直接到绑元商城购买3级宝石升级全满5级宝石，升6、7级宝石需要提升符，神秘商店每周可以买15张提升符+每日活跃1张，每周可获得22张，充值活动卡和每日充值累计奖励也可获得大量提升符。<br><br>
+
+        <b>② 神器打造</b><br>
+        解锁神器需要一直做主线任务，每个角色通过任务可获得一件系统赠送的神器，82级神铸满了以后开启注魂，8件神器都可以注满，五色石、新莽神符不用留，有就用。<br><br>
+
+        <b>③ 授印打造</b><br>
+        吃完经验丹75级就可以去找帮派npc（征战捐献思洋）解锁狩印打造功能，战勋令牌是通过：充值还有捐献任务和帮会贡献获得。<br>
+        升星的位子共计8个：体力—属性攻击—血—内功（外功）—闪避—灵气—身法—命中<br><br>
+
+        <b>④ 暗器打造</b><br>
+        暗器打造材料比较稀有，产出量小，获取难度较大，每周商店拉满就行，多余的只能神值获取，或者拍卖收材料。<br>
+        宝珠升星材料可以直接绑元购买，可以直接拉满，征战功勋需要每天去帮会把三种捐献拉满。<br><br>
+
+        <b>⑤ 神兽宝宝打造</b><br>
+        所有神兽都是需要550颗珠子就可以完全体血脉觉醒，多的珠子可以无限炼魂加战力。龙、虎比较容易获得，打每日神兽都会掉落，凤凰、麒麟、鲲鹏可以充值带神兽珠子的活动礼包来直接血脉觉醒。<br><br>
+
+        <b>血脉凤凰技能：</b><br>
+        神佑/驱散/血迹 → 迟钝 → 强身 → 蛮兽 → 反震 → 吸气 → 忠心 → 虚弱 → 破绽<br><br>
+
+        <b>血脉龙技能：</b><br>
+        嗜血龙：痛击→连击→法魂→狡猾→吸气→蛮兽→虚弱→摔绊<br>
+        咆哮龙：痛击→连击→反噬→溅射→护援→吸气→进化决→散气<br><br>
+
+        <b>⑥ 内丹打造</b><br>
+        单职业内丹：属性—减属性—抗性—针对抗性—血—闪避—会心—命中<br>
+        四属性内丹：冰火玄毒—主减抗—附减抗—主抗—血<br><br>
+
+        <b>⑦ 附体幻化打造</b><br>
+        两个附体阵内丹达到四级即可，幻形玉元宝商店按需求购买。<br><br>
+
+        <b>⑧ 披风打造</b><br>
+        69级解锁此功能，需要用到凤灵引升级，引灵梭。<br><br>
+
+        <b>⑨ 武魂打造</b><br>
+        武魂在79级解锁打造功能，少室山每天能固定产出材料，周常商店记得清空，神值累计也会送材料，凝魂可以直接用绑元拉满。<br><br>
+
+        <b>⑩ 英雄谱打造</b><br>
+        可以到银两商店购买碎片箱子开（大概400个箱子可以开出200碎片，主要看运气），乔峰需要游戏内累计500奖励领取，无崖子需要打英雄试炼获取。<br><br>
+
+        <b>⑪ 经脉打造</b><br>
+        经脉推荐：段誉—段延庆—丁春秋—天山童姥—乔峰—王语嫣—慕容复—无崖子<br>
+        经脉需要的材料：潜能果、回天珠、钥匙<br>
+        潜能果：把橙色潜能搞满大概前期需要4组，全部搞完是8组<br><br>
+
+        <b>⑫ 涅槃打造</b><br>
+        涅槃就是生85级的宝宝，然后给需要的神兽投喂。<br>
+        外功宝宝：出减抗，体力一般都是血和抗性<br>
+        内功宝宝：出通灵和攻击属性系列<br><br>
+
+        <b>⑬ 龙纹打造</b><br>
+        主龙元：巨力、斩绝、舍生、神钦、电跃、振武、御反<br>
+        辅助龙元：以穿刺攻击、穿刺防御为主，不够的再补体力
+      </div>
+    </div>
+
+    <!-- 全门派技能指点 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide4')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        🎯 全门派技能指点（17个门派）
+        <span id="guide4-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide4" style="display:none; padding:0 16px 16px; border-top:1px solid rgba(255,255,255,.1);">
+
+        <!-- 逍遥 -->
+        <div style="margin-top:12px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p1')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🏔️ 逍遥（火攻）
+          </button>
+          <div id="p1" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，火攻，双火减，会心，先打火抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·挖坟：</b><br>
+            逍遥扇(慕容复)、八阵图(阿朱)、洛神图(李秋水)、溪山行旅(无崖子)<br>
+            凌波微步(王语嫣)、波澜不惊(段誉)、云体风身(玄慈)、排山倒海(乔峰)<br><br>
+            <b>真武·帮战：</b><br>
+            逍遥扇(苏星河)、诛仙阵(钟灵)、定海神针(李秋水)、溪山行旅(叶二娘)<br>
+            凌波微步(王语嫣)、波澜不惊(段正淳)、云体风身(玄慈)、排山倒海(慕容博)<br><br>
+            <b>真武·单挑：</b><br>
+            逍遥扇(慕容复)、八阵图(阿朱)、洛神图(李秋水)、溪山行旅(无崖子)<br>
+            凌波微步(王语嫣)、波澜不惊(段誉)、云体风身(玄慈)、排山倒海(乔峰)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/ojfEbGytZ4" alt="逍遥真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 武当 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p2')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            ❄️ 武当（冰攻）
+          </button>
+          <div id="p2" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，冰攻，双冰减，会心，先打冰抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·站桩：</b><br>
+            仙人指路(风波恶)、太渊十三剑(钟灵)、三环套月(鸠摩智)、仙风道骨(叶二娘)<br>
+            如风似闭(段延庆)、流行赶月(段誉)、七星聚首(萧远山)、白鹤亮翅(阮星竹)<br><br>
+            <b>真武·帮战：</b><br>
+            天马飞瀑(苏星河)、天外飞仙(钟灵)、两仪剑(木婉清)、游刃有余(无崖子)<br>
+            如风似闭(段延庆)、流星赶月(段誉)、七星聚首(阿朱)、白鹤亮翅(乔峰)<br><br>
+            <b>真武·门派：</b><br>
+            仙人指路(阿紫)、天外飞仙(天山童姥)、两仪剑(木婉清)、游刃有余(叶二娘)<br>
+            如风似闭(段延庆)、梯云纵(段誉)、七星聚首(萧远山)、白鹤亮翅(慕容博)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/kHCxxAfkZn" alt="武当真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 天山 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p3')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🏹 天山（冰攻）
+          </button>
+          <div id="p3" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，冰攻，双冰减，会心，先打冰抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·地宫偷人：</b><br>
+            梅花三弄(慕容复)、凤舞九天(阿朱)、折梅式(李秋水)、移花接木(叶二娘)<br>
+            金蚕脱壳(云中鹤)、兰花点穴手(南海鳄神)、寒梅怒放(萧远山)、踏雪无痕(慕容博)<br><br>
+            <b>真武·爆发：</b><br>
+            梅花三弄(慕容复)、凤舞九天(钟灵)、折梅式(李秋水)、移花接木(丁春秋)<br>
+            冰凝霜华(云中鹤)、兰花点穴手(南海鳄神)、寒梅怒放(虚竹)、踏雪无痕(慕容博)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/1aUSaDmyO9" alt="天山真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 天龙 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p4')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            ☯️ 天龙（玄攻）
+          </button>
+          <div id="p4" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
+            <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
+            <b>非真武：</b><br>
+            一阳指(慕容复)、三阳开泰(阿朱)、八门金锁(鸠摩智)、非枯非荣(叶二娘)<br>
+            少泽剑(段延庆)、商阳剑(南海鳄神)、中冲剑(萧远山)、百步穿杨(乔峰)<br><br>
+            <b>真武·帮战：</b><br>
+            一阳指(慕容复)、万岳朝宗(阿朱)、白虹贯日(李秋水)、非枯非荣(丁春秋)<br>
+            少泽剑(云中鹤)、雪拥蓝关(段誉)、中冲剑(玄慈)、百步穿杨(乔峰)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/XZdBKI0ips" alt="天龙真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 桃花 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p5')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🌸 桃花（火攻）
+          </button>
+          <div id="p5" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，火攻，双火减，会心，先打火抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·常规：</b><br>
+            星河在天(慕容复)、天外清音(阿朱)、平沙落雁(鸠摩智)、九花玉露(无崖子)<br>
+            碧波云海(王语嫣)、旋风扫叶(段誉)、听云观海(虚竹)、碧海潮声(乔峰)<br><br>
+            <b>吸蓝回血：</b><br>
+            回风拂柳(苏星河)、天外清音(阿朱)、玉银(鸠摩智)、九花玉露(丁春秋)<br>
+            凤曲长鸣(云中鹤)、旋风扫叶(段誉)、听云观海(阿碧)、碧海潮声(阮星竹)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/X3loqNQeSU" alt="桃花真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 慕容 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p6')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            ⚔️ 慕容（玄攻）
+          </button>
+          <div id="p6" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>非真武·单挑：</b><br>
+            剑横疆场(阿紫)、气定六合(天山童姥)、心剑交融(李秋水)、蓄云欲雨(丁春秋)<br>
+            凌神式(傅思归)、探营取将(南海鳄神)、星河虹吸(虚竹)、破天式(乔峰)<br><br>
+            <b>真武·单挑：</b><br>
+            参合指(慕容复)、气定六合(天山童姥)、借力反施(古诚)、蓄云欲雨(丁春秋)<br>
+            凌神式(傅思归)、重云遮日(段正淳)、星河虹吸(虚竹)、破天式(乔峰)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/H8ojXWNZ9B" alt="慕容真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 明教 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p7')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🔥 明教（火攻）
+          </button>
+          <div id="p7" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，火攻，双火减，会心，先打火抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·常规：</b><br>
+            火焰连环斩(慕容复)、血战八方(天山童姥)、水神下凡(李秋水)、怒火连斩(无崖子)<br>
+            烽火连城(云中鹤)、烈焰刀(段誉)、炎龙无双(虚竹)、李代桃僵(阮星竹)<br><br>
+            <b>无限刀：</b><br>
+            火焰连环斩(阿紫)、血战八方(天山童姥)、水神下凡(李秋水)、怒火连斩(无崖子)<br>
+            烽火连城(云中鹤)、烈焰刀(段正淳)、炎龙无双(虚竹)、李代桃僵(乔峰)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/ReANqMxmlw" alt="明教真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 昆仑 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p8')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🗡️ 昆仑（冰攻）
+          </button>
+          <div id="p8" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，冰攻，双冰减，会心，先打冰抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·门派单挑：</b><br>
+            迅雷刀法(阿紫)、刀影三合(天山童姥)、刀卷狂风(鸠摩智)、寒冰护体(褚万里)<br>
+            凌冽寒风(段延庆)、三阴手(段正淳)、屏气凝神(萧远山)、盛气凌敌(乔峰)<br><br>
+            <b>真武·帮战：</b><br>
+            迅雷刀法(阿紫)、刀光掠影(王夫人)、刀卷狂风(李秋水)、寒冰护体(叶二娘)<br>
+            凌冽寒风(傅思归)、疾雪无痕(段正淳)、屏气凝神(玄慈)、盛气凌敌(乔峰)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/bUSywopJCi" alt="昆仑真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 鬼谷 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p9')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🌀 鬼谷
+          </button>
+          <div id="p9" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，单属性攻，双减，会心<br>
+            <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
+            <b>真武·常规：</b><br>
+            声东击西(阿紫)、谪仙梦影(天山童姥)、惑守心(鸠摩智)、捭阖之术(丁春秋)<br>
+            五气朝元(王语嫣)、缩地成寸(段正淳)、陶然一醉(虚竹)、纵横之理(慕容博)<br><br>
+            <b>爆发：</b><br>
+            一气三清(阿紫)、谪仙梦影(天山童姥)、太上忘情(鸠摩智)、捭阖之术(无崖子)<br>
+            五气朝元(王语嫣)、缩地成寸(朱丹臣)、陶然一醉(玄慈)、纵横之理(乔峰)
+          </div>
+        </div>
+
+        <!-- 蓬莱 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p10')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🌊 蓬莱（玄攻）
+          </button>
+          <div id="p10" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·轻剑：</b><br>
+            斩长鲸(慕容复)、浪中行(天山童姥)、引玄决(李秋水)、乘风御云(丁春秋)<br>
+            慕雨霏微(王语嫣)、鹏飞海暗(段誉)、惊雾流波(萧远山)、剑分阴阳(乔峰)<br><br>
+            <b>真武·重剑：</b><br>
+            斩长鲸(慕容复)、浪中行(天山童姥)、引玄决(李秋水)、乘风御云(丁春秋)<br>
+            慕雨霏微(云中鹤)、鹏飞海暗(段誉)、惊雾流波(萧远山)、剑分阴阳(乔峰)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/Fz6STb66kV" alt="蓬莱真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 丐帮 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p11')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🐉 丐帮（毒攻）
+          </button>
+          <div id="p11" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，毒攻，双毒减，会心，先打毒抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·通用：</b><br>
+            亢龙有悔(风波恶)、青龙出水(钟灵)、时乘六龙(李秋水)、横扫乾坤(无崖子)<br>
+            雪泥鸿爪(段延庆)、震惊百里(段誉)、八步赶蝉(虚竹)、棒打狗头(乔峰)<br><br>
+            <b>秒人：</b><br>
+            亢龙有悔(风波恶)、青龙出水(天山童姥)、潜龙勿用(李秋水)、控鹤式(无崖子)<br>
+            雪泥鸿爪(段延庆)、震惊百里(南海鳄神)、八步赶蝉(虚竹)、棒打狗头(乔峰)
+          </div>
+        </div>
+
+        <!-- 峨眉 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p12')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            💚 峨眉（玄攻）
+          </button>
+          <div id="p12" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
+            <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
+            <b>真武·门派：</b><br>
+            拖泥带水(慕容复)、西子捧心(王夫人)、冲虚养气(鸠摩智)、清心普善咒(褚万里)<br>
+            障眼法(云中鹤)、佛光普照(段誉)、月落西山(玄慈)、呆若木鸡(慕容博)<br><br>
+            <b>帮战纯输出：</b><br>
+            拖泥带水(阿紫)、西子捧心(钟灵)、冲虚养气(木婉清)、斩情绝(叶二娘)<br>
+            昭君出塞(段延庆)、灭剑式(南海鳄神)、月落西山(玄慈)、呆若木鸡(慕容博)
+          </div>
+        </div>
+
+        <!-- 点苍 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p13')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🖌️ 点苍（玄攻）
+          </button>
+          <div id="p13" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
+            <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
+            <b>真武·常规：</b><br>
+            神鬼如泣(慕容复)、松烟护月(钟灵)、雪落笔法(李秋水)、偷换日月(丁春秋)<br>
+            飞龙凤舞(王语嫣)、天魁点斗(段正淳)、云水无心(玄慈)、妙笔生花(乔峰)<br><br>
+            <b>帮战：</b><br>
+            神鬼如泣(阿紫)、风雨流云(王夫人)、雪落笔法(李秋水)、偷换日月(丁春秋)<br>
+            飞龙风舞(王语嫣)、天魁点斗(朱丹臣)、云水无心(玄慈)、妙笔生花(慕容复)
+          </div>
+        </div>
+
+        <!-- 华山 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p14')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            ⛰️ 华山（玄攻）
+          </button>
+          <div id="p14" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
+            <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
+            <b>非真武·常规：</b><br>
+            金燕横空(阿紫)、太华九剑(钟灵)、华岳三千(李秋水)、万象森罗(丁春秋)<br>
+            啸风溯木(段延庆)、春红化土(段正淳)、寄星落雁(虚竹)、霞云烟雨(乔峰)<br><br>
+            <b>帮战：</b><br>
+            金燕横空(阿紫)、太华九剑(天山童姥)、华岳三千(李秋水)、万象森罗(丁春秋)<br>
+            苍松迎客(王语嫣)、悬臂千锋(南海鳄神)、寄星落雁(虚竹)、霞云烟雨(慕容博)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/Qaf43UVUXO" alt="华山真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 唐门 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p15')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🏹 唐门（毒攻）
+          </button>
+          <div id="p15" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，毒攻，双毒减，会心，先打毒抗<br>
+            <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
+            <b>挖坟：</b><br>
+            九天揽月(阿紫)、浮光掠影(王语嫣)、天机弩(段誉)、落日追星(玄慈)<br>
+            十方俱灭(褚万里)、风雷万军(阮星竹)、铁蒺藜(李秋水)、万箭齐发(钟灵)<br><br>
+            <b>团战：</b><br>
+            九天揽月(阿紫)、浮光掠影(王语嫣)、天机弩(段誉)、落日追星(玄慈)<br>
+            十方俱灭(褚万里)、风雷万军(阮星竹)、震箭式(鸠摩智)、万箭齐发(钟灵)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/7FyFDdYkIm" alt="唐门真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 少林 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p16')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            🛡️ 少林（玄攻）
+          </button>
+          <div id="p16" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
+            <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
+            <b>不真武通用：</b><br>
+            大力金刚掌(慕容复)、普渡杖法(天山童姥)、韦陀杵(李秋水)、金钟罩(丁春秋)<br>
+            拈花指(段延庆)、易筋锻骨(段正淳)、狮子吼(玄慈)、如来神掌(乔峰)<br><br>
+            <b>真武通用：</b><br>
+            大力金刚掌(慕容复)、普渡杖法(天山童姥)、韦陀杵(李秋水)、金钟罩(丁春秋)<br>
+            拈花指(段延庆)、易筋锻骨(段正淳)、狮子吼(萧远山)、如来神掌(乔峰)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/Uea49pvk8R" alt="少林真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+        <!-- 星宿 -->
+        <div style="margin-top:8px; background:var(--card2); border-radius:8px; overflow:hidden;">
+          <button onclick="toggleSection('p17')" style="width:100%; padding:12px; background:var(--card2); color:var(--gold); border:none; text-align:left; font-size:14px; font-weight:600; cursor:pointer;">
+            ☠️ 星宿（毒攻）
+          </button>
+          <div id="p17" style="display:none; padding:12px; font-size:12px; line-height:1.8; color:var(--ink);">
+            <b>宝石：</b>血，闪，毒攻，双毒减，会心，先打毒抗<br>
+            <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
+            <b>常规：</b><br>
+            幽冥神掌(苏星河)、玉碎昆岗(天山童姥)、青蛇毒掌(鸠摩智)、经脉逆行(叶二娘)<br>
+            毒蟾功(云中鹤)、含笑半步癫(段正淳)、一日丧命散(萧远山)、天地同寿(乔峰)<br><br>
+            <b>团战宋辽：</b><br>
+            幽冥神掌(慕容复)、玉碎昆岗(天山童姥)、青蛇毒掌(木婉清)、经脉逆行(叶二娘)<br>
+            毒蟾功(王语嫣)、含笑半步癫(段誉)、一日丧命散(虚竹)、天地同寿(慕容博)<br><br>
+
+            <img src="https://aka.doubaocdn.com/s/5dSIjQ5O8m" alt="星宿真武指点" style="width:100%; display:block; margin-top:8px; border-radius:4px;">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 副本活动改动 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide5')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        🎮 副本活动改动
+        <span id="guide5-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide5" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        <b>① 副本奖励</b><br>
+        老三环-燕子坞-四绝庄-飘渺峰-反贼入侵-水牢等副本，在同步原有奖励的基础上增加boss固定绑元掉落18880×1，几率掉落随机所有神兽幸运宝箱1个。<br><br>
+
+        <b>② 限时活动</b><br>
+        镜湖剿匪：混江龙奖励增加绑元18880×5，几率掉落随机所有神兽幸运宝箱5个<br>
+        世界神兽活动：增加boss固定绑元18880×1 + 神兽凤凰元神珠子×1<br>
+        跨服神兽活动：增加boss固定绑元18880×5 + 神兽凤凰、龙魂、妖虎、玄武、鲲鹏、麒麟幸运宝箱各1个<br><br>
+
+        <b>③ 十人团本</b><br>
+        国运之战、兵圣奇阵、深海迷城、五圣降临，增加boss固定绑元18880×3，几率掉落随机所有神兽幸运宝箱×3
+      </div>
+    </div>
+
+    <!-- 幻化属性改动 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide5b')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        ✨ 幻化属性魔改加强
+        <span id="guide5b-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide5b" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        <b>🔪 武器幻化属性加强：</b><br>
+        方天画戟：全属性攻击+1111 + 一级属性111<br>
+        赤龙苗刀：会心防御2000 + 身法999<br>
+        开天神斧：会心3000 + 体力999<br>
+        岱山镰：全属性攻击+1111 + 一级属性111<br>
+        寒江暮雪：会心3000 + 闪避999<br>
+        十方怒焰刀：会心3000 + 体力999<br>
+        驭风劈云扇：会心防御2000 + 身法999<br>
+        游龙寒枪：全属性攻击+1111 + 一级属性111<br>
+        神威炽焰枪：全属性攻击+1111 + 一级属性111<br><br>
+
+        <b>🛡️ 武魂幻化属性加强：</b><br>
+        凤囚凰：一级属性444 + 命中1000<br>
+        双生鲤：一级属性188 + 体力2222<br>
+        霸世金轮：一级属性188 + 体力2222<br>
+        冰璃雪魄：会心2000 + 命中2600<br>
+        幻戏骨：一级属性188 + 体力2222<br>
+        蜇龙霸业：一级属性188 + 体力2222<br><br>
+
+        <b>🧥 披风属性加强：</b><br>
+        墨羽临渊：原属性 + 体力1111 + 一级属性99<br>
+        霜羽逐光：原属性 + 体力1111 + 一级属性99
+      </div>
+    </div>
+
+    <!-- 商店新增 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide5c')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        🛒 商店新增内容
+        <span id="guide5c-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide5c" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        <b>💰 元宝商店新增：</b><br>
+        ✅ 帮贡令牌100<br>
+        ✅ 自选天赐万灵宝箱<br>
+        ✅ 珍兽主动技能：咆哮/嗜血/血祭/共生/驱散<br>
+        ✅ 家园材料（300木材/300皮料）<br>
+        ✅ 保星符福袋<br>
+        ✅ 一箱宝珠50<br>
+        ✅ 幻形玉<br>
+        ✅ 稀有跑环材料（奇石/天然彩棉/貂皮/僵蚕）<br>
+        ✅ 元宝兑换绑元（绑定元宝18880）<br>
+        ✅ 龙魂/妖虎/凤凰/麒麟/鲲鹏/玄武幸运礼盒<br>
+        ✅ 各种抽奖箱子（国士无双/赤龙破军/开天辟地等）<br>
+        ✅ 武魂幻化抽奖箱子<br>
+        ✅ 特殊头像、头像相框<br>
+        ✅ 人物时装、子女时装、子女幻化<br>
+        ✅ 坐骑礼盒<br><br>
+
+        <b>💠 绑元商城新增：</b><br>
+        ✅ 摸金符<br><br>
+
+        <b>🏪 交易所自动上架：</b><br>
+        ✅ 珍兽主动技能（极冰凝杀/劫火焚杀/腐毒蚀杀/玄雷击杀）<br>
+        ✅ 珍兽被动技能（迟钝/狡猾/憨厚/法魂/蛮力/猛击/痛击等）<br>
+        ✅ 打造材料（学徒/工匠/名家/大师打造图）<br>
+        💡 每5分钟刷新，卖完间隔5分钟再次上架
+      </div>
+    </div>
+
+    <!-- 功能解锁方式 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide5d')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        🔓 功能解锁等级
+        <span id="guide5d-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide5d" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        <b>护心镜：</b>名望泰斗解锁，元宝商店购买一星护心镜<br><br>
+        <b>狩印（授印）：</b>73级帮会里找NPC思洋，做征战捐献任务解锁<br><br>
+        <b>披风：</b>69级解锁，需要凤灵引升级、引灵梭<br><br>
+        <b>武魂：</b>79级解锁，少室山每天固定产出材料<br><br>
+        <b>神器：</b>做主线任务解锁，82级神铸满后开启注魂<br><br>
+        <b>附体幻化：</b>两个附体阵内丹达到四级即可
+      </div>
+    </div>
+
+    <!-- 充值奖励 -->
+    <div style="margin:0 16px 12px; background:var(--card); border-radius:12px; overflow:hidden;">
+      <button onclick="toggleSection('guide6')" style="width:100%; padding:16px; background:var(--card); color:var(--ink); border:none; text-align:left; font-size:15px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+        💰 累计充值奖励档位
+        <span id="guide6-arrow" style="transition:transform .2s;">›</span>
+      </button>
+      <div id="guide6" style="display:none; padding:16px; border-top:1px solid rgba(255,255,255,.1); font-size:13px; line-height:1.8;">
+        <b>25元（5万元宝）</b>：地煞精华×50，洗练丹×50，龙魂元神×5，妖虎元神×5，蓝田玉令×3<br><br>
+        <b>50元（10万元宝）</b>：地煞精华×100，洗练丹×100，龙魂元神×5，蓝田玉令×3，妖虎元神×5<br><br>
+        <b>100元（20万元宝）</b>：地煞精华×150，洗练丹×200，九天玄女，五色神石×99，蓝田玉令×4<br><br>
+        <b>150元（30万元宝）</b>：地煞精华×200，七级血精石×1，啸月魔虎，蓝田玉令×4，暗器修炼石×99<br><br>
+        <b>250元（50万元宝）</b>：潜能果×200，乔峰×1，暗器修炼石×99，保星符自选福袋×10，紫髓玉令×5<br><br>
+        <b>500元（100万元宝）</b>：龙魂元神×10，玄凤元神×10，妖虎元神×10，紫髓玉令×10，宝石提升符×5<br><br>
+        <b>1000元（200万元宝）</b>：天渊帝麟，紫髓玉令×15，天命神符×1，玄凤元神×10，妖虎元神×10<br><br>
+        <b>2500元（500万元宝）</b>：天命神符×1，雕龙玉令×20，麒麟元神×10，鲲鹏元神×10，玄武元神×10<br><br>
+        <b>5000元（1000万元宝）</b>：雕龙玉令×30，天命神符×1，玄武元神×15，鲲鹏元神×15，麒麟元神×15<br><br>
+        <b>10000元（2000万元宝）</b>：溟海逸霄鲲（永久）×1，鲲鹏玉令×20，保星符自选福袋×99，绑元18880×388，天命神符×1
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:20px;">
+      <div class="sec-title"><span class="bar"></span><h2>图文攻略（长图）</h2></div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/cWZyJkWxb3" alt="攻略1" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/NYl8eQjAZu" alt="攻略2" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/UsTvPzyq5M" alt="攻略3" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/89RrIfmIS5" alt="攻略4" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/RkWbPwaP1H" alt="攻略5" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/sgAFcxy8OD" alt="攻略6" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/AXmNcGGexL" alt="攻略7" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/ZZv75sdved" alt="攻略8" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/swbUiORWnU" alt="攻略9" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/3RsvGT3f9g" alt="攻略10" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/vh174CpCt3" alt="攻略11" style="width:100%; display:block;">
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <img src="https://aka.doubaocdn.com/s/ICmtBqnFos" alt="攻略12" style="width:100%; display:block;">
+    </div>
+  </div>
+
+  <!-- ===== 进群页 ===== -->
+  <div class="page" id="page-group">
+    <a class="back-btn" href="#" onclick="switchPage('old');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回首页
+    </a>
+    <div class="sec">
+      <div class="sec-title"><span class="bar"></span><h2>联系客服</h2></div>
+      <p style="padding:0 20px; font-size:14px; color:var(--gold); margin-bottom:16px; text-align:center; font-weight:600;">
+        进群领福利 · 有问题直接找我
+      </p>
+    </div>
+
+    <div class="sec">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:linear-gradient(135deg,#12B7F5,#0A84D8);">QQ</div>
+        <div class="contact-info">
+          <div class="contact-label">玩家交流群（进群领福利）</div>
+          <div class="contact-num" onclick="copyText('680598747', this)">680598747</div>
+        </div>
+        <button class="contact-copy" onclick="copyText('680598747', this)">复制</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:linear-gradient(135deg,#12B7F5,#0A84D8);">QQ</div>
+        <div class="contact-info">
+          <div class="contact-label">代理QQ号（直接加）</div>
+          <div class="contact-num" onclick="copyText('354261705', this)">354261705</div>
+        </div>
+        <button class="contact-copy" onclick="copyText('354261705', this)">复制</button>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:linear-gradient(135deg,#07C160,#06AD56);">微信</div>
+        <div class="contact-info">
+          <div class="contact-label">微信号（微信咨询）</div>
+          <div class="contact-num" onclick="copyText('qun680598747', this)">qun680598747</div>
+        </div>
+        <button class="contact-copy" onclick="copyText('qun680598747', this)">复制</button>
+      </div>
+    </div>
+
+    <div class="tip">特别提示：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+</div>
+
+  <div class="tabbar">
+    <button class="active" data-page="old" onclick="goHome()">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      首页
+    </button>
+    <button data-page="gifts" onclick="goGifts()">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+      礼包码
+    </button>
+    <button data-page="manual" onclick="goManual()">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      游戏手册
+    </button>
+    <button data-page="group" onclick="goGroup()">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      客服
+    </button>
+  </div>
+
+</div>
+
+<!-- 备用链接弹窗 -->
+<div id="copyModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:999; align-items:center; justify-content:center;" onclick="hideCopyModal()">
+  <div style="background:var(--card); border-radius:16px; padding:20px; width:90%; max-width:380px;" onclick="event.stopPropagation()">
+    <div style="font-size:16px; color:var(--gold); margin-bottom:16px; font-weight:600; text-align:center;">🔗 复制链接到浏览器打开</div>
+    
+    <div style="margin-bottom:12px; padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📥 游戏下载链接</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">https://wrtl.ququ.im/WRTL.html</div>
+        <button onclick="copyText('https://wrtl.ququ.im/WRTL.html', this)" style="flex-shrink:0; padding:8px 16px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <div style="padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📝 注册 + 后台充值链接</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">https://tlbbb.hfynxx.top/MZSP</div>
+        <button onclick="copyText('https://tlbbb.hfynxx.top/MZSP', this)" style="flex-shrink:0; padding:8px 16px; background:var(--gold); color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <button onclick="hideCopyModal()" style="width:100%; margin-top:16px; padding:10px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:8px; font-size:14px; cursor:pointer;">关闭</button>
+  </div>
+</div>
+
+<!-- 老版备用链接弹窗 -->
+<div id="copyModalOld" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:999; align-items:center; justify-content:center;" onclick="hideCopyModalOld()">
+  <div style="background:var(--card); border-radius:16px; padding:20px; width:90%; max-width:380px;" onclick="event.stopPropagation()">
+    <div style="font-size:16px; color:#64b4ff; margin-bottom:16px; font-weight:600; text-align:center;">🔗 复制链接到浏览器打开</div>
+    
+    <div style="margin-bottom:12px; padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📥 游戏下载链接</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">https://hftl.jinkeyan.wang/HFTL.html</div>
+        <button onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html', this)" style="flex-shrink:0; padding:8px 16px; background:#64b4ff; color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <div style="padding:12px; background:var(--card2); border-radius:8px;">
+      <div style="font-size:13px; color:var(--ink-dim); margin-bottom:6px;">📝 注册 + 兑换码网站</div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <div style="flex:1; font-size:12px; color:var(--ink); word-break:break-all; line-height:1.4;">http://tlbb.hfynxx.top/PPAP</div>
+        <button onclick="copyText('http://tlbb.hfynxx.top/PPAP', this)" style="flex-shrink:0; padding:8px 16px; background:#64b4ff; color:#000; border:none; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer;">复制</button>
+      </div>
+    </div>
+
+    <button onclick="hideCopyModalOld()" style="width:100%; margin-top:16px; padding:10px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:8px; font-size:14px; cursor:pointer;">关闭</button>
+  </div>
+</div>
+
+<script>
+function switchPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  window.scrollTo(0, 0);
+}
+
+var currentVersion = 'home'; // 'home' | 'new' | 'old'
+
+function switchVersion(v) {
+  currentVersion = v;
+  if (v === 'new') {
+    document.getElementById('topbar-title').textContent = '魔幻天龙17职业';
+    document.getElementById('topbar-sub').textContent = '0.01折新服 · 17职业';
+    switchPage('new');
+  } else if (v === 'old') {
+    document.getElementById('topbar-title').textContent = '天龙畅玩版';
+    document.getElementById('topbar-sub').textContent = '超高比例1:4000 · 17职业';
+    switchPage('old');
+  } else if (v === 'home') {
+    document.getElementById('topbar-title').textContent = '天龙17职业港版';
+    document.getElementById('topbar-sub').textContent = '双版本任选 · 畅玩武侠';
+    switchPage('home');
+  }
+}
+
+function goGifts() {
+  switchPage('gifts-old');
+}
+
+function goManual() {
+  switchPage('manual-old');
+}
+
+function goHome() {
+  document.getElementById('topbar-title').textContent = '天龙畅玩版';
+  document.getElementById('topbar-sub').textContent = '超高比例1:4000 · 17职业';
+  switchPage('old');
+}
+
+function goGroup() {
+  switchPage('group');
+}
+
+function showCopyModal() {
+  document.getElementById('copyModal').style.display = 'flex';
+}
+
+function hideCopyModal() {
+  document.getElementById('copyModal').style.display = 'none';
+}
+
+function showCopyModalOld() {
+  document.getElementById('copyModalOld').style.display = 'flex';
+}
+
+function hideCopyModalOld() {
+  document.getElementById('copyModalOld').style.display = 'none';
+}
+
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  const arrow = document.getElementById(id + '-arrow');
+  if (el.style.display === 'none' || !el.style.display) {
+    el.style.display = 'block';
+    arrow.style.transform = 'rotate(90deg)';
+  } else {
+    el.style.display = 'none';
+    arrow.style.transform = 'rotate(0deg)';
+  }
+}
+</script>
+
+<script>
+function saveQRCode() {
+  var img = document.querySelector('#page-group .qr-card img');
+  var canvas = document.createElement('canvas');
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  canvas.toBlob(function(blob) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'qq-group-qrcode.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    alert('二维码已下载，请在相册或下载文件夹查看');
+  }, 'image/png');
+}
+</script>
+
+<script>
+function copyText(text, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    var oldText = btn.textContent;
+    btn.textContent = '已复制';
+    setTimeout(function() { btn.textContent = oldText; }, 2000);
+  } catch(e) {
+    alert('复制失败，请手动长按复制');
+  }
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
