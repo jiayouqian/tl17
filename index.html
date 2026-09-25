@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f0c09'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='%23e8b64c' font-weight='900'%3E天%3C/text%3E%3C/svg%3E">
-<title>天龙畅玩版 · 17职业超高比例</title>
+<title>魔幻天龙17职业 · 0.01折新服</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   :root {
@@ -276,12 +276,12 @@
 <div class="wrap">
 
   <div class="topbar">
-    <b id="topbar-title">天龙畅玩版</b>
-    <small id="topbar-sub">超高比例1:4000 · 17职业</small>
+    <b id="topbar-title">天龙17职业港版</b>
+    <small id="topbar-sub">双版本任选 · 畅玩武侠</small>
   </div>
 
   <!-- ===== 版本选择页（首页） ===== -->
-  <div class="page" id="page-home">
+  <div class="page active" id="page-home">
     <div style="padding:24px 16px 16px; text-align:center;">
       <h1 style="font-size:28px; color:var(--gold); font-weight:900; letter-spacing:4px; margin-bottom:6px;">天龙17职业</h1>
       <div style="font-size:13px; color:var(--ink-dim);">双版本任选 · 选你喜欢的开始畅玩</div>
@@ -397,8 +397,11 @@
   </div>
 
   <!-- ===== 畅玩老版页面 ===== -->
-  <div class="page active" id="page-old">
-    <!-- 畅玩版首页不需要返回按钮 -->
+  <div class="page" id="page-old">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      版本选择
+    </a>
 
     <div class="hero">
       <img class="hero-bg" src="https://aka.doubaocdn.com/s/ecDoa10uEh" alt="天龙畅玩版17职业">
@@ -1333,7 +1336,7 @@
 
   <!-- ===== 进群页 ===== -->
   <div class="page" id="page-group">
-    <a class="back-btn" href="#" onclick="switchPage('old');return false;">
+    <a class="back-btn" href="#" onclick="switchVersion('home');return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       返回首页
     </a>
@@ -1382,7 +1385,7 @@
 </div>
 
   <div class="tabbar">
-    <button class="active" data-page="old" onclick="goHome()">
+    <button class="active" data-page="home" onclick="document.getElementById('topbar-title').textContent='天龙17职业港版';document.getElementById('topbar-sub').textContent='双版本任选 · 畅玩武侠';switchPage('home');">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       首页
     </button>
@@ -1480,17 +1483,46 @@ function switchVersion(v) {
 }
 
 function goGifts() {
-  switchPage('gifts-old');
+  // 直接看当前显示的是哪个版本的页面
+  var isOld = document.getElementById('page-old').classList.contains('active') || 
+              document.getElementById('page-gifts-old').classList.contains('active') || 
+              document.getElementById('page-manual-old').classList.contains('active');
+  var isNew = document.getElementById('page-new').classList.contains('active') || 
+              document.getElementById('page-gifts').classList.contains('active') || 
+              document.getElementById('page-manual').classList.contains('active');
+  
+  if (isOld) {
+    switchPage('gifts-old');
+  } else if (isNew) {
+    switchPage('gifts');
+  } else {
+    switchPage('gifts');
+  }
 }
 
 function goManual() {
-  switchPage('manual-old');
+  // 直接看当前显示的是哪个版本的页面
+  var isOld = document.getElementById('page-old').classList.contains('active') || 
+              document.getElementById('page-gifts-old').classList.contains('active') || 
+              document.getElementById('page-manual-old').classList.contains('active');
+  var isNew = document.getElementById('page-new').classList.contains('active') || 
+              document.getElementById('page-gifts').classList.contains('active') || 
+              document.getElementById('page-manual').classList.contains('active');
+  
+  if (isOld) {
+    switchPage('manual-old');
+  } else if (isNew) {
+    switchPage('manual');
+  } else {
+    switchPage('manual');
+  }
 }
 
 function goHome() {
-  document.getElementById('topbar-title').textContent = '天龙畅玩版';
-  document.getElementById('topbar-sub').textContent = '超高比例1:4000 · 17职业';
-  switchPage('old');
+  // 直接跳回版本选择首页
+  document.getElementById('topbar-title').textContent = '天龙17职业港版';
+  document.getElementById('topbar-sub').textContent = '双版本任选 · 畅玩武侠';
+  switchPage('home');
 }
 
 function goGroup() {
