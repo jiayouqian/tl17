@@ -22,6 +22,10 @@
     background: var(--bg); color: var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
     line-height:1.6;
+    background-image: 
+      radial-gradient(circle at 20% 0%, rgba(232,182,76,.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 100%, rgba(232,182,76,.05) 0%, transparent 50%);
+    background-attachment: fixed;
   }
   .wrap { max-width:480px; margin:0 auto; padding-bottom:80px; }
 
@@ -189,7 +193,40 @@
     padding:10px 16px 18px; font-size:12px; color:var(--ink-dim); text-align:center;
   }
 
-  /* ===== 底部固定导航 ===== */
+  /* ===== 攻略图美化 ===== */
+  #manual img {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,.3);
+    margin: 8px 0 !important;
+  }
+
+  /* ===== 手册展开内容美化 ===== */
+  #manual .page div[style*="display:none"] {
+    padding: 16px !important;
+    background: rgba(0,0,0,.15);
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* ===== 底部导航优化 ===== */
+  .tabbar button {
+    flex:1; padding:12px 0; background:transparent; border:none;
+    color:var(--ink-dim); font-size:11px; cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    transition: all .2s ease;
+  }
+  .tabbar button.active {
+    color:var(--gold);
+  }
+  .tabbar button.active::before {
+    content:'';
+    position: absolute;
+    top:0;
+    width:24px;
+    height:2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+
   .tabbar {
     position:fixed; bottom:0; left:0; right:0; z-index:100;
     background:rgba(15,12,9,.97); backdrop-filter:blur(12px);
