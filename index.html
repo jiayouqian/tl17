@@ -26,10 +26,12 @@ h2{text-align:center;color:#f2d06b;padding:25px 0 15px;font-size:22px}
 .gift-block{background:linear-gradient(135deg,rgba(60,45,25,.9),rgba(50,38,20,.9));padding:14px;border-radius:10px;margin:10px 0;line-height:1.8;font-size:14px;border:1px solid rgba(230,184,74,.1)}
 .gift-code{color:#f2d06b;font-weight:bold;font-size:16px;margin-bottom:5px}
 .tip-box{background:rgba(217,72,43,.15);border:1px solid rgba(240,112,74,.3);padding:14px;border-radius:10px;margin-top:15px;color:#f0a08a;font-size:13px;line-height:1.7}
-details{background:linear-gradient(135deg,rgba(50,38,20,.9),rgba(40,30,18,.8));margin:12px;border-radius:14px;padding:16px;border:1px solid rgba(230,184,74,.15);box-shadow:0 4px 15px rgba(0,0,0,.2)}
-summary{cursor:pointer;color:#f2d06b;font-weight:bold;font-size:16px;list-style:none;display:flex;align-items:center;gap:8px}
-summary::before{content:"▸ ";color:#e6b84a;font-size:18px}
-details[open] summary::before{content:"▾ "}
+/* 折叠菜单美化成金色按钮风格 */
+details{background:linear-gradient(135deg,rgba(80,60,30,.9),rgba(60,45,20,.9));margin:12px;border-radius:50px;padding:0;border:2px solid #e6b84a;box-shadow:0 6px 20px rgba(230,184,74,.2);overflow:hidden}
+summary{cursor:pointer;color:#1a120b;font-weight:bold;font-size:16px;list-style:none;padding:16px 20px;background:linear-gradient(135deg,#d4a038,#f7d774);display:flex;align-items:center;justify-content:center;gap:8px}
+summary::before{content:"";}
+details[open] summary{border-bottom:2px solid #b8862e}
+.details-content{padding:16px}
 details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rgba(0,0,0,.3)}
 .contact-item{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(60,45,25,.9),rgba(50,38,20,.9));padding:18px;margin:12px;border-radius:14px;border:1px solid rgba(230,184,74,.2);box-shadow:0 4px 15px rgba(0,0,0,.2)}
 .contact-left{display:flex;align-items:center;gap:12px}
@@ -43,7 +45,7 @@ details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rg
 .b2{flex:1;padding:18px 0;background:linear-gradient(135deg,#12a89d,#2dd4bf);color:white;text-align:center;text-decoration:none;font-weight:bold;font-size:16px}
 .b3{flex:1;padding:18px 0;background:linear-gradient(135deg,#d9482b,#f0704a);color:white;text-align:center;text-decoration:none;font-weight:bold;font-size:15px}
 .back{text-align:center;padding:25px}
-.back a{display:inline-block;padding:12px 30px;border:1px solid #e6b84a;color:#e6b84a;border-radius:10px;text-decoration:none;font-size:16px;font-weight:bold;background:rgba(230,184,74,.1)}
+.back a{display:inline-block;padding:12px 30px;border:1px solid #e6b84a;color:#e6b84a;border-radius:30px;text-decoration:none;font-size:16px;font-weight:bold;background:rgba(230,184,74,.1)}
 </style>
 </head>
 <body>
@@ -86,67 +88,77 @@ details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rg
 <div class="page" id="manual">
   <h2>新手攻略</h2>
   <details><summary>🎁 公测专属礼包码</summary>
-    <div style="padding:10px 0;color:#a08c6c;font-size:13px">进入游戏后左上角找到精彩活动，输入6个1可一次性领取全部5个礼包，全区通用无门槛，按角色各领一次。</div>
-    <div class="gift-block">
-      <div class="gift-code">MH1001 公测等级坐骑时装礼包</div>
-      ✅ 50万补偿经验 ×170 = 8500万经验<br>
-      ✅ 18880绑元 ×100 = 188.8万绑元<br>
-      ✅ 冥羽（永久坐骑）×1<br>
-      ✅ 金庭云罗（永久时装）×1
-    </div>
-    <div class="gift-block">
-      <div class="gift-code">MH1002 公测成长材料礼包</div>
-      ✅ 100万银两 ×1<br>
-      ✅ 1000万铜钱 ×1<br>
-      ✅ 10万帮贡 ×1<br>
-      ✅ 新莽神符×10<br>
-      ✅ 地煞强化精华×200<br>
-      ✅ 18880绑元 ×999 = 1886万绑元
-    </div>
-    <div class="gift-block">
-      <div class="gift-code">MH1003 神兽觉醒礼包</div>
-      ✅ 六大神兽元神各×550个
-    </div>
-    <div class="gift-block">
-      <div class="gift-code">MH1004 重楼神装礼包</div>
-      ✅ 重楼五件套 ×1<br>
-      ✅ 保星符福袋×50
-    </div>
-    <div class="gift-block">
-      <div class="gift-code">MH1005 公测江湖豪礼</div>
-      ✅ 储备元宝200万<br>
-      ✅ 绑定元宝3000万<br>
-      ✅ 蓝田玉令×20个<br>
-      ✅ 宝石提升符×20个<br>
-      ✅ 暗器修炼石×100个<br>
-      ✅ 天罡强化精华×99个<br>
-      ✅ 新莽神符×50个
-    </div>
-    <div class="tip-box">
-      ⚠️ 特别提示：请从本页面注册链接创建账号，后续才能提供充值、礼包等售后服务；非本链接注册的账号不提供售后支持，感谢理解。
+    <div class="details-content">
+      <div style="padding:10px 0;color:#a08c6c;font-size:13px">进入游戏后左上角找到精彩活动，输入6个1可一次性领取全部5个礼包，全区通用无门槛，按角色各领一次。</div>
+      <div class="gift-block">
+        <div class="gift-code">MH1001 公测等级坐骑时装礼包</div>
+        ✅ 50万补偿经验 ×170 = 8500万经验<br>
+        ✅ 18880绑元 ×100 = 188.8万绑元<br>
+        ✅ 冥羽（永久坐骑）×1<br>
+        ✅ 金庭云罗（永久时装）×1
+      </div>
+      <div class="gift-block">
+        <div class="gift-code">MH1002 公测成长材料礼包</div>
+        ✅ 100万银两 ×1<br>
+        ✅ 1000万铜钱 ×1<br>
+        ✅ 10万帮贡 ×1<br>
+        ✅ 新莽神符×10<br>
+        ✅ 地煞强化精华×200<br>
+        ✅ 18880绑元 ×999 = 1886万绑元
+      </div>
+      <div class="gift-block">
+        <div class="gift-code">MH1003 神兽觉醒礼包</div>
+        ✅ 六大神兽元神各×550个
+      </div>
+      <div class="gift-block">
+        <div class="gift-code">MH1004 重楼神装礼包</div>
+        ✅ 重楼五件套 ×1<br>
+        ✅ 保星符福袋×50
+      </div>
+      <div class="gift-block">
+        <div class="gift-code">MH1005 公测江湖豪礼</div>
+        ✅ 储备元宝200万<br>
+        ✅ 绑定元宝3000万<br>
+        ✅ 蓝田玉令×20个<br>
+        ✅ 宝石提升符×20个<br>
+        ✅ 暗器修炼石×100个<br>
+        ✅ 天罡强化精华×99个<br>
+        ✅ 新莽神符×50个
+      </div>
+      <div class="tip-box">
+        ⚠️ 特别提示：请从本页面注册链接创建账号，后续才能提供充值、礼包等售后服务；非本链接注册的账号不提供售后支持，感谢理解。
+      </div>
     </div>
   </details>
   <details><summary>🚀 新手起步步骤</summary>
-    <img src="https://aka.doubaocdn.com/s/n23aNMxIWv">
-    <img src="https://aka.doubaocdn.com/s/0uHzV50iOG">
-    <img src="https://aka.doubaocdn.com/s/WoTdzpGpqb">
+    <div class="details-content">
+      <img src="https://aka.doubaocdn.com/s/n23aNMxIWv">
+      <img src="https://aka.doubaocdn.com/s/0uHzV50iOG">
+      <img src="https://aka.doubaocdn.com/s/WoTdzpGpqb">
+    </div>
   </details>
   <details><summary>📦 充值活动套餐</summary>
-    <img src="https://aka.doubaocdn.com/s/N8tBL01QGs">
-    <img src="https://aka.doubaocdn.com/s/pb1uNQ0pUO">
-    <img src="https://aka.doubaocdn.com/s/yRVjaRMWLN">
-    <img src="https://aka.doubaocdn.com/s/yIyB6UkOUc">
-    <img src="https://aka.doubaocdn.com/s/4FlPlkHVT0">
-    <img src="https://aka.doubaocdn.com/s/pNaeMLv4zt">
+    <div class="details-content">
+      <img src="https://aka.doubaocdn.com/s/N8tBL01QGs">
+      <img src="https://aka.doubaocdn.com/s/pb1uNQ0pUO">
+      <img src="https://aka.doubaocdn.com/s/yRVjaRMWLN">
+      <img src="https://aka.doubaocdn.com/s/yIyB6UkOUc">
+      <img src="https://aka.doubaocdn.com/s/4FlPlkHVT0">
+      <img src="https://aka.doubaocdn.com/s/pNaeMLv4zt">
+    </div>
   </details>
   <details><summary>🪶 披风幻化战力榜</summary>
-    <img src="https://aka.doubaocdn.com/s/VwdLUiGemp">
-    <img src="https://aka.doubaocdn.com/s/BWbkJkrQYf">
-    <img src="https://aka.doubaocdn.com/s/QUD037wuCg">
-    <img src="https://aka.doubaocdn.com/s/Z2UqoLlY6V">
+    <div class="details-content">
+      <img src="https://aka.doubaocdn.com/s/VwdLUiGemp">
+      <img src="https://aka.doubaocdn.com/s/BWbkJkrQYf">
+      <img src="https://aka.doubaocdn.com/s/QUD037wuCg">
+      <img src="https://aka.doubaocdn.com/s/Z2UqoLlY6V">
+    </div>
   </details>
   <details><summary>🗺️ 宝图攻略</summary>
-    <img src="https://aka.doubaocdn.com/s/vOzDWd9NLU">
+    <div class="details-content">
+      <img src="https://aka.doubaocdn.com/s/vOzDWd9NLU">
+    </div>
   </details>
   <div class="back"><a onclick="go('home')">← 返回首页</a></div>
 </div>
