@@ -29,14 +29,17 @@ summary{cursor:pointer;color:#f2d06b;font-weight:bold;font-size:16px;list-style:
 summary::before{content:"▸ ";color:#e6b84a}
 details[open] summary::before{content:"▾ "}
 details img{width:100%;border-radius:10px;margin:12px 0}
-.link-row{display:flex;justify-content:space-between;align-items:center;background:rgba(50,38,20,.9);padding:12px;border-radius:8px;margin-top:10px}
+.link-row{background:rgba(50,38,20,.9);padding:12px;border-radius:8px;margin-top:10px}
+.link-row label{font-size:13px;color:#a08c6c;display:block;margin-bottom:5px}
+.link-row .link-content{display:flex;justify-content:space-between;align-items:center}
+.link-row .link-url{font-size:12px;color:#f2d06b;word-break:break-all;margin-right:10px}
 .contact-item{display:flex;align-items:center;justify-content:space-between;background:rgba(50,38,20,.9);padding:18px;margin:12px;border-radius:12px;border:1px solid rgba(230,184,74,.2)}
 .contact-left{display:flex;align-items:center;gap:12px}
 .contact-icon-qq{width:50px;height:50px;line-height:50px;text-align:center;background:linear-gradient(135deg,#12b7f5,#00a2ed);border-radius:50%;font-size:24px}
 .contact-icon-wx{width:50px;height:50px;line-height:50px;text-align:center;background:linear-gradient(135deg,#07c160,#06ad56);border-radius:50%;font-size:24px}
 .contact-label{font-size:14px;color:#a08c6c}
 .contact-value{font-size:18px;color:#f2d06b;font-weight:bold;margin-top:3px}
-.copy-btn{padding:8px 16px;border:1px solid #e6b84a;color:#e6b84a;border-radius:8px;background:transparent;cursor:pointer;font-size:13px}
+.copy-btn{padding:8px 16px;border:1px solid #e6b84a;color:#e6b84a;border-radius:8px;background:transparent;cursor:pointer;font-size:13px;white-space:nowrap}
 .bottom{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(20,15,9,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(230,184,74,.2)}
 .b1{flex:1;padding:18px 0;background:linear-gradient(135deg,#d4a038,#f7d774);color:#1a120b;text-align:center;text-decoration:none;font-weight:bold;font-size:16px}
 .b2{flex:1;padding:18px 0;background:linear-gradient(135deg,#12a89d,#2dd4bf);color:white;text-align:center;text-decoration:none;font-weight:bold;font-size:16px}
@@ -84,16 +87,25 @@ details img{width:100%;border-radius:10px;margin:12px 0}
   <details style="width:94%;margin:0 auto 15px auto">
     <summary>📋 按钮点不开？点击复制链接</summary>
     <div class="link-row">
-      <span>注册地址</span>
-      <button class="copy-btn" onclick="copyText('https://tlbbb.hfynxx.top/MZSP')">复制</button>
+      <label>注册地址</label>
+      <div class="link-content">
+        <div class="link-url">https://tlbbb.hfynxx.top/MZSP</div>
+        <button class="copy-btn" onclick="copyText('https://tlbbb.hfynxx.top/MZSP')">复制</button>
+      </div>
     </div>
     <div class="link-row">
-      <span>下载地址</span>
-      <button class="copy-btn" onclick="copyText('https://wrtl.ququ.im/WRTL.html')">复制</button>
+      <label>下载地址</label>
+      <div class="link-content">
+        <div class="link-url">https://wrtl.ququ.im/WRTL.html</div>
+        <button class="copy-btn" onclick="copyText('https://wrtl.ququ.im/WRTL.html')">复制</button>
+      </div>
     </div>
     <div class="link-row">
-      <span>充值后台</span>
-      <button class="copy-btn" onclick="copyText('https://tlbbb.hfynxx.top/MZSP')">复制</button>
+      <label>充值后台</label>
+      <div class="link-content">
+        <div class="link-url">https://tlbbb.hfynxx.top/MZSP</div>
+        <button class="copy-btn" onclick="copyText('https://tlbbb.hfynxx.top/MZSP')">复制</button>
+      </div>
     </div>
   </details>
 </div>
