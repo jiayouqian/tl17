@@ -19,7 +19,7 @@ h1{font-size:20px;color:#f2d06b;margin-bottom:10px;letter-spacing:2px;text-shado
 .adv-title{color:#f2d06b;font-weight:bold;font-size:14px;margin-bottom:5px}
 .adv-desc{color:#a08c6c;font-size:12px}
 .menu{display:flex;gap:12px;width:94%;margin:20px auto}
-.menu-btn{flex:1;padding:15px;border:1px solid #e6b84a;color:#f2d06b;border-radius:25px;text-align:center;text-decoration:none;font-size:16px;font-weight:bold;background:linear-gradient(135deg,rgba(230,184,74,.2),rgba(230,184,74,.05));box-shadow:0 4px 20px rgba(230,184,74,.4);transition:all .3s}
+.menu-btn{flex:1;padding:16px;border:none;color:white;border-radius:30px;text-align:center;text-decoration:none;font-size:17px;font-weight:bold;box-shadow:0 6px 25px rgba(0,0,0,.3)}
 .page{display:none}
 .page.on{display:block}
 h2{text-align:center;color:#f2d06b;padding:25px 0 15px;font-size:22px}
@@ -37,9 +37,9 @@ details img{width:100%;border-radius:10px;margin:12px 0}
 .contact-value{font-size:18px;color:#f2d06b;font-weight:bold;margin-top:3px}
 .copy-btn{padding:8px 16px;border:1px solid #e6b84a;color:#e6b84a;border-radius:8px;background:transparent;cursor:pointer;font-size:13px}
 .bottom{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(20,15,9,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(230,184,74,.2)}
-.b1{flex:1;padding:18px 0;background:linear-gradient(135deg,#b8862e,#f7d774,#c99a3c);color:#111;text-align:center;text-decoration:none;font-weight:bold;font-size:16px;box-shadow:0 -4px 20px rgba(230,184,74,.3)}
-.b2{flex:1;padding:18px 0;background:linear-gradient(135deg,#b8862e,#f7d774,#c99a3c);color:#111;text-align:center;text-decoration:none;font-weight:bold;font-size:16px;box-shadow:0 -4px 20px rgba(230,184,74,.3)}
-.b3{flex:1;padding:18px 0;color:#e6b84a;text-align:center;text-decoration:none;border-left:1px solid #33291c;font-size:15px;font-weight:bold;background:rgba(230,184,74,.05)}
+.b1{flex:1;padding:18px 0;background:linear-gradient(135deg,#d4a038,#f7d774);color:#1a120b;text-align:center;text-decoration:none;font-weight:bold;font-size:16px}
+.b2{flex:1;padding:18px 0;background:linear-gradient(135deg,#12a89d,#2dd4bf);color:white;text-align:center;text-decoration:none;font-weight:bold;font-size:16px}
+.b3{flex:1;padding:18px 0;background:linear-gradient(135deg,#d9482b,#f0704a);color:white;text-align:center;text-decoration:none;font-weight:bold;font-size:15px}
 .back{text-align:center;padding:25px}
 .back a{display:inline-block;padding:12px 30px;border:1px solid #e6b84a;color:#e6b84a;border-radius:10px;text-decoration:none;font-size:16px;font-weight:bold;background:rgba(230,184,74,.1)}
 </style>
@@ -77,8 +77,8 @@ details img{width:100%;border-radius:10px;margin:12px 0}
     </div>
   </div>
   <div class="menu">
-    <a class="menu-btn" onclick="go('manual')">📖 新手攻略</a>
-    <a class="menu-btn" onclick="go('contact')">🎧 联系客服</a>
+    <a class="menu-btn" style="background:linear-gradient(135deg,#d4a038,#f5d060);color:#1a120b" onclick="go('manual')">📖 新手攻略</a>
+    <a class="menu-btn" style="background:linear-gradient(135deg,#d9482b,#f0704a);color:white" onclick="go('contact')">🎧 联系客服</a>
   </div>
 </div>
 <div class="page" id="manual">
