@@ -26,14 +26,15 @@ h2{text-align:center;color:#e8c987;padding:25px 0 15px;font-size:22px;text-shado
 .gift-block{background:linear-gradient(135deg,rgba(55,42,23,.9),rgba(45,35,20,.9));padding:14px;border-radius:10px;margin:10px 0;line-height:1.8;font-size:14px;border:1px solid rgba(201,169,97,.1)}
 .gift-code{color:#e8c987;font-weight:bold;font-size:16px;margin-bottom:5px}
 .tip-box{background:rgba(180,60,40,.12);border:1px solid rgba(220,90,60,.25);padding:14px;border-radius:10px;margin-top:15px;color:#d8907a;font-size:13px;line-height:1.7}
-/* 高级暗金菜单，不扎眼 */
 details{background:rgba(0,0,0,0);margin:12px;border-radius:12px;padding:0;border:none;box-shadow:0 4px 15px rgba(0,0,0,.3);overflow:hidden}
 summary{cursor:pointer;color:#e8c987;font-weight:500;font-size:16px;list-style:none;padding:16px 20px;background:linear-gradient(90deg,rgba(60,45,25,.95),rgba(45,35,20,.95),rgba(60,45,25,.95));border-left:3px solid #c9a961;display:flex;align-items:center;gap:10px}
 summary::after{content:"›";position:absolute;right:20px;color:#c9a961;font-size:20px}
 details[open] summary{border-left-color:#e8c987;background:linear-gradient(90deg,rgba(70,52,28,.95),rgba(55,42,23,.95),rgba(70,52,28,.95))}
 details[open] summary::after{content:"⌄";}
-.details-content{background:rgba(30,23,13,.95);border-left:3px solid #c9a961;padding:16px}
+.details-content{background:rgba(30,23,13,.95);border-left:3px solid #c9a961;padding:16px;font-size:14px;line-height:1.9}
 details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.sub-details{margin:8px 0;border-radius:8px;overflow:hidden}
+.sub-details summary{padding:12px 16px;font-size:15px;background:rgba(60,45,25,.9);border-left:2px solid #c9a961}
 .contact-item{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(55,42,23,.9),rgba(45,35,20,.9));padding:18px;margin:12px;border-radius:14px;border:1px solid rgba(201,169,97,.15);box-shadow:0 4px 15px rgba(0,0,0,.2)}
 .contact-left{display:flex;align-items:center;gap:12px}
 .contact-icon-qq{width:50px;height:50px;line-height:50px;text-align:center;background:linear-gradient(135deg,#12b7f5,#00a2ed);border-radius:50%;font-size:24px;box-shadow:0 4px 15px rgba(18,183,245,.3)}
@@ -131,11 +132,110 @@ details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rg
       </div>
     </div>
   </details>
-  <details><summary>🚀 新手起步步骤</summary>
+  <details><summary>🚀 升级路线攻略</summary>
     <div class="details-content">
-      <img src="https://aka.doubaocdn.com/s/n23aNMxIWv">
-      <img src="https://aka.doubaocdn.com/s/0uHzV50iOG">
-      <img src="https://aka.doubaocdn.com/s/WoTdzpGpqb">
+      <p>1. 1级开始跟主线任务走，直接升到69级</p>
+      <p>2. 69级后吃经验丹，直接吃到74级</p>
+      <p>3. 74级后打造装备，通过打英雄试炼、活动大厅一条龙、挂地宫、做武林悬赏，升到79级</p>
+      <p>4. 卡级建议：想长期玩推荐卡89级（人多、可参与活动多），最低也要卡79级，开服第一天极限可以升到79级</p>
+      <p style="margin-top:12px;color:#e8c987;font-weight:bold">⚠️ 注意事项：</p>
+      <p>- 69级后每升10级需要把修炼点满，才能继续升级</p>
+      <p>- 帮贡获取：推荐去帮会宴请/吃席拿，不建议去元宝商城买</p>
+      <p>- 等级突破：69、79、89级需要回到帮会找NPC「吴维」完成突破</p>
+    </div>
+  </details>
+  <details><summary>⚔️ 战力提升打造</summary>
+    <div class="details-content">
+      <details class="sub-details"><summary>💎 宝石打造</summary>
+        <div class="details-content">
+          <p>绑元商城直接买3级宝石，升级到全满5级；升6/7级宝石需要宝石提升符：</p>
+          <p>- 神秘商店每周买15张提升符，每日活跃1张，每周可拿22张</p>
+          <p>- 充值活动卡、每日充值累计奖励也能拿大量提升符</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>⚔️ 神器打造</summary>
+        <div class="details-content">
+          <p>- 一直做主线任务解锁神器，每个角色系统送一件神器</p>
+          <p>- 82级神铸满后开启注魂，8件神器都可以注满</p>
+          <p>- 五色石、新莽神符不用留，有就用</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🏅 授印打造</summary>
+        <div class="details-content">
+          <p>- 吃完经验丹75级找帮派NPC「征战捐献思洋」解锁狩印打造</p>
+          <p>- 战勋令牌获取：充值、捐献任务、帮会贡献、扶风郡商店兑换</p>
+          <p>- 升星后解锁刻纹位，高级刻纹通过占卜获得，不需要的熔炼去刻纹商店兑换需要的</p>
+          <p>- 升星8个位置优先级：体力→属性攻击→血→内/外功→闪避→灵气→身法→命中</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🗡️ 暗器打造</summary>
+        <div class="details-content">
+          <p>- 暗器材料稀有产出少，每周商店拉满，多余材料靠神值兑换或拍卖收</p>
+          <p>- 宝珠升星材料绑元直接拉满；征战功勋每天帮会三种捐献拉满，功勋慢慢积累</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🐉 神兽宝宝打造</summary>
+        <div class="details-content">
+          <p>- 所有神兽550颗珠子就能完全体血脉觉醒，多余珠子无限炼魂加战力</p>
+          <p>- 龙、虎每日神兽副本掉落好拿；凤凰、麒麟、鲲鹏买充值带珠子的礼包直接觉醒</p>
+          <p>- 珍兽技能商城/商会买，嗜血和部分神技充值累计送，不用急着花元宝买</p>
+          <p>- 洗宝宝拿经验丹：银两商店买宝宝孵化洗到完美放生，拿百万宝宝经验丹</p>
+          <p>- 商会技能书每2分钟刷新，注意抢</p>
+          <p>- 老虎、麒麟、玄武主要用来附体</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🧿 内丹打造</summary>
+        <div class="details-content">
+          <p>- 单职业内丹：属性→减属性→抗性→针对抗性/减抗→血→闪避→会心→命中</p>
+          <p>- 四属性内丹：冰火玄毒→主减抗→附减抗→主抗→血，或打四减四抗</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>👘 附体幻化打造</summary>
+        <div class="details-content">
+          <p>两个附体阵内丹达到4级即可，幻形玉按需求在元宝商店买</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🧥 披风打造</summary>
+        <div class="details-content">
+          <p>69级解锁，需要凤灵引、引灵梭升级</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🔥 武魂打造</summary>
+        <div class="details-content">
+          <p>- 79级解锁，少室山每天固定出材料，周常商店清空，神值累计送材料</p>
+          <p>- 凝魂绑元直接拉满；普通幻化每月4个全买，战力叠加</p>
+          <p>- 特殊精铸就开箱子，龙泉剑神秘商店买月限使用</p>
+          <p>- 装备材料商会买，元宝商城材料礼包划算；保星符神秘商店、元宝商城、充值礼包买</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>📜 英雄谱打造</summary>
+        <div class="details-content">
+          <p>- 快速拿碎片去银两商店买碎片箱子，约400箱子出200碎片（看运气）</p>
+          <p>- 乔峰累计500奖励领，无崖子打英雄试炼获取</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🩸 经脉打造</summary>
+        <div class="details-content">
+          <p>- 经脉推荐顺序：段誉→段延庆→丁春秋→天山童姥→乔峰→王语嫣→慕容复→无崖子（前期用木婉清过渡）</p>
+          <p>- 经脉500级左右到30级，优先30级以上，往后酌情升；经脉加属性最多，小资潜能先点满橙色戴橙装，土豪直接拉满</p>
+          <p>- 材料：潜能果、回天珠、钥匙；点满橙色前期要4组，全满要8组</p>
+          <p>- 回天珠内功：属性→体力→灵气→身法；外功：属性→体力→力量→身法</p>
+          <p>- 抽装备注意绑元消耗，绑元快没了去元宝商城换，别超了自动5倍扣元宝</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🌀 涅槃打造</summary>
+        <div class="details-content">
+          <p>- 85级宝宝给神兽投喂涅槃，16职业版本神兽涅槃后强度更高</p>
+          <p>- 8-9星投喂宝宝：外出减抗、体力选血和抗性；内功出通灵和攻击属性</p>
+        </div>
+      </details>
+      <details class="sub-details"><summary>🐲 龙纹打造</summary>
+        <div class="details-content">
+          <p>- 主龙元：巨力、斩绝、舍生、神钦、电跃、振武、御反</p>
+          <p>- 辅助龙元：优先穿刺攻击、穿刺防御，不够再补体力</p>
+          <p>- 玄学：当天抽完不要隔夜，哪怕抽3小时也别第二天抽</p>
+        </div>
+      </details>
     </div>
   </details>
   <details><summary>📦 充值活动套餐</summary>
