@@ -3,39 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>天龙17职业</title>
+<title>天龙17职业港版</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}
-body{background:#111;color:#fff;padding-bottom:70px}
-.hero{width:100%;display:block}
-.quick-btns{display:flex;gap:10px;padding:15px}
-.quick-btn{flex:1;padding:10px;border:1px solid #d4af37;color:#d4af37;border-radius:8px;text-align:center;text-decoration:none;font-size:14px}
-.tab{display:none}
-.tab.on{display:block}
-h2{text-align:center;padding:20px;color:#d4af37}
-.card{background:#1a1a1a;margin:10px;padding:15px;border-radius:10px;border:1px solid #333}
-details{background:#1a1a1a;margin:10px;padding:15px;border-radius:10px;border:1px solid #333}
-summary{cursor:pointer;color:#d4af37;font-weight:bold}
-details img{width:100%;border-radius:8px;margin:10px 0}
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;display:flex;background:#1a1a1a;border-top:1px solid #333}
-.bar-btn{flex:1;padding:15px 0;text-align:center;text-decoration:none;font-weight:bold}
-.bar1{background:linear-gradient(90deg,#d4af37,#f2d06b);color:#111}
-.bar2{background:linear-gradient(90deg,#d4af37,#f2d06b);color:#111}
-.bar3{color:#d4af37;border-left:1px solid #333}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC",system-ui,sans-serif}
+body{background:radial-gradient(ellipse at top,#2b1d0e 0%,#120e08 70%);color:#f5e9d0;padding-bottom:80px;min-height:100vh}
+.header{padding:35px 20px 20px;text-align:center}
+.tag{display:inline-block;padding:6px 18px;border:1px solid #e6b84a;border-radius:30px;color:#e6b84a;font-size:12px;background:rgba(230,184,74,.1);margin-bottom:15px;letter-spacing:1px}
+h1{font-size:32px;color:#f2d06b;margin-bottom:10px;letter-spacing:4px;text-shadow:0 2px 15px rgba(230,184,74,.4)}
+.sub{color:#a08c6c;font-size:14px;letter-spacing:2px}
+.hero{width:94%;margin:10px auto;border-radius:16px;overflow:hidden;border:1px solid rgba(230,184,74,.4);box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.hero img{width:100%;display:block}
+.menu{display:flex;gap:12px;width:94%;margin:20px auto}
+.menu-btn{flex:1;padding:14px;border:1px solid #e6b84a;color:#e6b84a;border-radius:12px;text-align:center;text-decoration:none;font-size:15px;background:rgba(230,184,74,.05)}
+.page{display:none}
+.page.on{display:block}
+h2{text-align:center;color:#f2d06b;padding:25px 0 15px;font-size:22px}
+.card{background:rgba(40,30,18,.8);margin:12px;padding:18px;border-radius:14px;border:1px solid rgba(230,184,74,.15);line-height:1.9}
+details{background:rgba(40,30,18,.8);margin:12px;border-radius:14px;padding:16px;border:1px solid rgba(230,184,74,.15)}
+summary{cursor:pointer;color:#f2d06b;font-weight:bold;font-size:16px;list-style:none}
+summary::before{content:"▸ ";color:#e6b84a}
+details[open] summary::before{content:"▾ "}
+details img{width:100%;border-radius:10px;margin:12px 0}
+.bottom{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(20,15,9,.95);backdrop-filter:blur(10px);border-top:1px solid rgba(230,184,74,.2)}
+.b1{flex:1;padding:16px 0;background:linear-gradient(90deg,#c99a3c,#f2d06b);color:#111;text-align:center;text-decoration:none;font-weight:bold;font-size:15px}
+.b2{flex:1;padding:16px 0;background:linear-gradient(90deg,#c99a3c,#f2d06b);color:#111;text-align:center;text-decoration:none;font-weight:bold;font-size:15px}
+.b3{flex:1;padding:16px 0;color:#e6b84a;text-align:center;text-decoration:none;border-left:1px solid #33291c;font-size:14px;padding-top:19px}
+.back{text-align:center;padding:20px}
+.back a{color:#999;text-decoration:none;font-size:14px}
 </style>
 </head>
 <body>
-<div class="tab on" id="tab-home">
-  <img class="hero" src="https://aka.doubaocdn.com/s/YivMqAHYwc">
-  <div class="quick-btns">
-    <a class="quick-btn" onclick="showTab('manual')">新手攻略</a>
-    <a class="quick-btn" onclick="showTab('contact')">联系客服</a>
+<div class="page on" id="home">
+  <div class="header">
+    <div class="tag">0.01折新服 · 5重楼+6神兽</div>
+    <h1>天龙17职业港版</h1>
+    <div class="sub">全新高爆区 · 零氪可玩</div>
+  </div>
+  <div class="hero">
+    <img src="https://aka.doubaocdn.com/s/YivMqAHYwc">
+  </div>
+  <div class="menu">
+    <a class="menu-btn" onclick="go('manual')">📖 新手攻略</a>
+    <a class="menu-btn" onclick="go('contact')">🎧 联系客服</a>
   </div>
 </div>
-<div class="tab" id="tab-manual">
+<div class="page" id="manual">
   <h2>新手攻略</h2>
   <div class="card">
-    <b style="color:#d4af37">公测礼包码：</b>MH1001、MH1002、MH1003、MH1004、MH1005
+    <b style="color:#f2d06b">🎁 公测专属礼包码：</b><br>
+    MH1001 &nbsp; MH1002 &nbsp; MH1003<br>
+    MH1004 &nbsp; MH1005
   </div>
   <details><summary>📦 充值活动套餐</summary>
     <img src="https://aka.doubaocdn.com/s/N8tBL01QGs">
@@ -50,7 +67,7 @@ details img{width:100%;border-radius:8px;margin:10px 0}
     <img src="https://aka.doubaocdn.com/s/0uHzV50iOG">
     <img src="https://aka.doubaocdn.com/s/WoTdzpGpqb">
   </details>
-  <details><summary>🪶 披风幻化榜</summary>
+  <details><summary>🪶 披风幻化战力榜</summary>
     <img src="https://aka.doubaocdn.com/s/VwdLUiGemp">
     <img src="https://aka.doubaocdn.com/s/BWbkJkrQYf">
     <img src="https://aka.doubaocdn.com/s/QUD037wuCg">
@@ -59,30 +76,26 @@ details img{width:100%;border-radius:8px;margin:10px 0}
   <details><summary>🗺️ 宝图攻略</summary>
     <img src="https://aka.doubaocdn.com/s/vOzDWd9NLU">
   </details>
-  <div style="text-align:center;padding:15px">
-    <a class="quick-btn" onclick="showTab('home')">返回首页</a>
-  </div>
+  <div class="back"><a onclick="go('home')">← 返回首页</a></div>
 </div>
-<div class="tab" id="tab-contact">
+<div class="page" id="contact">
   <h2>联系客服</h2>
-  <div class="card" style="text-align:center;line-height:2.5">
-    <div>QQ群：<b>680598747</b></div>
-    <div>代理QQ：<b>354261705</b></div>
-    <div>微信：<b>qun680598747</b></div>
+  <div class="card" style="text-align:center;line-height:2.8">
+    <div>👥 玩家QQ群：<b style="color:#f2d06b">680598747</b></div>
+    <div>💬 代理QQ：<b style="color:#f2d06b">354261705</b></div>
+    <div>📱 微信：<b style="color:#f2d06b">qun680598747</b></div>
   </div>
-  <div style="text-align:center;padding:15px">
-    <a class="quick-btn" onclick="showTab('home')">返回首页</a>
-  </div>
+  <div class="back"><a onclick="go('home')">← 返回首页</a></div>
 </div>
-<div class="bottom-bar">
-  <a class="bar-btn bar1" href="https://tlbbb.hfynxx.top/MZSP">立即注册</a>
-  <a class="bar-btn bar2" href="https://wrtl.ququ.im/WRTL.html">游戏下载</a>
-  <a class="bar-btn bar3" href="https://tlbbb.hfynxx.top/MZSP">充值后台</a>
+<div class="bottom">
+  <a class="b1" href="https://tlbbb.hfynxx.top/MZSP">立即注册</a>
+  <a class="b2" href="https://wrtl.ququ.im/WRTL.html">游戏下载</a>
+  <a class="b3" href="https://tlbbb.hfynxx.top/MZSP">充值后台</a>
 </div>
 <script>
-function showTab(n){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'))
-  document.getElementById('tab-'+n).classList.add('on')
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'))
+  document.getElementById(n).classList.add('on')
   window.scrollTo(0,0)
 }
 </script>
