@@ -655,7 +655,7 @@ function go(n){
   window.scrollTo(0,0)
 }
 function copyText(t){
-  navigator.clipboard.writeText(t).then(()=>alert('已复制：'+t))
+  const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('已复制：'+t)
 }
 </script>
 </body>
