@@ -20,9 +20,6 @@ h1{font-size:20px;color:#f2d06b;margin-bottom:10px;letter-spacing:2px;text-shado
 .adv-desc{color:#a08c6c;font-size:12px}
 .menu{display:flex;gap:12px;width:94%;margin:20px auto}
 .menu-btn{flex:1;padding:16px;border:none;color:white;border-radius:30px;text-align:center;text-decoration:none;font-size:17px;font-weight:bold;box-shadow:0 6px 25px rgba(0,0,0,.3)}
-.copy-menu{width:94%;margin:0 auto 15px auto;background:rgba(40,30,18,.8);border-radius:12px;padding:14px;border:1px solid rgba(230,184,74,.15)}
-.copy-menu summary{cursor:pointer;color:#f2d06b;font-weight:bold;font-size:15px}
-.copy-item{display:flex;justify-content:space-between;align-items:center;background:rgba(50,38,20,.9);padding:10px;border-radius:8px;margin-top:10px}
 .page{display:none}
 .page.on{display:block}
 h2{text-align:center;color:#f2d06b;padding:25px 0 15px;font-size:22px}
@@ -32,6 +29,7 @@ summary{cursor:pointer;color:#f2d06b;font-weight:bold;font-size:16px;list-style:
 summary::before{content:"▸ ";color:#e6b84a}
 details[open] summary::before{content:"▾ "}
 details img{width:100%;border-radius:10px;margin:12px 0}
+.link-row{display:flex;justify-content:space-between;align-items:center;background:rgba(50,38,20,.9);padding:12px;border-radius:8px;margin-top:10px}
 .contact-item{display:flex;align-items:center;justify-content:space-between;background:rgba(50,38,20,.9);padding:18px;margin:12px;border-radius:12px;border:1px solid rgba(230,184,74,.2)}
 .contact-left{display:flex;align-items:center;gap:12px}
 .contact-icon-qq{width:50px;height:50px;line-height:50px;text-align:center;background:linear-gradient(135deg,#12b7f5,#00a2ed);border-radius:50%;font-size:24px}
@@ -83,17 +81,17 @@ details img{width:100%;border-radius:10px;margin:12px 0}
     <a class="menu-btn" style="background:linear-gradient(135deg,#d4a038,#f5d060);color:#1a120b" onclick="go('manual')">📖 新手攻略</a>
     <a class="menu-btn" style="background:linear-gradient(135deg,#d9482b,#f0704a);color:white" onclick="go('contact')">🎧 联系客服</a>
   </div>
-  <details class="copy-menu">
+  <details style="width:94%;margin:0 auto 15px auto">
     <summary>📋 按钮点不开？点击复制链接</summary>
-    <div class="copy-item">
+    <div class="link-row">
       <span>注册地址</span>
       <button class="copy-btn" onclick="copyText('https://tlbbb.hfynxx.top/MZSP')">复制</button>
     </div>
-    <div class="copy-item">
+    <div class="link-row">
       <span>下载地址</span>
       <button class="copy-btn" onclick="copyText('https://wrtl.ququ.im/WRTL.html')">复制</button>
     </div>
-    <div class="copy-item">
+    <div class="link-row">
       <span>充值后台</span>
       <button class="copy-btn" onclick="copyText('https://tlbbb.hfynxx.top/MZSP')">复制</button>
     </div>
