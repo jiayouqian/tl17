@@ -614,7 +614,7 @@ details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rg
         <div class="contact-value">680598747</div>
       </div>
     </div>
-    <button class="copy-btn" onclick="copyText('680598747')">复制</button>
+    <button class="copy-btn" onclick="copyText('680598747',this)">复制</button>
   </div>
   <div class="contact-item">
     <div class="contact-left">
@@ -624,7 +624,7 @@ details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rg
         <div class="contact-value">354261705</div>
       </div>
     </div>
-    <button class="copy-btn" onclick="copyText('354261705')">复制</button>
+    <button class="copy-btn" onclick="copyText('354261705',this)">复制</button>
   </div>
   <div class="contact-item">
     <div class="contact-left">
@@ -634,7 +634,7 @@ details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rg
         <div class="contact-value">qun680598747</div>
       </div>
     </div>
-    <button class="copy-btn" onclick="copyText('qun680598747')">复制</button>
+    <button class="copy-btn" onclick="copyText('qun680598747',this)">复制</button>
   </div>
   <div class="back"><a onclick="go('home')">← 返回首页</a></div>
 </div>
@@ -654,8 +654,10 @@ function go(n){
   document.getElementById(n).classList.add('on')
   window.scrollTo(0,0)
 }
-function copyText(t){
-  const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('已复制：'+t)
+function copyText(t,btn){
+  const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+  const old=btn.textContent;btn.textContent='已复制';btn.style.background='#c9a961';btn.style.color='#1a120b';
+  setTimeout(()=>{btn.textContent=old;btn.style.background='';btn.style.color=''},1500)
 }
 </script>
 </body>
