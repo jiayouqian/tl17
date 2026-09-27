@@ -18,7 +18,7 @@ h1{font-size:20px;color:#e8c987;margin-bottom:10px;letter-spacing:2px;text-shado
 .adv-icon{font-size:26px;margin-bottom:8px;color:#e8c987}
 .adv-title{color:#e8c987;font-weight:bold;font-size:14px;margin-bottom:5px}
 .adv-desc{color:#8a7552;font-size:12px}
-.menu{display:flex;gap:16px;width:94%;margin:30px auto}
+.menu{display:flex;gap:16px;width:90%;margin:30px auto}
 .menu-btn{flex:1;height:120px;display:flex;align-items:center;justify-content:center;border:none;color:white;border-radius:16px;text-align:center;text-decoration:none;font-size:28px;font-weight:bold;letter-spacing:4px;box-shadow:0 0 25px rgba(201,169,97,.5),0 8px 25px rgba(0,0,0,.5);transition:all .3s}
 .page{display:none}
 .page.on{display:block}
@@ -114,8 +114,8 @@ details img{width:100%;border-radius:10px;margin:12px 0;box-shadow:0 4px 15px rg
   </div>
 
   <div class="menu">
-    <a class="menu-btn" style="background:linear-gradient(135deg,#a67c2e,#d4af5a);color:#1a120b;font-size:32px;font-weight:bold;white-space:nowrap;" onclick="go('manual')">新手攻略</a>
-    <a class="menu-btn" style="background:linear-gradient(135deg,#b84028,#d95a3c);color:white;font-size:32px;font-weight:bold;white-space:nowrap;" onclick="go('contact')">联系客服</a>
+    <a class="menu-btn" style="background:linear-gradient(135deg,#a67c2e,#d4af5a);color:#1a120b;font-weight:bold;flex-direction:column;gap:8px;" onclick="go('manual')"><span style="font-size:36px;">📖</span><span style="font-size:26px;">新手攻略</span></a>
+    <a class="menu-btn" style="background:linear-gradient(135deg,#b84028,#d95a3c);color:white;font-weight:bold;flex-direction:column;gap:8px;" onclick="go('contact')"><span style="font-size:36px;">🎧</span><span style="font-size:26px;">联系客服</span></a>
   </div>
 </div>
 <div class="page" id="manual">
