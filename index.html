@@ -6,20 +6,21 @@
 <title>天龙17职业港版</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
-body{background:linear-gradient(180deg,#1a120b 0%,#0f0c09 100%);color:#f0e6d2;padding-bottom:70px;min-height:100vh}
+body{background:linear-gradient(180deg,#1a120b 0%,#0f0c09 100%);color:#f0e6d2;padding-bottom:80px;min-height:100vh}
 .top-bar{padding:30px 20px 15px;text-align:center}
 .top-tag{display:inline-block;padding:5px 15px;border:1px solid #d4af37;border-radius:20px;font-size:12px;color:#d4af37;margin-bottom:15px;background:rgba(212,175,55,.1)}
 h1{font-size:30px;color:#d4af37;margin-bottom:10px;letter-spacing:3px;text-shadow:0 2px 10px rgba(212,175,55,.3)}
 .subtitle{color:#999;font-size:14px;margin-bottom:25px}
 .hero{width:92%;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid rgba(212,175,55,.3);box-shadow:0 8px 30px rgba(0,0,0,.5)}
 .hero img{width:100%;display:block}
-.btns{width:92%;margin:25px auto;display:flex;flex-direction:column;gap:12px}
-.btn{padding:16px;border-radius:12px;text-align:center;text-decoration:none;font-weight:600;font-size:16px}
-.btn-gold{background:linear-gradient(135deg,#d4af37,#f5d060);color:#1a120b;box-shadow:0 4px 15px rgba(212,175,55,.3)}
+.top-btns{width:92%;margin:20px auto;display:flex;gap:10px}
+.top-btn{flex:1;padding:12px;border-radius:10px;text-align:center;text-decoration:none;font-weight:600;font-size:14px}
+.btn-gold{background:linear-gradient(135deg,#d4af37,#f5d060);color:#1a120b}
 .btn-outline{border:1px solid #d4af37;color:#d4af37;background:rgba(212,175,55,.05)}
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(26,18,11,.95);backdrop-filter:blur(10px);display:flex;border-top:1px solid rgba(212,175,55,.2)}
-.nav a{flex:1;text-align:center;padding:15px 0;color:#888;text-decoration:none;font-size:13px}
-.nav a.on{color:#d4af37}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(26,18,11,.95);backdrop-filter:blur(10px);display:flex;border-top:1px solid rgba(212,175,55,.2)}
+.nav-item{flex:1;text-align:center;padding:12px 0;text-decoration:none;font-size:13px}
+.nav-item.gold{color:#d4af37;font-weight:600}
+.nav-item.gray{color:#888}
 .page{display:none}
 .page.on{display:block}
 h2{text-align:center;padding:25px 0 10px;color:#d4af37}
@@ -30,6 +31,7 @@ h2{text-align:center;padding:25px 0 10px;color:#d4af37}
 </style>
 </head>
 <body>
+<!-- 首页 -->
 <div class="page on" id="p1">
   <div class="top-bar">
     <div class="top-tag">0.01折新服 · 5重楼+6神兽</div>
@@ -39,11 +41,12 @@ h2{text-align:center;padding:25px 0 10px;color:#d4af37}
   <div class="hero">
     <img src="https://aka.doubaocdn.com/s/YivMqAHYwc" alt="宣传图">
   </div>
-  <div class="btns">
-    <a class="btn btn-gold" href="https://tlbbb.hfynxx.top/MZSP">立即注册（邀请码MZSP）</a>
-    <a class="btn btn-outline" href="https://wrtl.ququ.im/WRTL.html">游戏下载</a>
+  <div class="top-btns">
+    <a class="top-btn btn-outline" href="#manual" onclick="show(2,this)">新手攻略</a>
+    <a class="top-btn btn-outline" href="#contact" onclick="show(3,this)">联系客服</a>
   </div>
 </div>
+<!-- 新手攻略页 -->
 <div class="page" id="p2">
   <h2>新手攻略</h2>
   <div class="card">
@@ -76,6 +79,7 @@ h2{text-align:center;padding:25px 0 10px;color:#d4af37}
     <img src="https://aka.doubaocdn.com/s/vOzDWd9NLU">
   </div>
 </div>
+<!-- 联系客服页 -->
 <div class="page" id="p3">
   <h2>联系客服</h2>
   <div class="card" style="text-align:center;line-height:2.5">
@@ -84,17 +88,16 @@ h2{text-align:center;padding:25px 0 10px;color:#d4af37}
     <div>📱 微信：<b>qun680598747</b></div>
   </div>
 </div>
-<div class="nav">
-  <a class="on" onclick="show(1,this)">首页</a>
-  <a onclick="show(2,this)">新手攻略</a>
-  <a onclick="show(3,this)">联系客服</a>
+<!-- 底部三栏：注册、下载、玩家后台/充值 -->
+<div class="bottom-nav">
+  <a class="nav-item gold" href="https://tlbbb.hfynxx.top/MZSP">立即注册</a>
+  <a class="nav-item gold" href="https://wrtl.ququ.im/WRTL.html">游戏下载</a>
+  <a class="nav-item gray" href="https://tlbbb.hfynxx.top/MZSP">充值后台</a>
 </div>
 <script>
 function show(n,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'))
   document.getElementById('p'+n).classList.add('on')
-  document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('on'))
-  el.classList.add('on')
 }
 </script>
 </body>
