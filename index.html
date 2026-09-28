@@ -907,6 +907,10 @@ details img{width:100%;margin:8px 0;display:block}
       <a class="b2" href="https://wrtl.ququ.im/WRTL.html">游戏下载</a>
       <a class="b3" href="https://tlbbb.hfynxx.top/">充值后台</a>
     </div>
+    <div style="display:flex;gap:6px;padding-bottom:6px;">
+      <a onclick="sharePage()" style="flex:1;height:40px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#07c160,#06ad56);color:white;text-decoration:none;font-size:14px;font-weight:bold;border-radius:8px;">📤 分享给好友</a>
+      <a onclick="copyLink()" style="flex:1;height:40px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#4a6fa5,#5a8fc5);color:white;text-decoration:none;font-size:14px;font-weight:bold;border-radius:8px;">🔗 复制链接</a>
+    </div>
   </div>
 </div>
 <script>
@@ -924,6 +928,17 @@ function copyText(t,btn){
   const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
   const old=btn.textContent;btn.textContent='已复制';btn.style.background='#c9a961';btn.style.color='#1a120b';
   setTimeout(()=>{btn.textContent=old;btn.style.background='';btn.style.color=''},1500)
+}
+function sharePage(){
+  if(navigator.share){
+    navigator.share({title:'魔幻天龙17职业国际服',text:'上线领全套毕业福利，0氪也能玩！代理码MZSP',url:location.href}).catch(()=>{});
+  }else{
+    copyLink();
+  }
+}
+function copyLink(){
+  const ta=document.createElement('textarea');ta.value=location.href;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+  alert('链接已复制，发给好友吧！');
 }
 </script>
 </body>
