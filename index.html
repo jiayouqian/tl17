@@ -933,7 +933,9 @@ function copyText(t,btn){
 }
 function sharePage(){
   if(navigator.share){
-    navigator.share({title:'魔幻天龙17职业国际服',text:'上线领全套毕业福利，0氪也能玩！代理码MZSP',url:location.href}).catch(function(){});
+    navigator.share({title:'魔幻天龙17职业国际服',text:'上线领全套毕业福利，0氪也能玩！代理码MZSP',url:location.href}).then(function(){},function(){
+      copyLink();
+    });
   }else{
     copyLink();
   }
@@ -944,12 +946,12 @@ function copyLink(){
   else{
     var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
   }
-  showToast('链接已复制');
+  showToast('链接已复制，打开微信粘贴给好友');
 }
 function showToast(msg){
   var d=document.createElement('div');d.textContent=msg;
-  d.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;z-index:9999;pointer-events:none;';
-  document.body.appendChild(d);setTimeout(function(){d.remove()},1500);
+  d.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:#fff;padding:14px 24px;border-radius:10px;font-size:14px;z-index:9999;pointer-events:none;text-align:center;';
+  document.body.appendChild(d);setTimeout(function(){d.remove()},2000);
 }
 </script>
 </body>
