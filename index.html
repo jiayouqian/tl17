@@ -946,7 +946,7 @@ function copyLink(){
   else{
     var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
   }
-  showToast('链接已复制，打开微信粘贴给好友');
+  showToast('链接已复制，去微信或QQ粘贴给好友');
 }
 function showToast(msg){
   var d=document.createElement('div');d.textContent=msg;
