@@ -127,8 +127,7 @@ details img{width:100%;margin:8px 0;display:block}
 </div>
 <div class="page" id="manual">
   <div class="topbar">
-    <a onclick="go('home')">← 首页</a>
-    <div style="flex:1;overflow:hidden;text-align:center;color:#c9a961;font-size:14px;">📖 新手攻略</div>
+    <div style="flex:1;text-align:center;color:#c9a961;font-size:14px;">📖 新手攻略</div>
   </div>
   <div class="toc">
     <a href="#" onclick="scrollToSec(0,event)">📦充值</a>
@@ -864,8 +863,7 @@ details img{width:100%;margin:8px 0;display:block}
 </div>
 <div class="page" id="contact">
   <div class="topbar">
-    <a onclick="go('home')">← 首页</a>
-    <div style="flex:1;overflow:hidden;text-align:center;color:#c9a961;font-size:14px;">🎧 联系客服</div>
+    <div style="flex:1;text-align:center;color:#c9a961;font-size:14px;">🎧 联系客服</div>
   </div>
   <div class="contact-item">
     <div class="contact-left">
@@ -900,8 +898,10 @@ details img{width:100%;margin:8px 0;display:block}
 </div>
 <div class="bottom" style="padding:0;">
   <div style="width:94%;margin:0 auto;">
-    <div style="background:linear-gradient(135deg,#8b5a18,#c9962c);color:white;text-align:center;padding:8px 10px;font-size:12px;margin-bottom:5px;border-top:1px solid #ffd97a;border-bottom:1px solid #ffd97a;border-radius:8px;">
-      🎁 注册专属代理码：<b style="font-size:18px;letter-spacing:2px;color:#fff7d6;text-shadow:0 1px 2px rgba(0,0,0,.4);">MZSP</b>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+      <a onclick="go('home')" style="flex-shrink:0;padding:6px 12px;background:rgba(201,169,97,.15);border:1px solid #c9a961;border-radius:8px;color:#ffd97a;text-decoration:none;font-size:12px;white-space:nowrap;">←首页</a>
+      <div style="flex:1;background:linear-gradient(135deg,#8b5a18,#c9962c);color:white;text-align:center;padding:8px 10px;font-size:12px;border-radius:8px;">🎁 注册专属代理码：<b style="font-size:16px;letter-spacing:2px;color:#fff7d6;">MZSP</b></div>
+      <a onclick="window.scrollTo({top:0,behavior:'smooth'})" style="flex-shrink:0;padding:6px 12px;background:rgba(201,169,97,.15);border:1px solid #c9a961;border-radius:8px;color:#ffd97a;text-decoration:none;font-size:12px;white-space:nowrap;">↑顶部</a>
     </div>
     <div style="display:flex;gap:8px;padding-bottom:8px;">
       <a class="b1" href="https://tlbbb.hfynxx.top/MZSP">立即注册</a>
@@ -910,7 +910,6 @@ details img{width:100%;margin:8px 0;display:block}
     </div>
   </div>
 </div>
-<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
 function go(n){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'))
@@ -922,10 +921,6 @@ function scrollToSec(i,e){
   var secs=document.querySelectorAll('#manual>details');
   if(secs[i]){secs[i].scrollIntoView({behavior:'smooth',block:'start'});secs[i].open=true;}
 }
-window.addEventListener('scroll',function(){
-  var b=document.getElementById('backTop');
-  if(window.scrollY>400){b.style.display='flex'}else{b.style.display='none'}
-});
 function copyText(t,btn){
   const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity=0;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
   const old=btn.textContent;btn.textContent='已复制';btn.style.background='#c9a961';btn.style.color='#1a120b';
