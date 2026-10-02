@@ -29,7 +29,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 .carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease;overflow:hidden;flex:1;min-height:0}
 .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
-.slide img{display:block;height:100%;width:auto;max-width:100%;object-fit:contain}
+.slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .sl-cap{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 30px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.86) 68%)}
 .sl-badge{display:inline-block;font-size:10px;color:#191209;background:#d4a94a;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
 .sl-badge.tl{background:#d34b3a;color:#fff}
@@ -120,7 +120,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002194000';
+  var __ver='v20261002194500';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
