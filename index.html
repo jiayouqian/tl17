@@ -73,19 +73,22 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
   function initCarousel(root){
     var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
     var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
-    var i = 0, timer = null;
+    var i = 0;
     function fitH(){
-      var avail = window.innerHeight - 96;
+      var hd = document.querySelector('header');
+      var ft = document.querySelector('.foot');
+      var fixed = (hd ? hd.offsetHeight + 14 : 0) + (ft ? ft.offsetHeight + 10 : 0);
+      var zcs = document.querySelectorAll('.zc-hd');
+      var zcH = 0;
+      Array.prototype.forEach.call(zcs, function(z){ zcH += z.offsetHeight + 6; });
+      var avail = window.innerHeight - fixed - zcH - 8;
       root.style.height = Math.max(200, Math.round(avail / 2)) + 'px';
     }
     function go(n){
       slides[i].classList.remove('on'); dots[i].classList.remove('on');
       i = (n + slides.length) % slides.length;
       slides[i].classList.add('on'); dots[i].classList.add('on');
-      fitH();
     }
-    function next(){ go(i + 1); }
-    function start(){ clearInterval(timer); timer = setInterval(next, 3500); }
     // 预加载全部图片，首帧加载后撑开高度
     slides.forEach(function(s, idx){
       var im = new Image();
@@ -94,7 +97,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
     });
     dots.forEach(function(dot){
       dot.addEventListener('click', function(){
-        go(parseInt(this.dataset.i, 10)); start();
+        go(parseInt(this.dataset.i, 10));
       });
     });
     root.addEventListener('click', function(e){
@@ -103,7 +106,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
     });
     window.addEventListener('resize', fitH);
     fitH();
-    start();
   }
   Array.prototype.forEach.call(document.querySelectorAll('.carousel'), initCarousel);
 })();
@@ -123,7 +125,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002192000';
+  var __ver='v20261002192500';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
