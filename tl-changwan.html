@@ -3,85 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>天龙畅玩版 · 经典天龙八部</title>
+<meta http-equiv="Cache-Control" content="no-store">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f0c09'/%3E%3Ctext x='32' y='46' font-size='34' text-anchor='middle' fill='%23e8b64c' font-weight='900'%3E天%3C/text%3E%3C/svg%3E">
+<title>畅玩版 · 经典天龙八部</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d0a06;color:#f2e7cf;font-family:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
-.wrap{max-width:720px;margin:0 auto;padding:0 16px 48px}
-header{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid #33271a;margin-bottom:18px}
-.logo{font-family:"Noto Serif SC",serif;font-weight:900;font-size:19px;color:#d4a94a}
-.logo small{display:block;font-size:10px;font-weight:400;color:#8a7a5e;letter-spacing:3px}
-.back{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px}
-.back:hover{color:#d4a94a;border-color:#d4a94a}
-/* 版本卡 */
-.card{background:#171209;border:1px solid #33271a;border-radius:16px;overflow:hidden;margin-bottom:16px}
-.hero{display:flex;align-items:center;gap:16px;padding:22px 18px;background:radial-gradient(120% 160% at 20% 0%,#2a2013 0%,#171209 60%)}
-.icon{width:84px;height:84px;border-radius:18px;flex:none;box-shadow:0 6px 18px rgba(0,0,0,.5)}
-.info b{font-family:"Noto Serif SC",serif;font-size:22px;color:#e8c878;display:block}
-.info .ver{font-size:12px;color:#8a7a5e;margin:4px 0 2px}
-.info .tag{display:inline-block;font-size:11px;color:#191209;background:#d4a94a;border-radius:4px;padding:1px 8px;font-weight:700}
-.info p{font-size:13px;color:#b6a584;margin-top:8px;line-height:1.6}
-/* 下载按钮 */
-.dl{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 18px 20px}
-@media(max-width:560px){.dl{grid-template-columns:1fr}}
-.btn{display:block;text-align:center;padding:13px 10px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;transition:.2s}
-.btn-a{background:linear-gradient(135deg,#d4a94a,#b8860b);color:#191209}
-.btn-i{background:linear-gradient(135deg,#3a2f1e,#2a2013);color:#e8c878;border:1px solid #4a3d26}
-.btn:hover{filter:brightness(1.12)}
-/* 说明 */
-.tip{background:#171209;border:1px solid #33271a;border-radius:16px;padding:16px 18px;font-size:13px;color:#b6a584;line-height:1.8}
-.tip b{color:#e8c878}
-.tip a{color:#d4a94a}
-.tip ul{margin:8px 0 0 18px}
-.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:26px}
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --gold:#e8b64c; --gold-light:#f5d78a; --gold-dark:#b8842a;
+    --bg:#0f0c09; --card:#1a1510; --card2:#221b13;
+    --ink:#f0e6d2; --ink-dim:#9c8763; --red:#c0392b;
+  }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.6; }
+  .wrap { max-width:480px; margin:0 auto; padding-bottom:90px; }
+
+  /* 顶部栏 */
+  .topbar { position:sticky; top:0; z-index:100; background:rgba(15,12,9,.92); backdrop-filter:blur(12px); padding:12px 16px; text-align:center; border-bottom:1px solid rgba(232,182,76,.15); }
+  .topbar b { font-size:16px; color:var(--gold); letter-spacing:2px; }
+  .topbar small { display:block; font-size:10px; color:var(--ink-dim); margin-top:2px; }
+
+  .page { display:none; }
+  .page.active { display:block; }
+
+  /* Hero */
+  .hero { position:relative; overflow:hidden; padding:34px 20px 28px; text-align:center; background:radial-gradient(120% 100% at 50% 0%, #2a1f10 0%, #0f0c09 70%); }
+  .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(232,182,76,.08),transparent 40%); pointer-events:none; }
+  .hero-icon { width:96px; height:96px; border-radius:22px; margin:0 auto 16px; display:block; box-shadow:0 0 0 3px rgba(232,182,76,.35), 0 8px 30px rgba(0,0,0,.6); }
+  .hero-tag { display:inline-block; padding:4px 14px; background:linear-gradient(135deg,rgba(232,182,76,.25),rgba(232,182,76,.1)); border:1px solid var(--gold); border-radius:20px; font-size:11px; color:var(--gold); margin-bottom:10px; }
+  .hero h1 { font-size:30px; font-weight:900; color:#fff; line-height:1.2; }
+  .hero h1 span { background:linear-gradient(180deg,#f5d78a,#d4a03c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { font-size:13px; color:#e8dcc8; margin-top:8px; }
+  .hero-ver { font-size:11px; color:var(--ink-dim); margin-top:4px; }
+
+  /* 主按钮 */
+  .cta-wrap { display:flex; gap:10px; margin-top:22px; }
+  .btn { flex:1; padding:13px 8px; border-radius:12px; text-align:center; font-size:14px; font-weight:700; cursor:pointer; border:none; text-decoration:none; display:block; }
+  .btn-gold { background:linear-gradient(135deg,#e8b64c,#b8842a); color:#14100c; }
+  .btn-line { background:rgba(232,182,76,.08); border:1px solid rgba(232,182,76,.45); color:var(--gold); }
+  .btn-line b { color:#fff; }
+
+  /* 卖点 */
+  .pitch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:16px; }
+  .pitch-item { background:linear-gradient(180deg,var(--card2),var(--card)); border:1px solid rgba(232,182,76,.2); border-radius:14px; padding:14px 6px; text-align:center; }
+  .pitch-item b { display:block; font-size:15px; font-weight:900; background:linear-gradient(180deg,#f5d78a,#d4a03c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .pitch-item span { font-size:10.5px; color:var(--ink-dim); }
+
+  /* 大入口 */
+  .entry { margin:0 16px 14px; padding:16px 18px; background:linear-gradient(135deg,rgba(232,182,76,.18),rgba(232,182,76,.04)); border:1px solid rgba(232,182,76,.35); border-radius:14px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; text-decoration:none; }
+  .entry .left b { display:block; font-size:16px; color:#fff; }
+  .entry .left span { font-size:11.5px; color:var(--ink-dim); }
+  .entry .arrow { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#e8b64c,#b8842a); color:#14100c; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:900; flex-shrink:0; }
+
+  /* 区块 */
+  .sec { padding:0 16px; margin-bottom:22px; }
+  .sec-title { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .sec-title::before { content:""; width:4px; height:18px; background:linear-gradient(180deg,#e8b64c,#b8842a); border-radius:2px; }
+  .sec-title b { font-size:17px; color:var(--gold); letter-spacing:1px; }
+
+  /* 注册卡 */
+  .reg-card { background:linear-gradient(180deg,var(--card2),var(--card)); border:1px solid rgba(232,182,76,.3); border-radius:16px; padding:20px 18px; }
+  .reg-code-label { text-align:center; font-size:12px; color:var(--ink-dim); }
+  .reg-code { text-align:center; font-size:34px; font-weight:900; letter-spacing:10px; background:linear-gradient(180deg,#f5d78a,#d4a03c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin:6px 0 18px; }
+  .reg-btns { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .reg-btn { padding:13px 8px; border-radius:12px; text-align:center; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; display:block; }
+  .reg-btn:last-child:nth-child(odd) { grid-column:1 / -1; }
+  .rb-gold { background:linear-gradient(135deg,#e8b64c,#b8842a); color:#14100c; }
+  .rb-line { background:rgba(232,182,76,.08); border:1px solid rgba(232,182,76,.4); color:var(--gold); }
+  .copy-link { text-align:center; font-size:12px; color:var(--ink-dim); margin-top:14px; cursor:pointer; text-decoration:underline; }
+
+  /* 提醒 */
+  .notice { margin:14px 16px 20px; padding:12px 14px; border:1px solid rgba(192,57,43,.4); border-radius:10px; background:rgba(192,57,43,.08); font-size:12px; color:#e8b8b0; }
+
+  /* 画廊 */
+  .gallery { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .gallery img { width:100%; border-radius:10px; border:1px solid rgba(232,182,76,.18); display:block; }
+  .gallery .wide { grid-column:1 / -1; }
+
+  /* 手册/礼包/客服页共用 */
+  .back-link { display:inline-block; margin:14px 16px 4px; color:var(--gold); font-size:13px; cursor:pointer; text-decoration:none; }
+  .card { background:linear-gradient(180deg,var(--card2),var(--card)); border:1px solid rgba(232,182,76,.22); border-radius:14px; padding:16px; margin:0 16px 12px; }
+  .card h3 { font-size:15px; color:var(--gold); margin-bottom:10px; }
+  .card p { font-size:13px; color:var(--ink); margin-bottom:6px; }
+  .card .dim { font-size:12px; color:var(--ink-dim); }
+  .copy-row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 0; border-bottom:1px dashed rgba(232,182,76,.15); }
+  .copy-row:last-child { border-bottom:none; }
+  .copy-row span { font-size:13px; color:var(--ink); }
+  .copy-btn { font-size:11px; color:var(--gold); border:1px solid rgba(232,182,76,.4); border-radius:8px; padding:4px 12px; cursor:pointer; background:rgba(232,182,76,.08); flex-shrink:0; }
+  .benefit-list { font-size:12.5px; color:var(--ink-dim); margin-top:8px; line-height:2; }
+
+  /* 底部导航 */
+  .tabbar { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; z-index:200; display:flex; background:rgba(15,12,9,.97); border-top:1px solid rgba(232,182,76,.18); backdrop-filter:blur(12px); }
+  .tabbar button { flex:1; padding:12px 4px 10px; background:none; border:none; color:var(--ink-dim); font-size:12px; cursor:pointer; }
+  .tabbar button.active { color:var(--gold); font-weight:700; }
+  .tabbar button .ic { display:block; font-size:17px; margin-bottom:2px; }
+
+  /* 复制弹窗 */
+  .modal-mask { display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:300; }
+  .modal-mask.show { display:block; }
+  .modal { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:88%; max-width:420px; background:var(--card); border:1px solid rgba(232,182,76,.4); border-radius:16px; padding:20px; z-index:310; box-shadow:0 20px 60px rgba(0,0,0,.7); display:none; }
+  .modal h3 { color:var(--gold); font-size:15px; margin-bottom:6px; }
+  .modal .link-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:12px; padding:10px 12px; background:var(--card2); border-radius:10px; }
+  .modal .link-row .url { font-size:11px; color:var(--ink); word-break:break-all; flex:1; }
+  .modal .close-btn { display:block; width:100%; margin-top:16px; padding:11px; border:none; border-radius:10px; background:linear-gradient(135deg,#e8b64c,#b8842a); color:#14100c; font-size:14px; font-weight:700; cursor:pointer; }
+
+  /* toast */
+  .toast { position:fixed; left:50%; top:38%; transform:translate(-50%,-50%); background:rgba(20,16,12,.95); border:1px solid rgba(232,182,76,.5); color:var(--gold-light); padding:10px 22px; border-radius:10px; font-size:13px; z-index:400; opacity:0; transition:opacity .3s; pointer-events:none; }
+  .toast.show { opacity:1; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div class="logo">天龙手游专区<small>畅玩版 · 经典天龙八部</small></div>
-    <a class="back" href="tianlong.html">‹ 返回专区</a>
-  </header>
 
-  <div class="card">
+  <!-- ============ 畅玩版主页 ============ -->
+  <div class="page active" id="page-old">
+    <div class="topbar"><b>畅玩版 · 经典天龙八部</b><small>天龙八部手机版 1.0.1 · 复古情怀</small></div>
+
     <div class="hero">
-      <img class="icon" src="assets/tl-cw-icon.png" alt="天龙八部手机版">
-      <div class="info">
-        <b>天龙八部手机版</b>
-        <div class="ver">版本 1.0.1 · 大小 2.60GB</div>
-        <span class="tag">畅玩版 · 经典最早版本</span>
-        <p>经典天龙八部手游 · 原味江湖 重温天龙<br>安卓 + 苹果双端支持</p>
+      <img class="hero-icon" src="assets/tl-cw-icon.png" alt="畅玩版图标">
+      <div class="hero-tag">超高比例 · 千万元宝</div>
+      <h1>畅玩版<span>天龙八部</span></h1>
+      <p class="hero-sub">复古经典 · 原汁原味 · 零氪也能玩</p>
+      <p class="hero-ver">版本 1.0.1 · 安装包 2.60GB</p>
+      <div class="cta-wrap">
+        <a class="btn btn-gold" href="http://tlbb.hfynxx.top/PPAP">立即注册下载</a>
+        <a class="btn btn-line" href="https://wrtl.ququ.im/WRTL.html"><b>安卓高速下载</b></a>
       </div>
     </div>
-    <div class="dl">
-      <a class="btn btn-a" href="https://wrtl.ququ.im/d/wrtl.php" target="_blank" rel="noopener">安卓 + 苹果高速下载</a>
-      <a class="btn btn-i" href="itms-services://?action=download-manifest&url=https://apple-enterprise-signature-app-installation.yidi.im/data/wrtl.plist">苹果 iOS 备用下载</a>
+
+    <div class="pitch">
+      <div class="pitch-item"><b>最高1:4000+</b><span>超高比例</span></div>
+      <div class="pitch-item"><b>千万元宝</b><span>上线直接领</span></div>
+      <div class="pitch-item"><b>地宫刷绑</b><span>5层无限刷绑元</span></div>
+    </div>
+
+    <a class="entry" href="javascript:void(0)" onclick="switchPage('manual')">
+      <div class="left"><b>完整攻略手册</b><span>升级/战力提升/技能指点/副本活动 全攻略</span></div>
+      <div class="arrow">›</div>
+    </a>
+
+    <a class="entry" href="javascript:void(0)" onclick="switchPage('gifts')">
+      <div class="left"><b>新手礼包码</b><span>超多礼包免费领 · 6个1 / 6个6 / 6个9 / VIP码 全免费</span></div>
+      <div class="arrow">›</div>
+    </a>
+
+    <div class="sec">
+      <div class="sec-title"><b>立即注册下载</b></div>
+      <div class="reg-card">
+        <div class="reg-code-label">邀请码</div>
+        <div class="reg-code">PPAP</div>
+        <div class="reg-btns">
+          <a class="reg-btn rb-gold" href="http://tlbb.hfynxx.top/PPAP">注册账号</a>
+          <a class="reg-btn rb-gold" href="https://wrtl.ququ.im/WRTL.html">立即下载游戏</a>
+          <a class="reg-btn rb-line" href="http://tlbb.hfynxx.top/PPAP">兑换码 / 充值</a>
+        </div>
+        <div class="copy-link" onclick="openModal('old')">按钮点不开？点这里复制链接</div>
+      </div>
+    </div>
+
+    <a class="entry" href="javascript:void(0)" onclick="switchPage('group')">
+      <div class="left"><b>联系客服</b><span>QQ群 · 代理QQ · 微信，任选一种联系我</span></div>
+      <div class="arrow">›</div>
+    </a>
+
+    <div class="notice">特别提醒：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+
+    <div class="sec">
+      <div class="sec-title"><b>游戏实拍</b></div>
+      <div class="gallery">
+        <img class="wide" src="assets/tl-cw/img_0.png" alt="游戏截图">
+        <img src="assets/tl-cw/img_10.png" alt="道具展示">
+        <img src="assets/tl-cw/img_11.png" alt="礼包展示">
+        <img class="wide" src="assets/tl-cw/img_2.png" alt="充值福利">
+        <img src="assets/tl-cw/img_12.png" alt="游戏截图">
+        <img src="assets/tl-cw/img_13.png" alt="游戏截图">
+        <img class="wide" src="assets/tl-cw/img_3.png" alt="活动界面">
+        <img src="assets/tl-cw/img_4.png" alt="游戏截图">
+        <img src="assets/tl-cw/img_5.png" alt="游戏截图">
+        <img class="wide" src="assets/tl-cw/img_8.png" alt="游戏截图">
+        <img class="wide" src="assets/tl-cw/img_9.png" alt="游戏截图">
+      </div>
     </div>
   </div>
 
-  <div class="tip">
-    <b>安装说明</b>
-    <ul>
-      <li>苹果用户出现掉签、闪退：删除原 APP 重新下载安装，30 分钟内补签</li>
-      <li>苹果 iPad 建议用第三方浏览器打开下载页</li>
-      <li>点击「安装」后自动下载，期间不要操作桌面图标，避免中断</li>
-    </ul>
-    <p style="margin-top:10px">教程：<a href="https://wrtl.ququ.im/sy/xr.html" target="_blank" rel="noopener">苹果「未受信任的企业级开发者」解决办法</a> ｜ <a href="https://wrtl.ququ.im/sy/hm.html" target="_blank" rel="noopener">安卓鸿蒙系统安装教程</a></p>
-    <p style="margin-top:6px">完整下载页（含二维码）：<a href="https://wrtl.ququ.im/WRTL.html" target="_blank" rel="noopener">wrtl.ququ.im/WRTL.html</a></p>
+  <!-- ============ 攻略手册页 ============ -->
+  <div class="page" id="page-manual">
+    <div class="topbar"><b>完整攻略手册</b><small>升级/战力/技能/副本 全攻略</small></div>
+    <a class="back-link" onclick="switchPage('old')">‹ 返回畅玩版首页</a>
+
+    <div class="card"><h3>免费福利</h3><p>每日/每周/等级全送充值卡，零氪也能玩。</p></div>
+    <div class="card"><h3>0.01折充值</h3><p>1元=648充值额度，六档任选。</p><p class="dim">首充 / 周饷 / 月契 / 永契全档位。</p></div>
+    <div class="card"><h3>活动玩法</h3><p>七日寻重楼 · 连充7天拿全套幻化。</p><p class="dim">幻化总览：赤龙苗刀 / 开天神斧 / 墨羽披风 / 虎啸星陨枪 / 金荷武魂 / 山河与共称号。</p></div>
+    <div class="card"><h3>幻化战力榜</h3><p>披风幻化战力榜 TOP11，参考榜上配置快速提战。</p></div>
+    <div class="card"><h3>新手升级</h3><p>吃经验丹可到 74 级，之后靠日常与活动冲级；装备靠打怪爆、物价保值，散人友好。</p></div>
+    <div class="notice">更多深度攻略（技能指点/副本/藏宝图/充值档位）请进群咨询客服领取。</div>
   </div>
 
-  <p class="foot">天龙手游专区 · 畅玩版</p>
+  <!-- ============ 礼包码页 ============ -->
+  <div class="page" id="page-gifts">
+    <div class="topbar"><b>新手礼包码</b><small>超多礼包免费领</small></div>
+    <a class="back-link" onclick="switchPage('old')">‹ 返回畅玩版首页</a>
+
+    <div class="card">
+      <h3>一键领全部</h3>
+      <p>进入游戏后左上角找到「精彩活动」输入兑换码即可领取。</p>
+      <div class="copy-row"><span><b>111111</b>（6个1）一次性领完下面5个礼包所有奖励</span><button class="copy-btn" onclick="copyText('111111')">复制</button></div>
+    </div>
+
+    <div class="card">
+      <h3>MH1001 · 等级坐骑时装</h3>
+      <div class="copy-row"><span>MH1001</span><button class="copy-btn" onclick="copyText('MH1001')">复制</button></div>
+      <div class="benefit-list">8500万经验（50万×170）<br>188.8万绑元（18880×100）<br>冥羽 永久坐骑<br>金庭云罗 永久时装</div>
+    </div>
+
+    <div class="card">
+      <h3>MH1002 · 成长材料礼包</h3>
+      <div class="copy-row"><span>MH1002</span><button class="copy-btn" onclick="copyText('MH1002')">复制</button></div>
+      <div class="benefit-list">100万银两、1000万铜钱、10万帮贡<br>新莽神符×10、地煞强化精华×200<br>1886万绑元（18880×999）</div>
+    </div>
+
+    <div class="card">
+      <h3>MH1003 · 神兽元神礼包</h3>
+      <div class="copy-row"><span>MH1003</span><button class="copy-btn" onclick="copyText('MH1003')">复制</button></div>
+      <div class="benefit-list">六大神兽元神各550个</div>
+    </div>
+
+    <div class="card">
+      <h3>MH1004 · 重楼五件套</h3>
+      <div class="copy-row"><span>MH1004</span><button class="copy-btn" onclick="copyText('MH1004')">复制</button></div>
+      <div class="benefit-list">重楼五件套各1<br>保星符福袋×50</div>
+    </div>
+
+    <div class="card">
+      <h3>MH1005 · 江湖豪礼</h3>
+      <div class="copy-row"><span>MH1005</span><button class="copy-btn" onclick="copyText('MH1005')">复制</button></div>
+      <div class="benefit-list">储备元宝200万、绑定元宝3000万<br>蓝田玉令×20、宝石提升符×20<br>暗器修炼石×100、天罡强化精华×99<br>新莽神符×50</div>
+    </div>
+
+    <div class="notice">特别提示：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
+  <!-- ============ 客服页 ============ -->
+  <div class="page" id="page-group">
+    <div class="topbar"><b>联系客服</b><small>进群领福利 · 有问题直接找我</small></div>
+    <a class="back-link" onclick="switchPage('old')">‹ 返回畅玩版首页</a>
+
+    <div class="card">
+      <h3>QQ</h3>
+      <div class="copy-row"><span>玩家交流群（进群领福利）<br><b>680598747</b></span><button class="copy-btn" onclick="copyText('680598747')">复制</button></div>
+    </div>
+    <div class="card">
+      <h3>QQ</h3>
+      <div class="copy-row"><span>代理QQ号（直接加）<br><b>354261705</b></span><button class="copy-btn" onclick="copyText('354261705')">复制</button></div>
+    </div>
+    <div class="card">
+      <h3>微信</h3>
+      <div class="copy-row"><span>微信号（微信咨询）<br><b>qun680598747</b></span><button class="copy-btn" onclick="copyText('qun680598747')">复制</button></div>
+    </div>
+
+    <div class="notice">特别提示：务必通过本页面注册链接创建账号，后续充值不到账、礼包领取等问题才能获得售后。</div>
+  </div>
+
 </div>
+
+<!-- 底部导航 -->
+<div class="tabbar">
+  <button class="active" data-page="old" onclick="switchPage('old')"><span class="ic">⌂</span>首页</button>
+  <button data-page="gifts" onclick="switchPage('gifts')"><span class="ic">◆</span>礼包码</button>
+  <button data-page="manual" onclick="switchPage('manual')"><span class="ic">≡</span>游戏手册</button>
+  <button data-page="group" onclick="switchPage('group')"><span class="ic">◈</span>客服</button>
+</div>
+
+<!-- 复制链接弹窗 -->
+<div class="modal-mask" id="modalMask" onclick="closeModal()"></div>
+<div class="modal" id="modalOld">
+  <h3>复制链接到浏览器打开</h3>
+  <div class="link-row"><span class="url">游戏下载链接<br>https://wrtl.ququ.im/WRTL.html</span><button class="copy-btn" onclick="copyText('https://wrtl.ququ.im/WRTL.html')">复制</button></div>
+  <div class="link-row"><span class="url">注册 + 兑换码网站<br>http://tlbb.hfynxx.top/PPAP</span><button class="copy-btn" onclick="copyText('http://tlbb.hfynxx.top/PPAP')">复制</button></div>
+  <div class="link-row"><span class="url">备用下载入口<br>https://hftl.jinkeyan.wang/HFTL.html</span><button class="copy-btn" onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html')">复制</button></div>
+  <button class="close-btn" onclick="closeModal()">关闭</button>
+</div>
+
+<div class="toast" id="toast">已复制</div>
+
 <script>
 (function(){
-  var V='20261002093339';
-  function chk(){
-    fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
-      if(d&&d.v&&d.v!==V){ try{location.replace(location.href.split('?')[0]+'?rv='+d.v)}catch(e){location.reload()} }
+  var VERSION='20261002094822';
+  function switchPage(name){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+    var pg=document.getElementById('page-'+name); if(pg) pg.classList.add('active');
+    document.querySelectorAll('.tabbar button').forEach(function(b){b.classList.toggle('active',b.dataset.page===name);});
+    window.scrollTo(0,0);
+  }
+  function openModal(kind){
+    document.getElementById('modalMask').classList.add('show');
+    document.getElementById('modalOld').style.display='block';
+  }
+  function closeModal(){
+    document.getElementById('modalMask').classList.remove('show');
+    document.getElementById('modalOld').style.display='none';
+  }
+  function copyText(t){
+    var done=function(){var to=document.getElementById('toast');to.classList.add('show');setTimeout(function(){to.classList.remove('show');},1500);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fallback(t);done();});}else{fallback(t);done();}
+  }
+  function fallback(t){
+    var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta);
+  }
+  /* 秒更新轮询 */
+  function poll(){
+    fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      if(d.v&&VERSION&&d.v!==VERSION){location.replace('tl-changwan.html?rv='+d.v);}
     }).catch(function(){});
   }
-  setTimeout(chk,1500); setInterval(chk,6000);
+  setTimeout(poll,1500); setInterval(poll,6000);
+  window.switchPage=switchPage; window.openModal=openModal; window.closeModal=closeModal; window.copyText=copyText;
 })();
 </script>
 </body>
