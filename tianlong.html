@@ -27,7 +27,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease;overflow:hidden}
 .slide{position:absolute;top:0;left:0;width:100%;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
-.slide img{display:block;width:100%;height:auto}
+.slide img{display:block;width:100%;height:260px;object-fit:cover}
+.cw-car .slide img{object-position:center top}
+.ml-car .slide img{object-position:center}
 /* 全图帧(畅玩版: 游戏实拍全图+图标+文字叠加) */
 .cwbg{position:relative;height:210px;overflow:hidden} .cwbg img.bg{width:100%;height:100%;object-fit:cover;display:block;object-position:center 22%}
 .cw-mask{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,10,6,.05) 0%,rgba(13,10,6,.25) 40%,rgba(13,10,6,.88) 100%)}
@@ -60,14 +62,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
     <!-- 畅玩版滚动区(全图帧) -->
     <div class="zc cw-zc">
       <div class="zc-hd"><b>畅玩版</b><em>经典天龙八部</em><a class="enter" href="tl-changwan.html">进入畅玩版 ›</a></div>
-      <div class="carousel" data-href="tl-changwan.html">
+      <div class="carousel cw-car" data-href="tl-changwan.html">
         <div class="slide on"><img src="https://aka.doubaocdn.com/s/XlDeSqa71V" alt="畅玩天龙17职业"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 17职业</b><p>同步官方1比1 · 万人大区 · 福利拉满</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/Teu2T0CJGJ" alt="畅玩天龙游戏攻略"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 游戏攻略</b><p>详细攻略 · 新手快速上手</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/5RQQhVS9Gr" alt="畅玩天龙更新全新玩法"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 全新玩法</b><p>更新上线 · 玩法全面升级</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/5ieu4M9mBe" alt="畅玩天龙峨眉门派"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 门派焕新</b><p>峨眉门派 · 更新全新玩法</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/beMp9VAXP8" alt="畅玩天龙双节同庆"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>双节同庆 · 福利双行</b><p>节日福利 · 礼包限购返代币</p></div></div><div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button></div>
       </div>
     </div>
     <!-- 魔幻版滚动区 -->
     <div class="zc ml">
       <div class="zc-hd"><b>魔幻版</b><em>17职业国际服</em><a class="enter" href="tl-mohuan.html">进入魔幻版 ›</a></div>
-      <div class="carousel" data-href="tl-mohuan.html">
+      <div class="carousel ml-car" data-href="tl-mohuan.html">
         <div class="slide on"><img src="https://aka.doubaocdn.com/s/z1wTKy18HO" alt="0.01折江湖钜惠令"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>0.01折 · 江湖钜惠令</b><p>魔幻天龙17职业 · 一文抵百金</p></div></div>
         <div class="slide"><img src="https://aka.doubaocdn.com/s/Q1S1jzntyR" alt="天龙公测江湖充值帖"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙公测 · 江湖充值帖</b><p>首充豪礼 · 成长补给 · 终生限购</p></div></div>
         <div class="slide"><img src="https://aka.doubaocdn.com/s/NPGNQnUENd" alt="七日寻重楼连充献礼"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>七日寻重楼 · 连充献礼</b><p>日行寻玉充 · 重楼至宝赠</p></div></div>
@@ -86,11 +88,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
     var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
     var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
     var i = 0, timer = null;
-    function fitH(){ 
-      var im = root.querySelector('.slide.on img');
-      if(!im || !im.naturalWidth) return;
-      root.style.height = Math.round(root.clientWidth * im.naturalHeight / im.naturalWidth) + 'px';
-    }
+    function fitH(){ root.style.height='260px'; }
     function go(n){
       slides[i].classList.remove('on'); dots[i].classList.remove('on');
       i = (n + slides.length) % slides.length;
@@ -136,7 +134,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002185000';
+  var __ver='v20261002185500';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
