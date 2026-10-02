@@ -335,7 +335,6 @@
 
 <script>
 (function(){
-  var VERSION='20261002100617';
   function switchPage(name){
     document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
     var pg=document.getElementById('page-'+name); if(pg) pg.classList.add('active');
@@ -360,7 +359,9 @@
   }
   function poll(){
     fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
-      if(d.v&&VERSION&&d.v!==VERSION){location.replace('tl-changwan.html?rv='+d.v);}
+      if(!d||!d.v) return;
+      var cur = location.search.match(/rv=([^&]+)/);
+      if(!cur || cur[1] !== d.v){ location.replace(location.href.split('?')[0]+'?rv='+d.v); }
     }).catch(function(){});
   }
   setTimeout(poll,1500); setInterval(poll,6000);
