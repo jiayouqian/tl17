@@ -35,7 +35,7 @@
 </script>
 <script>
 (function(){
-  var V='20261002093339';
+  var V='20261002102143';
   function chk(){
     fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
       if(d&&d.v&&d.v!==V){ try{location.replace(location.href.split('?')[0]+'?rv='+d.v)}catch(e){location.reload()} }
