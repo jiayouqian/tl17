@@ -27,7 +27,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
-.slide img{display:block;width:100%;height:auto}
+.slide img{display:block;width:100%;height:210px;object-fit:cover;object-position:center}
 /* 全图帧(畅玩版: 游戏实拍全图+图标+文字叠加) */
 .cwbg{position:relative;height:210px;overflow:hidden} .cwbg img.bg{width:100%;height:100%;object-fit:cover;display:block;object-position:center 22%}
 .cw-mask{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,10,6,.05) 0%,rgba(13,10,6,.25) 40%,rgba(13,10,6,.88) 100%)}
@@ -61,17 +61,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
     <div class="zc cw-zc">
       <div class="zc-hd"><b>畅玩版</b><em>经典天龙八部</em><a class="enter" href="tl-changwan.html">进入畅玩版 ›</a></div>
       <div class="carousel" data-href="tl-changwan.html">
-        <div class="slide on cwbg">
-          <img class="bg" src="assets/tl-cw-full/cw_hero.jpg?v=20261002124024" alt="畅玩版主视觉">
-          <div class="cw-mask"></div>
-          <div class="cw-inner"><img src="assets/tl-cw-icon.png?v=20261002124024" alt="图标"><b>天龙八部手机版</b><p class="l1">经典畅玩 · 最早版本 · 重温天龙</p><p>版本 1.0.1 · 大小 2.60GB · 安卓 + 苹果双端</p></div>
-        </div>
-        <div class="slide cwbg">
-          <img class="bg" src="assets/tl-cw-full/cw_tianlong.jpg?v=20261002124024" alt="畅玩版实拍">
-          <div class="cw-mask"></div>
-          <div class="cw-inner"><img src="assets/tl-cw-icon.png?v=20261002124024" alt="图标"><b>天龙真武指点</b><p class="l1">超高比例 · 千万元宝 · 地宫刷绑</p><p>1:4000+ · 上线直接领 · 5层无限刷绑元</p></div>
-        </div>
-        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button></div>
+        <div <div class="slide on"><img src="assets/tl-cw-full/cw_hero_wide.jpg" alt="畅玩版主视觉"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>天龙八部手机版</b><p>畅玩二大区正式开启 · 版本1.0.1 · 双端</p></div></div> <div class="slide"><img src="assets/tl-cw-full/cw_tianlong.jpg" alt="畅玩版天龙门派"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>天龙真武指点</b><p>经典畅玩 · 最早版本 · 重温天龙</p></div></div><div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button></div>
       </div>
     </div>
     <!-- 魔幻版滚动区 -->
@@ -93,12 +83,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
     var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
     var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
     var i = 0, timer = null;
-    function fitH(){
-      var cur = slides[i];
-      var img = cur.querySelector('img');
-      var h = img && img.getBoundingClientRect().height ? img.getBoundingClientRect().height : cur.offsetHeight;
-      root.style.height = h + 'px';
-    }
+    function fitH(){ root.style.height='210px'; }
     function go(n){
       slides[i].classList.remove('on'); dots[i].classList.remove('on');
       i = (n + slides.length) % slides.length;
