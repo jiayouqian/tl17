@@ -25,14 +25,14 @@
   w.id = 'fkWidget';
   w.innerHTML =
     '<div class="fk-btn" onclick="fkToggle(event)">' +
-    '<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>' +
+    '<svg viewBox="0 0 24 24"><path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"/></svg>' +
     '<span>客服</span></div>' +
     '<div class="fk-panel" id="fkPanel">' +
     '<button class="fk-x" onclick="fkClose()" aria-label="关闭">×</button>' +
     '<h4>联系客服 · 进群领福利</h4>' +
     '<div class="fk-item"><span class="lb">玩家QQ群</span><span class="vl">680598747</span><button class="fk-cp" onclick="fkCopy(\'680598747\')">复制</button></div>' +
     '<div class="fk-item"><span class="lb">代理QQ</span><span class="vl">354261705</span><button class="fk-cp" onclick="fkCopy(\'354261705\')">复制</button></div>' +
-    '<div class="fk-item"><span class="lb">微信咨询</span><span class="vl">qun680598747</span><button class="fk-cp" onclick="fkCopy(\'qun680598747\')">复制</button></div>' +
+    '<div class="fk-item"><span class="lb">微信</span><span class="vl">qun680598747</span><button class="fk-cp" onclick="fkCopy(\'qun680598747\')">复制</button></div>' +
     '</div>';
   document.body.appendChild(w);
 
@@ -61,7 +61,7 @@
       try { document.execCommand('copy'); } catch (e) {}
       document.body.removeChild(t);
     }
-    alert('已复制：' + v);
+    
   };
   document.addEventListener('click', function (e) {
     if (!e.target.closest('#fkWidget')) {
