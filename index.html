@@ -83,11 +83,19 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
     }
     function next(){ go(i + 1); }
     function start(){ clearInterval(timer); timer = setInterval(next, 2500); }
-    // 预加载全部图片，首帧加载后撑开高度
+    // 预加载 + 按比例自适应: 横图填满cover(主体居中), 方形/竖图完整contain(不裁内容)
     slides.forEach(function(s, idx){
+      var real = s.querySelector('img');
+      function setFit(){
+        if(real.naturalWidth){
+          var r = real.naturalHeight / real.naturalWidth;
+          real.style.objectFit = (r >= 0.8) ? 'contain' : 'cover';
+        }
+      }
+      if(real.complete){ setFit(); } else { real.addEventListener('load', setFit); }
       var im = new Image();
-      im.onload = function(){ if(idx === i) fitH(); };
-      im.src = s.querySelector('img').src;
+      im.onload = function(){ setFit(); if(idx === i) fitH(); };
+      im.src = real.src;
     });
     dots.forEach(function(dot){
       dot.addEventListener('click', function(){
@@ -120,7 +128,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002194500';
+  var __ver='v20261002195000';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
