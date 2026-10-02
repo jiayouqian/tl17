@@ -9,23 +9,24 @@
 <title>游戏专区 · 传奇 & 天龙</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d0a06;color:#f2e7cf;font-family:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
-.wrap{max-width:1600px;margin:0 auto;padding:0 10px 36px}
-header{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid #33271a;margin-bottom:14px}
+html,body{height:100%;overflow:hidden}
+body{background:#0d0a06;color:#f2e7cf;font-family:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;height:100vh;overflow:hidden}
+.wrap{max-width:1600px;margin:0 auto;padding:0 10px 0;height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid #33271a;margin-bottom:14px;flex:none}
 .logo{display:flex;align-items:center;gap:10px;font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px;color:#d4a94a}
 .logo svg{width:26px;height:26px}
 .logo small{display:block;font-size:10px;font-weight:400;color:#8a7a5e;letter-spacing:3px}
 /* 双轮播：最大化 */
-.dual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:900px){.dual{grid-template-columns:1fr;gap:14px}}
-.zc{position:relative;background:#171209;border-radius:14px;overflow:hidden;min-width:0}
-.zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px 0}
+.dual{flex:1;display:grid;grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:14px;min-height:0}
+@media(min-width:900px){.dual{grid-template-columns:1fr 1fr;grid-template-rows:1fr}}
+.zc{position:relative;background:#171209;border-radius:14px;overflow:hidden;min-width:0;display:flex;flex-direction:column;min-height:0}
+.zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px 0;flex:none}
 .zc-hd b{font-family:"Noto Serif SC",serif;font-size:16px;color:#e8c878;font-weight:900}
 .zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;white-space:nowrap}
 .enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none;transition:.2s}
 .enter:hover{color:#d4a94a;border-color:#d4a94a}
 /* 轮播：高度随图自适应，全图展示 */
-.carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease;overflow:hidden}
+.carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease;overflow:hidden;flex:1;min-height:0}
 .slide{position:absolute;top:0;left:0;width:100%;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
 .slide img{display:block;height:100%;width:auto;max-width:none;margin:0 auto}
@@ -39,7 +40,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 .dot{width:18px;height:4px;border-radius:2px;border:none;background:rgba(242,231,207,.35);cursor:pointer;transition:.25s}
 .dot.on{background:#d4a94a}
 .zc.tl .dot.on{background:#d34b3a}
-.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:24px}
+.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:10px;flex:none}
 </style>
 </head>
 <body>
@@ -74,16 +75,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
     var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
     var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
     var i = 0, timer = null;
-    function fitH(){
-      var hd = document.querySelector('header');
-      var ft = document.querySelector('.foot');
-      var fixed = (hd ? hd.offsetHeight + 14 : 0) + (ft ? ft.offsetHeight + 10 : 0);
-      var zcs = document.querySelectorAll('.zc-hd');
-      var zcH = 0;
-      Array.prototype.forEach.call(zcs, function(z){ zcH += z.offsetHeight + 6; });
-      var avail = window.innerHeight - fixed - zcH - 8;
-      root.style.height = Math.max(200, Math.round(avail / 2)) + 'px';
-    }
+    function fitH(){ }
     function go(n){
       slides[i].classList.remove('on'); dots[i].classList.remove('on');
       i = (n + slides.length) % slides.length;
@@ -128,7 +120,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002193000';
+  var __ver='v20261002193500';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
