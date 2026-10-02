@@ -17,7 +17,7 @@
   // 每次打开强制回源加载最新数据（cache:'no-store' 绕过浏览器缓存，时间戳参数绕过 CDN 缓存）→ 秒更新
   function fetchText(u){ return fetch(u, {cache:'no-store'}).then(function(r){ return r.text(); }); }
   function extractVar(txt, name){
-    var m = txt.match(new RegExp('var\\s+' + name + '="([^"]+)"'));
+    var m = txt.match(new RegExp('var\\s+' + name + '\\s*=\\s*"([^"]+)"'));
     if(!m){ throw new Error('数据段缺失: '+name); }
     return m[1];
   }
@@ -58,7 +58,7 @@
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261003090000';
+  var __ver='v20261003100000';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
