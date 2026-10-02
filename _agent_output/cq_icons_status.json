@@ -1,0 +1,322 @@
+[
+ {
+  "name": "八荒主宰传世",
+  "file": "八荒主宰传世.png",
+  "fmt": "WEBP",
+  "wh": "1080x1080",
+  "size": 287544,
+  "ok": true
+ },
+ {
+  "name": "冰雪归来",
+  "file": "冰雪归来.png",
+  "fmt": "WEBP",
+  "wh": "1440x1440",
+  "size": 683064,
+  "ok": true
+ },
+ {
+  "name": "圣灵传奇",
+  "file": "圣灵传奇.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 565742,
+  "ok": true
+ },
+ {
+  "name": "复古176",
+  "file": "复古176.png",
+  "fmt": "JPEG",
+  "wh": "1365x1280",
+  "size": 319734,
+  "ok": true
+ },
+ {
+  "name": "复古合击",
+  "file": "复古合击.png",
+  "fmt": "PNG",
+  "wh": "513x513",
+  "size": 511557,
+  "ok": true
+ },
+ {
+  "name": "天命合击",
+  "file": "天命合击.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 118082,
+  "ok": true
+ },
+ {
+  "name": "幻世九歌",
+  "file": "幻世九歌.png",
+  "fmt": "PNG",
+  "wh": "1024x1024",
+  "size": 1558265,
+  "ok": true
+ },
+ {
+  "name": "怀旧传奇",
+  "file": "怀旧传奇.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 731138,
+  "ok": true
+ },
+ {
+  "name": "怒火一刀20倍",
+  "file": "怒火一刀20倍.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 568113,
+  "ok": true
+ },
+ {
+  "name": "恒游传奇",
+  "file": "恒游传奇.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 236112,
+  "ok": true
+ },
+ {
+  "name": "战国传奇",
+  "file": "战国传奇.png",
+  "fmt": "PNG",
+  "wh": "2565x2565",
+  "size": 8416838,
+  "ok": true
+ },
+ {
+  "name": "战魔",
+  "file": "战魔.png",
+  "fmt": "PNG",
+  "wh": "2565x2565",
+  "size": 7530753,
+  "ok": true
+ },
+ {
+  "name": "攻速火龙二合一",
+  "file": "攻速火龙二合一.png",
+  "fmt": "JPEG",
+  "wh": "1280x1280",
+  "size": 329438,
+  "ok": true
+ },
+ {
+  "name": "春秋江湖",
+  "file": "春秋江湖.png",
+  "fmt": "PNG",
+  "wh": "144x144",
+  "size": 43330,
+  "ok": true
+ },
+ {
+  "name": "木影沉默",
+  "file": "木影沉默.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 449626,
+  "ok": true
+ },
+ {
+  "name": "武皇江湖群攻版",
+  "file": "武皇江湖群攻版.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 491995,
+  "ok": true
+ },
+ {
+  "name": "沙城风云",
+  "file": "沙城风云.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 565323,
+  "ok": true
+ },
+ {
+  "name": "火龙福利版",
+  "file": "火龙福利版.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 650292,
+  "ok": true
+ },
+ {
+  "name": "烈火战歌",
+  "file": "烈火战歌.png",
+  "fmt": "PNG",
+  "wh": "500x500",
+  "size": 490677,
+  "ok": true
+ },
+ {
+  "name": "热血习武",
+  "file": "热血习武.png",
+  "fmt": "PNG",
+  "wh": "500x500",
+  "size": 455809,
+  "ok": true
+ },
+ {
+  "name": "狂刀万古",
+  "file": "狂刀万古.png",
+  "fmt": "WEBP",
+  "wh": "1280x1280",
+  "size": 339568,
+  "ok": true
+ },
+ {
+  "name": "狂暴传奇",
+  "file": "狂暴传奇.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 477901,
+  "ok": true
+ },
+ {
+  "name": "狼影传说",
+  "file": "狼影传说.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 457065,
+  "ok": true
+ },
+ {
+  "name": "画龙水浒十职业",
+  "file": "画龙水浒十职业.png",
+  "fmt": "PNG",
+  "wh": "192x192",
+  "size": 89873,
+  "ok": true
+ },
+ {
+  "name": "神界传说",
+  "file": "神界传说.png",
+  "fmt": "WEBP",
+  "wh": "1440x1440",
+  "size": 537704,
+  "ok": true
+ },
+ {
+  "name": "神迹觉醒",
+  "file": "神迹觉醒.png",
+  "fmt": "PNG",
+  "wh": "1024x1024",
+  "size": 827447,
+  "ok": true
+ },
+ {
+  "name": "神速传奇",
+  "file": "神速传奇.png",
+  "fmt": "PNG",
+  "wh": "1284x1286",
+  "size": 2847808,
+  "ok": true
+ },
+ {
+  "name": "羁绊觉醒",
+  "file": "羁绊觉醒.png",
+  "fmt": "JPEG",
+  "wh": "1280x1280",
+  "size": 187945,
+  "ok": true
+ },
+ {
+  "name": "自由之刃I3倍",
+  "file": "自由之刃I3倍.png",
+  "fmt": "PNG",
+  "wh": "500x500",
+  "size": 484799,
+  "ok": true
+ },
+ {
+  "name": "蛮荒传奇",
+  "file": "蛮荒传奇.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 468849,
+  "ok": true
+ },
+ {
+  "name": "血战沙城",
+  "file": "血战沙城.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 630554,
+  "ok": true
+ },
+ {
+  "name": "问鼎176",
+  "file": "问鼎176.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 298808,
+  "ok": true
+ },
+ {
+  "name": "雷霆传奇",
+  "file": "雷霆传奇.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 782375,
+  "ok": true
+ },
+ {
+  "name": "雷霆战魂",
+  "file": "雷霆战魂.png",
+  "fmt": "PNG",
+  "wh": "1024x1024",
+  "size": 2960492,
+  "ok": true
+ },
+ {
+  "name": "霸天专属",
+  "file": "霸天专属.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 596494,
+  "ok": true
+ },
+ {
+  "name": "风云传奇",
+  "file": "风云传奇.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 349311,
+  "ok": true
+ },
+ {
+  "name": "飞剑江湖",
+  "file": "飞剑江湖.png",
+  "fmt": "PNG",
+  "wh": "300x300",
+  "size": 163990,
+  "ok": true
+ },
+ {
+  "name": "骷髅传奇绿色版",
+  "file": "骷髅传奇绿色版.png",
+  "fmt": "PNG",
+  "wh": "1000x1000",
+  "size": 1462232,
+  "ok": true
+ },
+ {
+  "name": "骷髅传奇龙迹版",
+  "file": "骷髅传奇龙迹版.png",
+  "fmt": "PNG",
+  "wh": "1000x1000",
+  "size": 1633080,
+  "ok": true
+ },
+ {
+  "name": "魔影狂刀",
+  "file": "魔影狂刀.png",
+  "fmt": "PNG",
+  "wh": "512x512",
+  "size": 806570,
+  "ok": true
+ }
+]
