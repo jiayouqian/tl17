@@ -10,37 +10,36 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d0a06;color:#f2e7cf;font-family:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
-.wrap{max-width:1120px;margin:0 auto;padding:0 16px 48px}
-/* 顶栏 */
-header{display:flex;align-items:center;justify-content:space-between;padding:16px 0 12px;border-bottom:1px solid #33271a;margin-bottom:22px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 14px 44px}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 0 12px;border-bottom:1px solid #33271a;margin-bottom:18px}
 .logo{display:flex;align-items:center;gap:10px;font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px;color:#d4a94a}
 .logo svg{width:26px;height:26px}
 .logo small{display:block;font-size:10px;font-weight:400;color:#8a7a5e;letter-spacing:3px}
-/* 双轮播 */
-.dual{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:860px){.dual{grid-template-columns:1fr}}
-.zc{position:relative;border:1px solid #33271a;border-radius:16px;overflow:hidden;background:#171209}
-.zc-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
-.zc-hd b{font-family:"Noto Serif SC",serif;font-size:17px;color:#e8c878;font-weight:900}
-.zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;border:1px solid #33271a;border-radius:999px;padding:2px 10px}
-.carousel{position:relative;aspect-ratio:16/8.4;margin-top:10px}
-.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .7s ease;display:flex;align-items:flex-end}
-.slide.on{opacity:1}
-.sl-cap{width:100%;padding:30px 16px 42px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.88) 62%)}
-.sl-badge{display:inline-block;font-size:10px;color:#191209;background:#d4a94a;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:6px}
+/* 双轮播：最大化 */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.dual{grid-template-columns:1fr;gap:14px}}
+.zc{position:relative;background:#171209;border-radius:14px;overflow:hidden;min-width:0}
+.zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 14px 0}
+.zc-hd b{font-family:"Noto Serif SC",serif;font-size:16px;color:#e8c878;font-weight:900}
+.zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;white-space:nowrap}
+.enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none;transition:.2s}
+.enter:hover{color:#d4a94a;border-color:#d4a94a}
+/* 轮播：高度随图自适应，全图展示 */
+.carousel{position:relative;width:100%;margin-top:8px;transition:height .5s ease}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none}
+.slide.on{opacity:1;pointer-events:auto}
+.slide img{display:block;width:100%;height:auto;object-fit:cover}
+.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 30px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.86) 68%)}
+.sl-badge{display:inline-block;font-size:10px;color:#191209;background:#d4a94a;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
 .sl-badge.tl{background:#d34b3a;color:#fff}
-.sl-cap b{display:block;font-size:17px;font-weight:800;color:#f2e7cf;text-shadow:0 1px 4px rgba(0,0,0,.6)}
-.sl-cap p{font-size:12px;color:#b6a584;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sl-cap b{display:block;font-size:16px;font-weight:800;color:#f2e7cf;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.sl-cap p{font-size:12px;color:#c9b890;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* 指示点 */
 .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px}
 .dot{width:18px;height:4px;border-radius:2px;border:none;background:rgba(242,231,207,.35);cursor:pointer;transition:.25s}
 .dot.on{background:#d4a94a}
-.zc.ct .dot.on{background:#d34b3a}
-/* 进入按钮 */
-.enter{position:absolute;right:14px;top:12px;font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:4px 12px;background:rgba(13,10,6,.5);transition:.2s}
-.enter:hover{color:#d4a94a;border-color:#d4a94a}
-/* 底部说明 */
-.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:26px}
+.zc.tl .dot.on{background:#d34b3a}
+.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:24px}
 </style>
 </head>
 <body>
@@ -50,22 +49,20 @@ header{display:flex;align-items:center;justify-content:space-between;padding:16p
   </header>
 
   <div class="dual">
-    <!-- 传奇轮播 -->
     <div class="zc ct">
-      <div class="zc-hd"><b>传奇专区</b><em>41 款 · 点击进入</em></div>
+      <div class="zc-hd"><b>传奇专区</b><em>41 款 · 点图进入</em></div>
       <a class="enter" href="cq.html">进入传奇 ›</a>
       <div class="carousel" data-href="cq.html">
-        <div class="slide on" style="background-image:url('https://oss.cyjxcfkjgame.com/game/20260913/63b954db8f7d6b392b1030a9f716290e.png')"><div class="sl-cap"><span class="sl-badge">176复古</span><b>问鼎176</b><p>三职业复古激情团本 · 复刻经典176</p></div></div><div class="slide" style="background-image:url('https://yqcdn.fuhua95.com/game/20241220/ec88c1a127232ab8444daa7e073822f9.png')"><div class="sl-cap"><span class="sl-badge">复古微变</span><b>烈火战歌</b><p>烈火战歌·三职业复古传奇手游</p></div></div><div class="slide" style="background-image:url('https://yqcdn.fuhua95.com/game/20240108/8a08ccd37542a0c895760f1934efae38.png')"><div class="sl-cap"><span class="sl-badge">高爆率</span><b>狂暴传奇</b><p>狂暴传奇怒火合击高爆版·MMORPG游戏，有战士、法师和道士三种职业</p></div></div><div class="slide" style="background-image:url('https://file.648wl.com/package/uploads/1790222514_c39749e8e0a04be4.jpg')"><div class="sl-cap"><span class="sl-badge">三职业</span><b>恒游传奇</b><p>三职业经典传奇 · 隐藏探索 装备精致</p></div></div><div class="slide" style="background-image:url('https://file.648wl.com/image/20260603/d2d26457184da900bfa6a48f0a52d348.jpg')"><div class="sl-cap"><span class="sl-badge">觉醒</span><b>神迹觉醒</b><p>神迹觉醒 · 开启觉醒之旅</p></div></div><div class="slide" style="background-image:url('https://yqcdn.fuhua95.com/game/20250722/eb5a8c9d095fc9700eaa523abe56af51.png')"><div class="sl-cap"><span class="sl-badge">骷髅高爆</span><b>骷髅传奇（龙迹版）</b><p>骷髅传奇高爆版·上线一只小骷髅 多种时装随你转化</p></div></div>
+        <div class="slide on"><img src="https://file.648wl.com/package/uploads/1790222514_c39749e8e0a04be4.jpg" alt="恒游传奇"><div class="sl-cap"><span class="sl-badge">三职业</span><b>恒游传奇</b><p>三职业经典传奇 · 隐藏探索 装备精致 · 经典三职业</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/3Er9jUu7dV" alt="狂刀万古"><div class="sl-cap"><span class="sl-badge">攻速专属</span><b>狂刀万古</b><p>1.76复古攻速专属 · 散人白嫖可通关 · 攻速复古</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/8vejOcxW4T" alt="冰雪归来"><div class="sl-cap"><span class="sl-badge">10倍返利</span><b>冰雪归来</b><p>三职业冰雪复古 · 游戏内充值10倍返利 · 冰雪版本</p></div></div><div class="slide"><img src="https://yqcdn.fuhua95.com/game/20251221/bb924efd2f42c1ef6fe6cbf279ca2ee0.jpg" alt="战国传奇"><div class="sl-cap"><span class="sl-badge">180复古</span><b>战国传奇</b><p>战国传奇·三职业多流派180复古 装备靠打散人逆袭 · 经典复古</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/AFF2NfMMAE" alt="武皇江湖（群攻版）"><div class="sl-cap"><span class="sl-badge">武侠MMO</span><b>武皇江湖（群攻版）</b><p>青春武侠MMORPG · 排兵布阵 指尖胜负 · 特色服</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/IrD5vVKK9U" alt="羁绊觉醒"><div class="sl-cap"><span class="sl-badge">传奇</span><b>羁绊觉醒</b><p>水墨风传奇 · 羁绊觉醒 战力飙升 · 经典三职业</p></div></div>
         <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button><button class="dot" data-i="5" type="button" aria-label="第6张"></button></div>
       </div>
     </div>
-    <!-- 天龙轮播 -->
     <div class="zc tl">
-      <div class="zc-hd"><b>魔幻天龙 · 17职业国际服</b><em>专区 · 点击进入</em></div>
+      <div class="zc-hd"><b>魔幻天龙 · 17职业国际服</b><em>专区</em></div>
       <a class="enter" href="tianlong.html">进入天龙 ›</a>
       <div class="carousel" data-href="tianlong.html">
-        <div class="slide on" style="background-image:url('https://jiayouqian.github.io/tl17/assets/hero.jpg')"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>主视觉 · 天龙大陆</p></div></div><div class="slide" style="background-image:url('https://jiayouqian.github.io/tl17/assets/hero-poster.jpg')"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>宣传海报 · 一键开战</p></div></div><div class="slide" style="background-image:url('https://jiayouqian.github.io/tl17/assets/game/g1.jpg')"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>游戏实景 · 17职业</p></div></div><div class="slide" style="background-image:url('https://jiayouqian.github.io/tl17/assets/game/g2.jpg')"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>游戏实景 · 职业技能</p></div></div><div class="slide" style="background-image:url('https://jiayouqian.github.io/tl17/assets/game/g3.jpg')"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>游戏实景 · 场景截图</p></div></div><div class="slide" style="background-image:url('https://jiayouqian.github.io/tl17/assets/game/g4.jpg')"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>游戏实景 · 玩法展示</p></div></div><div class="slide" style="background-image:url('https://jiayouqian.github.io/tl17/assets/game/hero-art.jpg')"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>设定原画 · 角色一览</p></div></div>
-        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button><button class="dot" data-i="5" type="button" aria-label="第6张"></button><button class="dot" data-i="6" type="button" aria-label="第7张"></button></div>
+        <div class="slide on"><img src="https://jiayouqian.github.io/tl17/assets/manual/hero-art.jpg" alt="魔幻天龙 · 17职业国际服"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>主视觉 · 一键开战</p></div></div><div class="slide"><img src="https://jiayouqian.github.io/tl17/assets/game/hero-art.jpg" alt="魔幻天龙 · 17职业国际服"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>游戏实景 · 职业角色</p></div></div><div class="slide"><img src="https://jiayouqian.github.io/tl17/assets/manual-new/9_huagai_hd.jpg" alt="魔幻天龙 · 17职业国际服"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>魔幻天龙 · 17职业国际服</b><p>玩法系统 · 华山盖世</p></div></div>
+        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button></div>
       </div>
     </div>
   </div>
@@ -78,25 +75,37 @@ header{display:flex;align-items:center;justify-content:space-between;padding:16p
     var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
     var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
     var i = 0, timer = null;
+    function fitH(){
+      var img = slides[i].querySelector('img');
+      root.style.height = (img && img.getBoundingClientRect().height ? img.getBoundingClientRect().height : 0) + 'px';
+    }
     function go(n){
       slides[i].classList.remove('on'); dots[i].classList.remove('on');
       i = (n + slides.length) % slides.length;
       slides[i].classList.add('on'); dots[i].classList.add('on');
+      fitH();
     }
     function next(){ go(i + 1); }
     function start(){ clearInterval(timer); timer = setInterval(next, 3500); }
+    // 预加载全部图片，首帧加载后撑开高度
+    slides.forEach(function(s, idx){
+      var im = new Image();
+      im.onload = function(){ if(idx === i) fitH(); };
+      im.src = s.querySelector('img').src;
+    });
     dots.forEach(function(dot){
       dot.addEventListener('click', function(){
         go(parseInt(this.dataset.i, 10)); start();
       });
     });
-    // 整卡点击进入专区
     root.addEventListener('click', function(e){
       if(e.target.closest('.dot')) return;
       window.location.href = root.dataset.href;
     });
     root.addEventListener('mouseenter', function(){ clearInterval(timer); });
     root.addEventListener('mouseleave', start);
+    window.addEventListener('resize', fitH);
+    fitH();
     start();
   }
   Array.prototype.forEach.call(document.querySelectorAll('.carousel'), initCarousel);
