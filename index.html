@@ -121,20 +121,26 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 })();
 </script>
 <script src="assets/kefu.js?v=v20261002113533"></script></script>
-<!-- 秒更新: 自动检测版本变化强制刷新 -->
+<!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002124328';
+  var __ver='v20261002125617';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
       .then(function(j){
-        if(j && j.v && j.v!==__ver){ try{location.reload(true)}catch(e){location.href=location.href} }
+        if(j && j.v && j.v!==__ver){
+          var k='tl17v';
+          if(sessionStorage.getItem(k)===j.v){return;}
+          sessionStorage.setItem(k,j.v);
+          try{location.reload(true)}catch(e){location.href=location.href}
+        }
       }).catch(function(){});
   }
   setInterval(chk, 3000);
-  setTimeout(chk, 1500);
+  setTimeout(chk, 1200);
 })();
 </script>
+
 </body>
 </html>
