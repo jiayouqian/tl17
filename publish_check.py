@@ -107,15 +107,18 @@ def check_structure():
     ok("5 个 html 结构闭合、关键标记齐全")
 
 # ---------- 4. 数据段解码 ----------
+# 浏览器等价校验：cq.html 的 extractVar 用正则 var\s+B64X="..."（无空格），
+# 数据段文件必须保持 var B64X="..." 无空格格式，否则浏览器端匹配失败 → 页面卡加载。
 def check_data():
     for name, cfg in DATA_SEGS.items():
         b64 = ''
         for fn, var in zip(cfg['files'], cfg['vars']):
             s = read(fn)
             if s is None: return
-            m = re.search(var + r'\s*=\s*"([^"]+)"', s)
+            # 严格浏览器等价：var B64X="..."（等号两侧无空格）
+            m = re.search(r'var\s+' + var + r'="([^"]+)"', s)
             if not m:
-                fail(f"{fn}: 未找到 {var} 定义")
+                fail(f"{fn}: 数据段格式错误（必须 var {var}=\"...\" 无空格，浏览器正则严格匹配）")
                 return
             b64 += m.group(1)
         try:
