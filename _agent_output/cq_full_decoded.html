@@ -130,11 +130,11 @@
   }
   @media(max-width:760px){.detail-hero{grid-template-columns:1fr}}
   .detail-poster-ph{
-    aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;
+    aspect-ratio:var(--poster-ratio,3/4);max-height:64vh;display:flex;align-items:center;justify-content:center;
     background:linear-gradient(135deg,#2a2012,#0d0a06 70%);border:1px solid var(--line);border-radius:10px;
     color:var(--tx-mute);font-size:14px;overflow:hidden;
   }
-  .poster-img{width:100%;height:100%;object-fit:cover;display:block}
+  .poster-img{width:100%;height:100%;object-fit:contain;display:block}
   .detail-info h2{font-family:"Noto Serif SC",serif;font-size:26px;font-weight:900;color:var(--gold-2)}
   .detail-info .slogan{color:var(--tx-dim);margin:6px 0 14px;font-size:15px}
   .detail-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
@@ -320,7 +320,7 @@ var GAMES = [
     "badge": "三职业九流派",
     "category": "复古微变",
     "thumb": "https://aka.doubaocdn.com/s/mJy0c86Q28",
-    "hero": "https://aka.doubaocdn.com/s/PNVA2wAcwF",
+    "hero": "https://yqcdn.fuhua95.com/game/20260827/036541debbe935665e1038d205d5c29a.png",
     "codes": [
       {
         "code": "lx666",
@@ -1023,7 +1023,7 @@ var GAMES = [
     "badge": "元神骑战",
     "category": "传世元神",
     "thumb": "https://aka.doubaocdn.com/s/Kznr5VW9bV",
-    "hero": "https://aka.doubaocdn.com/s/j3gTZaa9b9",
+    "hero": "https://yqcdn.fuhua95.com/game/20260703/fb53a3394079d80d9f8e53cae92b9e7c.png",
     "codes": [
       {
         "code": "LX000",
@@ -1254,7 +1254,7 @@ var GAMES = [
     "badge": "骷髅高爆",
     "category": "特色服",
     "thumb": "https://yqcdn.fuhua95.com/game/20250722/510d521eba25250a416df77f856fec94.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20250722/eb5a8c9d095fc9700eaa523abe56af51.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260328/b89ae23f8733dde1472b85b55f4bd168.png",
     "codes": [],
     "benefits": [
       "骷髅传奇高爆版，上线一只小骷髅，多种时装随你转化",
@@ -1288,7 +1288,7 @@ var GAMES = [
     "badge": "骷髅绿服",
     "category": "特色服",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260328/b89ae23f8733dde1472b85b55f4bd168.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260328/7b1bb8d61fbae326223e3f57b4541901.png",
+    "hero": "https://aka.doubaocdn.com/s/gHndMxpOXN",
     "codes": [],
     "benefits": [
       "骷髅版本全新（御剑八荒骷髅版）：自动回收起手就送，装备回收得灵符",
@@ -1457,7 +1457,7 @@ var GAMES = [
     "badge": "高爆率",
     "category": "特色服",
     "thumb": "https://yqcdn.fuhua95.com/game/20240108/8a08ccd37542a0c895760f1934efae38.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20240108/8a08ccd37542a0c895760f1934efae38.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260917/367196456a7372f2f771d6212aaa3025.png",
     "benefits": [
       "狂暴传奇怒火合击高爆版·MMORPG游戏，有战士、法师和道士三种职业",
       "更多玩法攻略与线下福利整理中，敬请期待"
@@ -1542,7 +1542,7 @@ var GAMES = [
     "badge": "攻速复古",
     "category": "攻速复古",
     "thumb": "https://yqcdn.fuhua95.com/game/20240218/542b4c9c6444b34e6c53852c18ce24f3.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20240218/542b4c9c6444b34e6c53852c18ce24f3.png",
+    "hero": "https://yqcdn.fuhua95.com/game/20240218/7588631453869a39f1d366f812ac6a90.png",
     "benefits": [
       "热血习武·以魔幻世界为背景的即时动作类手机网络",
       "更多玩法攻略与线下福利整理中，敬请期待"
@@ -1623,7 +1623,7 @@ var GAMES = [
     "badge": "复古微变",
     "category": "复古微变",
     "thumb": "https://yqcdn.fuhua95.com/game/20241220/ec88c1a127232ab8444daa7e073822f9.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20241220/ec88c1a127232ab8444daa7e073822f9.png",
+    "hero": "https://yqcdn.fuhua95.com/game/20241220/b61718057f016da6c445941b5d639d32.jpg",
     "benefits": [
       "烈火战歌·三职业复古传奇手游",
       "更多玩法攻略与线下福利整理中，敬请期待"
@@ -1857,7 +1857,7 @@ var GAMES = [
     "badge": "复古",
     "category": "经典复古",
     "thumb": "https://file.648wl.com/package/uploads/1785397378_809811df83956b61.jpg",
-    "hero": "https://file.648wl.com/package/uploads/1784775211_4dc59677f6024270.png",
+    "hero": "https://file.648wl.com/package/uploads/1785397378_809811df83956b61.jpg",
     "benefits": [
       "战法道三职业经典MMORPG",
       "行会系统 · 特色副本 · 极品装备",
@@ -1960,7 +1960,7 @@ var GAMES = [
     "badge": "复古微变",
     "category": "复古微变",
     "thumb": "https://yqcdn.fuhua95.com/game/20260721/dc1cf1efd1f66985edd60e50cc88fc1a.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20260721/dc1cf1efd1f66985edd60e50cc88fc1a.png",
+    "hero": "https://yqcdn.fuhua95.com/game/20260727/c4f788963f30c91bb1e1153b47765e79.png",
     "benefits": [
       "神速传奇·180微变三职业版本传奇类手游",
       "更多玩法攻略与线下福利整理中，敬请期待"
@@ -1991,7 +1991,7 @@ var GAMES = [
     "badge": "高爆率",
     "category": "特色服",
     "thumb": "https://yqcdn.fuhua95.com/game/20251027/4476176af5869fee100e3833eb84a4e1.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20251027/4476176af5869fee100e3833eb84a4e1.png",
+    "hero": "https://aka.doubaocdn.com/s/E19Dza1Qyf",
     "benefits": [
       "狼影传说怒火一刀·MMORPG游戏",
       "更多玩法攻略与线下福利整理中，敬请期待"
@@ -2210,7 +2210,7 @@ var GAMES = [
     "badge": "高爆率",
     "category": "冰雪版本",
     "thumb": "https://yqcdn.fuhua95.com/game/20260109/7b94d86af05f189a69aae6e4bd7b7dba.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20260109/7b94d86af05f189a69aae6e4bd7b7dba.png",
+    "hero": "https://aka.doubaocdn.com/s/qR2LbgM5f7",
     "benefits": [
       "全新冰雪高爆版本，绿色生态传奇",
       "更多玩法攻略与线下福利整理中，敬请期待"
@@ -2438,7 +2438,7 @@ var GAMES = [
     "badge": "攻沙",
     "category": "特色服",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260706/44708f66381053c5439199aa4550535b.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260706/44708f66381053c5439199aa4550535b.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260706/556ecc43ecc49941b30394178a7deb47.png",
     "benefits": [
       "沙城激战热血PK，行会争霸攻沙夺城",
       "点击下载即玩 · 游戏内注册账号",
@@ -2472,7 +2472,7 @@ var GAMES = [
     "badge": "复古微变",
     "category": "复古微变",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260621/f9f6bef5d187bab19e20b303813a8325.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260621/f9f6bef5d187bab19e20b303813a8325.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260621/48dac8140a757ce744485c752af89939.png",
     "benefits": [
       "蛮荒题材经典传奇，原始大陆自由PK",
       "点击下载即玩 · 游戏内注册账号",
@@ -2540,7 +2540,7 @@ var GAMES = [
     "badge": "合击",
     "category": "合击",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260421/f7491bebb43deac145c73cf0b1980bfa.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260421/f7491bebb43deac145c73cf0b1980bfa.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260424/812f9fad6b3b84aa3ad893b35d2a8686.jpg",
     "benefits": [
       "战法道合击版本，合击技能威力无穷",
       "点击下载即玩 · 游戏内注册账号",
@@ -2574,7 +2574,7 @@ var GAMES = [
     "badge": "合击",
     "category": "合击",
     "thumb": "https://yqcdn.fuhua95.com/game/20250902/10bea642861d4fc9a588d8697a7c7819.png",
-    "hero": "https://yqcdn.fuhua95.com/game/20250902/10bea642861d4fc9a588d8697a7c7819.png",
+    "hero": "https://yqcdn.fuhua95.com/game/20250902/251d4c12b2e5118202c31b92f491431f.png",
     "benefits": [
       "经典复古三职业 · 战法道合击组合技",
       "情怀老版本 · 行会攻城 · 自由PK",
@@ -3058,7 +3058,7 @@ var GAMES = [
     "badge": "176复古",
     "category": "经典复古",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260913/63b954db8f7d6b392b1030a9f716290e.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260913/63b954db8f7d6b392b1030a9f716290e.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260917/177828f20938628ae3674ffd87d47c51.png",
     "codes": [
       {
         "code": "wd555",
@@ -3145,7 +3145,7 @@ var GAMES = [
     "badge": "传奇",
     "category": "经典三职业",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260907/34c6cc4ddd5aa270640748a59ff71c29.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260907/34c6cc4ddd5aa270640748a59ff71c29.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260907/0b5997cb356326d4e12d93d46b6f0eed.png",
     "codes": [
       {
         "code": "ltcq111",
@@ -3215,7 +3215,7 @@ var GAMES = [
     "badge": "传奇",
     "category": "经典三职业",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260722/4abb3ca704c14be0960e7dd31d99b0a5.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260722/4abb3ca704c14be0960e7dd31d99b0a5.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260722/b6b2ea51debf25bee18b03e759d7295d.jpg",
     "benefits": [
       "经典传奇玩法，岁月不老热血重燃",
       "三职业平衡，BOSS争夺、沙城PK",
@@ -3249,7 +3249,7 @@ var GAMES = [
     "badge": "火龙",
     "category": "攻速复古",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20251216/091a8cf917339cb921aa7aca5b70e06f.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20251216/091a8cf917339cb921aa7aca5b70e06f.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20251216/623ecd91dcb0d066608e52f73bd07d80.jpg",
     "benefits": [
       "火龙版本传奇，福利版高爆率",
       "经典火龙套装，BOSS爆率提升",
@@ -3284,7 +3284,7 @@ var GAMES = [
     "badge": "传奇",
     "category": "经典三职业",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260821/a9e7f0044abbea9aa64327af3fe689d6.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260821/a9e7f0044abbea9aa64327af3fe689d6.png",
+    "hero": "https://aka.doubaocdn.com/s/P1pk65IQ5c",
     "benefits": [
       "热血传奇永不过时，经典三职业玩法",
       "BOSS争夺、沙城PK、装备回收",
@@ -3316,7 +3316,7 @@ var GAMES = [
     "badge": "专属",
     "category": "特色服",
     "thumb": "https://oss.cyjxcfkjgame.com/game/20260807/2848459c6ba4aa93d839e5b51774805b.png",
-    "hero": "https://oss.cyjxcfkjgame.com/game/20260807/2848459c6ba4aa93d839e5b51774805b.png",
+    "hero": "https://oss.cyjxcfkjgame.com/game/20260807/1d736f58e4910948e8867526e3e414fb.png",
     "benefits": [
       "专属神器版本，装备全靠打",
       "BOSS爆专属装备，散人可逆袭",
@@ -3351,7 +3351,7 @@ var GAMES = [
     "badge": "觉醒",
     "category": "特色服",
     "thumb": "https://file.648wl.com/image/20260603/a5ee602a81ccfd44c0532c544bea1e9d.png",
-    "hero": "https://file.648wl.com/image/20260603/d2d26457184da900bfa6a48f0a52d348.jpg",
+    "hero": "https://file.648wl.com/image/20260603/a5ee602a81ccfd44c0532c544bea1e9d.png",
     "benefits": [
       "经典传奇觉醒玩法，觉醒系统强力加持"
     ],
@@ -3384,7 +3384,7 @@ var GAMES = [
     "badge": "20倍爆率",
     "category": "特色服",
     "thumb": "https://file.648wl.com/image/20260604/65dd3679a9b1c34e7ddd730dae58b217.png",
-    "hero": "https://file.648wl.com/image/20260604/65dd3679a9b1c34e7ddd730dae58b217.png",
+    "hero": "https://aka.doubaocdn.com/s/xr422iZVEF",
     "benefits": [
       "20倍爆率狂暴服，装备爆到手软"
     ],
@@ -3400,7 +3400,23 @@ var GAMES = [
           "自动回收自动拾取，散人天堂",
           "长期稳定运营",
           "20倍高爆率传奇，经典怒火一刀版本，爆率拉满、装备好打，主打复古打宝与自由PK。"
+        ,
+      {
+        "title": "玩法攻略",
+        "items": [
+          "三职业打金神器：复刻散人打金、刀刀升级、装备回收、PK爆装、激情攻沙核心玩法",
+          "刀刀切割秒、满屏光柱爆：小怪爆神器，全神器保值，散人也能当大佬",
+          "20倍地图·烟花之地：每日累充200元得地图券、合成赤金宝匣或击败百威以上怪物掉落",
+          "进游福利：报销月卡+至尊会员，上线领1000真充，新手快速解锁钻石会员",
+          "阵法称号：凌晨抢阵法称号，消耗元宝提升核心属性，冲榜效率翻倍"
+        ],
+        "imgs": [
+          "https://aka.doubaocdn.com/s/wxM6K8TtSI",
+          "https://aka.doubaocdn.com/s/xQXsuYXBtm",
+          "https://aka.doubaocdn.com/s/AuyJryBUvR",
+          "https://aka.doubaocdn.com/s/Y0T6K1D5o4"
         ]
+      }]
       }
     ]
   },
@@ -3411,7 +3427,7 @@ var GAMES = [
     "badge": "战魂",
     "category": "特色服",
     "thumb": "https://file.648wl.com/image/20260615/833dad8d0b882f925d421a1d7baf9c78.png",
-    "hero": "https://file.648wl.com/image/20260615/083027c0985610155e74fb25fc050f74.png",
+    "hero": "https://file.648wl.com/image/20260615/833dad8d0b882f925d421a1d7baf9c78.png",
     "benefits": [
       "战魂版本经典传奇，战魂系统强力加持"
     ],
@@ -3444,7 +3460,7 @@ var GAMES = [
     "badge": "沉默复古",
     "category": "复古微变",
     "thumb": "https://file.648wl.com/image/20260705/dbdf98b4cdf91d9904dd1dda42f52f1e.png",
-    "hero": "https://file.648wl.com/image/20260705/dbdf98b4cdf91d9904dd1dda42f52f1e.png",
+    "hero": "https://aka.doubaocdn.com/s/MbQPQYAWFV",
     "benefits": [
       "经典沉默版本，专属玩法"
     ],
@@ -3460,7 +3476,23 @@ var GAMES = [
           "自动回收自动拾取，长期稳定",
           "专属地图BOSS爆率真实",
           "沉默系复古微变传奇，木影沉默经典版本，主打散人打宝、复古PK，人气下载量高。"
+        ,
+      {
+        "title": "玩法攻略",
+        "items": [
+          "185微变单职业大极品：刀刀暴击、爆装率超高，散人零氪也能登顶称王",
+          "多大陆剧情：浩然、青冥、莲花、蛮荒等天下逐级开放，完成各大陆剧情奖励巨额充值卷",
+          "散人推荐：跟随剧情任务拿前期神器，元宝购买赞助会员，银通升级切割",
+          "前期提速：优先抽取二大陆风之翼Lv6，吸血攻速大提升；PK提爆率升称号、攻速斗笠、技能强化",
+          "养成体系：命格洗练、风之翼、本命法宝、先天脉络、内功境界、葫芦培养全开放"
+        ],
+        "imgs": [
+          "https://aka.doubaocdn.com/s/RbMmDdxdb6",
+          "https://aka.doubaocdn.com/s/x9UxfUZ9eF",
+          "https://aka.doubaocdn.com/s/PSIfVivBdB",
+          "https://aka.doubaocdn.com/s/nocK2emvit"
         ]
+      }]
       }
     ]
   },
@@ -3471,7 +3503,7 @@ var GAMES = [
     "badge": "幻世",
     "category": "特色服",
     "thumb": "https://file.648wl.com/package/uploads/1786510678_a85390ff616ee910.png",
-    "hero": "https://file.648wl.com/package/uploads/1786512108_9443fa304ff00b33.jpg",
+    "hero": "https://file.648wl.com/package/uploads/1786510678_a85390ff616ee910.png",
     "benefits": [
       "幻世题材经典传奇，独特幻世玩法"
     ],
@@ -3572,9 +3604,13 @@ var GAMES = [
     "badge": "狂刀",
     "category": "特色服",
     "thumb": "https://file.648wl.com/package/uploads/1789628701_2670df61e3376583.png",
-    "hero": "https://file.648wl.com/package/uploads/1789628701_2670df61e3376583.png",
+    "hero": "https://aka.doubaocdn.com/s/uyNons2hiL",
     "benefits": [
-      "魔影题材经典传奇，狂刀职业特色技能华丽"
+      "魔影题材经典传奇，狂刀职业特色技能华丽",
+      "自研引擎高清重制，战法道三职业，打怪爆装装备回收",
+      "抢BOSS、野外PK、万人攻沙、跨服会战",
+      "神兽系统、上古神器，光柱爆装不停",
+      "集结兄弟，鏖战玛法，争夺沙城荣耀"
     ],
     "regLink": "https://sdkadmin.648wl.com/d/MzdfMF8xNzkwODU4MDgxXzEzYWU4ZDI0",
     "payLink": "https://sdkadmin.648wl.com/d/MzdfMF8xNzkwODU4MDgxXzEzYWU4ZDI0",
@@ -3586,8 +3622,48 @@ var GAMES = [
           "魔影狂刀魔影题材传奇，狂刀职业特色",
           "狂刀职业特色，技能华丽",
           "装备全靠打，自动回收自动拾取",
-          "长期稳定运营"
+          "长期稳定运营",
+          "自研引擎高清重制，战法道三职业",
+          "打怪爆装、装备回收，0氪也能当大佬",
+          "抢BOSS、野外PK、万人攻沙、跨服会战",
+          "神兽系统、上古神器，光柱爆装不停"
+        
+      ,
+      {
+        "title": "玩法实拍",
+        "items": [
+          "首爆送真充，2万元宝豪礼",
+          "宝物养成：冰尊剑/屠龙刀/诛妖剑多阶进阶",
+          "押镖护送玩法，打怪送秘宝",
+          "37转战力百万，切割伤害拉满"
+        ],
+        "imgs": [
+          "https://aka.doubaocdn.com/s/nxgqNFnTZa",
+          "https://aka.doubaocdn.com/s/Vkje6pVVST",
+          "https://aka.doubaocdn.com/s/xjBgOGBtL9",
+          "https://aka.doubaocdn.com/s/n4him8kcOz",
+          "https://aka.doubaocdn.com/s/oRGqyGJl2I"
         ]
+      }
+      ,
+      {
+        "title": "玩法攻略",
+        "items": [
+          "九大世界大陆：比奇省、云垂仙洲、玄黄古陆等九域逐级解锁，新大陆开放新地图新装备新BOSS",
+          "切割伤害为核心：按目标最大血量追加固定伤害，优先养成切割提升刷BOSS效率",
+          "问仙之路：集齐问仙套装解锁九霄雷罚，攻击概率触发范围雷电，群刷效率倍增",
+          "AI红颜养成：培养苏小闹送礼提升好感度，解锁生平剧情，持续产出灵符资源",
+          "福利拉满：白嫖首充免费领全套奖励，福利BOSS全天掉充值卡，百万秘宝每击杀20怪抽1次",
+          "玩法大厅：福利BOSS、源脉古地、异兽岛、战魂BOSS、修真练功房一站开刷",
+          "限时跨服：双倍押镖、必爆天书、沙城争霸、王者之巅、人宗幻境、神龙战将轮番开启"
+        ],
+        "imgs": [
+          "https://aka.doubaocdn.com/s/ebwcnfREZt",
+          "https://aka.doubaocdn.com/s/HtZzre1XDt",
+          "https://aka.doubaocdn.com/s/rQ0N7vLGpX",
+          "https://aka.doubaocdn.com/s/PfB3YpHxea"
+        ]
+      }]
       }
     ]
   },
@@ -3598,7 +3674,7 @@ var GAMES = [
     "badge": "三职业打金",
     "category": "特色服",
     "thumb": "https://aka.doubaocdn.com/s/DJg1FaJmrB",
-    "hero": "https://aka.doubaocdn.com/s/0xOM3gIS7U",
+    "hero": "https://aka.doubaocdn.com/s/GVLYcA8b4m",
     "benefits": [
       "三职业打金合击复古，千人同屏激战",
       "随机装备掉落、特色合击技能，自由交易稳定搬砖",
@@ -3618,10 +3694,43 @@ var GAMES = [
           "细腻画面：写实场景搭配炫技特效"
         ],
         "imgs": [
-          "https://aka.doubaocdn.com/s/0xOM3gIS7U",
           "https://aka.doubaocdn.com/s/UZ88QbJXiv",
           "https://aka.doubaocdn.com/s/6g3Y2gowal",
-          "https://dysdk.72yx.com/upload/game/20260827/eb923c42e6bd7241a873f9d5605b108d.jpg"
+          "https://dysdk.72yx.com/upload/game/20260827/eb923c42e6bd7241a873f9d5605b108d.jpg",
+          "https://aka.doubaocdn.com/s/Qb25H5ZWHB"
+        ]
+      },
+      {
+        "title": "礼包福利",
+        "items": [
+          "官方福利码（游戏内【设置-礼包码兑换】输入，每码限领1次，以游戏内实际为准）：",
+          "月卡特权 XYSVIP888：官方月卡激活码，免费领月卡特权+30天游戏时间",
+          "关注福利 rxyb666：关注领奖礼包",
+          "称号福利 XY666 / XY888：专属称号奖励",
+          "复访福利 rkfl001：侧边栏复访奖励",
+          "IOS福利 HPLB888：仅IOS端好评礼包"
+        ],
+        "imgs": [
+          "https://aka.doubaocdn.com/s/mAco2EVdJM"
+        ]
+      },
+      {
+        "title": "玩法攻略",
+        "items": [
+          "职业推荐：【法+道】或【法+战】开局强势，散人首选，三职业铁三角平衡无氪金碾压",
+          "三职业定位：战士能抗近战爆发、法师群攻刷怪效率、道士毒伤治疗召唤打金混队",
+          "合击技能：战法雷霆一击破敌、战战破魂斩范围AOE、道道噬魂沼泽毒雾封锁，上线即送",
+          "前期速升：法师流星火雨最强，幻境双倍经验地图用传奇币购买时间，快速升级",
+          "中期打金：法道组合+道士宝宝施毒降BOSS回血防御，越级打宝；圣地打生肖每日额外奖励",
+          "每日必做：暗殿活动、蛮荒魔岛、双倍押镖，奖励丰厚别错过",
+          "后期养成：转生+神铸装备大增属性；转职业道具免费转换，装备技能全跟随",
+          "月卡福利：输入激活码 XYSVIP888 免费领月卡特权+30天游戏时间"
+        ],
+        "imgs": [
+          "https://aka.doubaocdn.com/s/GX0P8AnjCL",
+          "https://aka.doubaocdn.com/s/6cvxJnkEk2",
+          "https://aka.doubaocdn.com/s/UzzU5p9GC5",
+          "https://aka.doubaocdn.com/s/8Y2Arq1EmM"
         ]
       }
     ]
@@ -3756,7 +3865,19 @@ function renderDetail(id){
   document.getElementById('dBadges').innerHTML = '<span class="badge">' + esc(g.badge) + '</span>';
   document.getElementById('dRegister').dataset.url = g.regLink || '#';
   document.getElementById('dAgent').innerHTML = '进服注册：' + g.agentCode;
-  document.getElementById('dPoster').innerHTML = g.hero
+  (function(){
+      var ph = document.getElementById('dPoster');
+      ph.style.setProperty('--poster-ratio','3/4');
+      if(g.hero){
+        var img = new Image();
+        img.onload = function(){
+          if(img.naturalWidth && img.naturalHeight)
+            ph.style.setProperty('--poster-ratio',(img.naturalWidth/img.naturalHeight).toFixed(4));
+        };
+        img.src = g.hero;
+      }
+    })();
+    document.getElementById('dPoster').innerHTML = g.hero
     ? '<img class="poster-img" src="' + g.hero + '" alt="' + esc(g.name) + '">'
     : '【宣传海报位】';
 
