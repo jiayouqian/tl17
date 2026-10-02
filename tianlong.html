@@ -29,7 +29,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .slide.on{opacity:1;pointer-events:auto}
 .slide img{display:block;width:100%;height:auto}
 /* 全图帧(畅玩版: 游戏实拍全图+图标+文字叠加) */
-.cwbg img.bg{width:100%;height:auto;display:block}
+.cwbg{position:relative;height:210px;overflow:hidden} .cwbg img.bg{width:100%;height:100%;object-fit:cover;display:block;object-position:center 22%}
 .cw-mask{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,10,6,.05) 0%,rgba(13,10,6,.25) 40%,rgba(13,10,6,.88) 100%)}
 .cw-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center}
 .cw-inner img{width:min(30%,110px);border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.55);border:2px solid rgba(232,182,76,.5)}
@@ -62,14 +62,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
       <div class="zc-hd"><b>畅玩版</b><em>经典天龙八部</em><a class="enter" href="tl-changwan.html">进入畅玩版 ›</a></div>
       <div class="carousel" data-href="tl-changwan.html">
         <div class="slide on cwbg">
-          <img class="bg" src="assets/tl-cw-full/cw_hero.jpg" alt="畅玩版主视觉">
+          <img class="bg" src="assets/tl-cw-full/cw_hero.jpg?v=20261002124024" alt="畅玩版主视觉">
           <div class="cw-mask"></div>
-          <div class="cw-inner"><img src="assets/tl-cw-icon.png" alt="图标"><b>天龙八部手机版</b><p class="l1">经典畅玩 · 最早版本 · 重温天龙</p><p>版本 1.0.1 · 大小 2.60GB · 安卓 + 苹果双端</p></div>
+          <div class="cw-inner"><img src="assets/tl-cw-icon.png?v=20261002124024" alt="图标"><b>天龙八部手机版</b><p class="l1">经典畅玩 · 最早版本 · 重温天龙</p><p>版本 1.0.1 · 大小 2.60GB · 安卓 + 苹果双端</p></div>
         </div>
         <div class="slide cwbg">
-          <img class="bg" src="assets/tl-cw-full/cw_tianlong.jpg" alt="畅玩版实拍">
+          <img class="bg" src="assets/tl-cw-full/cw_tianlong.jpg?v=20261002124024" alt="畅玩版实拍">
           <div class="cw-mask"></div>
-          <div class="cw-inner"><img src="assets/tl-cw-icon.png" alt="图标"><b>天龙真武指点</b><p class="l1">超高比例 · 千万元宝 · 地宫刷绑</p><p>1:4000+ · 上线直接领 · 5层无限刷绑元</p></div>
+          <div class="cw-inner"><img src="assets/tl-cw-icon.png?v=20261002124024" alt="图标"><b>天龙真武指点</b><p class="l1">超高比例 · 千万元宝 · 地宫刷绑</p><p>1:4000+ · 上线直接领 · 5层无限刷绑元</p></div>
         </div>
         <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button></div>
       </div>
@@ -78,8 +78,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
     <div class="zc ml">
       <div class="zc-hd"><b>魔幻版</b><em>17职业国际服</em><a class="enter" href="tl-mohuan.html">进入魔幻版 ›</a></div>
       <div class="carousel" data-href="tl-mohuan.html">
-        <div class="slide on"><img src="assets/manual/hero-art.jpg" alt="天龙魔幻版主视觉"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>主视觉 · 一键开战</p></div></div>
-        <div class="slide"><img src="assets/game/hero-art.jpg" alt="天龙魔幻版游戏实景"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>游戏实景 · 职业角色</p></div></div>
+        <div class="slide on"><img src="assets/manual/hero-art.jpg?v=20261002124024" alt="天龙魔幻版主视觉"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>主视觉 · 一键开战</p></div></div>
+        <div class="slide"><img src="assets/game/hero-art.jpg?v=20261002124024" alt="天龙魔幻版游戏实景"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>游戏实景 · 职业角色</p></div></div>
         <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button></div>
       </div>
     </div>
