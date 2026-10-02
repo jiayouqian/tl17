@@ -29,7 +29,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 .slide{position:absolute;top:0;left:0;width:100%;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
 .slide img{display:block;width:100%;height:auto}
-.tl-car .slide img{height:320px;object-fit:cover;object-position:center}
 .sl-cap{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 30px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.86) 68%)}
 .sl-badge{display:inline-block;font-size:10px;color:#191209;background:#d4a94a;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
 .sl-badge.tl{background:#d34b3a;color:#fff}
@@ -76,7 +75,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
     var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
     var i = 0, timer = null;
     function fitH(){
-      if(root.classList.contains('tl-car')){ root.style.height='320px'; return; }
       var im = root.querySelector('.slide.on img');
       if(!im || !im.naturalWidth) return;
       root.style.height = Math.round(root.clientWidth * im.naturalHeight / im.naturalWidth) + 'px';
@@ -126,7 +124,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002190500';
+  var __ver='v20261002191000';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
