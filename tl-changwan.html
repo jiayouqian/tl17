@@ -62,6 +62,69 @@
   }
   .hero-sub { font-size:14px; color:#e8dcc8; margin-top:8px; }
 
+  /* ===== 畅玩版 Hero 自动轮播 ===== */
+  .hero-old { height:300px; background:#0f0c09; }
+  .hero-slides { position:relative; width:100%; height:100%; }
+  .hero-slide { position:absolute; inset:0; opacity:0; transition:opacity .6s ease; pointer-events:none; }
+  .hero-slide.on { opacity:1; pointer-events:auto; }
+  .hero-slide img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
+  .hero-dots {
+    position:absolute; left:0; right:0; bottom:10px; z-index:5;
+    display:flex; justify-content:center; gap:6px;
+  }
+  .hero-dots button {
+    width:7px; height:7px; border-radius:4px; border:none;
+    background:rgba(255,255,255,.45); padding:0; cursor:pointer;
+    transition:all .3s;
+  }
+  .hero-dots button.on { width:18px; background:var(--gold); }
+
+  /* ===== 注册下载主卡 ===== */
+  .re-card {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.3);
+    border-radius:16px; padding:16px; margin-bottom:20px;
+    box-shadow:0 6px 24px rgba(0,0,0,.35);
+    position:relative; overflow:hidden;
+  }
+  .re-card::before {
+    content:""; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .re-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .re-title b { display:block; font-size:18px; color:#fff; font-weight:800; }
+  .re-title span { font-size:11px; color:var(--ink-dim); }
+  .re-code { text-align:right; }
+  .re-code span { font-size:11px; color:var(--ink-dim); display:block; }
+  .re-code b {
+    font-size:22px; letter-spacing:3px; font-weight:900;
+    background:linear-gradient(180deg,#8ecbff,#4a9df0);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+
+  /* ===== 功能入口网格 ===== */
+  .entry-grid {
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;
+    padding:0 16px; margin-bottom:20px;
+  }
+  .entry-card {
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid rgba(232,182,76,.22);
+    border-radius:14px; padding:16px 8px; text-align:center;
+    text-decoration:none; cursor:pointer;
+    transition:transform .15s;
+  }
+  .entry-card:active { transform:scale(.96); }
+  .entry-card .ic {
+    width:42px; height:42px; margin:0 auto 8px;
+    border-radius:12px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,rgba(232,182,76,.25),rgba(232,182,76,.08));
+    border:1px solid rgba(232,182,76,.35);
+  }
+  .entry-card .ic svg { width:22px; height:22px; stroke:var(--gold); }
+  .entry-card b { display:block; font-size:15px; color:#fff; font-weight:700; }
+  .entry-card span { font-size:10.5px; color:var(--ink-dim); display:block; margin-top:2px; }
+
   /* ===== 核心卖点 ===== */
   .pitch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:16px; }
   .pitch-item {
@@ -400,7 +463,17 @@
   <div class="page active" id="page-old">
     <!-- 畅玩版首页不需要返回按钮 -->
 
-    <div class="hero"><img class="hero-bg" src="assets/tl-cw-full/cw_hero.jpg" alt="天龙畅玩版17职业"></div>
+    <!-- Hero 自动轮播 -->
+    <div class="hero hero-old">
+      <div class="hero-slides">
+        <div class="hero-slide on"><img class="hero-img" src="assets/tl-cw-full/cw_hero_wide.jpg" alt="天龙畅玩版17职业"></div>
+        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/XlDeSqa71V" alt="畅玩17职业福利拉满"></div>
+        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/beMp9VAXP8" alt="双节同庆福利双行"></div>
+        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/Teu2T0CJGJ" alt="畅玩攻略"></div>
+        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/m38fSojhO8" alt="畅玩版游戏实景"></div>
+      </div>
+      <div class="hero-dots"><button class="hd on" data-i="0" type="button" aria-label="第1张"></button><button class="hd" data-i="1" type="button" aria-label="第2张"></button><button class="hd" data-i="2" type="button" aria-label="第3张"></button><button class="hd" data-i="3" type="button" aria-label="第4张"></button><button class="hd" data-i="4" type="button" aria-label="第5张"></button></div>
+    </div>
 
     <div class="pitch">
       <div class="pitch-item"><b>超高比例</b><span>最高1:4000+</span></div>
@@ -408,54 +481,45 @@
       <div class="pitch-item"><b>地宫刷绑</b><span>5层无限刷绑元</span></div>
     </div>
 
-    <a class="manual-entry" href="#" onclick="switchPage('manual-old');return false;">
-      <div class="left">
-        <b>完整攻略手册</b>
-        <span>升级/战力提升/技能指点/副本活动 全攻略</span>
-      </div>
-      <div class="arrow">›</div>
-    </a>
-
-    <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>新手礼包码</h2></div>
-      <a class="manual-entry" href="#" onclick="switchPage('gifts-old');return false;">
-        <div class="left">
-          <b>超多礼包免费领</b>
-          <span>6个1 / 6个6 / 6个9 / VIP码 全免费</span>
+    <!-- 注册下载主卡 -->
+    <div style="padding:0 16px;">
+      <div class="re-card">
+        <div class="re-head">
+          <div class="re-title">
+            <b>立即注册下载</b>
+            <span>通过本页链接注册 · 充值礼包才有售后</span>
+          </div>
+          <div class="re-code">
+            <span>邀请码</span>
+            <b>PPAP</b>
+          </div>
         </div>
-        <div class="arrow">›</div>
+        <div class="cta">
+          <a class="primary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
+          <a class="download" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载游戏</a>
+          <a class="secondary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">玩家后台 / 充值</a>
+        </div>
+        <div style="margin-top:10px; text-align:center;">
+          <button onclick="showCopyModalOld()" style="padding:8px 24px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:20px; font-size:12px; cursor:pointer;">
+            🔗 按钮点不开？点这里复制链接
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 功能入口网格 -->
+    <div class="entry-grid">
+      <a class="entry-card" href="#" onclick="switchPage('manual-old');return false;">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <b>完整攻略</b><span>升级·战力·副本</span>
       </a>
-    </div>
-
-    <div class="sec">
-      <div class="sec-title">
-      <span class="bar"></span><h2 style="display:inline;">立即注册下载</h2>
-      <span style="font-size:24px; color:#64b4ff; font-weight:900; margin-left:16px;">邀请码</span>
-      <b style="color:#64b4ff; font-size:24px; letter-spacing:3px; margin-left:8px;">PPAP</b>
-    </div>
-      <div class="cta">
-        <a class="primary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
-        <a class="download" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载游戏</a>
-        <a class="secondary" href="http://tlbb.hfynxx.top/PPAP" target="_blank">玩家后台 / 充值</a>
-      </div>
-
-      <!-- 备用链接按钮 -->
-      <div style="margin-top:10px; text-align:center;">
-        <button onclick="showCopyModalOld()" style="padding:8px 24px; background:transparent; color:var(--ink-dim); border:1px solid rgba(255,255,255,.2); border-radius:20px; font-size:12px; cursor:pointer;">
-          🔗 按钮点不开？点这里复制链接
-        </button>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>联系客服</h2></div>
-      <a class="cs-entry" href="#" onclick="switchPage('group');return false;">
-        <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#14100c" stroke-width="2.5" style="width:24px; height:24px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
-        <div class="cs-text">
-          <b>联系客服</b>
-          <span>QQ群 · 代理QQ · 微信，任选一种联系我</span>
-        </div>
-        <div class="cs-arrow">›</div>
+      <a class="entry-card" href="#" onclick="switchPage('gifts-old');return false;">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+        <b>礼包福利</b><span>6个1·6个6·VIP码</span>
+      </a>
+      <a class="entry-card" href="#" onclick="switchPage('group');return false;">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <b>联系客服</b><span>QQ·微信·代理</span>
       </a>
     </div>
 
@@ -1432,6 +1496,47 @@
 </div>
 
 <script>
+/* 畅玩版 Hero 自动轮播 */
+(function () {
+  function initHero(hero) {
+    if (!hero) return;
+    var slides = hero.querySelectorAll('.hero-slide');
+    var dots = hero.querySelectorAll('.hd');
+    if (!slides.length) return;
+    var idx = 0, timer = null;
+
+    function fit(im) {
+      var r = im.naturalHeight / im.naturalWidth;
+      im.style.objectFit = (r >= 0.8) ? 'contain' : 'cover';
+      im.style.height = '100%';
+      im.style.width = '100%';
+      im.style.objectPosition = 'center';
+    }
+    slides.forEach(function (s, i) {
+      var im = s.querySelector('img');
+      if (!im) return;
+      if (im.complete && im.naturalWidth) fit(im);
+      else im.addEventListener('load', function () { fit(im); });
+    });
+    function go(n) {
+      slides[idx].classList.remove('on');
+      dots[idx].classList.remove('on');
+      idx = (n + slides.length) % slides.length;
+      slides[idx].classList.add('on');
+      dots[idx].classList.add('on');
+    }
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () { go(i); reset(); });
+    });
+    function reset() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(function () { go(idx + 1); }, 3000);
+    }
+    reset();
+  }
+  initHero(document.querySelector('.hero-old'));
+})();
+
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
@@ -1566,7 +1671,7 @@ function copyText(text, btn) {
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002195500';
+  var __ver='v20261002211451';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})

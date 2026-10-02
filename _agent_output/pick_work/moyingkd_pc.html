@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>魔影狂刀 - 官方下载</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
+            background: #F5F6F8;
+            color: #1D1D1F;
+            min-height: 100vh;
+            padding-bottom: 88px;
+        }
+        .wrap { max-width: 600px; margin: 0 auto; }
+
+        /* ========== 顶部导航 ========== */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            height: 48px;
+        }
+        .nav-back {
+            font-size: 28px;
+            color: #1D1D1F;
+            cursor: pointer;
+            line-height: 1;
+            width: 32px;
+            display: flex;
+            align-items: center;
+        }
+        .nav-logo {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #93c5fd, #67e8f9);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        /* ========== 通用卡片 ========== */
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            margin: 12px 16px 0;
+            padding: 16px;
+        }
+
+        /* ========== 轮播 ========== */
+        .carousel-wrap { margin: 12px 16px 0; border-radius: 8px; overflow: hidden; background: #fff; position: relative; }
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .carousel-track::-webkit-scrollbar { display: none; }
+        .carousel-slide {
+            flex-shrink: 0;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+        }
+        @media (min-width: 400px) { .carousel-slide { height: 340px; } }
+        @media (min-width: 500px) { .carousel-slide { height: 360px; } }
+        .carousel-slide img {
+            width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;
+            cursor: zoom-in;
+        }
+        /* 点击图片放大预览 */
+        .img-viewer {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.9);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .img-viewer.show { display: flex; }
+        .img-viewer img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .img-viewer .viewer-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        /* 微信内置浏览器下载提示遮罩 */
+        .wx-tips-mask {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.85);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .wx-tips-mask.show { display: flex; }
+        .wx-tips-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+        .carousel-fallback { position: relative; z-index: 1; text-align: center; }
+        .carousel-fallback .emoji { font-size: 64px; margin-bottom: 16px; }
+        .carousel-fallback .title-tall {
+            font-size: 36px; font-weight: 900; line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .carousel-fallback .sub-tall { font-size: 16px; opacity: 0.85; }
+        .carousel-page {
+            position: absolute;
+            bottom: 12px; right: 12px;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 4px;
+            z-index: 2;
+        }
+        .carousel-dots {
+            position: absolute;
+            bottom: 14px; left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 2;
+        }
+        .c-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transition: all 0.3s ease;
+        }
+        .c-dot.active {
+            width: 16px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.95);
+        }
+
+        /* 不同主题色 fallback 幻灯片 */
+        .slide-theme-1 { background: linear-gradient(180deg, #fde68a 0%, #fef3c7 50%, #fffbeb 100%); }
+        .slide-theme-1 .title-tall { color: #b45309; }
+        .slide-theme-1 .sub-tall { color: #d97706; }
+        .slide-theme-2 { background: linear-gradient(180deg, #bfdbfe 0%, #dbeafe 50%, #eff6ff 100%); }
+        .slide-theme-2 .title-tall { color: #1d4ed8; }
+        .slide-theme-2 .sub-tall { color: #2563eb; }
+        .slide-theme-3 { background: linear-gradient(180deg, #a7f3d0 0%, #d1fae5 50%, #ecfdf5 100%); }
+        .slide-theme-3 .title-tall { color: #047857; }
+        .slide-theme-3 .sub-tall { color: #059669; }
+        .slide-theme-4 { background: linear-gradient(180deg, #ddd6fe 0%, #ede9fe 50%, #f5f3ff 100%); }
+        .slide-theme-4 .title-tall { color: #6d28d9; }
+        .slide-theme-4 .sub-tall { color: #7c3aed; }
+
+        /* ========== 游戏信息卡 ========== */
+        .game-row { display: flex; gap: 16px; align-items: center; }
+        .game-icon {
+            width: 64px; height: 64px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #374151, #111827);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .game-mid { flex: 1; min-width: 0; }
+        .game-name { font-size: 20px; font-weight: 700; color: #1D1D1F; line-height: 1.3; }
+        .game-sub { font-size: 14px; color: #86909C; margin-top: 4px; }
+        .size-tag {
+            background: linear-gradient(135deg, #F2F3F5 0%, #E9EBEE 100%);
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+            border-radius: 999px;
+            padding: 7px 12px;
+            display: flex; align-items: center; gap: 6px;
+            flex-shrink: 0;
+            max-width: 45%;
+            justify-content: center;
+        }
+        .size-tag .icon { width: 12px; height: 12px; color: #86909C; flex-shrink: 0; }
+        .size-tag .text { font-size: 12px; font-weight: 500; color: #1D1D1F; line-height: 1.35; text-align: center; word-break: break-all; }
+
+        /* ========== 游戏介绍 ========== */
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .card-text { font-size: 14px; line-height: 1.75; color: #1D1D1F; word-wrap: break-word; }
+        .card-text p { margin: 0 0 10px 0; }
+        .card-text p:last-child { margin-bottom: 0; }
+        .card-text img { max-width: 100%; height: auto; border-radius: 6px; margin: 8px 0; display: block; }
+        .card-text strong, .card-text b { font-weight: 600; }
+
+        /* ========== 页脚 ========== */
+        .footer { padding: 24px 16px; text-align: center; }
+        .footer .tip { font-size: 12px; color: rgba(134,144,156,0.7); line-height: 1.8; }
+        .footer .copy { font-size: 12px; color: rgba(134,144,156,0.5); margin-top: 12px; }
+
+        /* ========== 底部下载栏 ========== */
+        .bottom-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+            background: #fff;
+            border-top: 1px solid #f0f0f0;
+            padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        }
+        .bottom-inner { display: flex; gap: 12px; max-width: 600px; margin: 0 auto; }
+        .d-btn {
+            flex: 1;
+            height: 48px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .d-btn svg { width: 18px; height: 18px; }
+        .d-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 50%;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+        .btn-android {
+            background: linear-gradient(135deg, #36BFFA 0%, #2A82E4 50%, #1E63C9 100%);
+            box-shadow: 0 4px 14px rgba(42,130,228,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+        .btn-android::before {
+            background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+        }
+        .btn-android:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(42,130,228,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+        .btn-ios {
+            background: linear-gradient(135deg, #5A5F6B 0%, #3A3F4B 50%, #22252D 100%);
+            box-shadow: 0 4px 14px rgba(34,37,45,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+        .btn-ios::before {
+            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 100%);
+        }
+        .btn-ios:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(34,37,45,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .d-btn.disabled {
+            background: #E9EBEE !important;
+            color: #86909C !important;
+            box-shadow: none !important;
+            cursor: not-allowed;
+        }
+        .d-btn.disabled::before { display: none; }
+        .d-btn.disabled:active { transform: none; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <!-- 顶部导航 -->
+    <!-- <header class="nav-bar">
+        <div class="nav-inner">
+            <div class="nav-back" onclick="history.back()">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+            <div class="nav-logo">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-9c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm7 0c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+            </div>
+        </div>
+    </header> -->
+
+    <!-- 轮播（取游戏管理里的游戏图册，未上传则不显示） -->
+    
+    <!-- 游戏信息 -->
+    <section>
+        <div class="card">
+            <div class="game-row">
+                                                    <img class="game-icon" src="https://file.648wl.com/package/uploads/1789628701_2670df61e3376583.png" alt="魔影狂刀" data-fallback="魔" onerror="this.onerror=null;this.outerHTML='<div class=&quot;game-icon&quot;>'+this.getAttribute('data-fallback')+'</div>'">
+                                <div class="game-mid">
+                    <h1 class="game-name">魔影狂刀</h1>
+                    <p class="game-sub">精选 · 游玩</p>
+                </div>
+                <div class="size-tag">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    <span class="text">--</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏介绍 -->
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p class="tip">
+            抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防受骗上当<br>
+            适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活
+        </p>
+        <p class="copy">© 2026 魔影狂刀 官方运营</p>
+    </footer>
+</div>
+
+<!-- 底部下载 -->
+<div class="bottom-bar">
+    <div class="bottom-inner">
+                            <a class="d-btn btn-android" href="https://file.648wl.com/pack%2F202610012036279997%2Fguild_690_20261001203628.apk?OSSAccessKeyId=LTAI5t6z4GKnw51JGmYgN2iw&amp;Expires=1793450188&amp;Signature=w7E8HMBzxtdbrKCpZD4zhVf4p28%3D" onclick="trackDownload('android')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1367 1.0989L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/></svg>
+                <span>安卓下载</span>
+            </a>
+        
+                    <button class="d-btn btn-ios disabled">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <span>待打包</span>
+            </button>
+            </div>
+</div>
+
+<!-- 图片放大预览 -->
+<div class="img-viewer" id="imgViewer">
+    <img src="" alt="预览">
+    <button class="viewer-close" type="button" aria-label="关闭">&times;</button>
+</div>
+
+<!-- 微信内置浏览器下载提示 -->
+<div class="wx-tips-mask" id="wxTipsMask">
+    <img src="/public/assets/tips.jpg" alt="请点击右上角，选择在浏览器中打开">
+</div>
+
+<script>
+(function(){
+    var track = document.getElementById('carouselTrack');
+    var dots = document.querySelectorAll('.c-dot');
+    var pageEl = document.getElementById('curPage');
+    var total = dots.length;
+    if (!track || total <= 1) return;
+    var curIdx = 0;
+    var timer = null;
+
+    function goto(i) {
+        if (i < 0) i = total - 1;
+        if (i >= total) i = 0;
+        curIdx = i;
+        track.scrollLeft = track.clientWidth * curIdx;
+        dots.forEach(function(d, j){ d.classList.toggle('active', j === curIdx); });
+        if (pageEl) pageEl.textContent = curIdx + 1;
+    }
+    function next() { goto(curIdx + 1); }
+    function start() { stop(); timer = setInterval(next, 3500); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+    var scrollTimer = null;
+    track.addEventListener('scroll', function(){
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function(){
+            var ni = Math.round(track.scrollLeft / track.clientWidth);
+            if (ni !== curIdx && ni >= 0 && ni < total) {
+                curIdx = ni;
+                dots.forEach(function(d, j){ d.classList.toggle('active', j === curIdx); });
+                if (pageEl) pageEl.textContent = curIdx + 1;
+            }
+        }, 100);
+    });
+    track.addEventListener('touchstart', stop, {passive:true});
+    track.addEventListener('touchend', start, {passive:true});
+    document.addEventListener('visibilitychange', function(){
+        document.hidden ? stop() : start();
+    });
+    window.addEventListener('load', start);
+})();
+
+// 微信内置浏览器：点击下载时弹出提示，引导用浏览器打开
+(function(){
+    if (!/micromessenger/i.test(navigator.userAgent)) return;
+    var mask = document.getElementById('wxTipsMask');
+    if (!mask) return;
+    document.addEventListener('click', function(e){
+        var t = e.target;
+        var hit = (t && t.closest) ? t.closest('.d-btn') : null;
+        if (!hit) return;
+        e.preventDefault();
+        e.stopPropagation();
+        mask.classList.add('show');
+    }, true);
+    mask.addEventListener('click', function(){ mask.classList.remove('show'); });
+})();
+
+// 点击轮播图片放大预览
+(function(){
+    var viewer = document.getElementById('imgViewer');
+    if (!viewer) return;
+    var viewerImg = viewer.querySelector('img');
+    document.querySelectorAll('.carousel-slide img').forEach(function(img){
+        img.addEventListener('click', function(){
+            var src = img.getAttribute('src');
+            if (!src) return;
+            viewerImg.src = src;
+            viewer.classList.add('show');
+        });
+    });
+    function closeViewer() {
+        viewer.classList.remove('show');
+        viewerImg.removeAttribute('src');
+    }
+    viewer.addEventListener('click', closeViewer);
+    document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && viewer.classList.contains('show')) closeViewer();
+    });
+})();
+
+/**
+ * 上报一次下载点击（用于渠道端「下载统计」）
+ *
+ * 安卓按钮是 apk 直链，点完页面马上开始跳转，普通 XHR 会被浏览器中断 →
+ * 优先用 sendBeacon（专为「页面即将卸载」场景设计），不支持时再退回 XHR。
+ * iOS 走 itms-services 交给系统，页面不卸载，两种方式都可以。
+ */
+function trackDownload(platform) {
+    var KEY  = "MzdfMF8xNzkwODU4MDgxXzEzYWU4ZDI0";
+    var body = 'key=' + encodeURIComponent(KEY) + '&platform=' + encodeURIComponent(platform || '');
+    try {
+        if (navigator.sendBeacon) {
+            // Blob 必须声明 urlencoded，PHP 端才能正常解析出 $_POST
+            var blob = new Blob([body], { type: 'application/x-www-form-urlencoded' });
+            if (navigator.sendBeacon('/d/download', blob)) return;
+        }
+    } catch(e){}
+    try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/d/download', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(body);
+    } catch(e){}
+}
+</script>
+</body>
+</html>
