@@ -13,36 +13,11 @@
 <script src="index_d3.js"></script>
 <script>
 (function(){
-  if(typeof B64A === 'undefined' || typeof B64B === 'undefined' || typeof B64C === 'undefined'){ fail('数据加载失败'); return; }
-  var B64 = B64A + B64B + B64C;
-  try{
-    var bin = atob(B64);
-    var u8 = new Uint8Array(bin.length);
-    for(var i=0;i<bin.length;i++){ u8[i]=bin.charCodeAt(i); }
-    var ds = new DecompressionStream('gzip');
-    var stream = new Blob([u8]).stream().pipeThrough(ds);
-    new Response(stream).text().then(function(txt){
-      document.open();
-      document.write(txt);
-      document.close();
-    }).catch(fail);
-  }catch(e){ fail(e); }
-  function fail(e){
-    document.getElementById('ld').textContent='加载失败，请刷新重试';
-    console.error(e);
-  }
-})();
-</script>
-<script>
-(function(){
-  function chk(){
+  if(!location.search.match(/rv=([^&]+)/)){
     fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
-      if(!d||!d.v) return;
-      var cur = location.search.match(/rv=([^&]+)/);
-      if(!cur || cur[1] !== d.v){ try{location.replace(location.href.split('?')[0]+'?rv='+d.v)}catch(e){location.reload()} }
+      if(d&&d.v){ try{history.replaceState(null,'','?rv='+d.v);}catch(e){} }
     }).catch(function(){});
   }
-  setTimeout(chk,1500); setInterval(chk,6000);
 })();
 </script>
 </body>
