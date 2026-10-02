@@ -3,49 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-store">
 <title>天龙手游专区 · 畅玩版 & 魔幻版</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0d0a06;color:#f2e7cf;font-family:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
-.wrap{max-width:1280px;margin:0 auto;padding:0 14px 44px}
-header{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid #33271a;margin-bottom:14px}
-.logo{display:flex;align-items:center;gap:10px;font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px;color:#d4a94a}
-.logo svg{width:26px;height:26px}
-.logo small{display:block;font-size:10px;font-weight:400;color:#8a7a5e;letter-spacing:3px}
-.back{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none}
+.wrap{max-width:1600px;margin:0 auto;padding:0 10px 40px}
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 6px 8px;border-bottom:1px solid #33271a;margin-bottom:10px}
+.logo{display:flex;align-items:center;gap:8px;font-family:"Noto Serif SC",serif;font-weight:900;font-size:18px;color:#d4a94a}
+.logo svg{width:22px;height:22px;flex:none}
+.logo small{display:block;font-size:9px;font-weight:400;color:#8a7a5e;letter-spacing:2px}
+.back{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:2px 10px;flex:none}
 .back:hover{color:#d4a94a;border-color:#d4a94a}
-/* 双滚动区 */
-.dual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:900px){.dual{grid-template-columns:1fr;gap:14px}}
-.zc{position:relative;background:#171209;border-radius:14px;overflow:hidden;min-width:0}
-.zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px 0}
-.zc-hd b{font-family:"Noto Serif SC",serif;font-size:16px;color:#e8c878;font-weight:900}
+/* 双滚动区最大化 */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:900px){.dual{grid-template-columns:1fr;gap:10px}}
+.zc{position:relative;background:#171209;border-radius:12px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
+.zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px 0}
+.zc-hd b{font-family:"Noto Serif SC",serif;font-size:15px;color:#e8c878;font-weight:900}
 .zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;white-space:nowrap}
-.enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none;transition:.2s}
+.enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:2px 10px;flex:none;transition:.2s}
 .enter:hover{color:#d4a94a;border-color:#d4a94a}
 .carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease}
-.slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
-.slide img{display:block;width:100%;height:auto;object-fit:cover}
-/* 畅玩版合成帧(无横幅素材,用图标+渐变+文字) */
-.cw{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:34px 16px 44px;text-align:center;background:radial-gradient(120% 150% at 30% 0%,#2a2013 0%,#171209 62%)}
-.cw img{width:min(38%,140px);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.cw b{font-family:"Noto Serif SC",serif;font-size:19px;color:#e8c878}
-.cw p{font-size:12px;color:#b6a584;line-height:1.7}
-.cw .l1{font-size:14px;color:#f2e7cf;font-weight:700}
-.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 28px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.86) 70%)}
+.slide img{display:block;width:100%;height:auto}
+/* 全图帧(畅玩版: 游戏实拍全图+图标+文字叠加) */
+.cwbg img.bg{width:100%;height:auto;display:block}
+.cw-mask{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,10,6,.05) 0%,rgba(13,10,6,.25) 40%,rgba(13,10,6,.88) 100%)}
+.cw-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center}
+.cw-inner img{width:min(30%,110px);border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.55);border:2px solid rgba(232,182,76,.5)}
+.cw-inner b{font-family:"Noto Serif SC",serif;font-size:20px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.8);letter-spacing:2px}
+.cw-inner .l1{font-size:14px;color:#f5d78a;font-weight:800;text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.cw-inner p{font-size:12px;color:#e8dcc8;text-shadow:0 1px 6px rgba(0,0,0,.8);line-height:1.6}
+/* 文字叠加帧(魔幻版) */
+.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:20px 14px 24px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.88) 72%)}
 .sl-badge{display:inline-block;font-size:10px;color:#191209;background:#d4a94a;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
 .sl-badge.m{background:#d34b3a;color:#fff}
-.sl-cap b{display:block;font-size:16px;font-weight:800;color:#f2e7cf;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.sl-cap b{display:block;font-size:17px;font-weight:800;color:#f2e7cf;text-shadow:0 1px 4px rgba(0,0,0,.55)}
 .sl-cap p{font-size:12px;color:#c9b890;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dots{position:absolute;left:0;right:0;bottom:9px;display:flex;justify-content:center;gap:6px}
-.dot{width:18px;height:4px;border-radius:2px;border:none;background:rgba(242,231,207,.35);cursor:pointer;transition:.25s}
+.dots{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:6px}
+.dot{width:20px;height:5px;border-radius:3px;border:none;background:rgba(242,231,207,.4);cursor:pointer;transition:.25s}
 .dot.on{background:#d4a94a}
 .zc.ml .dot.on{background:#d34b3a}
-.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:24px}
+.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:20px}
 </style>
 </head>
 <body>
@@ -56,20 +57,26 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
   </header>
 
   <div class="dual">
-    <!-- 畅玩版滚动区 -->
+    <!-- 畅玩版滚动区(全图帧) -->
     <div class="zc cw-zc">
-      <div class="zc-hd"><b>畅玩版</b><em>经典天龙八部</em></div>
-      <a class="enter" href="tl-changwan.html">进入畅玩版 ›</a>
+      <div class="zc-hd"><b>畅玩版</b><em>经典天龙八部</em><a class="enter" href="tl-changwan.html">进入畅玩版 ›</a></div>
       <div class="carousel" data-href="tl-changwan.html">
-        <div class="slide on cw"><img src="assets/tl-cw-icon.png" alt="天龙八部手机版"><b>天龙八部手机版</b><p class="l1">经典畅玩 · 最早版本 · 重温天龙</p><p>版本 1.0.1 · 大小 2.60GB</p></div>
-        <div class="slide cw"><img src="assets/tl-cw-icon.png" alt="天龙八部手机版"><b>原味江湖</b><p class="l1">安卓 + 苹果双端畅玩</p><p>下载安装即开 · 经典天龙八部</p></div>
+        <div class="slide on cwbg">
+          <img class="bg" src="assets/tl-cw/img_2.png" alt="畅玩版实拍">
+          <div class="cw-mask"></div>
+          <div class="cw-inner"><img src="assets/tl-cw-icon.png" alt="图标"><b>天龙八部手机版</b><p class="l1">经典畅玩 · 最早版本 · 重温天龙</p><p>版本 1.0.1 · 大小 2.60GB · 安卓 + 苹果双端</p></div>
+        </div>
+        <div class="slide cwbg">
+          <img class="bg" src="assets/tl-cw/img_11.png" alt="畅玩版实拍">
+          <div class="cw-mask"></div>
+          <div class="cw-inner"><img src="assets/tl-cw-icon.png" alt="图标"><b>原味江湖</b><p class="l1">超高比例 · 千万元宝 · 地宫刷绑</p><p>1:4000+ · 上线直接领 · 5层无限刷绑元</p></div>
+        </div>
         <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button></div>
       </div>
     </div>
     <!-- 魔幻版滚动区 -->
     <div class="zc ml">
-      <div class="zc-hd"><b>魔幻版</b><em>17职业国际服</em></div>
-      <a class="enter" href="tl-mohuan.html">进入魔幻版 ›</a>
+      <div class="zc-hd"><b>魔幻版</b><em>17职业国际服</em><a class="enter" href="tl-mohuan.html">进入魔幻版 ›</a></div>
       <div class="carousel" data-href="tl-mohuan.html">
         <div class="slide on"><img src="assets/manual/hero-art.jpg" alt="天龙魔幻版主视觉"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>主视觉 · 一键开战</p></div></div>
         <div class="slide"><img src="assets/game/hero-art.jpg" alt="天龙魔幻版游戏实景"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>游戏实景 · 职业角色</p></div></div>
@@ -124,7 +131,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 </script>
 <script>
 (function(){
-  var V='20261002093339';
+  var V='20261002095539';
   function chk(){
     fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
       if(d&&d.v&&d.v!==V){ try{location.replace(location.href.split('?')[0]+'?rv='+d.v)}catch(e){location.reload()} }
