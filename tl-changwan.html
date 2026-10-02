@@ -1381,8 +1381,6 @@
     </button>
   </div>
 
-</div>
-
 <!-- 备用链接弹窗 -->
 <div id="copyModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:999; align-items:center; justify-content:center;" onclick="hideCopyModal()">
   <div style="background:var(--card); border-radius:16px; padding:20px; width:90%; max-width:380px;" onclick="event.stopPropagation()">
@@ -1564,11 +1562,11 @@ function copyText(text, btn) {
 
 
 
-<script src="assets/kefu.js?v=v20261002113533"></script></script>
+<script src="assets/kefu.js?v=v20261002113533"></script>
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261002180000';
+  var __ver='v20261002180500';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
