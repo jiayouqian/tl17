@@ -8,28 +8,36 @@
 </head>
 <body>
 <div id="ld">传奇专区 · 加载中…</div>
-<script src="chuangqi_d1.js?v=6efedc87"></script>
-<script src="chuangqi_d2.js?v=7c140861"></script>
 <script>
 (function(){
-  if(typeof B64A === 'undefined' || typeof B64B === 'undefined'){ fail('数据加载失败'); return; }
-  var B64 = B64A + B64B;
-  try{
+  // 每次打开强制回源加载最新数据（cache:'no-store' 绕过浏览器缓存，时间戳参数绕过 CDN 缓存）→ 秒更新
+  function fetchText(u){ return fetch(u, {cache:'no-store'}).then(function(r){ return r.text(); }); }
+  function extractVar(txt, name){
+    var m = txt.match(new RegExp('var\\s+' + name + '="([^"]+)"'));
+    if(!m){ throw new Error('数据段缺失: '+name); }
+    return m[1];
+  }
+  function fail(e){
+    document.getElementById('ld').textContent = '加载失败，请刷新重试';
+    console.error(e);
+  }
+  var ts = Date.now();
+  Promise.all([
+    fetchText('chuangqi_d1.js?ts='+ts),
+    fetchText('chuangqi_d2.js?ts='+ts)
+  ]).then(function(rs){
+    var B64 = extractVar(rs[0], 'B64A') + extractVar(rs[1], 'B64B');
     var bin = atob(B64);
     var u8 = new Uint8Array(bin.length);
     for(var i=0;i<bin.length;i++){ u8[i]=bin.charCodeAt(i); }
     var ds = new DecompressionStream('gzip');
     var stream = new Blob([u8]).stream().pipeThrough(ds);
-    new Response(stream).text().then(function(txt){
-      document.open();
-      document.write(txt);
-      document.close();
-    }).catch(fail);
-  }catch(e){ fail(e); }
-  function fail(e){
-    document.getElementById('ld').textContent='加载失败，请刷新重试';
-    console.error(e);
-  }
+    return new Response(stream).text();
+  }).then(function(txt){
+    document.open();
+    document.write(txt);
+    document.close();
+  }).catch(fail);
 })();
 </script>
 </body>
