@@ -16,7 +16,6 @@
   body { background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.6; }
   .wrap { max-width:480px; margin:0 auto; padding-bottom:90px; }
 
-  /* 顶部栏 */
   .topbar { position:sticky; top:0; z-index:100; background:rgba(15,12,9,.92); backdrop-filter:blur(12px); padding:12px 16px; text-align:center; border-bottom:1px solid rgba(232,182,76,.15); }
   .topbar b { font-size:16px; color:var(--gold); letter-spacing:2px; }
   .topbar small { display:block; font-size:10px; color:var(--ink-dim); margin-top:2px; }
@@ -24,7 +23,6 @@
   .page { display:none; }
   .page.active { display:block; }
 
-  /* Hero */
   .hero { position:relative; overflow:hidden; padding:34px 20px 28px; text-align:center; background:radial-gradient(120% 100% at 50% 0%, #2a1f10 0%, #0f0c09 70%); }
   .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(232,182,76,.08),transparent 40%); pointer-events:none; }
   .hero-icon { width:96px; height:96px; border-radius:22px; margin:0 auto 16px; display:block; box-shadow:0 0 0 3px rgba(232,182,76,.35), 0 8px 30px rgba(0,0,0,.6); }
@@ -34,32 +32,27 @@
   .hero-sub { font-size:13px; color:#e8dcc8; margin-top:8px; }
   .hero-ver { font-size:11px; color:var(--ink-dim); margin-top:4px; }
 
-  /* 主按钮 */
   .cta-wrap { display:flex; gap:10px; margin-top:22px; }
   .btn { flex:1; padding:13px 8px; border-radius:12px; text-align:center; font-size:14px; font-weight:700; cursor:pointer; border:none; text-decoration:none; display:block; }
   .btn-gold { background:linear-gradient(135deg,#e8b64c,#b8842a); color:#14100c; }
   .btn-line { background:rgba(232,182,76,.08); border:1px solid rgba(232,182,76,.45); color:var(--gold); }
   .btn-line b { color:#fff; }
 
-  /* 卖点 */
   .pitch { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:16px; }
   .pitch-item { background:linear-gradient(180deg,var(--card2),var(--card)); border:1px solid rgba(232,182,76,.2); border-radius:14px; padding:14px 6px; text-align:center; }
   .pitch-item b { display:block; font-size:15px; font-weight:900; background:linear-gradient(180deg,#f5d78a,#d4a03c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
   .pitch-item span { font-size:10.5px; color:var(--ink-dim); }
 
-  /* 大入口 */
   .entry { margin:0 16px 14px; padding:16px 18px; background:linear-gradient(135deg,rgba(232,182,76,.18),rgba(232,182,76,.04)); border:1px solid rgba(232,182,76,.35); border-radius:14px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; text-decoration:none; }
   .entry .left b { display:block; font-size:16px; color:#fff; }
   .entry .left span { font-size:11.5px; color:var(--ink-dim); }
   .entry .arrow { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#e8b64c,#b8842a); color:#14100c; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:900; flex-shrink:0; }
 
-  /* 区块 */
   .sec { padding:0 16px; margin-bottom:22px; }
   .sec-title { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
   .sec-title::before { content:""; width:4px; height:18px; background:linear-gradient(180deg,#e8b64c,#b8842a); border-radius:2px; }
   .sec-title b { font-size:17px; color:var(--gold); letter-spacing:1px; }
 
-  /* 注册卡 */
   .reg-card { background:linear-gradient(180deg,var(--card2),var(--card)); border:1px solid rgba(232,182,76,.3); border-radius:16px; padding:20px 18px; }
   .reg-code-label { text-align:center; font-size:12px; color:var(--ink-dim); }
   .reg-code { text-align:center; font-size:34px; font-weight:900; letter-spacing:10px; background:linear-gradient(180deg,#f5d78a,#d4a03c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin:6px 0 18px; }
@@ -70,15 +63,12 @@
   .rb-line { background:rgba(232,182,76,.08); border:1px solid rgba(232,182,76,.4); color:var(--gold); }
   .copy-link { text-align:center; font-size:12px; color:var(--ink-dim); margin-top:14px; cursor:pointer; text-decoration:underline; }
 
-  /* 提醒 */
   .notice { margin:14px 16px 20px; padding:12px 14px; border:1px solid rgba(192,57,43,.4); border-radius:10px; background:rgba(192,57,43,.08); font-size:12px; color:#e8b8b0; }
 
-  /* 画廊 */
   .gallery { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
   .gallery img { width:100%; border-radius:10px; border:1px solid rgba(232,182,76,.18); display:block; }
   .gallery .wide { grid-column:1 / -1; }
 
-  /* 手册/礼包/客服页共用 */
   .back-link { display:inline-block; margin:14px 16px 4px; color:var(--gold); font-size:13px; cursor:pointer; text-decoration:none; }
   .card { background:linear-gradient(180deg,var(--card2),var(--card)); border:1px solid rgba(232,182,76,.22); border-radius:14px; padding:16px; margin:0 16px 12px; }
   .card h3 { font-size:15px; color:var(--gold); margin-bottom:10px; }
@@ -90,13 +80,18 @@
   .copy-btn { font-size:11px; color:var(--gold); border:1px solid rgba(232,182,76,.4); border-radius:8px; padding:4px 12px; cursor:pointer; background:rgba(232,182,76,.08); flex-shrink:0; }
   .benefit-list { font-size:12.5px; color:var(--ink-dim); margin-top:8px; line-height:2; }
 
-  /* 底部导航 */
+  .m-card { background:linear-gradient(180deg,var(--card2),var(--card)); border:1px solid rgba(232,182,76,.22); border-radius:14px; margin:0 16px 14px; overflow:hidden; }
+  .m-title { display:flex; align-items:center; gap:8px; padding:14px 16px 8px; }
+  .m-title::before { content:""; width:3px; height:14px; background:linear-gradient(180deg,#e8b64c,#b8842a); border-radius:2px; }
+  .m-title b { font-size:15px; color:var(--gold); }
+  .m-card img { width:100%; display:block; }
+  .m-card .m-cap { padding:10px 16px 14px; font-size:12.5px; color:var(--ink-dim); line-height:1.7; }
+
   .tabbar { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; z-index:200; display:flex; background:rgba(15,12,9,.97); border-top:1px solid rgba(232,182,76,.18); backdrop-filter:blur(12px); }
   .tabbar button { flex:1; padding:12px 4px 10px; background:none; border:none; color:var(--ink-dim); font-size:12px; cursor:pointer; }
   .tabbar button.active { color:var(--gold); font-weight:700; }
   .tabbar button .ic { display:block; font-size:17px; margin-bottom:2px; }
 
-  /* 复制弹窗 */
   .modal-mask { display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:300; }
   .modal-mask.show { display:block; }
   .modal { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:88%; max-width:420px; background:var(--card); border:1px solid rgba(232,182,76,.4); border-radius:16px; padding:20px; z-index:310; box-shadow:0 20px 60px rgba(0,0,0,.7); display:none; }
@@ -105,7 +100,6 @@
   .modal .link-row .url { font-size:11px; color:var(--ink); word-break:break-all; flex:1; }
   .modal .close-btn { display:block; width:100%; margin-top:16px; padding:11px; border:none; border-radius:10px; background:linear-gradient(135deg,#e8b64c,#b8842a); color:#14100c; font-size:14px; font-weight:700; cursor:pointer; }
 
-  /* toast */
   .toast { position:fixed; left:50%; top:38%; transform:translate(-50%,-50%); background:rgba(20,16,12,.95); border:1px solid rgba(232,182,76,.5); color:var(--gold-light); padding:10px 22px; border-radius:10px; font-size:13px; z-index:400; opacity:0; transition:opacity .3s; pointer-events:none; }
   .toast.show { opacity:1; }
 </style>
@@ -125,7 +119,7 @@
       <p class="hero-ver">版本 1.0.1 · 安装包 2.60GB</p>
       <div class="cta-wrap">
         <a class="btn btn-gold" href="http://tlbb.hfynxx.top/PPAP">立即注册下载</a>
-        <a class="btn btn-line" href="https://wrtl.ququ.im/WRTL.html"><b>安卓高速下载</b></a>
+        <a class="btn btn-line" href="https://hftl.jinkeyan.wang/HFTL.html"><b>安卓高速下载</b></a>
       </div>
     </div>
 
@@ -136,7 +130,7 @@
     </div>
 
     <a class="entry" href="javascript:void(0)" onclick="switchPage('manual')">
-      <div class="left"><b>完整攻略手册</b><span>升级/战力提升/技能指点/副本活动 全攻略</span></div>
+      <div class="left"><b>完整攻略手册</b><span>免费福利/充值/活动/幻化战力榜/藏宝图 全攻略</span></div>
       <div class="arrow">›</div>
     </a>
 
@@ -152,7 +146,7 @@
         <div class="reg-code">PPAP</div>
         <div class="reg-btns">
           <a class="reg-btn rb-gold" href="http://tlbb.hfynxx.top/PPAP">注册账号</a>
-          <a class="reg-btn rb-gold" href="https://wrtl.ququ.im/WRTL.html">立即下载游戏</a>
+          <a class="reg-btn rb-gold" href="https://hftl.jinkeyan.wang/HFTL.html">立即下载游戏</a>
           <a class="reg-btn rb-line" href="http://tlbb.hfynxx.top/PPAP">兑换码 / 充值</a>
         </div>
         <div class="copy-link" onclick="openModal('old')">按钮点不开？点这里复制链接</div>
@@ -184,17 +178,72 @@
     </div>
   </div>
 
-  <!-- ============ 攻略手册页 ============ -->
+  <!-- ============ 完整攻略手册页 ============ -->
   <div class="page" id="page-manual">
-    <div class="topbar"><b>完整攻略手册</b><small>升级/战力/技能/副本 全攻略</small></div>
+    <div class="topbar"><b>完整攻略手册</b><small>免费福利/充值/活动/幻化/藏宝图 全攻略</small></div>
     <a class="back-link" onclick="switchPage('old')">‹ 返回畅玩版首页</a>
 
-    <div class="card"><h3>免费福利</h3><p>每日/每周/等级全送充值卡，零氪也能玩。</p></div>
-    <div class="card"><h3>0.01折充值</h3><p>1元=648充值额度，六档任选。</p><p class="dim">首充 / 周饷 / 月契 / 永契全档位。</p></div>
-    <div class="card"><h3>活动玩法</h3><p>七日寻重楼 · 连充7天拿全套幻化。</p><p class="dim">幻化总览：赤龙苗刀 / 开天神斧 / 墨羽披风 / 虎啸星陨枪 / 金荷武魂 / 山河与共称号。</p></div>
-    <div class="card"><h3>幻化战力榜</h3><p>披风幻化战力榜 TOP11，参考榜上配置快速提战。</p></div>
-    <div class="card"><h3>新手升级</h3><p>吃经验丹可到 74 级，之后靠日常与活动冲级；装备靠打怪爆、物价保值，散人友好。</p></div>
-    <div class="notice">更多深度攻略（技能指点/副本/藏宝图/充值档位）请进群咨询客服领取。</div>
+    <div class="m-card">
+      <div class="m-title"><b>免费福利</b></div>
+      <img src="assets/tl-cw-manual/free-welfare.png" alt="免费福利馈赠">
+      <div class="m-cap">每日 / 每周 / 等级全送充值卡，零氪也能玩。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>0.01折充值</b></div>
+      <img src="assets/tl-cw-manual/zhekou-648.png" alt="0.01折江湖钜惠令">
+      <div class="m-cap">1元=648充值额度，六档任选。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>充值体系总览</b></div>
+      <img src="assets/tl-cw-manual/recharge-system.png" alt="充值体系总览">
+      <div class="m-cap">首充 / 周饷 / 月契 / 永契全档位。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>活动玩法</b></div>
+      <img src="assets/tl-cw-manual/qiri-zhonglou.png" alt="七日寻重楼">
+      <div class="m-cap">七日寻重楼 · 连充7天拿全套幻化。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>幻化总览</b></div>
+      <img src="assets/tl-cw-manual/huanhua-overview.png" alt="幻化总览">
+      <div class="m-cap">赤龙苗刀 / 开天神斧 / 墨羽披风 / 虎啸星陨枪 / 金荷武魂 / 山河与共称号。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>幻化战力榜</b></div>
+      <img src="assets/tl-cw-manual/pipao-rank.png" alt="披风幻化战力榜">
+      <div class="m-cap">披风幻化战力榜 TOP11。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>神器幻化战力榜</b></div>
+      <img src="assets/tl-cw-manual/shenqi-rank.png" alt="神器幻化战力榜">
+      <div class="m-cap">神器幻化战力榜 TOP30。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>武魂幻化战力榜</b></div>
+      <img src="assets/tl-cw-manual/wuhun-rank.png" alt="武魂幻化战力榜">
+      <div class="m-cap">武魂幻化战力榜 TOP30。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>称号战力榜</b></div>
+      <img src="assets/tl-cw-manual/chenghao-rank.png" alt="称号战力榜">
+      <div class="m-cap">称号战力榜 TOP50+。</div>
+    </div>
+
+    <div class="m-card">
+      <div class="m-title"><b>藏宝图寻宝</b></div>
+      <img src="assets/tl-cw-manual/cangbaotu.png" alt="藏宝图寻宝大全">
+      <div class="m-cap">密径 / 稀世 / 绝世三档寻宝玩法。</div>
+    </div>
+
+    <div class="notice">更多深度攻略（技能指点 / 副本 / 藏宝图 / 充值档位）请进群咨询客服领取。</div>
   </div>
 
   <!-- ============ 礼包码页 ============ -->
@@ -276,9 +325,9 @@
 <div class="modal-mask" id="modalMask" onclick="closeModal()"></div>
 <div class="modal" id="modalOld">
   <h3>复制链接到浏览器打开</h3>
-  <div class="link-row"><span class="url">游戏下载链接<br>https://wrtl.ququ.im/WRTL.html</span><button class="copy-btn" onclick="copyText('https://wrtl.ququ.im/WRTL.html')">复制</button></div>
+  <div class="link-row"><span class="url">游戏下载链接<br>https://hftl.jinkeyan.wang/HFTL.html</span><button class="copy-btn" onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html')">复制</button></div>
   <div class="link-row"><span class="url">注册 + 兑换码网站<br>http://tlbb.hfynxx.top/PPAP</span><button class="copy-btn" onclick="copyText('http://tlbb.hfynxx.top/PPAP')">复制</button></div>
-  <div class="link-row"><span class="url">备用下载入口<br>https://hftl.jinkeyan.wang/HFTL.html</span><button class="copy-btn" onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html')">复制</button></div>
+  <div class="link-row"><span class="url">备用下载入口<br>https://wrtl.ququ.im/WRTL.html</span><button class="copy-btn" onclick="copyText('https://wrtl.ququ.im/WRTL.html')">复制</button></div>
   <button class="close-btn" onclick="closeModal()">关闭</button>
 </div>
 
@@ -286,7 +335,7 @@
 
 <script>
 (function(){
-  var VERSION='20261002094822';
+  var VERSION='20261002100617';
   function switchPage(name){
     document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
     var pg=document.getElementById('page-'+name); if(pg) pg.classList.add('active');
@@ -309,7 +358,6 @@
     var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
     try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta);
   }
-  /* 秒更新轮询 */
   function poll(){
     fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
       if(d.v&&VERSION&&d.v!==VERSION){location.replace('tl-changwan.html?rv='+d.v);}
