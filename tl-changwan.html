@@ -1573,11 +1573,13 @@ function copyText(text, btn) {
 
 <script>
 (function(){
+  (function(){
   if(!location.search.match(/rv=([^&]+)/)){
     fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
       if(d&&d.v){ try{history.replaceState(null,'','?rv='+d.v);}catch(e){} }
     }).catch(function(){});
   }
+})();
 })();
 </script>
 
