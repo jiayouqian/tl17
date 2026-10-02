@@ -3,34 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>魔幻天龙17职业国际服</title>
-<style>html,body{margin:0;background:#120e08;min-height:100vh}#ld{color:#c9a961;text-align:center;padding:60px 20px;font-family:system-ui,sans-serif;font-size:14px;letter-spacing:2px}</style>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>天龙手游专区 · 畅玩版 & 魔幻版</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0a06;color:#f2e7cf;font-family:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+.wrap{max-width:1280px;margin:0 auto;padding:0 14px 44px}
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid #33271a;margin-bottom:14px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px;color:#d4a94a}
+.logo svg{width:26px;height:26px}
+.logo small{display:block;font-size:10px;font-weight:400;color:#8a7a5e;letter-spacing:3px}
+.back{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none}
+.back:hover{color:#d4a94a;border-color:#d4a94a}
+/* 双滚动区 */
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.dual{grid-template-columns:1fr;gap:14px}}
+.zc{position:relative;background:#171209;border-radius:14px;overflow:hidden;min-width:0}
+.zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px 0}
+.zc-hd b{font-family:"Noto Serif SC",serif;font-size:16px;color:#e8c878;font-weight:900}
+.zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;white-space:nowrap}
+.enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none;transition:.2s}
+.enter:hover{color:#d4a94a;border-color:#d4a94a}
+.carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease;pointer-events:none}
+.slide.on{opacity:1;pointer-events:auto}
+.slide img{display:block;width:100%;height:auto;object-fit:cover}
+/* 畅玩版合成帧(无横幅素材,用图标+渐变+文字) */
+.cw{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:34px 16px 44px;text-align:center;background:radial-gradient(120% 150% at 30% 0%,#2a2013 0%,#171209 62%)}
+.cw img{width:min(38%,140px);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.cw b{font-family:"Noto Serif SC",serif;font-size:19px;color:#e8c878}
+.cw p{font-size:12px;color:#b6a584;line-height:1.7}
+.cw .l1{font-size:14px;color:#f2e7cf;font-weight:700}
+.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 28px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.86) 70%)}
+.sl-badge{display:inline-block;font-size:10px;color:#191209;background:#d4a94a;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
+.sl-badge.m{background:#d34b3a;color:#fff}
+.sl-cap b{display:block;font-size:16px;font-weight:800;color:#f2e7cf;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.sl-cap p{font-size:12px;color:#c9b890;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dots{position:absolute;left:0;right:0;bottom:9px;display:flex;justify-content:center;gap:6px}
+.dot{width:18px;height:4px;border-radius:2px;border:none;background:rgba(242,231,207,.35);cursor:pointer;transition:.25s}
+.dot.on{background:#d4a94a}
+.zc.ml .dot.on{background:#d34b3a}
+.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:24px}
+</style>
 </head>
 <body>
-<div id="ld">魔幻天龙 · 加载中…</div>
-<script src="index_d1.js"></script>
-<script src="index_d2.js"></script>
-<script src="index_d3.js"></script>
+<div class="wrap">
+  <header>
+    <div class="logo"><svg viewBox="0 0 24 24"><path d="M12 2l2.2 5.2L19.5 9l-5.3 1.8L12 16l-2.2-5.2L4.5 9l5.3-1.8z" fill="#d4a94a"/></svg><div>天龙手游专区<small>畅玩版 · 魔幻版</small></div></div>
+    <a class="back" href="index.html">‹ 返回门户</a>
+  </header>
+
+  <div class="dual">
+    <!-- 畅玩版滚动区 -->
+    <div class="zc cw-zc">
+      <div class="zc-hd"><b>畅玩版</b><em>经典天龙八部</em></div>
+      <a class="enter" href="tl-changwan.html">进入畅玩版 ›</a>
+      <div class="carousel" data-href="tl-changwan.html">
+        <div class="slide on cw"><img src="assets/tl-cw-icon.png" alt="天龙八部手机版"><b>天龙八部手机版</b><p class="l1">经典畅玩 · 最早版本 · 重温天龙</p><p>版本 1.0.1 · 大小 2.60GB</p></div>
+        <div class="slide cw"><img src="assets/tl-cw-icon.png" alt="天龙八部手机版"><b>原味江湖</b><p class="l1">安卓 + 苹果双端畅玩</p><p>下载安装即开 · 经典天龙八部</p></div>
+        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button></div>
+      </div>
+    </div>
+    <!-- 魔幻版滚动区 -->
+    <div class="zc ml">
+      <div class="zc-hd"><b>魔幻版</b><em>17职业国际服</em></div>
+      <a class="enter" href="tl-mohuan.html">进入魔幻版 ›</a>
+      <div class="carousel" data-href="tl-mohuan.html">
+        <div class="slide on"><img src="assets/manual/hero-art.jpg" alt="天龙魔幻版主视觉"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>主视觉 · 一键开战</p></div></div>
+        <div class="slide"><img src="assets/game/hero-art.jpg" alt="天龙魔幻版游戏实景"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙手游 17职业国际服</b><p>游戏实景 · 职业角色</p></div></div>
+        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">天龙手游专区 · 畅玩版(经典天龙八部) + 魔幻版(17职业国际服)</p>
+</div>
 <script>
 (function(){
-  if(typeof B64A === 'undefined' || typeof B64B === 'undefined' || typeof B64C === 'undefined'){ fail('数据加载失败'); return; }
-  var B64 = B64A + B64B + B64C;
-  try{
-    var bin = atob(B64);
-    var u8 = new Uint8Array(bin.length);
-    for(var i=0;i<bin.length;i++){ u8[i]=bin.charCodeAt(i); }
-    var ds = new DecompressionStream('gzip');
-    var stream = new Blob([u8]).stream().pipeThrough(ds);
-    new Response(stream).text().then(function(txt){
-      document.open();
-      document.write(txt);
-      document.close();
-    }).catch(fail);
-  }catch(e){ fail(e); }
-  function fail(e){
-    document.getElementById('ld').textContent='加载失败，请刷新重试';
-    console.error(e);
+  function initCarousel(root){
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
+    var i = 0, timer = null;
+    function fitH(){
+      var cur = slides[i];
+      var img = cur.querySelector('img');
+      var h = img && img.getBoundingClientRect().height ? img.getBoundingClientRect().height : cur.offsetHeight;
+      root.style.height = h + 'px';
+    }
+    function go(n){
+      slides[i].classList.remove('on'); dots[i].classList.remove('on');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('on'); dots[i].classList.add('on');
+      fitH();
+    }
+    function next(){ go(i + 1); }
+    function start(){ clearInterval(timer); timer = setInterval(next, 3500); }
+    slides.forEach(function(s, idx){
+      var im = s.querySelector('img');
+      if(im){ im.onload = function(){ if(idx === i) fitH(); }; }
+    });
+    dots.forEach(function(dot){
+      dot.addEventListener('click', function(){
+        go(parseInt(this.dataset.i, 10)); start();
+      });
+    });
+    root.addEventListener('click', function(e){
+      if(e.target.closest('.dot')) return;
+      window.location.href = root.dataset.href;
+    });
+    root.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    root.addEventListener('mouseleave', start);
+    window.addEventListener('resize', fitH);
+    fitH();
+    start();
   }
+  Array.prototype.forEach.call(document.querySelectorAll('.carousel'), initCarousel);
 })();
 </script>
 </body>
