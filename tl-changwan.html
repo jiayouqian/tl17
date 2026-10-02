@@ -73,5 +73,16 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 
   <p class="foot">天龙手游专区 · 畅玩版</p>
 </div>
+<script>
+(function(){
+  var V='20261002093339';
+  function chk(){
+    fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+      if(d&&d.v&&d.v!==V){ try{location.replace(location.href.split('?')[0]+'?rv='+d.v)}catch(e){location.reload()} }
+    }).catch(function(){});
+  }
+  setTimeout(chk,1500); setInterval(chk,6000);
+})();
+</script>
 </body>
 </html>
