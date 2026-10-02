@@ -112,11 +112,13 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 </script>
 <script>
 (function(){
+  (function(){
   if(!location.search.match(/rv=([^&]+)/)){
     fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
       if(d&&d.v){ try{history.replaceState(null,'','?rv='+d.v);}catch(e){} }
     }).catch(function(){});
   }
+})();
 })();
 </script>
 <script src="assets/kefu.js?v=v20261002113533"></script></script>
