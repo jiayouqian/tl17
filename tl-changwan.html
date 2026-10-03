@@ -251,17 +251,17 @@
   /* ===== 折叠攻略 ===== */
   .fold { margin-bottom: 10px; }
   .fold-head {
-    width: 100%; padding: 13px 14px;
-    background: linear-gradient(180deg, rgba(201,164,92,.07), rgba(201,164,92,.02));
-    border: 1px solid var(--line); border-radius: 10px;
-    color: var(--ink); font-size: 13.5px; font-weight: 600; cursor: pointer;
+    width: 100%; padding: 12px 14px;
+    background: linear-gradient(180deg, rgba(201,164,92,.10), rgba(201,164,92,.03));
+    border: 1px solid rgba(201,164,92,.22); border-radius: 10px;
+    color: #e9d9ac; font-size: 14px; font-weight: 700; cursor: pointer;
     display: flex; align-items: center; gap: 10px; text-align: left;
-    letter-spacing: .5px;
+    letter-spacing: 1px;
     transition: border-color .2s, background .2s;
   }
   .fold-head::before {
-    content: ""; width: 3px; height: 14px; border-radius: 2px; flex: none;
-    background: linear-gradient(180deg, var(--gold-hi), var(--gold-dk));
+    content: ""; width: 4px; height: 15px; border-radius: 2px; flex: none;
+    background: linear-gradient(180deg, #f0d9a0, var(--gold-dk));
   }
   .fold-head .t { flex: 1; }
   .fold-head .ar {
@@ -278,16 +278,16 @@
   }
   .pitem { margin-top: 8px; }
   .pitem-head {
-    width: 100%; padding: 13px 14px;
-    background: linear-gradient(180deg, rgba(201,164,92,.07), rgba(201,164,92,.02));
-    border: 1px solid var(--line); border-radius: 10px;
-    color: var(--gold-hi); font-size: 13.5px; font-weight: 600; text-align: left; cursor: pointer;
-    display: flex; align-items: center; gap: 10px; letter-spacing: 1px;
+    width: 100%; padding: 12px 14px;
+    background: linear-gradient(180deg, rgba(201,164,92,.10), rgba(201,164,92,.03));
+    border: 1px solid rgba(201,164,92,.22); border-radius: 10px;
+    color: #f0d9a0; font-size: 14px; font-weight: 700; text-align: left; cursor: pointer;
+    display: flex; align-items: center; gap: 10px; letter-spacing: 1.5px;
     transition: border-color .2s;
   }
   .pitem-head::before {
-    content: ""; width: 3px; height: 14px; border-radius: 2px; flex: none;
-    background: linear-gradient(180deg, var(--gold-hi), var(--gold-dk));
+    content: ""; width: 4px; height: 15px; border-radius: 2px; flex: none;
+    background: linear-gradient(180deg, #f0d9a0, var(--gold-dk));
   }
   .pitem-head.open { border-color: rgba(201,164,92,.45); border-radius: 10px 10px 0 0; }
   .pitem-head .ar { transition: transform .22s; color: var(--gold); }
@@ -305,7 +305,7 @@
   /* ===== 攻略大区标题（金棕底+白金字+紧凑） ===== */
   .sec-head.guide-sec {
     display: flex; align-items: center; gap: 8px;
-    margin: 6px 0 10px; padding: 9px 12px 9px 16px;
+    margin: 3px 0 7px; padding: 9px 12px 9px 16px;
     background: linear-gradient(180deg, rgba(201,164,92,.24), rgba(201,164,92,.09));
     border: 1px solid rgba(201,164,92,.45); border-radius: 8px;
     position: relative; overflow: hidden;
@@ -876,7 +876,7 @@
 </div>
 
 <script>
-var __ver='v20261003192423';
+var __ver='v20261003193348';
 function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -891,16 +891,29 @@ function curPageName() {
   var cur = document.querySelector('.page.active');
   return cur ? cur.id.replace('page-', '') : 'old';
 }
+/* 全站折叠返回栈：大区 + 二级折叠统一逐层返回 */
+function collectOpenFolds() {
+  var list = [];
+  document.querySelectorAll('.sec-head.guide-sec:not(.folded)').forEach(function (h) { list.push(h); });
+  document.querySelectorAll('.fold-head.open, .pitem-head.open').forEach(function (h) { list.push(h); });
+  return list;
+}
 window.addEventListener('popstate', function (e) {
-  /* 优先：手机返回键先收起展开的攻略大区 */
-  var openHeads = document.querySelectorAll('.sec-head.guide-sec:not(.folded)');
-  if (openHeads.length) {
-    var h = openHeads[openHeads.length - 1];
-    var body = document.getElementById(h.getAttribute('data-sec'));
-    h.classList.add('folded');
-    if (body) body.style.display = 'none';
-    var m = h.querySelector('.more');
-    if (m && m.dataset.t) m.textContent = '点击展开';
+  /* 优先：手机返回键逐层收起展开的折叠（大区/二级标题） */
+  var openFolds = collectOpenFolds();
+  if (openFolds.length) {
+    var el = openFolds[openFolds.length - 1];
+    if (el.classList.contains('guide-sec')) {
+      el.classList.add('folded');
+      var b = document.getElementById(el.getAttribute('data-sec'));
+      if (b) b.style.display = 'none';
+      var m = el.querySelector('.more');
+      if (m && m.dataset.t) m.textContent = '点击展开';
+    } else {
+      el.classList.remove('open');
+      var body = el.nextElementSibling;
+      if (body) body.classList.remove('open');
+    }
     return;
   }
   var p = e.state && e.state.p;
@@ -938,8 +951,10 @@ document.addEventListener('DOMContentLoaded', function () {
   heads.forEach(function (h) {
     h.addEventListener('click', function () {
       var body = h.nextElementSibling;
+      var wasOpen = h.classList.contains('open');
       h.classList.toggle('open');
       if (body) body.classList.toggle('open');
+      if (!wasOpen) { try { history.pushState({ p: curPageName() }, ''); } catch (e) {} }
     });
   });
   /* 攻略顶部 Tab 导航 */
