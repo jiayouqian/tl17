@@ -798,7 +798,7 @@
 </div>
 
 <script>
-var __ver='v20261003172755';
+var __ver='v20261003173222';
 function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -869,7 +869,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var dots = hero.querySelectorAll('.hero-dots .hd');
   var idx = 0, timer = null, idleTimer = null, interacting = false;
   function cur() { var w = scroller.clientWidth || 1; return Math.round(scroller.scrollLeft / w); }
-  function startAuto() { stopAuto(); timer = setInterval(function () { go(idx + 1); }, 2500); }
+  function startAuto() { stopAuto(); timer = setInterval(function () { go(idx + 1); }, 2000); }
   function stopAuto() { clearInterval(timer); timer = null; }
   function go(n) {
     idx = (n + slides.length) % slides.length;
