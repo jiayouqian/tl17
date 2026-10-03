@@ -548,7 +548,7 @@
 </div>
 
 <script>
-var __ver='v20261003470000';
+var __ver='v20261003480000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -597,10 +597,12 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!hero) return;
   var ctaBar = document.querySelector('.cta-bar');
   function fitHero() {
-    hero.style.height = (window.innerHeight - ctaBar.offsetHeight) + 'px';
+    var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+    hero.style.height = (vh - ctaBar.offsetHeight) + 'px';
   }
   fitHero();
   window.addEventListener('resize', fitHero);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHero);
   var scroller = hero.querySelector('.hero-slides');
   var slides = scroller.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
