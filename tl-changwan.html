@@ -108,10 +108,12 @@
       linear-gradient(180deg, rgba(10,13,16,.18), transparent 22%, transparent 62%, rgba(10,13,16,.66)),
       radial-gradient(120% 80% at 50% 0%, rgba(201,164,92,.07), transparent 55%);
   }
-  .hero-dots { position: fixed; bottom: 70px; left: 0; right: 0; z-index: 99; display: flex; justify-content: center; gap: 8px; padding: 6px 12px; background: rgba(8,10,13,.55); border-radius: 20px; width: fit-content; margin: 0 auto; backdrop-filter: blur(4px); pointer-events: auto; }
+  .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 5; pointer-events: none; background: linear-gradient(90deg, transparent 6%, var(--gold) 35%, var(--gold-hi) 50%, var(--gold-dk) 65%, transparent 94%); opacity: .85; }
+  .hero-dots { position: absolute; bottom: 12px; left: 0; right: 0; z-index: 99; display: flex; justify-content: center; gap: 8px; padding: 6px 12px; background: rgba(8,10,13,.55); border-radius: 20px; width: fit-content; margin: 0 auto; backdrop-filter: blur(4px); pointer-events: auto; }
   .hero-dots button {
-    width: 5px; height: 5px; border-radius: 3px; border: none; padding: 0; cursor: pointer;
+    width: 6px; height: 6px; border-radius: 3px; border: none; cursor: pointer;
     background: rgba(233,226,208,.35); transition: all .3s;
+    padding: 8px; background-clip: content-box; box-sizing: content-box;
   }
   .hero-dots button.on { width: 18px; background: var(--gold-hi); }
 
@@ -130,10 +132,10 @@
   }
   .pitch .p b {
     display: block; font-family: "Noto Serif SC", serif;
-    font-size: 15px; font-weight: 900; color: var(--gold-hi);
+    font-size: 17px; font-weight: 900; color: var(--gold-hi);
     letter-spacing: .5px;
   }
-  .pitch .p span { font-size: 9.5px; color: var(--ink-faint); letter-spacing: 1px; display: block; margin-top: 2px; }
+  .pitch .p span { font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; display: block; margin-top: 2px; }
 
   /* ===== 通行令主卡 ===== */
   .pass {
@@ -304,6 +306,24 @@
   }
   .back-btn svg { width: 15px; height: 15px; stroke: var(--gold); }
 
+  /* ===== 福利速领三卡 ===== */
+  .quick { padding: 0 18px; margin-bottom: 16px; }
+  .q-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: 2px; }
+  .q-head::before { content: ""; width: 3px; height: 13px; border-radius: 2px; background: linear-gradient(180deg, var(--gold-hi), var(--gold-dk)); }
+  .q-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .q-card { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 13px 4px 11px; background: linear-gradient(160deg, var(--surface2), var(--surface)); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; transition: border-color .2s, transform .14s ease; }
+  .q-card:active { transform: scale(.97); }
+  .q-card svg { width: 22px; height: 22px; stroke: var(--gold-hi); }
+  .q-card b { font-size: 13px; color: var(--ink); letter-spacing: 1px; }
+  .q-card span { font-size: 9.5px; color: var(--ink-faint); letter-spacing: .5px; }
+
+  /* ===== 底部代理码条 ===== */
+  .agent-line { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 6px 0 7px; border-bottom: 1px solid rgba(201,164,92,.14); background: rgba(201,164,92,.06); cursor: pointer; }
+  .agent-line span { font-size: 11px; color: var(--ink-dim); letter-spacing: 1px; }
+  .agent-line b { font-size: 15px; letter-spacing: 3px; color: var(--gold-hi); font-family: "Noto Serif SC", serif; }
+  .agent-line i { font-style: normal; font-size: 10px; color: var(--gold); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 8px; }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
   /* ===== 顶部入口导航 ===== */
   .topnav {
     display: flex; gap: 10px; padding: 0 18px 10px;
@@ -325,7 +345,7 @@
     border-top: 1px solid var(--line);
     padding: 9px 12px calc(3px + env(safe-area-inset-bottom, 0px));
     padding-bottom: max(6px, env(safe-area-inset-bottom));
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+    display: flex; flex-direction: column;
   }
   .cta-btn {
     display: block; text-align: center; text-decoration: none;
@@ -379,31 +399,28 @@
     </div>
 
     <div class="pitch">
-      <div class="p"><b>1:4000+</b><span>超高充值比例</span></div>
+      <div class="p"><b>1:4000+</b><span>充值比例给力</span></div>
       <div class="p"><b>千万绑元</b><span>上线直接领</span></div>
       <div class="p"><b>地宫刷绑</b><span>5层无限刷</span></div>
     </div>
 
 
-    <div class="sec">
-      <div class="pass" onclick="copyInvite(this)" role="button" tabindex="0">
-        <div class="pass-head">
-          <div class="pass-title">
-            <b>新手邀请函</b>
-            <span>注册时填写 · 领开局豪礼</span>
-          </div>
-          <div class="pass-code">
-            <span>邀请码</span>
-            <b>PPAP</b>
-          </div>
-        </div>
-        <div class="invite-hint">点击卡片复制邀请码 PPAP</div>
+    <div class="quick">
+      <div class="q-head">福利速领</div>
+      <div class="q-grid">
+        <a class="q-card" href="#" onclick="switchPage('gifts-old');return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M3 8h18M12 8v12M12 8c-4-6-10-3-7 2M12 8c4-6 10-3 7 2"/></svg>
+          <b>礼包码</b><span>免费领取</span>
+        </a>
+        <a class="q-card" href="#" onclick="switchPage('manual-old');return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 5a2 2 0 0 1 2-2h14v18H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h14"/></svg>
+          <b>游戏手册</b><span>玩法攻略</span>
+        </a>
+        <a class="q-card" href="http://tlbb.hfynxx.top/PPAP" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M9 12h6M12 9v6"/></svg>
+          <b>充值福利</b><span>福利充值</span>
+        </a>
       </div>
-    </div>
-
-    <div class="topnav">
-      <a href="#" onclick="switchPage('gifts-old');return false;">礼包码</a>
-      <a href="#" onclick="switchPage('manual-old');return false;">游戏手册</a>
     </div>
   </div>
 
@@ -542,13 +559,20 @@
 
 <!-- ===== 底部导航 ===== -->
 <div class="cta-bar">
-  <a class="cta-btn cta-gold" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
-  <a class="cta-btn cta-cinnabar" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载</a>
-  <a class="cta-btn cta-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">充值后台</a>
+  <div class="agent-line" onclick="copyText('PPAP',this)" role="button" tabindex="0" aria-label="复制代理码">
+    <span>注册专属代理码</span>
+    <b>PPAP</b>
+    <i>点击复制</i>
+  </div>
+  <div class="cta-grid">
+    <a class="cta-btn cta-gold" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
+    <a class="cta-btn cta-cinnabar" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载</a>
+    <a class="cta-btn cta-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">充值后台</a>
+  </div>
 </div>
 
 <script>
-var __ver='v20261003560000';
+var __ver='v20261003570000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
