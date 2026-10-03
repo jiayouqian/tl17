@@ -323,7 +323,7 @@
     max-width: 480px; margin: 0 auto;
     background: rgba(10,13,16,.97); backdrop-filter: blur(16px);
     border-top: 1px solid var(--line);
-    padding: 9px 12px 6px;
+    padding: 9px 12px calc(3px + env(safe-area-inset-bottom, 0px));
     padding-bottom: max(6px, env(safe-area-inset-bottom));
     display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
   }
@@ -548,7 +548,7 @@
 </div>
 
 <script>
-var __ver='v20261003390000';
+var __ver='v20261003400000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
