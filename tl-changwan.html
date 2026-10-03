@@ -567,18 +567,6 @@
     <a class="back-btn" href="#" onclick="switchPage('old');return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
     <div class="sec"><div class="sec-head"><h2>充值套餐</h2><span class="more">BOSS卡 · 25元-10000元全档位</span></div></div>
     <div class="sec" style="padding:0 18px;">
-      <div class="ticket">
-        <div class="head"><span class="name">BOSS周卡</span><span class="badge">188元</span></div>
-        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡2张 + 镜湖BOSS召唤卡2张</li><li>7天叠加购买 · 只增天数</li></ul>
-      </div>
-      <div class="ticket">
-        <div class="head"><span class="name">BOSS月卡</span><span class="badge">488元</span></div>
-        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡1张 + 镜湖BOSS召唤卡1张</li><li>30天叠加购买 · 只增天数</li></ul>
-      </div>
-      <div class="ticket">
-        <div class="head"><span class="name">BOSS终身卡</span><span class="badge">1288元</span></div>
-        <ul><li>终身每日领取：188888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡1张 + 镜湖BOSS召唤卡1张</li><li>一次性购买 · 永久生效</li></ul>
-      </div>
       <div class="sec-head" style="margin-top:18px;"><h2>充值推荐套餐搭配</h2><span class="more">最快起号 · 最快涨战力</span></div>
       <div class="ticket">
         <div class="head"><span class="name">0元起号 · 白嫖快起</span><span class="badge">0元</span></div>
@@ -618,6 +606,18 @@
           <li>7日连充回本：100元充值卡×3 + 200元×3 + 300元×1 = 1200元充值卡</li>
           <li>可选：399元神兽炼魂卡 / 1999元卡，神兽战力封顶</li>
         </ul>
+      </div>
+      <div class="sec-head" style="margin-top:18px;"><h2>充值推荐套餐搭配</h2>      <div class="ticket">
+        <div class="head"><span class="name">BOSS周卡</span><span class="badge">188元</span></div>
+        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡2张 + 镜湖BOSS召唤卡2张</li><li>7天叠加购买 · 只增天数</li></ul>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">BOSS月卡</span><span class="badge">488元</span></div>
+        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡1张 + 镜湖BOSS召唤卡1张</li><li>30天叠加购买 · 只增天数</li></ul>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">BOSS终身卡</span><span class="badge">1288元</span></div>
+        <ul><li>终身每日领取：188888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡1张 + 镜湖BOSS召唤卡1张</li><li>一次性购买 · 永久生效</li></ul>
       </div>
       <div class="sec-head" style="margin-top:18px;"><h2>BOSS天卡</h2><span class="more">每天限购一次</span></div>
       <div class="mini-grid">
@@ -699,7 +699,7 @@
 </div>
 
 <script>
-var __ver='v20261003640000';
+var __ver='v20261003650000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
