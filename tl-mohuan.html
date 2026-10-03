@@ -11,9 +11,9 @@
 </head>
 <body>
 <div id="ld">天龙魔幻版 · 加载中…</div>
-<script src="index_d1.js?v=v20261003212550"></script>
-<script src="index_d2.js?v=v20261003212550"></script>
-<script src="index_d3.js?v=v20261003212550"></script>
+<script src="index_d1.js?v=v20261003214652"></script>
+<script src="index_d2.js?v=v20261003214652"></script>
+<script src="index_d3.js?v=v20261003214652"></script>
 <script>
 (function(){
   if(typeof B64A === 'undefined' || typeof B64B === 'undefined' || typeof B64C === 'undefined'){ fail('数据加载失败'); return; }
@@ -41,7 +41,7 @@
   /* 首载盖章：把当前版本写入 URL ?ver= 一次（replace，不入栈）。
      真实页据此得到 curVer，首访不触发自刷白屏；后续秒更新一律由真实页 URL ver 比较法负责，
      壳层不再做轮询，避免与真实页双重检测、也避免发版忘改 __ver 时每 3 秒死循环 reload。 */
-  var __ver='v20261003212550';
+  var __ver='v20261003214652';
   if(!location.search.match(/[?&]ver=/)){
     try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver); }catch(e){}
   }
