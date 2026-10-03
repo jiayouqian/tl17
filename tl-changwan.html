@@ -302,42 +302,36 @@
   .guide-tab { flex: none; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--line); background: rgba(201,164,92,.07); color: var(--ink); font-size: 12px; letter-spacing: .5px; cursor: pointer; white-space: nowrap; transition: all .2s; }
   .guide-tab.on { background: linear-gradient(180deg, rgba(201,164,92,.28), rgba(201,164,92,.12)); border-color: rgba(201,164,92,.55); color: var(--gold-hi); }
   .sec-head.foldable { cursor: pointer; user-select: none; }
-  /* ===== 攻略大区标题（鎏金卡片式） ===== */
+  /* ===== 攻略大区标题（紧凑大字形） ===== */
   .sec-head.guide-sec {
-    display: flex; align-items: center; gap: 10px;
-    margin: 2px 0 12px; padding: 13px 14px 13px 16px;
-    background: linear-gradient(180deg, rgba(201,164,92,.14), rgba(201,164,92,.04));
-    border: 1px solid rgba(201,164,92,.32);
-    border-radius: 10px; position: relative; overflow: hidden;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    display: flex; align-items: center; gap: 12px;
+    margin: 8px 0 12px; padding: 4px 0 12px 14px;
+    position: relative;
+    background: none; border: none; border-radius: 0;
+    border-bottom: 1px solid rgba(201,164,92,.22);
+    overflow: visible; box-shadow: none;
   }
   .sec-head.guide-sec::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-    background: linear-gradient(180deg, var(--gold-hi), var(--gold-dk));
+    content: ""; position: absolute; left: 0; top: 5px; bottom: 14px; width: 5px;
+    background: linear-gradient(180deg, var(--gold-hi), var(--gold-dk)); border-radius: 3px;
   }
-  .sec-head.guide-sec::after {
-    content: ""; position: absolute; right: -30px; top: -30px; width: 90px; height: 90px;
-    background: radial-gradient(circle, rgba(201,164,92,.10), transparent 70%);
-    pointer-events: none;
-  }
+  .sec-head.guide-sec::after { content: none; }
   .sec-head.guide-sec h2 {
-    font-family: "Noto Serif SC", serif; font-size: 16px; font-weight: 700; letter-spacing: 2px;
-    background: linear-gradient(180deg, #f0dfae, #c9a45c 70%, #a8813a);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    text-shadow: none;
+    font-family: "Noto Serif SC", serif; font-size: 19px; font-weight: 700; letter-spacing: 3px;
+    color: var(--gold-hi); background: none; -webkit-text-fill-color: currentColor;
+    line-height: 1.3;
   }
-  .sec-head.guide-sec .more { font-size: 10px; letter-spacing: 1px; opacity: .85; }
+  .sec-head.guide-sec h2::before, .sec-head.guide-sec h2::after { content: none; }
+  .sec-head.guide-sec .more { font-size: 10px; letter-spacing: 1px; opacity: .8; }
   .sec-head.guide-sec .ar {
-    flex: none; margin-left: 2px; width: 24px; height: 24px;
-    border: 1px solid rgba(201,164,92,.55); border-radius: 50%;
-    background: rgba(201,164,92,.10); color: var(--gold-hi);
+    flex: none; width: 24px; height: 24px; margin-left: 2px;
+    border: 1px solid rgba(201,164,92,.6); border-radius: 50%;
+    background: rgba(201,164,92,.12); color: var(--gold-hi);
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; transition: transform .25s, background .25s;
+    font-size: 13px; font-weight: 700; transition: transform .25s;
   }
-  .sec-head.guide-sec.folded { background: linear-gradient(180deg, rgba(201,164,92,.07), rgba(201,164,92,.02)); border-color: rgba(201,164,92,.22); }
+  .sec-head.guide-sec.folded { background: none; border-bottom-color: rgba(201,164,92,.15); }
   .sec-head.guide-sec.folded .ar { transform: rotate(90deg); }
-  .sec-head.foldable .ar { transition: transform .22s; }
-  .sec-head.foldable.folded .ar { transform: rotate(90deg); }
   .menpai-chips { display: flex; gap: 7px; overflow-x: auto; padding: 2px 0 10px; margin-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .menpai-chips::-webkit-scrollbar { display: none; }
   .chip { flex: none; padding: 6px 12px; border-radius: 16px; font-size: 11.5px; letter-spacing: 1px; cursor: pointer; white-space: nowrap; border: 1px solid rgba(255,255,255,.12); transition: all .2s; }
@@ -883,7 +877,7 @@
 </div>
 
 <script>
-var __ver='v20261003190826';
+var __ver='v20261003191240';
 function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
