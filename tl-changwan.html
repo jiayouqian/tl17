@@ -91,11 +91,11 @@
   .sec-head .more { margin-left: auto; font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; font-weight: 300; }
 
   /* ===== Hero 全屏长图轮播 ===== */
-  .hero { position: relative; overflow: hidden; background: var(--bg); transition: height .5s ease; }
+  .hero { position: relative; height: calc(100dvh - 46px); overflow: hidden; background: var(--bg); }
   .hero-slides, .hero-slide { position: absolute; inset: 0; }
   .hero-slide { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
   .hero-slide.on { opacity: 1; pointer-events: auto; }
-  .hero-slide img { width: 100%; height: 100%; object-fit: contain; object-position: top center; display: block; }
+  .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
@@ -362,11 +362,11 @@
   <div class="page active" id="page-old">
     <div class="hero" id="hero-old">
       <div class="hero-slides">
-        <div class="hero-slide on"><img class="hero-img" src="assets/tl-cw-full/cw_hero.jpg" alt="畅玩天龙开服福利"></div>
-        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/cw_g05.jpg" alt="畅玩399元炼魂卡充值套餐"></div>
-        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/cw_g06.jpg" alt="畅玩BOSS周卡月卡终身卡"></div>
-        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/cw_g12.jpg" alt="畅玩充值战力档位"></div>
-        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/cw_g07.jpg" alt="畅玩BOSS榜奖励战力加成"></div>
+        <div class="hero-slide on"><img class="hero-img" src="assets/tl-cw-full/hero_re0.jpg" alt="畅玩天龙开服福利"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/hero_re1.jpg" alt="畅玩399元神兽炼魂卡"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/hero_re2.jpg" alt="畅玩BOSS全新玩法充值"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/hero_re3.jpg" alt="畅玩充值档位奖励"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/hero_re4.jpg" alt="畅玩积分商城提战力"></div>
       </div>
       <div class="hero-dots"><button class="hd on" data-i="0" type="button" aria-label="第1张"></button><button class="hd" data-i="1" type="button" aria-label="第2张"></button><button class="hd" data-i="2" type="button" aria-label="第3张"></button><button class="hd" data-i="3" type="button" aria-label="第4张"></button><button class="hd" data-i="4" type="button" aria-label="第5张"></button></div>
     </div>
@@ -541,7 +541,7 @@
 </div>
 
 <script>
-var __ver='v20261003310000';
+var __ver='v20261003320000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -591,25 +591,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var slides = hero.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
   var idx = 0, timer = null;
-  function setH(im) {
-    if (!im.naturalWidth) return;
-    var r = im.naturalHeight / im.naturalWidth;
-    hero.style.height = Math.round(hero.clientWidth * r) + 'px';
-  }
-  slides.forEach(function (s) {
-    var im = s.querySelector('img');
-    if (!im) return;
-    if (im.complete && im.naturalWidth) setH(im);
-    else im.addEventListener('load', function () { setH(im); });
-  });
   function go(n) {
     slides[idx].classList.remove('on');
     dots[idx].classList.remove('on');
     idx = (n + slides.length) % slides.length;
     slides[idx].classList.add('on');
     dots[idx].classList.add('on');
-    var im = slides[idx].querySelector('img');
-    if (im && im.naturalWidth) setH(im);
   }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); restart(); }); });
   function restart() { clearInterval(timer); timer = setInterval(function () { go(idx + 1); }, 3000); }
