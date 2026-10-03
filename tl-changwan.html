@@ -128,12 +128,15 @@
 
   /* ===== 通行令主卡 ===== */
   .pass {
-    position: relative; overflow: hidden;
+    position: relative; overflow: hidden; cursor: pointer;
     background: linear-gradient(160deg, var(--surface2), var(--surface));
     border: 1px solid var(--line);
     border-radius: 14px;
-    padding: 20px 18px 18px;
+    padding: 20px 18px 16px;
+    transition: border-color .2s, transform .14s ease;
   }
+  .pass:active { transform: scale(.985); }
+  .pass:hover { border-color: rgba(201,164,92,.4); }
   .pass::before {
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
     background: linear-gradient(90deg, transparent 8%, var(--gold) 30%, var(--gold-hi) 55%, var(--gold-dk) 80%, transparent 95%);
@@ -155,7 +158,12 @@
     font-family: "Noto Serif SC", serif;
     text-shadow: 0 0 18px rgba(201,164,92,.35);
   }
-  .pass .divider { height: 1px; margin: 15px 0; background: linear-gradient(90deg, var(--line), transparent); }
+  .invite-hint {
+    margin-top: 13px; padding-top: 10px; text-align: center;
+    border-top: 1px dashed rgba(201,164,92,.22);
+    font-size: 10.5px; letter-spacing: 2px; color: var(--gold);
+    position: relative; z-index: 2;
+  }
 
   /* ===== 底部常驻操作栏 ===== */
   .cta-bar {
@@ -212,22 +220,6 @@
     box-shadow: none;
   }
   .btn-sm { padding: 8px 18px; border-radius: 8px; font-size: 12.5px; letter-spacing: 2px; display: inline-block; }
-  .copy-fallback { margin-top: 14px; text-align: center; position: relative; z-index: 2; }
-  .copy-fallback button {
-    padding: 6px 18px; background: transparent; color: var(--ink-faint);
-    border: 1px dashed rgba(143,139,124,.35); border-radius: 16px;
-    font-size: 10.5px; cursor: pointer; letter-spacing: 1px;
-  }
-
-  /* ===== 功能入口 ===== */
-  .entry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 0 18px 26px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
-  .entry { display: block; text-align: center; text-decoration: none; color: var(--ink); padding: 18px 4px 16px; position: relative; transition: background .2s; }
-  .entry + .entry::before { content: ""; position: absolute; left: 0; top: 18%; bottom: 18%; width: 1px; background: linear-gradient(180deg, transparent, var(--line-strong), transparent); }
-  .entry:active { background: rgba(201,164,92,.05); }
-  .entry .ic { width: 30px; height: 30px; margin: 0 auto 9px; }
-  .entry .ic svg { width: 100%; height: 100%; stroke: var(--gold); stroke-width: 1.5; fill: none; }
-  .entry b { display: block; font-size: 13.5px; font-weight: 700; letter-spacing: 1px; }
-  .entry span { font-size: 9.5px; color: var(--ink-faint); letter-spacing: .5px; display: block; margin-top: 3px; }
 
   /* ===== 礼包券票 ===== */
   .ticket {
@@ -356,17 +348,6 @@
   }
   .tabbar button .icon { width: 19px; height: 19px; display: block; margin: 0 auto 3px; stroke: currentColor; fill: none; stroke-width: 1.6; }
 
-  /* ===== 弹窗 ===== */
-  .modal { display: none; position: fixed; inset: 0; background: rgba(5,7,9,.78); backdrop-filter: blur(4px); z-index: 999; align-items: center; justify-content: center; }
-  .modal.show { display: flex; animation: fadeIn .2s ease; }
-  .modal-box { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 14px; padding: 20px; width: 90%; max-width: 370px; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
-  .modal-box h3 { font-family: "Noto Serif SC", serif; font-size: 15px; color: var(--gold-hi); margin-bottom: 15px; font-weight: 700; text-align: center; letter-spacing: 2px; }
-  .modal-item { margin-bottom: 10px; padding: 12px; background: rgba(10,13,16,.6); border: 1px solid var(--line); border-radius: 9px; }
-  .modal-item .lb { font-size: 10.5px; color: var(--ink-faint); margin-bottom: 6px; letter-spacing: 1px; }
-  .modal-item .row { display: flex; gap: 9px; align-items: center; }
-  .modal-item .row code { flex: 1; font-size: 11px; color: var(--ink); word-break: break-all; line-height: 1.5; font-family: "Noto Sans SC", sans-serif; }
-  .modal-close { width: 100%; margin-top: 13px; padding: 10px; background: transparent; color: var(--ink-faint); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; font-size: 12.5px; cursor: pointer; letter-spacing: 2px; }
-
   @media (prefers-reduced-motion: reduce) {
     .page.active { animation: none; }
     .hero-slide { transition: none; }
@@ -401,36 +382,19 @@
     </div>
 
     <div class="sec">
-      <div class="pass">
+      <div class="pass" onclick="copyInvite(this)" role="button" tabindex="0">
         <div class="pass-head">
           <div class="pass-title">
-            <b>注册 · 下载</b>
-            <span>通过本页链接注册 · 充值礼包有售后</span>
+            <b>新手邀请函</b>
+            <span>注册时填写 · 领开局豪礼</span>
           </div>
           <div class="pass-code">
             <span>邀请码</span>
             <b>PPAP</b>
           </div>
         </div>
-        <div class="copy-fallback">
-          <button onclick="showCopyModalOld()">按钮点不开？点这里复制链接</button>
-        </div>
+        <div class="invite-hint">点击卡片复制邀请码 PPAP</div>
       </div>
-    </div>
-
-    <div class="entry-grid">
-      <a class="entry" href="#" onclick="switchPage('manual-old');return false;">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-        <b>完整攻略</b><span>升级·战力·副本</span>
-      </a>
-      <a class="entry" href="#" onclick="switchPage('gifts-old');return false;">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
-        <b>礼包福利</b><span>CDK·VIP·补偿码</span>
-      </a>
-      <a class="entry" href="http://tlbb.hfynxx.top/PPAP" target="_blank">
-        <div class="ic"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <b>玩家后台</b><span>充值 · 转区 · 服务</span>
-      </a>
     </div>
 
     <div class="tip">注册账号密码需"小写字母+数字"组合，不可纯数字；邀请码 PPAP 已自动填好。</div>
@@ -440,7 +404,7 @@
   <div class="cta-bar">
     <a class="cta-btn cta-gold" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
     <a class="cta-btn cta-cinnabar" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载</a>
-    <a class="cta-btn cta-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">玩家后台</a>
+    <a class="cta-btn cta-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">充值后台</a>
   </div>
 
   <!-- ===== 礼包码页 ===== -->
@@ -592,24 +556,8 @@
   </button>
 </div>
 
-<!-- 备用链接复制弹窗 -->
-<div class="modal" id="copyModalOld" onclick="hideCopyModalOld()">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <h3>复制链接</h3>
-    <div class="modal-item">
-      <div class="lb">注册链接</div>
-      <div class="row"><code id="m-reg">http://tlbb.hfynxx.top/PPAP</code><button class="copy-btn" onclick="copyText('http://tlbb.hfynxx.top/PPAP', this)">复制</button></div>
-    </div>
-    <div class="modal-item">
-      <div class="lb">下载链接</div>
-      <div class="row"><code id="m-dl">https://hftl.jinkeyan.wang/HFTL.html</code><button class="copy-btn" onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html', this)">复制</button></div>
-    </div>
-    <button class="modal-close" onclick="hideCopyModalOld()">关闭</button>
-  </div>
-</div>
-
 <script>
-var __ver='v20261003190000';
+var __ver='v20261003200000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -652,8 +600,10 @@ function flash(btn) {
   var old = btn.textContent; btn.textContent = '已复制';
   setTimeout(function () { btn.textContent = old; }, 1400);
 }
-function showCopyModalOld() { document.getElementById('copyModalOld').classList.add('show'); }
-function hideCopyModalOld() { document.getElementById('copyModalOld').classList.remove('show'); }
+function copyInvite(card) {
+  var code = card.querySelector('.pass-code b');
+  copyText(code ? code.textContent : 'PPAP', card.querySelector('.invite-hint'));
+}
 
 /* 折叠展开 */
 document.addEventListener('DOMContentLoaded', function () {
