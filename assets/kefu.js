@@ -3,7 +3,7 @@
   if (window.__fkInjected) { return; }
   window.__fkInjected = true;
   var css = [
-    '.fk{position:fixed;right:14px;bottom:64px;z-index:9999;font-family:system-ui,sans-serif}',
+    '.fk{position:fixed;right:14px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:9999;font-family:system-ui,sans-serif}',
     '.fk-btn{width:56px;height:56px;border-radius:50%;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:none;border:2px solid rgba(232,182,76,.85);user-select:none;touch-action:none;-webkit-touch-callout:none;transition:background .25s}',
     '.fk-btn:hover{background:rgba(232,182,76,.2)}',
     '.fk-btn svg{width:24px;height:24px;fill:#f5d489;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}',
@@ -37,15 +37,31 @@
     '</div>';
   document.body.appendChild(w);
 
+  var __fkPushed = false;
+  function fkSetOpen(p, open){
+    if(!p) return;
+    var was = p.classList.contains('open');
+    p.classList.toggle('open', open);
+    if(open && !was){
+      if(!__fkPushed){ __fkPushed = true; try{ history.pushState({fk:1},''); }catch(e){} }
+    } else if(!open && was){
+      if(__fkPushed){ __fkPushed = false; try{ history.back(); }catch(e){} }
+    }
+  }
   window.fkToggle = function (e) {
     if (e && e.stopPropagation) { e.stopPropagation(); }
     var p = document.getElementById('fkPanel');
-    if (p) { p.classList.toggle('open'); }
+    if (p) { fkSetOpen(p, !p.classList.contains('open')); }
   };
   window.fkClose = function () {
-    var p = document.getElementById('fkPanel');
-    if (p) { p.classList.remove('open'); }
+    fkSetOpen(document.getElementById('fkPanel'), false);
   };
+  /* 手机返回键：收起客服面板（浏览器已后退一格，这里只负责关面板） */
+  window.addEventListener('popstate', function(){
+    var p = document.getElementById('fkPanel');
+    if (p && p.classList.contains('open')) { p.classList.remove('open'); }
+    __fkPushed = false;
+  });
   window.fkCopy = function (v) {
     var ok = false;
     try {
@@ -66,8 +82,7 @@
   };
   document.addEventListener('click', function (e) {
     if (!e.target.closest('#fkWidget')) {
-      var p = document.getElementById('fkPanel');
-      if (p) { p.classList.remove('open'); }
+      fkSetOpen(document.getElementById('fkPanel'), false);
     }
   });
 

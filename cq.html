@@ -46,31 +46,13 @@
 </script>
 <script>
 (function(){
-  (function(){
-  if(!location.search.match(/rv=([^&]+)/)){
-    fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
-      if(d&&d.v){ try{history.replaceState(null,'','?rv='+d.v);}catch(e){} }
-    }).catch(function(){});
+  /* 首载盖章：把当前版本写入 URL ?ver= 一次（replace，不入栈）。
+     真实页据此得到 curVer，首访不触发自刷白屏；后续秒更新一律由真实页 URL ver 比较法负责，
+     壳层不再做轮询，避免与真实页双重检测、也避免发版忘改 __ver 时每 3 秒死循环 reload。 */
+  var __ver='v20261003211550';
+  if(!location.search.match(/[?&]ver=/)){
+    try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver); }catch(e){}
   }
-})();
-})();
-</script>
-<!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
-<script>
-(function(){
-  var __ver='v20261003202925';
-  function chk(){
-    fetch('version.json?r='+Date.now(),{cache:'no-store'})
-      .then(function(r){return r.json()})
-      .then(function(j){
-        if(j && j.v && j.v>__ver){ /* 仅新版本跳转，旧缓存不跳 */
-          var q=(location.search?location.search+'&':'?')+'ver='+j.v;
-          location.replace(location.pathname+q);
-        }
-      }).catch(function(){});
-  }
-  setInterval(chk, 3000);
-  setTimeout(chk, 1200);
 })();
 </script>
 

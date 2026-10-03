@@ -1,5 +1,6 @@
 _shots/
-_agent_output/pick_work/
-_agent_output/pick_work2/
-_agent_output/qa/
+_agent_output/
+_backup/
+_backup_*.html
+audit_*
 _agent_output/pick_*.json
