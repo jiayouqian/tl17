@@ -798,7 +798,7 @@
 </div>
 
 <script>
-var __ver='v20261003173222';
+var __ver='v20261003174612';
 function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -867,12 +867,18 @@ document.addEventListener('DOMContentLoaded', function () {
   var scroller = hero.querySelector('.hero-slides');
   var slides = scroller.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
+  var N = slides.length;
+  var fc = slides[0].cloneNode(true);
+  fc.classList.remove('on');
+  scroller.appendChild(fc);
+  var TOTAL = N + 1;
   var idx = 0, timer = null, idleTimer = null, interacting = false;
   function cur() { var w = scroller.clientWidth || 1; return Math.round(scroller.scrollLeft / w); }
+  function syncDots(k) { for (var j = 0; j < dots.length; j++) dots[j].classList.toggle('on', j === k); }
   function startAuto() { stopAuto(); timer = setInterval(function () { go(idx + 1); }, 2000); }
   function stopAuto() { clearInterval(timer); timer = null; }
   function go(n) {
-    idx = (n + slides.length) % slides.length;
+    idx = n % TOTAL;
     stopAuto();
     scroller.scrollTo({ left: idx * scroller.clientWidth, behavior: 'smooth' });
     clearTimeout(idleTimer);
@@ -884,11 +890,15 @@ document.addEventListener('DOMContentLoaded', function () {
   scroller.addEventListener('pointercancel', function () { interacting = false; clearTimeout(idleTimer); idleTimer = setTimeout(startAuto, 1400); });
   scroller.addEventListener('wheel', function () { stopAuto(); clearTimeout(idleTimer); idleTimer = setTimeout(startAuto, 1400); }, { passive: true });
   scroller.addEventListener('scroll', function () {
+    var w = scroller.clientWidth || 1;
     var i = cur();
-    if (i !== idx) {
-      idx = i;
-      for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('on', k === i);
+    if (scroller.scrollLeft >= N * w - 2) {
+      /* 到达克隆首图：无声跳回真实第一张，实现无缝循环 */
+      idx = 0; syncDots(0);
+      scroller.scrollLeft = 0;
+      return;
     }
+    if (i !== idx) { idx = i; syncDots(i); }
     if (!interacting) { clearTimeout(idleTimer); idleTimer = setTimeout(startAuto, 1400); }
   }, { passive: true });
   startAuto();
