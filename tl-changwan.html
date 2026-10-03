@@ -3,270 +3,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0a07'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='%23d4a94e' font-weight='900'%3E天%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230a0d10'/%3E%3Crect x='8' y='8' width='48' height='48' rx='6' fill='none' stroke='%23c9a45c' stroke-width='2'/%3E%3Ctext x='32' y='42' font-size='26' text-anchor='middle' fill='%23e8cf9a' font-family='serif' font-weight='900'%3E龙%3C/text%3E%3C/svg%3E">
 <title>天龙畅玩版 · 17职业国际服</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   :root {
-    --gold: #d4a94e;
-    --gold-hi: #f2d38a;
-    --gold-dk: #8f6b24;
-    --bg: #0d0a07;
-    --bg2: #141009;
-    --card: #171109;
-    --card2: #1e160c;
-    --ink: #f2e8d4;
-    --ink-dim: #a08c68;
-    --ink-faint: #6e5f45;
-    --line: rgba(212,169,78,.16);
-    --line-strong: rgba(212,169,78,.34);
-    --red: #e2572c;
-    --ice: #7fb8e6;
+    --gold: #c9a45c;
+    --gold-hi: #e8cf9a;
+    --gold-dk: #8a6a35;
+    --cinnabar: #b03a2e;
+    --cinnabar-hi: #d95c44;
+    --bg: #0a0d10;
+    --bg2: #0e1217;
+    --surface: #12161c;
+    --surface2: #171d24;
+    --ink: #e9e2d0;
+    --ink-dim: #8f8b7c;
+    --ink-faint: #5c5a52;
+    --line: rgba(201,164,92,.16);
+    --line-strong: rgba(201,164,92,.4);
   }
   html { scroll-behavior:smooth; }
   body {
     background: var(--bg); color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-    line-height: 1.6;
+    font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
     min-height: 100vh;
+    font-weight: 400;
   }
-  .wrap { max-width: 480px; margin: 0 auto; padding-bottom: 76px; }
+  .wrap { max-width: 480px; margin: 0 auto; padding-bottom: 78px; position: relative; }
 
   /* ===== 顶部品牌条 ===== */
   .topbar {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(13,10,7,.92); backdrop-filter: blur(14px);
-    padding: 14px 16px; text-align: center;
+    background: rgba(10,13,16,.94);
+    backdrop-filter: blur(16px);
+    padding: 16px 18px 14px;
+    text-align: center;
     border-bottom: 1px solid var(--line);
   }
-  .topbar .brand { font-size: 17px; font-weight: 900; color: var(--gold-hi); letter-spacing: 3px; }
-  .topbar .brand::before, .topbar .brand::after { content: "◆"; font-size: 9px; color: var(--gold-dk); vertical-align: 3px; margin: 0 7px; }
-  .topbar .sub { display: block; font-size: 10px; color: var(--ink-faint); margin-top: 3px; letter-spacing: 1px; }
+  .topbar .brand {
+    font-family: "Noto Serif SC", serif;
+    font-size: 18px; font-weight: 900; color: var(--ink);
+    letter-spacing: 6px;
+    text-shadow: 0 1px 24px rgba(201,164,92,.22);
+  }
+  .topbar .brand i {
+    font-style: normal;
+    background: linear-gradient(120deg, var(--gold-hi), var(--gold-dk));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .topbar .sub {
+    display: block; margin-top: 5px;
+    font-size: 10px; letter-spacing: 3px; color: var(--ink-faint);
+    font-weight: 300;
+  }
 
   .page { display: none; }
-  .page.active { display: block; animation: fadeIn .25s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .page.active { display: block; animation: fadeIn .28s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-  /* ===== 通用组件 ===== */
-  .sec { padding: 0 14px; margin-bottom: 22px; }
-  .sec-title { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
-  .sec-title .bar { width: 3px; height: 16px; background: linear-gradient(180deg, var(--gold-hi), var(--gold-dk)); border-radius: 2px; }
-  .sec-title h2 { font-size: 16px; color: var(--ink); font-weight: 700; letter-spacing: 1px; }
-  .sec-title .more { margin-left: auto; font-size: 11px; color: var(--ink-faint); }
-
-  .panel {
-    background: linear-gradient(180deg, var(--card2), var(--card));
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  /* ===== 分区标题 ===== */
+  .sec { padding: 0 18px; margin-bottom: 26px; }
+  .sec-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .sec-head h2 {
+    font-family: "Noto Serif SC", serif;
+    font-size: 15px; font-weight: 700; color: var(--ink);
+    letter-spacing: 2px;
   }
-  .panel-pad { padding: 14px; }
-
-  /* ===== 按钮 ===== */
-  .btn { display: block; text-align: center; text-decoration: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 700; letter-spacing: 1px; transition: transform .12s; }
-  .btn:active { transform: scale(.97); }
-  .btn-gold {
-    background: linear-gradient(135deg, #ecc470, #b0852e);
-    color: #161006;
-    box-shadow: 0 6px 18px rgba(212,169,78,.35), inset 0 1px 0 rgba(255,255,255,.35);
+  .sec-head h2::after {
+    content: ""; display: block; width: 26px; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-top: 4px;
   }
-  .btn-dl {
-    background: linear-gradient(135deg, #ff6a3d, #d5451d);
-    color: #fff;
-    box-shadow: 0 6px 18px rgba(229,82,44,.32), inset 0 1px 0 rgba(255,255,255,.25);
-  }
-  .btn-ghost {
-    background: linear-gradient(180deg, rgba(212,169,78,.12), rgba(212,169,78,.04));
-    border: 1px solid var(--line-strong);
-    color: var(--gold-hi);
-  }
-  .btn-sm { padding: 8px 16px; border-radius: 9px; font-size: 13px; display: inline-block; }
-
-  /* ===== 三列卖点 ===== */
-  .pitch { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 0 14px; margin-bottom: 18px; }
-  .pitch .p {
-    background: linear-gradient(180deg, var(--card2), var(--card));
-    border: 1px solid var(--line);
-    border-radius: 12px; padding: 12px 4px; text-align: center;
-  }
-  .pitch .p b {
-    display: block; font-size: 15px; font-weight: 900;
-    background: linear-gradient(180deg, var(--gold-hi), #c2953c);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .pitch .p span { font-size: 10.5px; color: var(--ink-faint); }
+  .sec-head .more { margin-left: auto; font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; font-weight: 300; }
 
   /* ===== Hero 轮播 ===== */
-  .hero { position: relative; height: 212px; overflow: hidden; background: #0d0a07; }
+  .hero { position: relative; height: 300px; overflow: hidden; background: var(--bg); }
   .hero-slides, .hero-slide { position: absolute; inset: 0; }
-  .hero-slide { opacity: 0; transition: opacity .55s ease; pointer-events: none; }
+  .hero-slide { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
   .hero-slide.on { opacity: 1; pointer-events: auto; }
   .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-  .hero::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 56px;
-    background: linear-gradient(180deg, transparent, rgba(13,10,7,.85));
-    pointer-events: none;
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(10,13,16,.18), transparent 22%, transparent 62%, rgba(10,13,16,.66)),
+      radial-gradient(120% 80% at 50% 0%, rgba(201,164,92,.07), transparent 55%);
   }
-  .hero-dots { position: absolute; left: 0; right: 0; bottom: 12px; z-index: 5; display: flex; justify-content: center; gap: 6px; }
+  .hero-dots { position: absolute; left: 0; right: 0; bottom: 16px; z-index: 5; display: flex; justify-content: center; gap: 8px; }
   .hero-dots button {
-    width: 6px; height: 6px; border-radius: 3px; border: none; padding: 0; cursor: pointer;
-    background: rgba(255,255,255,.4); transition: all .3s;
+    width: 5px; height: 5px; border-radius: 3px; border: none; padding: 0; cursor: pointer;
+    background: rgba(233,226,208,.35); transition: all .3s;
   }
-  .hero-dots button.on { width: 16px; background: var(--gold); }
+  .hero-dots button.on { width: 18px; background: var(--gold-hi); }
+
+  /* ===== 卖点细线区 ===== */
+  .pitch {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    margin: -22px 18px 24px; position: relative; z-index: 6;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 14px 34px rgba(0,0,0,.42);
+  }
+  .pitch .p { padding: 16px 4px 14px; text-align: center; position: relative; }
+  .pitch .p + .p::before {
+    content: ""; position: absolute; left: 0; top: 20%; bottom: 20%;
+    width: 1px; background: linear-gradient(180deg, transparent, var(--line-strong), transparent);
+  }
+  .pitch .p b {
+    display: block; font-family: "Noto Serif SC", serif;
+    font-size: 16px; font-weight: 900; color: var(--gold-hi);
+    letter-spacing: .5px;
+  }
+  .pitch .p span { font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; display: block; margin-top: 3px; }
+
+  /* ===== 通行令主卡 ===== */
+  .pass {
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, var(--surface2), var(--surface));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 18px 18px;
+  }
+  .pass::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 8%, var(--gold) 30%, var(--gold-hi) 55%, var(--gold-dk) 80%, transparent 95%);
+  }
+  .pass::after {
+    content: ""; position: absolute; right: -44px; top: -44px; width: 110px; height: 110px;
+    border: 1px solid var(--line); border-radius: 50%;
+  }
+  .pass-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .pass-title b {
+    display: block; font-family: "Noto Serif SC", serif;
+    font-size: 17px; font-weight: 900; color: var(--ink); letter-spacing: 2px;
+  }
+  .pass-title span { font-size: 10.5px; color: var(--ink-faint); letter-spacing: .5px; }
+  .pass-code { text-align: right; position: relative; z-index: 2; }
+  .pass-code span { font-size: 9.5px; color: var(--ink-faint); letter-spacing: 2px; display: block; }
+  .pass-code b {
+    font-size: 22px; letter-spacing: 4px; font-weight: 700; color: var(--gold-hi);
+    font-family: "Noto Serif SC", serif;
+    text-shadow: 0 0 18px rgba(201,164,92,.35);
+  }
+  .pass .divider { height: 1px; margin: 15px 0; background: linear-gradient(90deg, var(--line), transparent); }
+  .cta-stack { display: flex; flex-direction: column; gap: 11px; position: relative; z-index: 2; }
+
+  /* ===== 按钮 ===== */
+  .btn {
+    display: block; text-align: center; text-decoration: none;
+    border-radius: 10px; padding: 15px; font-size: 14.5px;
+    font-weight: 600; letter-spacing: 3px; position: relative; overflow: hidden;
+    transition: transform .14s ease, box-shadow .2s ease;
+    font-family: "Noto Sans SC", sans-serif;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn::after {
+    content: ""; position: absolute; top: 0; left: -60%; width: 45%; height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255,255,255,.16), transparent);
+    transition: left .5s ease;
+  }
+  .btn:active::after { left: 130%; }
+  .btn-gold {
+    background: linear-gradient(135deg, #e0bd7c 0%, #c9a45c 45%, #a07d3d 100%);
+    color: #14100a;
+    box-shadow: 0 8px 22px rgba(201,164,92,.3), inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .btn-cinnabar {
+    background: linear-gradient(135deg, #c9472f 0%, #b03a2e 55%, #8c2b22 100%);
+    color: #fdf3ec;
+    box-shadow: 0 8px 22px rgba(176,58,46,.32), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--gold-hi);
+    box-shadow: none;
+  }
+  .btn-sm { padding: 8px 18px; border-radius: 8px; font-size: 12.5px; letter-spacing: 2px; display: inline-block; }
+  .copy-fallback { margin-top: 14px; text-align: center; position: relative; z-index: 2; }
+  .copy-fallback button {
+    padding: 6px 18px; background: transparent; color: var(--ink-faint);
+    border: 1px dashed rgba(143,139,124,.35); border-radius: 16px;
+    font-size: 10.5px; cursor: pointer; letter-spacing: 1px;
+  }
 
   /* ===== 功能入口 ===== */
-  .entry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; padding: 0 14px; margin-bottom: 18px; }
-  .entry {
-    display: block; text-align: center; text-decoration: none; color: var(--ink);
-    background: linear-gradient(180deg, var(--card2), var(--card));
-    border: 1px solid var(--line); border-radius: 12px; padding: 13px 4px;
-    transition: transform .12s;
-  }
-  .entry:active { transform: scale(.95); }
-  .entry .ic {
-    width: 38px; height: 38px; margin: 0 auto 7px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, rgba(212,169,78,.22), rgba(212,169,78,.06));
-    border: 1px solid var(--line-strong);
-  }
-  .entry .ic svg { width: 20px; height: 20px; stroke: var(--gold-hi); }
-  .entry b { display: block; font-size: 14px; font-weight: 700; }
-  .entry span { font-size: 10px; color: var(--ink-faint); display: block; margin-top: 2px; }
+  .entry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 0 18px 26px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+  .entry { display: block; text-align: center; text-decoration: none; color: var(--ink); padding: 18px 4px 16px; position: relative; transition: background .2s; }
+  .entry + .entry::before { content: ""; position: absolute; left: 0; top: 18%; bottom: 18%; width: 1px; background: linear-gradient(180deg, transparent, var(--line-strong), transparent); }
+  .entry:active { background: rgba(201,164,92,.05); }
+  .entry .ic { width: 30px; height: 30px; margin: 0 auto 9px; }
+  .entry .ic svg { width: 100%; height: 100%; stroke: var(--gold); stroke-width: 1.5; fill: none; }
+  .entry b { display: block; font-size: 13.5px; font-weight: 700; letter-spacing: 1px; }
+  .entry span { font-size: 9.5px; color: var(--ink-faint); letter-spacing: .5px; display: block; margin-top: 3px; }
 
-  /* ===== 注册下载主卡 ===== */
-  .re-card { position: relative; overflow: hidden; }
-  .re-card::before {
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  /* ===== 礼包券票 ===== */
+  .ticket {
+    position: relative; margin-bottom: 14px;
+    background: linear-gradient(150deg, var(--surface2), var(--surface));
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 16px 14px;
   }
-  .re-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .re-title b { display: block; font-size: 16px; color: var(--ink); font-weight: 800; }
-  .re-title span { font-size: 10.5px; color: var(--ink-faint); }
-  .re-code { text-align: right; }
-  .re-code span { font-size: 10px; color: var(--ink-faint); display: block; }
-  .re-code b {
-    font-size: 20px; letter-spacing: 3px; font-weight: 900;
-    background: linear-gradient(180deg, #a8d2f2, #5d9ad6);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  .ticket::before, .ticket::after {
+    content: ""; position: absolute; top: 46px; width: 16px; height: 16px;
+    background: var(--bg); border-radius: 50%;
+    border: 1px solid var(--line);
+    z-index: 2;
   }
-  .cta-stack { display: flex; flex-direction: column; gap: 9px; }
-  .copy-fallback { margin-top: 9px; text-align: center; }
-  .copy-fallback button {
-    padding: 7px 20px; background: transparent; color: var(--ink-faint);
-    border: 1px solid rgba(255,255,255,.16); border-radius: 18px; font-size: 11px; cursor: pointer;
-  }
-
-  /* ===== 礼包码 ===== */
-  .gift { position: relative; overflow: hidden; margin-bottom: 11px; }
-  .gift::before {
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .gift .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-  .gift .name { font-size: 14px; color: var(--ink); font-weight: 700; }
-  .gift .badge { font-size: 10px; padding: 2px 9px; border-radius: 9px; background: rgba(212,169,78,.14); color: var(--gold-hi); }
-  .code-row { display: flex; gap: 9px; align-items: center; }
+  .ticket::before { left: -9px; }
+  .ticket::after { right: -9px; }
+  .ticket .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .ticket .name { font-family: "Noto Serif SC", serif; font-size: 14px; color: var(--ink); font-weight: 700; letter-spacing: 1px; }
+  .ticket .badge { font-size: 9.5px; padding: 2px 10px; border-radius: 10px; background: rgba(201,164,92,.13); color: var(--gold-hi); letter-spacing: 1px; }
+  .code-row { display: flex; gap: 10px; align-items: center; }
   .code-box {
-    flex: 1; padding: 11px 12px; background: rgba(13,10,7,.6);
-    border: 1px dashed var(--line-strong); border-radius: 9px;
-    font-size: 18px; font-weight: 900; color: var(--gold-hi); letter-spacing: 2px; text-align: center;
-    font-family: Menlo, Consolas, monospace;
+    flex: 1; padding: 12px; background: rgba(10,13,16,.7);
+    border: 1px dashed var(--line-strong); border-radius: 8px;
+    font-size: 19px; font-weight: 700; color: var(--gold-hi); letter-spacing: 3px; text-align: center;
+    font-family: "Noto Serif SC", serif;
   }
   .copy-btn {
-    padding: 10px 16px; background: linear-gradient(135deg, rgba(212,169,78,.2), rgba(212,169,78,.05));
-    border: 1px solid var(--line-strong); border-radius: 9px; color: var(--gold-hi);
-    font-size: 12px; cursor: pointer; font-weight: 700;
+    padding: 11px 17px; background: rgba(201,164,92,.1);
+    border: 1px solid var(--line-strong); border-radius: 8px; color: var(--gold-hi);
+    font-size: 12px; cursor: pointer; font-weight: 500; letter-spacing: 1px;
+    transition: all .2s;
   }
-  .gift ul { list-style: none; margin-top: 9px; }
-  .gift ul li { font-size: 12.5px; color: #c8b692; padding: 2.5px 0; }
-  .gift ul li::before { content: "◆ "; color: var(--gold); font-size: 9px; }
+  .copy-btn:active { transform: scale(.95); }
+  .ticket ul { list-style: none; margin-top: 11px; padding-top: 11px; border-top: 1px dashed rgba(143,139,124,.22); }
+  .ticket ul li { font-size: 12px; color: #b7ad94; padding: 3px 0; line-height: 1.8; }
+  .ticket ul li::before { content: "·"; color: var(--gold); font-weight: 700; margin-right: 7px; }
 
   /* ===== 折叠攻略 ===== */
-  .fold { margin-bottom: 10px; overflow: hidden; }
+  .fold { margin-bottom: 8px; }
   .fold-head {
-    width: 100%; padding: 13px 14px; background: linear-gradient(180deg, var(--card2), var(--card));
-    border: 1px solid var(--line); border-radius: 11px; color: var(--ink);
-    font-size: 14px; font-weight: 600; cursor: pointer;
+    width: 100%; padding: 14px 16px; background: transparent;
+    border: none; border-bottom: 1px solid var(--line);
+    color: var(--ink); font-size: 14px; font-weight: 500; cursor: pointer;
     display: flex; justify-content: space-between; align-items: center; text-align: left;
+    letter-spacing: 1px;
   }
-  .fold-head .ar { transition: transform .22s; color: var(--gold); font-size: 16px; }
-  .fold-head.open { border-radius: 11px 11px 0 0; }
+  .fold-head .ar {
+    transition: transform .22s; color: var(--gold); font-size: 15px; font-weight: 300;
+  }
   .fold-head.open .ar { transform: rotate(90deg); }
-  .fold-body { display: none; padding: 13px 14px; background: rgba(23,17,9,.92); border: 1px solid var(--line); border-top: none; border-radius: 0 0 11px 11px; font-size: 12.5px; line-height: 1.85; color: #d8c9ab; }
-  .fold-body.open { display: block; }
-  .fold-body b { color: var(--gold-hi); }
+  .fold-body { display: none; padding: 12px 16px 16px; background: rgba(18,22,28,.5); border-bottom: 1px solid var(--line); font-size: 12.5px; line-height: 1.95; color: #cfc5a8; }
+  .fold-body.open { display: block; animation: fadeIn .2s ease; }
+  .fold-body b { color: var(--gold-hi); font-weight: 600; }
   .fold-body .sub {
-    margin-top: 9px; background: rgba(212,169,78,.06); border-left: 2px solid var(--gold-dk);
-    border-radius: 0 8px 8px 0; padding: 9px 11px; font-size: 12px; color: var(--ink-dim);
+    margin-top: 9px; background: rgba(201,164,92,.05); border-left: 2px solid var(--gold-dk);
+    border-radius: 0 8px 8px 0; padding: 9px 12px; font-size: 12px; color: var(--ink-dim);
   }
-  .pitem { margin-top: 9px; background: rgba(212,169,78,.05); border-radius: 8px; overflow: hidden; }
+  .pitem { margin-top: 8px; }
   .pitem-head {
-    width: 100%; padding: 10px 12px; background: transparent; border: none; color: var(--gold-hi);
-    font-size: 13px; font-weight: 700; text-align: left; cursor: pointer; display: flex; justify-content: space-between;
+    width: 100%; padding: 13px 16px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 10px;
+    color: var(--gold-hi); font-size: 13.5px; font-weight: 600; text-align: left; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; letter-spacing: 1px;
+    transition: border-color .2s;
   }
-  .pitem-body { display: none; padding: 10px 12px; font-size: 12px; line-height: 1.85; color: var(--ink); border-top: 1px solid rgba(212,169,78,.1); }
+  .pitem-head .ar { transition: transform .22s; color: var(--ink-faint); }
+  .pitem-head.open .ar { transform: rotate(90deg); }
+  .pitem-body { display: none; padding: 14px 16px; font-size: 12px; line-height: 1.95; color: var(--ink); border: 1px solid var(--line); border-top: none; border-radius: 0 0 10px 10px; background: rgba(18,22,28,.4); }
   .pitem-body.open { display: block; }
-  .pitem-body img { width: 100%; display: block; margin-top: 8px; border-radius: 6px; }
+  .pitem-body img { width: 100%; display: block; margin-top: 9px; border-radius: 6px; }
 
   /* ===== 手册长图 ===== */
-  .man-img { margin-bottom: 12px; }
+  .man-img { margin-bottom: 14px; }
   .man-img img { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--line); }
-  .man-img p { padding: 7px 4px 10px; font-size: 11.5px; color: var(--ink-faint); text-align: center; }
 
   /* ===== 提示条 ===== */
   .tip {
-    margin: 14px; padding: 12px 13px;
-    background: rgba(212,169,78,.07);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 9px 9px 0;
-    font-size: 11.5px; color: var(--ink-dim); line-height: 1.7;
+    margin: 2px 18px 26px; padding: 12px 14px;
+    background: rgba(201,164,92,.05);
+    border-left: 2px solid var(--gold-dk);
+    border-radius: 0 8px 8px 0;
+    font-size: 11px; color: var(--ink-dim); line-height: 1.8; letter-spacing: .5px;
   }
 
   /* ===== 返回 ===== */
   .back-btn {
-    display: flex; align-items: center; gap: 6px; padding: 13px 14px 8px;
-    color: var(--gold-hi); font-size: 13.5px; font-weight: 600;
+    display: flex; align-items: center; gap: 7px; padding: 16px 18px 10px;
+    color: var(--ink-dim); font-size: 12.5px; font-weight: 400;
     cursor: pointer; text-decoration: none; background: none; border: none;
+    letter-spacing: 1px;
   }
-  .back-btn svg { width: 17px; height: 17px; }
+  .back-btn svg { width: 15px; height: 15px; stroke: var(--gold); }
 
   /* ===== 底部导航 ===== */
   .tabbar {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(13,10,7,.97); backdrop-filter: blur(14px);
+    background: rgba(10,13,16,.97); backdrop-filter: blur(16px);
     border-top: 1px solid var(--line);
     display: flex; max-width: 480px; margin: 0 auto;
   }
   .tabbar button {
-    flex: 1; padding: 9px 5px 7px; background: none; border: none; cursor: pointer;
-    color: var(--ink-faint); font-size: 10.5px;
+    flex: 1; padding: 10px 5px 9px; background: none; border: none; cursor: pointer;
+    color: var(--ink-faint); font-size: 10px; letter-spacing: 2px; position: relative;
     transition: color .2s;
   }
-  .tabbar button.active { color: var(--gold-hi); font-weight: 700; }
-  .tabbar button .icon { width: 20px; height: 20px; display: block; margin: 0 auto 2px; }
+  .tabbar button.active { color: var(--gold-hi); }
+  .tabbar button.active::before {
+    content: ""; position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--gold-dk), var(--gold-hi), var(--gold-dk));
+  }
+  .tabbar button .icon { width: 19px; height: 19px; display: block; margin: 0 auto 3px; stroke: currentColor; fill: none; stroke-width: 1.6; }
 
   /* ===== 弹窗 ===== */
-  .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.72); z-index: 999; align-items: center; justify-content: center; }
-  .modal.show { display: flex; }
-  .modal-box { background: var(--card); border: 1px solid var(--line); border-radius: 15px; padding: 18px; width: 90%; max-width: 370px; }
-  .modal-box h3 { font-size: 15px; color: var(--gold-hi); margin-bottom: 13px; font-weight: 700; text-align: center; }
-  .modal-item { margin-bottom: 10px; padding: 11px; background: var(--card2); border: 1px solid var(--line); border-radius: 9px; }
-  .modal-item .lb { font-size: 11.5px; color: var(--ink-faint); margin-bottom: 5px; }
-  .modal-item .row { display: flex; gap: 8px; align-items: center; }
-  .modal-item .row code { flex: 1; font-size: 11px; color: var(--ink); word-break: break-all; line-height: 1.4; font-family: Menlo, Consolas, monospace; }
-  .modal-close { width: 100%; margin-top: 12px; padding: 9px; background: transparent; color: var(--ink-faint); border: 1px solid rgba(255,255,255,.16); border-radius: 8px; font-size: 13px; cursor: pointer; }
+  .modal { display: none; position: fixed; inset: 0; background: rgba(5,7,9,.78); backdrop-filter: blur(4px); z-index: 999; align-items: center; justify-content: center; }
+  .modal.show { display: flex; animation: fadeIn .2s ease; }
+  .modal-box { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 14px; padding: 20px; width: 90%; max-width: 370px; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+  .modal-box h3 { font-family: "Noto Serif SC", serif; font-size: 15px; color: var(--gold-hi); margin-bottom: 15px; font-weight: 700; text-align: center; letter-spacing: 2px; }
+  .modal-item { margin-bottom: 10px; padding: 12px; background: rgba(10,13,16,.6); border: 1px solid var(--line); border-radius: 9px; }
+  .modal-item .lb { font-size: 10.5px; color: var(--ink-faint); margin-bottom: 6px; letter-spacing: 1px; }
+  .modal-item .row { display: flex; gap: 9px; align-items: center; }
+  .modal-item .row code { flex: 1; font-size: 11px; color: var(--ink); word-break: break-all; line-height: 1.5; font-family: "Noto Sans SC", sans-serif; }
+  .modal-close { width: 100%; margin-top: 13px; padding: 10px; background: transparent; color: var(--ink-faint); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; font-size: 12.5px; cursor: pointer; letter-spacing: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page.active { animation: none; }
+    .hero-slide { transition: none; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="topbar">
-    <span class="brand" id="topbar-title">天龙畅玩版</span>
-    <span class="sub" id="topbar-sub">17职业国际服 · 超高比例1:4000</span>
+    <span class="brand"><i>天龙畅玩版</i></span>
+    <span class="sub">TL·17 CLASSES INTERNATIONAL</span>
   </div>
 
-  <!-- ===== 畅玩老版首页 ===== -->
-  <div class="page" id="page-old">
+  <!-- ===== 畅玩版首页 ===== -->
+  <div class="page active" id="page-old">
     <div class="hero" id="hero-old">
       <div class="hero-slides">
         <div class="hero-slide on"><img class="hero-img" src="assets/tl-cw-full/cw_hero_wide.jpg" alt="天龙畅玩版17职业"></div>
@@ -285,20 +357,21 @@
     </div>
 
     <div class="sec">
-      <div class="panel panel-pad re-card">
-        <div class="re-head">
-          <div class="re-title">
-            <b>立即注册下载</b>
+      <div class="pass">
+        <div class="pass-head">
+          <div class="pass-title">
+            <b>注册 · 下载</b>
             <span>通过本页链接注册 · 充值礼包有售后</span>
           </div>
-          <div class="re-code">
+          <div class="pass-code">
             <span>邀请码</span>
             <b>PPAP</b>
           </div>
         </div>
+        <div class="divider"></div>
         <div class="cta-stack">
           <a class="btn btn-gold" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
-          <a class="btn btn-dl" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载游戏</a>
+          <a class="btn btn-cinnabar" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载游戏</a>
           <a class="btn btn-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">玩家后台 / 充值</a>
         </div>
         <div class="copy-fallback">
@@ -309,488 +382,189 @@
 
     <div class="entry-grid">
       <a class="entry" href="#" onclick="switchPage('manual-old');return false;">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-        <b>完整攻略</b><span>升级 · 战力 · 副本</span>
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <b>完整攻略</b><span>升级·战力·副本</span>
       </a>
       <a class="entry" href="#" onclick="switchPage('gifts-old');return false;">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
-        <b>礼包福利</b><span>6个1 · 6个6 · VIP码</span>
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+        <b>礼包福利</b><span>6个1·6个6·VIP</span>
       </a>
       <a class="entry" href="#" onclick="switchPage('gifts-old');return false;">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/><circle cx="12" cy="14" r="1.6"/><path d="M12 15.5V18"/></svg></div>
-        <b>礼包兑换</b><span>精彩活动 · 输入即领</span>
+        <div class="ic"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/><path d="M12 15.5V18"/></svg></div>
+        <b>礼包兑换</b><span>精彩活动·输入即领</span>
       </a>
     </div>
 
     <div class="tip">注册账号密码需"小写字母+数字"组合，不可纯数字；邀请码 PPAP 已自动填好。</div>
   </div>
 
-  <!-- ===== 畅玩老版 · 礼包码页 ===== -->
+  <!-- ===== 礼包码页 ===== -->
   <div class="page" id="page-gifts-old">
     <a class="back-btn" href="#" onclick="switchPage('old');return false;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-      返回畅玩版
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      返回首页
     </a>
     <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>新手礼包码</h2></div>
-      <div style="font-size:12px; color:var(--ink-faint); padding:0 2px 10px;">进入游戏后，左上角「精彩活动」输入兑换码即可领取</div>
+      <div class="sec-head"><h2>新手礼包码</h2><span class="more">进入游戏·精彩活动·输入即领</span></div>
     </div>
 
-    <div class="sec">
-      <div class="panel panel-pad">
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07);">
-          <div>
-            <b style="font-size:14px;">基础CDK礼包</b>
-            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:3px;">输入：111111（6个1）</p>
-          </div>
-          <button class="btn-sm btn-gold" onclick="copyText('111111', this)">复制</button>
+    <div class="sec" style="padding:0 18px;">
+      <div class="ticket">
+        <div class="head"><span class="name">基础CDK礼包</span><span class="badge">6个1</span></div>
+        <div class="code-row">
+          <div class="code-box">111111</div>
+          <button class="copy-btn" onclick="copyText('111111', this)">复制</button>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07);">
-          <div>
-            <b style="font-size:14px;">重楼材料礼包</b>
-            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:3px;">输入：666666（6个6）</p>
-          </div>
-          <button class="btn-sm btn-gold" onclick="copyText('666666', this)">复制</button>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">重楼材料礼包</span><span class="badge">6个6</span></div>
+        <div class="code-row">
+          <div class="code-box">666666</div>
+          <button class="copy-btn" onclick="copyText('666666', this)">复制</button>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07);">
-          <div>
-            <b style="font-size:14px;">试炼材料礼包</b>
-            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:3px;">输入：999999（6个9）</p>
-          </div>
-          <button class="btn-sm btn-gold" onclick="copyText('999999', this)">复制</button>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">试炼材料礼包</span><span class="badge">6个9</span></div>
+        <div class="code-row">
+          <div class="code-box">999999</div>
+          <button class="copy-btn" onclick="copyText('999999', this)">复制</button>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07);">
-          <div>
-            <b style="font-size:14px;">重开补偿礼包</b>
-            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:3px;">100万绑银 + 7级体力石×3 + 保星石×20</p>
-          </div>
-          <button class="btn-sm btn-gold" onclick="copyText('TL12345', this)">复制</button>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">重开补偿礼包</span><span class="badge">补偿</span></div>
+        <div class="code-row">
+          <div class="code-box">TL12345</div>
+          <button class="copy-btn" onclick="copyText('TL12345', this)">复制</button>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07);">
-          <div>
-            <b style="font-size:14px;">重楼链补偿</b>
-            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:3px;">重楼链 + 100万绑元 + 100保星符</p>
-          </div>
-          <button class="btn-sm btn-gold" onclick="copyText('TL1111', this)">复制</button>
+        <ul><li>100万绑银 + 7级体力石×3 + 保星石×20</li></ul>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">重楼链补偿</span><span class="badge">补偿</span></div>
+        <div class="code-row">
+          <div class="code-box">TL1111</div>
+          <button class="copy-btn" onclick="copyText('TL1111', this)">复制</button>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:9px 0;">
-          <div>
-            <b style="font-size:14px;">延迟公测补偿</b>
-            <p style="font-size:11.5px; color:var(--ink-faint); margin-top:3px;">地煞精华×50 + 新莽神符×10 + 100万绑元</p>
-          </div>
-          <button class="btn-sm btn-gold" onclick="copyText('BC888', this)">复制</button>
+        <ul><li>重楼链 + 100万绑元 + 100保星符</li></ul>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">延迟公测补偿</span><span class="badge">补偿</span></div>
+        <div class="code-row">
+          <div class="code-box">BC888</div>
+          <button class="copy-btn" onclick="copyText('BC888', this)">复制</button>
         </div>
+        <ul><li>地煞精华×50 + 新莽神符×10 + 100万绑元</li></ul>
       </div>
     </div>
 
     <div class="sec">
-      <div class="panel panel-pad">
-        <div style="font-size:13.5px; color:var(--gold-hi); margin-bottom:11px; font-weight:700;">VIP 礼包码（全部免费）</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:9px;">
-          <button class="btn-sm btn-ghost" onclick="copyText('VIP666', this)">VIP666</button>
-          <button class="btn-sm btn-ghost" onclick="copyText('VIP888', this)">VIP888</button>
-          <button class="btn-sm btn-ghost" onclick="copyText('TL666', this)">TL666</button>
-          <button class="btn-sm btn-ghost" onclick="copyText('TL888', this)">TL888</button>
-          <button class="btn-sm btn-ghost" onclick="copyText('TL999', this)">TL999</button>
-          <button class="btn-sm btn-ghost" onclick="copyText('TL9999', this)">TL9999</button>
-          <button class="btn-sm btn-ghost" onclick="copyText('TL520', this)">TL520</button>
-        </div>
+      <div class="sec-head"><h2>VIP 礼包码</h2><span class="more">全部免费</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+        <button class="btn btn-sm btn-ghost" onclick="copyText('VIP666', this)">VIP666</button>
+        <button class="btn btn-sm btn-ghost" onclick="copyText('VIP888', this)">VIP888</button>
+        <button class="btn btn-sm btn-ghost" onclick="copyText('TL666', this)">TL666</button>
+        <button class="btn btn-sm btn-ghost" onclick="copyText('TL888', this)">TL888</button>
+        <button class="btn btn-sm btn-ghost" onclick="copyText('TL999', this)">TL999</button>
+        <button class="btn btn-sm btn-ghost" onclick="copyText('TL9999', this)">TL9999</button>
+        <button class="btn btn-sm btn-ghost" onclick="copyText('TL520', this)">TL520</button>
       </div>
     </div>
+
     <div class="tip">注册账号密码需"小写字母+数字"组合，不可纯数字；邀请码 PPAP 已自动填好。</div>
   </div>
 
-  <!-- ===== 畅玩老版 · 完整攻略页 ===== -->
+    <!-- ===== 攻略页 ===== -->
   <div class="page" id="page-manual-old">
-    <a class="back-btn" href="#" onclick="switchPage('old');return false;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-      返回畅玩版
-    </a>
-    <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>新手入门</h2></div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>👑 开局领豪礼（0~50级）</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          进入游戏领取<strong>开局豪礼</strong>，快速升到 50 级：<br>
-          · 上线可直接领取<strong>1100万绑元</strong>、5重楼、6神兽<br>
-          · 20级开始<strong>地宫刷绑元</strong>，1-5层无限刷<br>
-          · 副本<strong>掉落绑定元宝</strong>，商店可兑换元宝
-        </div>
-      </div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>⚔️ 每日必做</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          ① 20级后去<strong>地宫</strong>刷绑元，每日上限刷满<br>
-          ② 老三环、燕子坞、四绝庄、飘渺峰、反贼入侵、水牢等副本<br>
-          ③ 每日<strong>世界神兽</strong>活动打 boss，几率掉神兽元神<br>
-          ④ 每周<strong>跨服神兽</strong>活动，掉六大神兽幸运宝箱<br>
-          ⑤ 十人团本：国运之战、兵圣奇阵、深海迷城、五圣降临
-        </div>
-      </div>
+    <a class="back-btn" href="#" onclick="switchPage('old');return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
+<div class="sec"><div class="sec-head"><h2>新手入门</h2><span class="more">0-50级快速上手</span></div></div>
+    <div class="sec" style="padding:0 18px;">
+<div class="fold"><button class="fold-head" type="button">开局领豪礼（0~50级）<span class="ar">›</span></button><div class="fold-body"><p style="margin-top:8px;"><b>进入游戏领取开局豪礼，快速升到 50 级：</b></p><p style="margin:3px 0 0 2px;">· 上线可直接领取1100万绑元、5重楼、6神兽</p><p style="margin:3px 0 0 2px;">· 20级开始地宫刷绑元，1-5层无限刷</p><p style="margin:3px 0 0 2px;">· 副本掉落绑定元宝，商店可兑换元宝</p></div></div>
+<div class="fold"><button class="fold-head" type="button">每日必做<span class="ar">›</span></button><div class="fold-body"><p style="margin:3px 0 0 2px;">① 20级后去地宫刷绑元，每日上限刷满</p><p style="margin:3px 0 0 2px;">② 老三环、燕子坞、四绝庄、飘渺峰、反贼入侵、水牢等副本</p><p style="margin:3px 0 0 2px;">③ 每日世界神兽活动打 boss，几率掉神兽元神</p><p style="margin:3px 0 0 2px;">④ 每周跨服神兽活动，掉六大神兽幸运宝箱</p><p style="margin:3px 0 0 2px;">⑤ 十人团本：国运之战、兵圣奇阵、深海迷城、五圣降临</p></div></div>
     </div>
-
-    <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>升级攻略</h2></div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>🚀 快速升级路线</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          主线和支线任务 → 每日任务 / 师门任务 → 副本连刷 → 地宫挂机经验<br>
-          帮会任务、科举答题、周末活动经验双倍
-        </div>
-      </div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>📈 战力养成</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          <b>宝石：</b>血、闪、属性攻、双减、会心（按门派打法打抗性）<br>
-          <b>附体：</b>单属性一减四抗 + 一级属性四选二；或四减三属性一抗<br>
-          <b>神器：</b>82级神铸满开启注魂<br>
-          <b>武魂：</b>79级解锁，少室山每天固定产出材料<br>
-          <b>披风：</b>69级解锁，凤灵引升级、引灵梭<br>
-          <b>护心镜：</b>名望泰斗解锁，元宝商店购买一星护心镜<br>
-          <b>狩印：</b>73级帮会找NPC思洋，征战捐献任务解锁
-        </div>
-      </div>
+<div class="sec"><div class="sec-head"><h2>升级 · 战力</h2><span class="more">成长路线</span></div></div>
+    <div class="sec" style="padding:0 18px;">
+<div class="fold"><button class="fold-head" type="button">快速升级路线<span class="ar">›</span></button><div class="fold-body"><p style="margin:3px 0 0 2px;">主线和支线任务 → 每日任务 / 师门任务 → 副本连刷 → 地宫挂机经验</p><p style="margin:3px 0 0 2px;">帮会任务、科举答题、周末活动经验双倍</p></div></div>
+<div class="fold"><button class="fold-head" type="button">战力养成<span class="ar">›</span></button><div class="fold-body"><p style="margin:3px 0 0 2px;">宝石：血、闪、属性攻、双减、会心（按门派打法打抗性）</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗 + 一级属性四选二；或四减三属性一抗</p><p style="margin-top:8px;"><b>神器：82级神铸满开启注魂</b></p><p style="margin:3px 0 0 2px;">武魂：79级解锁，少室山每天固定产出材料</p><p style="margin:3px 0 0 2px;">披风：69级解锁，凤灵引升级、引灵梭</p><p style="margin:3px 0 0 2px;">护心镜：名望泰斗解锁，元宝商店购买一星护心镜</p><p style="margin:3px 0 0 2px;">狩印：73级帮会找NPC思洋，征战捐献任务解锁</p></div></div>
     </div>
-
-    <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>全门派真武指点</h2><span class="more">17门派 · 点开即看</span></div>
+<div class="sec"><div class="sec-head"><h2>副本 · 活动 · 养成</h2><span class="more">核心玩法</span></div></div>
+    <div class="sec" style="padding:0 18px;">
+<div class="fold"><button class="fold-head" type="button">副本限时活动团本<span class="ar">›</span></button><div class="fold-body"><p style="margin:3px 0 0 2px;">① 副本奖励</p><p style="margin:3px 0 0 2px;">老三环-燕子坞-四绝庄-飘渺峰-反贼入侵-水牢等副本，在同步原有奖励的基础上增加boss固定绑元掉落18880×1，几率掉落随机所有神兽幸运宝箱1个。</p><p style="margin:3px 0 0 2px;">② 限时活动</p><p style="margin:3px 0 0 2px;">镜湖剿匪：混江龙奖励增加绑元18880×5，几率掉落随机所有神兽幸运宝箱5个</p><p style="margin:3px 0 0 2px;">世界神兽活动：增加boss固定绑元18880×1 + 神兽凤凰元神珠子×1</p><p style="margin:3px 0 0 2px;">跨服神兽活动：增加boss固定绑元18880×5 + 神兽凤凰、龙魂、妖虎、玄武、鲲鹏、麒麟幸运宝箱各1个</p><p style="margin:3px 0 0 2px;">③ 十人团本</p><p style="margin:3px 0 0 2px;">国运之战、兵圣奇阵、深海迷城、五圣降临，增加boss固定绑元18880×3，几率掉落随机所有神兽幸运宝箱×3</p></div></div>
+<div class="fold"><button class="fold-head" type="button">幻化属性魔改加强<span class="ar">›</span></button><div class="fold-body"><p style="margin-top:8px;"><b>🔪 武器幻化属性加强：</b></p><p style="margin:3px 0 0 2px;">方天画戟：全属性攻击+1111 + 一级属性111</p><p style="margin:3px 0 0 2px;">赤龙苗刀：会心防御2000 + 身法999</p><p style="margin:3px 0 0 2px;">开天神斧：会心3000 + 体力999</p><p style="margin:3px 0 0 2px;">岱山镰：全属性攻击+1111 + 一级属性111</p><p style="margin:3px 0 0 2px;">寒江暮雪：会心3000 + 闪避999</p><p style="margin:3px 0 0 2px;">十方怒焰刀：会心3000 + 体力999</p><p style="margin:3px 0 0 2px;">驭风劈云扇：会心防御2000 + 身法999</p><p style="margin:3px 0 0 2px;">游龙寒枪：全属性攻击+1111 + 一级属性111</p><p style="margin:3px 0 0 2px;">神威炽焰枪：全属性攻击+1111 + 一级属性111</p><p style="margin-top:8px;"><b>🛡️ 武魂幻化属性加强：</b></p><p style="margin:3px 0 0 2px;">凤囚凰：一级属性444 + 命中1000</p><p style="margin:3px 0 0 2px;">双生鲤：一级属性188 + 体力2222</p><p style="margin:3px 0 0 2px;">霸世金轮：一级属性188 + 体力2222</p><p style="margin:3px 0 0 2px;">冰璃雪魄：会心2000 + 命中2600</p><p style="margin:3px 0 0 2px;">幻戏骨：一级属性188 + 体力2222</p><p style="margin:3px 0 0 2px;">蜇龙霸业：一级属性188 + 体力2222</p><p style="margin-top:8px;"><b>🧥 披风属性加强：</b></p><p style="margin:3px 0 0 2px;">墨羽临渊：原属性 + 体力1111 + 一级属性99</p><p style="margin:3px 0 0 2px;">霜羽逐光：原属性 + 体力1111 + 一级属性99</p></div></div>
+<div class="fold"><button class="fold-head" type="button">商店新增内容<span class="ar">›</span></button><div class="fold-body"><p style="margin-top:8px;"><b>💰 元宝商店新增：</b></p><p style="margin:3px 0 0 2px;">✅ 帮贡令牌100</p><p style="margin:3px 0 0 2px;">✅ 自选天赐万灵宝箱</p><p style="margin:3px 0 0 2px;">✅ 珍兽主动技能：咆哮/嗜血/血祭/共生/驱散</p><p style="margin:3px 0 0 2px;">✅ 家园材料（300木材/300皮料）</p><p style="margin:3px 0 0 2px;">✅ 保星符福袋</p><p style="margin:3px 0 0 2px;">✅ 一箱宝珠50</p><p style="margin:3px 0 0 2px;">✅ 幻形玉</p><p style="margin:3px 0 0 2px;">✅ 稀有跑环材料（奇石/天然彩棉/貂皮/僵蚕）</p><p style="margin:3px 0 0 2px;">✅ 元宝兑换绑元（绑定元宝18880）</p><p style="margin:3px 0 0 2px;">✅ 龙魂/妖虎/凤凰/麒麟/鲲鹏/玄武幸运礼盒</p><p style="margin:3px 0 0 2px;">✅ 各种抽奖箱子（国士无双/赤龙破军/开天辟地等）</p><p style="margin:3px 0 0 2px;">✅ 武魂幻化抽奖箱子</p><p style="margin:3px 0 0 2px;">✅ 特殊头像、头像相框</p><p style="margin:3px 0 0 2px;">✅ 人物时装、子女时装、子女幻化</p><p style="margin:3px 0 0 2px;">✅ 坐骑礼盒</p><p style="margin-top:8px;"><b>💠 绑元商城新增：</b></p><p style="margin:3px 0 0 2px;">✅ 摸金符</p><p style="margin-top:8px;"><b>🏪 交易所自动上架：</b></p><p style="margin:3px 0 0 2px;">✅ 珍兽主动技能（极冰凝杀/劫火焚杀/腐毒蚀杀/玄雷击杀）</p><p style="margin:3px 0 0 2px;">✅ 珍兽被动技能（迟钝/狡猾/憨厚/法魂/蛮力/猛击/痛击等）</p><p style="margin:3px 0 0 2px;">✅ 打造材料（学徒/工匠/名家/大师打造图）</p><p style="margin:3px 0 0 2px;">💡 每5分钟刷新，卖完间隔5分钟再次上架</p></div></div>
+<div class="fold"><button class="fold-head" type="button">功能解锁等级<span class="ar">›</span></button><div class="fold-body"><p style="margin:3px 0 0 2px;">护心镜：名望泰斗解锁，元宝商店购买一星护心镜</p><p style="margin:3px 0 0 2px;">狩印（授印）：73级帮会里找NPC思洋，做征战捐献任务解锁</p><p style="margin:3px 0 0 2px;">披风：69级解锁，需要凤灵引升级、引灵梭</p><p style="margin:3px 0 0 2px;">武魂：79级解锁，少室山每天固定产出材料</p><p style="margin:3px 0 0 2px;">神器：做主线任务解锁，82级神铸满后开启注魂</p><p style="margin:3px 0 0 2px;">附体幻化：两个附体阵内丹达到四级即可</p></div></div>
+<div class="fold"><button class="fold-head" type="button">25元10000元全档位<span class="ar">›</span></button><div class="fold-body"><p style="margin:3px 0 0 2px;">25元（5万元宝）：地煞精华×50，洗练丹×50，龙魂元神×5，妖虎元神×5，蓝田玉令×3</p><p style="margin:3px 0 0 2px;">50元（10万元宝）：地煞精华×100，洗练丹×100，龙魂元神×5，蓝田玉令×3，妖虎元神×5</p><p style="margin:3px 0 0 2px;">100元（20万元宝）：地煞精华×150，洗练丹×200，九天玄女，五色神石×99，蓝田玉令×4</p><p style="margin:3px 0 0 2px;">150元（30万元宝）：地煞精华×200，七级血精石×1，啸月魔虎，蓝田玉令×4，暗器修炼石×99</p><p style="margin:3px 0 0 2px;">250元（50万元宝）：潜能果×200，乔峰×1，暗器修炼石×99，保星符自选福袋×10，紫髓玉令×5</p><p style="margin:3px 0 0 2px;">500元（100万元宝）：龙魂元神×10，玄凤元神×10，妖虎元神×10，紫髓玉令×10，宝石提升符×5</p><p style="margin:3px 0 0 2px;">1000元（200万元宝）：天渊帝麟，紫髓玉令×15，天命神符×1，玄凤元神×10，妖虎元神×10</p><p style="margin:3px 0 0 2px;">2500元（500万元宝）：天命神符×1，雕龙玉令×20，麒麟元神×10，鲲鹏元神×10，玄武元神×10</p><p style="margin:3px 0 0 2px;">5000元（1000万元宝）：雕龙玉令×30，天命神符×1，玄武元神×15，鲲鹏元神×15，麒麟元神×15</p><p style="margin:3px 0 0 2px;">10000元（2000万元宝）：溟海逸霄鲲（永久）×1，鲲鹏玉令×20，保星符自选福袋×99，绑元18880×388，天命神符×1</p></div></div>
     </div>
-    <div style="padding:0 14px;">
-      <!-- 逍遥 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">⛰ 逍遥（火攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，火攻，双火减，会心，先打火抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·副本：</b><br>排山倒海(风波恶)、弹指神通(钟灵)、逍遥御风(段正淳)、潇湘夜雨(无崖子)<br>惊鸿照影(段延庆)、凌波微步(段誉)、北冥神功(萧远山)、寒冰灵气(慕容博)<br><br>
-          <b>真武·帮战：</b><br>排山倒海(慕容复)、弹指神通(阿朱)、逍遥御风(段正淳)、潇湘夜雨(丁春秋)<br>惊鸿照影(云中鹤)、凌波微步(段誉)、北冥神功(萧远山)、寒冰灵气(阮星竹)<br><br>
-          <b>真武·门派：</b><br>排山倒海(慕容复)、弹指神通(天山童姥)、逍遥御风(段正淳)、潇湘夜雨(无崖子)<br>惊鸿照影(段延庆)、凌波微步(段誉)、北冥神功(萧远山)、寒冰灵气(乔峰)
-        </div>
-      </div>
-      <!-- 武当 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">❄️ 武当（冰攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，冰攻，双冰减，会心，先打冰抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·站桩：</b><br>仙人指路(风波恶)、太渊十三剑(钟灵)、三环套月(鸠摩智)、仙风道骨(叶二娘)<br>如风似闭(段延庆)、流行赶月(段誉)、七星聚首(萧远山)、白鹤亮翅(阮星竹)<br><br>
-          <b>真武·帮战：</b><br>天马飞瀑(苏星河)、天外飞仙(钟灵)、两仪剑(木婉清)、游刃有余(无崖子)<br>如风似闭(段延庆)、流星赶月(段誉)、七星聚首(阿朱)、白鹤亮翅(乔峰)<br><br>
-          <b>真武·门派：</b><br>仙人指路(阿紫)、天外飞仙(天山童姥)、两仪剑(木婉清)、游刃有余(叶二娘)<br>如风似闭(段延庆)、梯云纵(段誉)、七星聚首(萧远山)、白鹤亮翅(慕容博)
-        </div>
-      </div>
-      <!-- 天山 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🏹 天山（冰攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，冰攻，双冰减，会心，先打冰抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·地宫偷人：</b><br>梅花三弄(慕容复)、凤舞九天(阿朱)、折梅式(李秋水)、移花接木(叶二娘)<br>金蚕脱壳(云中鹤)、兰花点穴手(南海鳄神)、寒梅怒放(萧远山)、踏雪无痕(慕容博)<br><br>
-          <b>真武·爆发：</b><br>梅花三弄(慕容复)、凤舞九天(钟灵)、折梅式(李秋水)、移花接木(丁春秋)<br>冰凝霜华(云中鹤)、兰花点穴手(南海鳄神)、寒梅怒放(虚竹)、踏雪无痕(慕容博)
-        </div>
-      </div>
-      <!-- 天龙 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">☯️ 天龙（玄攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
-          <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
-          <b>非真武：</b><br>一阳指(慕容复)、三阳开泰(阿朱)、八门金锁(鸠摩智)、非枯非荣(叶二娘)<br>少泽剑(段延庆)、商阳剑(南海鳄神)、中冲剑(萧远山)、百步穿杨(乔峰)<br><br>
-          <b>真武·帮战：</b><br>一阳指(慕容复)、万岳朝宗(阿朱)、白虹贯日(李秋水)、非枯非荣(丁春秋)<br>少泽剑(云中鹤)、雪拥蓝关(段誉)、中冲剑(玄慈)、百步穿杨(乔峰)
-        </div>
-      </div>
-      <!-- 桃花 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🌸 桃花（火攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，火攻，双火减，会心，先打火抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·常规：</b><br>星河在天(慕容复)、天外清音(阿朱)、平沙落雁(鸠摩智)、九花玉露(无崖子)<br>碧波云海(王语嫣)、旋风扫叶(段誉)、听云观海(虚竹)、碧海潮声(乔峰)<br><br>
-          <b>吸蓝回血：</b><br>回风拂柳(苏星河)、天外清音(阿朱)、玉银(鸠摩智)、九花玉露(丁春秋)<br>凤曲长鸣(云中鹤)、旋风扫叶(段誉)、听云观海(阿碧)、碧海潮声(阮星竹)
-        </div>
-      </div>
-      <!-- 慕容 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">⚔️ 慕容（玄攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>非真武·单挑：</b><br>剑横疆场(阿紫)、气定六合(天山童姥)、心剑交融(李秋水)、蓄云欲雨(丁春秋)<br>凌神式(傅思归)、探营取将(南海鳄神)、星河虹吸(虚竹)、破天式(乔峰)<br><br>
-          <b>真武·单挑：</b><br>参合指(慕容复)、气定六合(天山童姥)、借力反施(古诚)、蓄云欲雨(丁春秋)<br>凌神式(傅思归)、重云遮日(段正淳)、星河虹吸(虚竹)、破天式(乔峰)
-        </div>
-      </div>
-      <!-- 明教 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🔥 明教（火攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，火攻，双火减，会心，先打火抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·常规：</b><br>火焰连环斩(慕容复)、血战八方(天山童姥)、水神下凡(李秋水)、怒火连斩(无崖子)<br>烽火连城(云中鹤)、烈焰刀(段誉)、炎龙无双(虚竹)、李代桃僵(阮星竹)<br><br>
-          <b>无限刀：</b><br>火焰连环斩(阿紫)、血战八方(天山童姥)、水神下凡(李秋水)、怒火连斩(无崖子)<br>烽火连城(云中鹤)、烈焰刀(段正淳)、炎龙无双(虚竹)、李代桃僵(乔峰)
-        </div>
-      </div>
-      <!-- 昆仑 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🗡️ 昆仑（冰攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，冰攻，双冰减，会心，先打冰抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·门派单挑：</b><br>迅雷刀法(阿紫)、刀影三合(天山童姥)、刀卷狂风(鸠摩智)、寒冰护体(褚万里)<br>凌冽寒风(段延庆)、三阴手(段正淳)、屏气凝神(萧远山)、盛气凌敌(乔峰)<br><br>
-          <b>真武·帮战：</b><br>迅雷刀法(阿紫)、刀光掠影(王夫人)、刀卷狂风(李秋水)、寒冰护体(叶二娘)<br>凌冽寒风(傅思归)、疾雪无痕(段正淳)、屏气凝神(玄慈)、盛气凌敌(乔峰)
-        </div>
-      </div>
-      <!-- 鬼谷 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🌀 鬼谷<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，单属性攻，双减，会心<br>
-          <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
-          <b>真武·常规：</b><br>声东击西(阿紫)、谪仙梦影(天山童姥)、惑守心(鸠摩智)、捭阖之术(丁春秋)<br>五气朝元(王语嫣)、缩地成寸(段正淳)、陶然一醉(虚竹)、纵横之理(慕容博)<br><br>
-          <b>爆发：</b><br>一气三清(阿紫)、谪仙梦影(天山童姥)、太上忘情(鸠摩智)、捭阖之术(无崖子)<br>五气朝元(王语嫣)、缩地成寸(朱丹臣)、陶然一醉(玄慈)、纵横之理(乔峰)
-        </div>
-      </div>
-      <!-- 蓬莱 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🌊 蓬莱（玄攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·轻剑：</b><br>斩长鲸(慕容复)、浪中行(天山童姥)、引玄决(李秋水)、乘风御云(丁春秋)<br>慕雨霏微(王语嫣)、鹏飞海暗(段誉)、惊雾流波(萧远山)、剑分阴阳(乔峰)<br><br>
-          <b>真武·重剑：</b><br>斩长鲸(慕容复)、浪中行(天山童姥)、引玄决(李秋水)、乘风御云(丁春秋)<br>慕雨霏微(云中鹤)、鹏飞海暗(段誉)、惊雾流波(萧远山)、剑分阴阳(乔峰)
-        </div>
-      </div>
-      <!-- 丐帮 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🐉 丐帮（毒攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，毒攻，双毒减，会心，先打毒抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·通用：</b><br>亢龙有悔(风波恶)、青龙出水(钟灵)、时乘六龙(李秋水)、横扫乾坤(无崖子)<br>雪泥鸿爪(段延庆)、震惊百里(段誉)、八步赶蝉(虚竹)、棒打狗头(乔峰)<br><br>
-          <b>秒人：</b><br>亢龙有悔(风波恶)、青龙出水(天山童姥)、潜龙勿用(李秋水)、控鹤式(无崖子)<br>雪泥鸿爪(段延庆)、震惊百里(南海鳄神)、八步赶蝉(虚竹)、棒打狗头(乔峰)
-        </div>
-      </div>
-      <!-- 峨眉 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">💚 峨眉（玄攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
-          <b>附体：</b>单属性一减四抗加一级属性四选二<br><br>
-          <b>真武·门派：</b><br>拖泥带水(慕容复)、西子捧心(王夫人)、冲虚养气(鸠摩智)、清心普善咒(褚万里)<br>障眼法(云中鹤)、佛光普照(段誉)、月落西山(玄慈)、呆若木鸡(慕容博)<br><br>
-          <b>帮战纯输出：</b><br>拖泥带水(阿紫)、西子捧心(钟灵)、冲虚养气(木婉清)、斩情绝(叶二娘)<br>昭君出塞(段延庆)、灭剑式(南海鳄神)、月落西山(玄慈)、呆若木鸡(慕容博)
-        </div>
-      </div>
-      <!-- 点苍 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🖌️ 点苍（玄攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
-          <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
-          <b>真武·常规：</b><br>神鬼如泣(慕容复)、松烟护月(钟灵)、雪落笔法(李秋水)、偷换日月(丁春秋)<br>飞龙凤舞(王语嫣)、天魁点斗(段正淳)、云水无心(玄慈)、妙笔生花(乔峰)<br><br>
-          <b>帮战：</b><br>神鬼如泣(阿紫)、风雨流云(王夫人)、雪落笔法(李秋水)、偷换日月(丁春秋)<br>飞龙风舞(王语嫣)、天魁点斗(朱丹臣)、云水无心(玄慈)、妙笔生花(慕容复)
-        </div>
-      </div>
-      <!-- 华山 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">⛰️ 华山（玄攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
-          <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
-          <b>非真武·常规：</b><br>金燕横空(阿紫)、太华九剑(钟灵)、华岳三千(李秋水)、万象森罗(丁春秋)<br>啸风溯木(段延庆)、春红化土(段正淳)、寄星落雁(虚竹)、霞云烟雨(乔峰)<br><br>
-          <b>帮战：</b><br>金燕横空(阿紫)、太华九剑(天山童姥)、华岳三千(李秋水)、万象森罗(丁春秋)<br>苍松迎客(王语嫣)、悬臂千锋(南海鳄神)、寄星落雁(虚竹)、霞云烟雨(慕容博)
-        </div>
-      </div>
-      <!-- 唐门 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🏹 唐门（毒攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，毒攻，双毒减，会心，先打毒抗<br>
-          <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
-          <b>挖坟：</b><br>九天揽月(阿紫)、浮光掠影(王语嫣)、天机弩(段誉)、落日追星(玄慈)<br>十方俱灭(褚万里)、风雷万军(阮星竹)、铁蒺藜(李秋水)、万箭齐发(钟灵)<br><br>
-          <b>团战：</b><br>九天揽月(阿紫)、浮光掠影(王语嫣)、天机弩(段誉)、落日追星(玄慈)<br>十方俱灭(褚万里)、风雷万军(阮星竹)、震箭式(鸠摩智)、万箭齐发(钟灵)
-        </div>
-      </div>
-      <!-- 少林 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">🛡️ 少林（玄攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，玄攻，双玄减，会心，先打玄抗<br>
-          <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
-          <b>不真武通用：</b><br>大力金刚掌(慕容复)、普渡杖法(天山童姥)、韦陀杵(李秋水)、金钟罩(丁春秋)<br>拈花指(段延庆)、易筋锻骨(段正淳)、狮子吼(玄慈)、如来神掌(乔峰)<br><br>
-          <b>真武通用：</b><br>大力金刚掌(慕容复)、普渡杖法(天山童姥)、韦陀杵(李秋水)、金钟罩(丁春秋)<br>拈花指(段延庆)、易筋锻骨(段正淳)、狮子吼(萧远山)、如来神掌(乔峰)
-        </div>
-      </div>
-      <!-- 星宿 -->
-      <div class="pitem panel">
-        <button class="pitem-head" onclick="this.parentElement.querySelector('.pitem-body').classList.toggle('open');this.classList.toggle('open')">☠️ 星宿（毒攻）<span>›</span></button>
-        <div class="pitem-body">
-          <b>宝石：</b>血，闪，毒攻，双毒减，会心，先打毒抗<br>
-          <b>附体：</b>四减三属性一抗，或者单属性四减三抗<br><br>
-          <b>常规：</b><br>幽冥神掌(苏星河)、玉碎昆岗(天山童姥)、青蛇毒掌(鸠摩智)、经脉逆行(叶二娘)<br>毒蟾功(云中鹤)、含笑半步癫(段正淳)、一日丧命散(萧远山)、天地同寿(乔峰)<br><br>
-          <b>团战宋辽：</b><br>幽冥神掌(慕容复)、玉碎昆岗(天山童姥)、青蛇毒掌(木婉清)、经脉逆行(叶二娘)<br>毒蟾功(王语嫣)、含笑半步癫(段誉)、一日丧命散(虚竹)、天地同寿(慕容博)
-        </div>
-      </div>
+<div class="sec"><div class="sec-head"><h2>17 门派真武指点</h2><span class="more">点击展开</span></div></div>
+    <div class="sec" style="padding:0 18px;">
+<div class="pitem"><button class="pitem-head" type="button">逍遥（火攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，火攻，双火减，会心，先打火抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·副本：</b></p><p style="margin:3px 0 0 2px;">排山倒海(风波恶)、弹指神通(钟灵)、逍遥御风(段正淳)、潇湘夜雨(无崖子)</p><p style="margin:3px 0 0 2px;">惊鸿照影(段延庆)、凌波微步(段誉)、北冥神功(萧远山)、寒冰灵气(慕容博)</p><p style="margin-top:8px;"><b>真武·帮战：</b></p><p style="margin:3px 0 0 2px;">排山倒海(慕容复)、弹指神通(阿朱)、逍遥御风(段正淳)、潇湘夜雨(丁春秋)</p><p style="margin:3px 0 0 2px;">惊鸿照影(云中鹤)、凌波微步(段誉)、北冥神功(萧远山)、寒冰灵气(阮星竹)</p><p style="margin-top:8px;"><b>真武·门派：</b></p><p style="margin:3px 0 0 2px;">排山倒海(慕容复)、弹指神通(天山童姥)、逍遥御风(段正淳)、潇湘夜雨(无崖子)</p><p style="margin:3px 0 0 2px;">惊鸿照影(段延庆)、凌波微步(段誉)、北冥神功(萧远山)、寒冰灵气(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">武当（冰攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，冰攻，双冰减，会心，先打冰抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·站桩：</b></p><p style="margin:3px 0 0 2px;">仙人指路(风波恶)、太渊十三剑(钟灵)、三环套月(鸠摩智)、仙风道骨(叶二娘)</p><p style="margin:3px 0 0 2px;">如风似闭(段延庆)、流行赶月(段誉)、七星聚首(萧远山)、白鹤亮翅(阮星竹)</p><p style="margin-top:8px;"><b>真武·帮战：</b></p><p style="margin:3px 0 0 2px;">天马飞瀑(苏星河)、天外飞仙(钟灵)、两仪剑(木婉清)、游刃有余(无崖子)</p><p style="margin:3px 0 0 2px;">如风似闭(段延庆)、流星赶月(段誉)、七星聚首(阿朱)、白鹤亮翅(乔峰)</p><p style="margin-top:8px;"><b>真武·门派：</b></p><p style="margin:3px 0 0 2px;">仙人指路(阿紫)、天外飞仙(天山童姥)、两仪剑(木婉清)、游刃有余(叶二娘)</p><p style="margin:3px 0 0 2px;">如风似闭(段延庆)、梯云纵(段誉)、七星聚首(萧远山)、白鹤亮翅(慕容博)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">天山（冰攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，冰攻，双冰减，会心，先打冰抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·地宫偷人：</b></p><p style="margin:3px 0 0 2px;">梅花三弄(慕容复)、凤舞九天(阿朱)、折梅式(李秋水)、移花接木(叶二娘)</p><p style="margin:3px 0 0 2px;">金蚕脱壳(云中鹤)、兰花点穴手(南海鳄神)、寒梅怒放(萧远山)、踏雪无痕(慕容博)</p><p style="margin-top:8px;"><b>真武·爆发：</b></p><p style="margin:3px 0 0 2px;">梅花三弄(慕容复)、凤舞九天(钟灵)、折梅式(李秋水)、移花接木(丁春秋)</p><p style="margin:3px 0 0 2px;">冰凝霜华(云中鹤)、兰花点穴手(南海鳄神)、寒梅怒放(虚竹)、踏雪无痕(慕容博)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">天龙（玄攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，玄攻，双玄减，会心，先打玄抗</p><p style="margin:3px 0 0 2px;">附体：四减三属性一抗，或者单属性四减三抗</p><p style="margin-top:8px;"><b>非真武：</b></p><p style="margin:3px 0 0 2px;">一阳指(慕容复)、三阳开泰(阿朱)、八门金锁(鸠摩智)、非枯非荣(叶二娘)</p><p style="margin:3px 0 0 2px;">少泽剑(段延庆)、商阳剑(南海鳄神)、中冲剑(萧远山)、百步穿杨(乔峰)</p><p style="margin-top:8px;"><b>真武·帮战：</b></p><p style="margin:3px 0 0 2px;">一阳指(慕容复)、万岳朝宗(阿朱)、白虹贯日(李秋水)、非枯非荣(丁春秋)</p><p style="margin:3px 0 0 2px;">少泽剑(云中鹤)、雪拥蓝关(段誉)、中冲剑(玄慈)、百步穿杨(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">桃花（火攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，火攻，双火减，会心，先打火抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·常规：</b></p><p style="margin:3px 0 0 2px;">星河在天(慕容复)、天外清音(阿朱)、平沙落雁(鸠摩智)、九花玉露(无崖子)</p><p style="margin:3px 0 0 2px;">碧波云海(王语嫣)、旋风扫叶(段誉)、听云观海(虚竹)、碧海潮声(乔峰)</p><p style="margin-top:8px;"><b>吸蓝回血：</b></p><p style="margin:3px 0 0 2px;">回风拂柳(苏星河)、天外清音(阿朱)、玉银(鸠摩智)、九花玉露(丁春秋)</p><p style="margin:3px 0 0 2px;">凤曲长鸣(云中鹤)、旋风扫叶(段誉)、听云观海(阿碧)、碧海潮声(阮星竹)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">慕容（玄攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，玄攻，双玄减，会心，先打玄抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>非真武·单挑：</b></p><p style="margin:3px 0 0 2px;">剑横疆场(阿紫)、气定六合(天山童姥)、心剑交融(李秋水)、蓄云欲雨(丁春秋)</p><p style="margin:3px 0 0 2px;">凌神式(傅思归)、探营取将(南海鳄神)、星河虹吸(虚竹)、破天式(乔峰)</p><p style="margin-top:8px;"><b>真武·单挑：</b></p><p style="margin:3px 0 0 2px;">参合指(慕容复)、气定六合(天山童姥)、借力反施(古诚)、蓄云欲雨(丁春秋)</p><p style="margin:3px 0 0 2px;">凌神式(傅思归)、重云遮日(段正淳)、星河虹吸(虚竹)、破天式(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">明教（火攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，火攻，双火减，会心，先打火抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·常规：</b></p><p style="margin:3px 0 0 2px;">火焰连环斩(慕容复)、血战八方(天山童姥)、水神下凡(李秋水)、怒火连斩(无崖子)</p><p style="margin:3px 0 0 2px;">烽火连城(云中鹤)、烈焰刀(段誉)、炎龙无双(虚竹)、李代桃僵(阮星竹)</p><p style="margin-top:8px;"><b>无限刀：</b></p><p style="margin:3px 0 0 2px;">火焰连环斩(阿紫)、血战八方(天山童姥)、水神下凡(李秋水)、怒火连斩(无崖子)</p><p style="margin:3px 0 0 2px;">烽火连城(云中鹤)、烈焰刀(段正淳)、炎龙无双(虚竹)、李代桃僵(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">昆仑（冰攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，冰攻，双冰减，会心，先打冰抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·门派单挑：</b></p><p style="margin:3px 0 0 2px;">迅雷刀法(阿紫)、刀影三合(天山童姥)、刀卷狂风(鸠摩智)、寒冰护体(褚万里)</p><p style="margin:3px 0 0 2px;">凌冽寒风(段延庆)、三阴手(段正淳)、屏气凝神(萧远山)、盛气凌敌(乔峰)</p><p style="margin-top:8px;"><b>真武·帮战：</b></p><p style="margin:3px 0 0 2px;">迅雷刀法(阿紫)、刀光掠影(王夫人)、刀卷狂风(李秋水)、寒冰护体(叶二娘)</p><p style="margin:3px 0 0 2px;">凌冽寒风(傅思归)、疾雪无痕(段正淳)、屏气凝神(玄慈)、盛气凌敌(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">鬼谷<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，单属性攻，双减，会心</p><p style="margin:3px 0 0 2px;">附体：四减三属性一抗，或者单属性四减三抗</p><p style="margin-top:8px;"><b>真武·常规：</b></p><p style="margin:3px 0 0 2px;">声东击西(阿紫)、谪仙梦影(天山童姥)、惑守心(鸠摩智)、捭阖之术(丁春秋)</p><p style="margin:3px 0 0 2px;">五气朝元(王语嫣)、缩地成寸(段正淳)、陶然一醉(虚竹)、纵横之理(慕容博)</p><p style="margin-top:8px;"><b>爆发：</b></p><p style="margin:3px 0 0 2px;">一气三清(阿紫)、谪仙梦影(天山童姥)、太上忘情(鸠摩智)、捭阖之术(无崖子)</p><p style="margin:3px 0 0 2px;">五气朝元(王语嫣)、缩地成寸(朱丹臣)、陶然一醉(玄慈)、纵横之理(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">蓬莱（玄攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，玄攻，双玄减，会心，先打玄抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·轻剑：</b></p><p style="margin:3px 0 0 2px;">斩长鲸(慕容复)、浪中行(天山童姥)、引玄决(李秋水)、乘风御云(丁春秋)</p><p style="margin:3px 0 0 2px;">慕雨霏微(王语嫣)、鹏飞海暗(段誉)、惊雾流波(萧远山)、剑分阴阳(乔峰)</p><p style="margin-top:8px;"><b>真武·重剑：</b></p><p style="margin:3px 0 0 2px;">斩长鲸(慕容复)、浪中行(天山童姥)、引玄决(李秋水)、乘风御云(丁春秋)</p><p style="margin:3px 0 0 2px;">慕雨霏微(云中鹤)、鹏飞海暗(段誉)、惊雾流波(萧远山)、剑分阴阳(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">丐帮（毒攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，毒攻，双毒减，会心，先打毒抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·通用：</b></p><p style="margin:3px 0 0 2px;">亢龙有悔(风波恶)、青龙出水(钟灵)、时乘六龙(李秋水)、横扫乾坤(无崖子)</p><p style="margin:3px 0 0 2px;">雪泥鸿爪(段延庆)、震惊百里(段誉)、八步赶蝉(虚竹)、棒打狗头(乔峰)</p><p style="margin-top:8px;"><b>秒人：</b></p><p style="margin:3px 0 0 2px;">亢龙有悔(风波恶)、青龙出水(天山童姥)、潜龙勿用(李秋水)、控鹤式(无崖子)</p><p style="margin:3px 0 0 2px;">雪泥鸿爪(段延庆)、震惊百里(南海鳄神)、八步赶蝉(虚竹)、棒打狗头(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">峨眉（玄攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，玄攻，双玄减，会心，先打玄抗</p><p style="margin:3px 0 0 2px;">附体：单属性一减四抗加一级属性四选二</p><p style="margin-top:8px;"><b>真武·门派：</b></p><p style="margin:3px 0 0 2px;">拖泥带水(慕容复)、西子捧心(王夫人)、冲虚养气(鸠摩智)、清心普善咒(褚万里)</p><p style="margin:3px 0 0 2px;">障眼法(云中鹤)、佛光普照(段誉)、月落西山(玄慈)、呆若木鸡(慕容博)</p><p style="margin-top:8px;"><b>帮战纯输出：</b></p><p style="margin:3px 0 0 2px;">拖泥带水(阿紫)、西子捧心(钟灵)、冲虚养气(木婉清)、斩情绝(叶二娘)</p><p style="margin:3px 0 0 2px;">昭君出塞(段延庆)、灭剑式(南海鳄神)、月落西山(玄慈)、呆若木鸡(慕容博)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">点苍（玄攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，玄攻，双玄减，会心，先打玄抗</p><p style="margin:3px 0 0 2px;">附体：四减三属性一抗，或者单属性四减三抗</p><p style="margin-top:8px;"><b>真武·常规：</b></p><p style="margin:3px 0 0 2px;">神鬼如泣(慕容复)、松烟护月(钟灵)、雪落笔法(李秋水)、偷换日月(丁春秋)</p><p style="margin:3px 0 0 2px;">飞龙凤舞(王语嫣)、天魁点斗(段正淳)、云水无心(玄慈)、妙笔生花(乔峰)</p><p style="margin-top:8px;"><b>帮战：</b></p><p style="margin:3px 0 0 2px;">神鬼如泣(阿紫)、风雨流云(王夫人)、雪落笔法(李秋水)、偷换日月(丁春秋)</p><p style="margin:3px 0 0 2px;">飞龙风舞(王语嫣)、天魁点斗(朱丹臣)、云水无心(玄慈)、妙笔生花(慕容复)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">华山（玄攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，玄攻，双玄减，会心，先打玄抗</p><p style="margin:3px 0 0 2px;">附体：四减三属性一抗，或者单属性四减三抗</p><p style="margin-top:8px;"><b>非真武·常规：</b></p><p style="margin:3px 0 0 2px;">金燕横空(阿紫)、太华九剑(钟灵)、华岳三千(李秋水)、万象森罗(丁春秋)</p><p style="margin:3px 0 0 2px;">啸风溯木(段延庆)、春红化土(段正淳)、寄星落雁(虚竹)、霞云烟雨(乔峰)</p><p style="margin-top:8px;"><b>帮战：</b></p><p style="margin:3px 0 0 2px;">金燕横空(阿紫)、太华九剑(天山童姥)、华岳三千(李秋水)、万象森罗(丁春秋)</p><p style="margin:3px 0 0 2px;">苍松迎客(王语嫣)、悬臂千锋(南海鳄神)、寄星落雁(虚竹)、霞云烟雨(慕容博)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">唐门（毒攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，毒攻，双毒减，会心，先打毒抗</p><p style="margin:3px 0 0 2px;">附体：四减三属性一抗，或者单属性四减三抗</p><p style="margin-top:8px;"><b>挖坟：</b></p><p style="margin:3px 0 0 2px;">九天揽月(阿紫)、浮光掠影(王语嫣)、天机弩(段誉)、落日追星(玄慈)</p><p style="margin:3px 0 0 2px;">十方俱灭(褚万里)、风雷万军(阮星竹)、铁蒺藜(李秋水)、万箭齐发(钟灵)</p><p style="margin-top:8px;"><b>团战：</b></p><p style="margin:3px 0 0 2px;">九天揽月(阿紫)、浮光掠影(王语嫣)、天机弩(段誉)、落日追星(玄慈)</p><p style="margin:3px 0 0 2px;">十方俱灭(褚万里)、风雷万军(阮星竹)、震箭式(鸠摩智)、万箭齐发(钟灵)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">少林（玄攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，玄攻，双玄减，会心，先打玄抗</p><p style="margin:3px 0 0 2px;">附体：四减三属性一抗，或者单属性四减三抗</p><p style="margin-top:8px;"><b>不真武通用：</b></p><p style="margin:3px 0 0 2px;">大力金刚掌(慕容复)、普渡杖法(天山童姥)、韦陀杵(李秋水)、金钟罩(丁春秋)</p><p style="margin:3px 0 0 2px;">拈花指(段延庆)、易筋锻骨(段正淳)、狮子吼(玄慈)、如来神掌(乔峰)</p><p style="margin-top:8px;"><b>真武通用：</b></p><p style="margin:3px 0 0 2px;">大力金刚掌(慕容复)、普渡杖法(天山童姥)、韦陀杵(李秋水)、金钟罩(丁春秋)</p><p style="margin:3px 0 0 2px;">拈花指(段延庆)、易筋锻骨(段正淳)、狮子吼(萧远山)、如来神掌(乔峰)</p></div></div>
+<div class="pitem"><button class="pitem-head" type="button">星宿（毒攻）<span class="ar">›</span></button><div class="pitem-body"><p style="margin:3px 0 0 2px;">宝石：血，闪，毒攻，双毒减，会心，先打毒抗</p><p style="margin:3px 0 0 2px;">附体：四减三属性一抗，或者单属性四减三抗</p><p style="margin-top:8px;"><b>常规：</b></p><p style="margin:3px 0 0 2px;">幽冥神掌(苏星河)、玉碎昆岗(天山童姥)、青蛇毒掌(鸠摩智)、经脉逆行(叶二娘)</p><p style="margin:3px 0 0 2px;">毒蟾功(云中鹤)、含笑半步癫(段正淳)、一日丧命散(萧远山)、天地同寿(乔峰)</p><p style="margin-top:8px;"><b>团战宋辽：</b></p><p style="margin:3px 0 0 2px;">幽冥神掌(慕容复)、玉碎昆岗(天山童姥)、青蛇毒掌(木婉清)、经脉逆行(叶二娘)</p><p style="margin:3px 0 0 2px;">毒蟾功(王语嫣)、含笑半步癫(段誉)、一日丧命散(虚竹)、天地同寿(慕容博)</p></div></div>
     </div>
-
-    <div class="sec" style="margin-top:20px;">
-      <div class="sec-title"><span class="bar"></span><h2>副本活动改动</h2></div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>🎮 副本 / 限时活动 / 团本</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          <b>① 副本奖励</b><br>
-          老三环-燕子坞-四绝庄-飘渺峰-反贼入侵-水牢等副本，在同步原有奖励的基础上增加boss固定绑元掉落18880×1，几率掉落随机所有神兽幸运宝箱1个。<br><br>
-          <b>② 限时活动</b><br>
-          镜湖剿匪：混江龙奖励增加绑元18880×5，几率掉落随机所有神兽幸运宝箱5个<br>
-          世界神兽活动：增加boss固定绑元18880×1 + 神兽凤凰元神珠子×1<br>
-          跨服神兽活动：增加boss固定绑元18880×5 + 神兽凤凰、龙魂、妖虎、玄武、鲲鹏、麒麟幸运宝箱各1个<br><br>
-          <b>③ 十人团本</b><br>
-          国运之战、兵圣奇阵、深海迷城、五圣降临，增加boss固定绑元18880×3，几率掉落随机所有神兽幸运宝箱×3
-        </div>
-      </div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>✨ 幻化属性魔改加强</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          <b>🔪 武器幻化属性加强：</b><br>
-          方天画戟：全属性攻击+1111 + 一级属性111<br>
-          赤龙苗刀：会心防御2000 + 身法999<br>
-          开天神斧：会心3000 + 体力999<br>
-          岱山镰：全属性攻击+1111 + 一级属性111<br>
-          寒江暮雪：会心3000 + 闪避999<br>
-          十方怒焰刀：会心3000 + 体力999<br>
-          驭风劈云扇：会心防御2000 + 身法999<br>
-          游龙寒枪：全属性攻击+1111 + 一级属性111<br>
-          神威炽焰枪：全属性攻击+1111 + 一级属性111<br><br>
-          <b>🛡️ 武魂幻化属性加强：</b><br>
-          凤囚凰：一级属性444 + 命中1000<br>
-          双生鲤：一级属性188 + 体力2222<br>
-          霸世金轮：一级属性188 + 体力2222<br>
-          冰璃雪魄：会心2000 + 命中2600<br>
-          幻戏骨：一级属性188 + 体力2222<br>
-          蜇龙霸业：一级属性188 + 体力2222<br><br>
-          <b>🧥 披风属性加强：</b><br>
-          墨羽临渊：原属性 + 体力1111 + 一级属性99<br>
-          霜羽逐光：原属性 + 体力1111 + 一级属性99
-        </div>
-      </div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>🛒 商店新增内容</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          <b>💰 元宝商店新增：</b><br>
-          ✅ 帮贡令牌100<br>
-          ✅ 自选天赐万灵宝箱<br>
-          ✅ 珍兽主动技能：咆哮/嗜血/血祭/共生/驱散<br>
-          ✅ 家园材料（300木材/300皮料）<br>
-          ✅ 保星符福袋<br>
-          ✅ 一箱宝珠50<br>
-          ✅ 幻形玉<br>
-          ✅ 稀有跑环材料（奇石/天然彩棉/貂皮/僵蚕）<br>
-          ✅ 元宝兑换绑元（绑定元宝18880）<br>
-          ✅ 龙魂/妖虎/凤凰/麒麟/鲲鹏/玄武幸运礼盒<br>
-          ✅ 各种抽奖箱子（国士无双/赤龙破军/开天辟地等）<br>
-          ✅ 武魂幻化抽奖箱子<br>
-          ✅ 特殊头像、头像相框<br>
-          ✅ 人物时装、子女时装、子女幻化<br>
-          ✅ 坐骑礼盒<br><br>
-          <b>💠 绑元商城新增：</b><br>
-          ✅ 摸金符<br><br>
-          <b>🏪 交易所自动上架：</b><br>
-          ✅ 珍兽主动技能（极冰凝杀/劫火焚杀/腐毒蚀杀/玄雷击杀）<br>
-          ✅ 珍兽被动技能（迟钝/狡猾/憨厚/法魂/蛮力/猛击/痛击等）<br>
-          ✅ 打造材料（学徒/工匠/名家/大师打造图）<br>
-          💡 每5分钟刷新，卖完间隔5分钟再次上架
-        </div>
-      </div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>🔓 功能解锁等级</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          <b>护心镜：</b>名望泰斗解锁，元宝商店购买一星护心镜<br><br>
-          <b>狩印（授印）：</b>73级帮会里找NPC思洋，做征战捐献任务解锁<br><br>
-          <b>披风：</b>69级解锁，需要凤灵引升级、引灵梭<br><br>
-          <b>武魂：</b>79级解锁，少室山每天固定产出材料<br><br>
-          <b>神器：</b>做主线任务解锁，82级神铸满后开启注魂<br><br>
-          <b>附体幻化：</b>两个附体阵内丹达到四级即可
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>累计充值奖励档位</h2></div>
-      <div class="fold panel">
-        <button class="fold-head" onclick="toggleFold(this)"><span>💰 25元 → 10000元 全档位</span><span class="ar">›</span></button>
-        <div class="fold-body">
-          <b>25元（5万元宝）</b>：地煞精华×50，洗练丹×50，龙魂元神×5，妖虎元神×5，蓝田玉令×3<br><br>
-          <b>50元（10万元宝）</b>：地煞精华×100，洗练丹×100，龙魂元神×5，蓝田玉令×3，妖虎元神×5<br><br>
-          <b>100元（20万元宝）</b>：地煞精华×150，洗练丹×200，九天玄女，五色神石×99，蓝田玉令×4<br><br>
-          <b>150元（30万元宝）</b>：地煞精华×200，七级血精石×1，啸月魔虎，蓝田玉令×4，暗器修炼石×99<br><br>
-          <b>250元（50万元宝）</b>：潜能果×200，乔峰×1，暗器修炼石×99，保星符自选福袋×10，紫髓玉令×5<br><br>
-          <b>500元（100万元宝）</b>：龙魂元神×10，玄凤元神×10，妖虎元神×10，紫髓玉令×10，宝石提升符×5<br><br>
-          <b>1000元（200万元宝）</b>：天渊帝麟，紫髓玉令×15，天命神符×1，玄凤元神×10，妖虎元神×10<br><br>
-          <b>2500元（500万元宝）</b>：天命神符×1，雕龙玉令×20，麒麟元神×10，鲲鹏元神×10，玄武元神×10<br><br>
-          <b>5000元（1000万元宝）</b>：雕龙玉令×30，天命神符×1，玄武元神×15，鲲鹏元神×15，麒麟元神×15<br><br>
-          <b>10000元（2000万元宝）</b>：溟海逸霄鲲（永久）×1，鲲鹏玉令×20，保星符自选福袋×99，绑元18880×388，天命神符×1
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-title"><span class="bar"></span><h2>图文攻略（长图）</h2><span class="more">12张 · 往下翻</span></div>
-    </div>
-    <div style="padding:0 14px;">
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g01.jpg" alt="攻略1"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g02.jpg" alt="攻略2"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g03.jpg" alt="攻略3"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g04.jpg" alt="攻略4"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g05.jpg" alt="攻略5"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g06.jpg" alt="攻略6"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g07.jpg" alt="攻略7"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g08.jpg" alt="攻略8"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g09.jpg" alt="攻略9"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g10.jpg" alt="攻略10"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g11.jpg" alt="攻略11"></div>
-      <div class="man-img"><img src="assets/tl-cw-full/cw_g12.jpg" alt="攻略12"></div>
+<div class="sec"><div class="sec-head"><h2>完整手册</h2><span class="more">12张长图</span></div></div>
+    <div class="sec" style="padding:0 18px;">
+<div class="man-img"><img src="assets/tl-cw-full/cw_g01.jpg" alt="手册长图1" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g02.jpg" alt="手册长图2" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g03.jpg" alt="手册长图3" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g04.jpg" alt="手册长图4" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g05.jpg" alt="手册长图5" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g06.jpg" alt="手册长图6" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g07.jpg" alt="手册长图7" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g08.jpg" alt="手册长图8" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g09.jpg" alt="手册长图9" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g10.jpg" alt="手册长图10" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g11.jpg" alt="手册长图11" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g12.jpg" alt="手册长图12" loading="lazy"></div>
     </div>
   </div>
+</div>
 
-</div><!-- /wrap -->
-
-<!-- ===== 底部导航（3键） ===== -->
+<!-- ===== 底部导航 ===== -->
 <div class="tabbar">
   <button id="tb-home" class="active" onclick="tabGo('home')">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <svg class="icon" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
     首页
   </button>
   <button id="tb-gifts" onclick="tabGo('gifts')">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    <svg class="icon" viewBox="0 0 24 24"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
     礼包码
   </button>
   <button id="tb-manual" onclick="tabGo('manual')">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     游戏手册
   </button>
 </div>
 
-<!-- 老版备用链接弹窗 -->
+<!-- 备用链接复制弹窗 -->
 <div class="modal" id="copyModalOld" onclick="hideCopyModalOld()">
   <div class="modal-box" onclick="event.stopPropagation()">
-    <h3>复制链接到浏览器打开</h3>
+    <h3>复制链接</h3>
     <div class="modal-item">
-      <div class="lb">📥 游戏下载链接</div>
-      <div class="row">
-        <code>https://hftl.jinkeyan.wang/HFTL.html</code>
-        <button class="copy-btn" onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html', this)">复制</button>
-      </div>
+      <div class="lb">注册链接</div>
+      <div class="row"><code id="m-reg">http://tlbb.hfynxx.top/PPAP</code><button class="copy-btn" onclick="copyText('http://tlbb.hfynxx.top/PPAP', this)">复制</button></div>
     </div>
     <div class="modal-item">
-      <div class="lb">📝 注册 + 兑换码网站</div>
-      <div class="row">
-        <code>http://tlbb.hfynxx.top/PPAP</code>
-        <button class="copy-btn" onclick="copyText('http://tlbb.hfynxx.top/PPAP', this)">复制</button>
-      </div>
+      <div class="lb">下载链接</div>
+      <div class="row"><code id="m-dl">https://hftl.jinkeyan.wang/HFTL.html</code><button class="copy-btn" onclick="copyText('https://hftl.jinkeyan.wang/HFTL.html', this)">复制</button></div>
     </div>
     <button class="modal-close" onclick="hideCopyModalOld()">关闭</button>
   </div>
 </div>
 
 <script>
-/* ===== 页面切换 ===== */
+var __ver='v20261003170000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -798,7 +572,7 @@ function switchPage(name) {
   window.scrollTo(0, 0);
   syncTab();
 }
-/* 底部导航：首页 / 礼包码 / 游戏手册（畅玩版独立板块） */
+/* 底部导航 */
 function tabGo(tab) {
   if (tab === 'home') { switchPage('old'); return; }
   if (tab === 'gifts') { switchPage('gifts-old'); return; }
@@ -814,10 +588,39 @@ function syncTab() {
   tbG.classList.toggle('active', id === 'page-gifts-old');
   tbM.classList.toggle('active', id === 'page-manual-old');
 }
-/* 初始化：直接进入畅玩版首页 */
-(function () {
-  switchPage('old');
-})();
+(function () { switchPage('old'); })();
+
+/* 复制 */
+function copyText(txt, btn) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function () { flash(btn); }).catch(function () { legacyCopy(txt, btn); });
+  } else { legacyCopy(txt, btn); }
+}
+function legacyCopy(txt, btn) {
+  var ta = document.createElement('textarea');
+  ta.value = txt; ta.style.cssText = 'position:fixed;opacity:0;';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); flash(btn); } catch (e) {}
+  document.body.removeChild(ta);
+}
+function flash(btn) {
+  var old = btn.textContent; btn.textContent = '已复制';
+  setTimeout(function () { btn.textContent = old; }, 1400);
+}
+function showCopyModalOld() { document.getElementById('copyModalOld').classList.add('show'); }
+function hideCopyModalOld() { document.getElementById('copyModalOld').classList.remove('show'); }
+
+/* 折叠展开 */
+document.addEventListener('DOMContentLoaded', function () {
+  var heads = document.querySelectorAll('.fold-head, .pitem-head');
+  heads.forEach(function (h) {
+    h.addEventListener('click', function () {
+      var body = h.nextElementSibling;
+      h.classList.toggle('open');
+      if (body) body.classList.toggle('open');
+    });
+  });
+});
 
 /* ===== Hero 轮播 ===== */
 (function () {
@@ -829,6 +632,7 @@ function syncTab() {
   function fit(im) {
     var r = im.naturalHeight / im.naturalWidth;
     im.style.objectFit = (r >= 0.8) ? 'contain' : 'cover';
+    im.style.background = 'var(--bg)';
   }
   slides.forEach(function (s) {
     var im = s.querySelector('img');
@@ -843,65 +647,25 @@ function syncTab() {
     slides[idx].classList.add('on');
     dots[idx].classList.add('on');
   }
-  dots.forEach(function (d, i) {
-    d.addEventListener('click', function () { go(i); reset(); });
-  });
-  function reset() {
-    if (timer) clearInterval(timer);
-    timer = setInterval(function () { go(idx + 1); }, 3000);
-  }
-  reset();
+  dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); restart(); }); });
+  function restart() { clearInterval(timer); timer = setInterval(function () { go(idx + 1); }, 3000); }
+  restart();
 })();
 
-/* ===== 折叠 ===== */
-function toggleFold(head) {
-  head.classList.toggle('open');
-  head.nextElementSibling.classList.toggle('open');
-}
-
-/* ===== 复制 ===== */
-function copyText(text, btn) {
-  var ta = document.createElement('textarea');
-  ta.value = text;
-  ta.style.position = 'fixed';
-  ta.style.left = '-9999px';
-  document.body.appendChild(ta);
-  ta.select();
-  try {
-    document.execCommand('copy');
-    var old = btn.textContent;
-    btn.textContent = '已复制';
-    setTimeout(function () { btn.textContent = old; }, 2000);
-  } catch (e) { alert('复制失败，请手动长按复制'); }
-  document.body.removeChild(ta);
-}
-
-/* ===== 弹窗 ===== */
-function showCopyModalOld() { document.getElementById('copyModalOld').classList.add('show'); }
-function hideCopyModalOld() { document.getElementById('copyModalOld').classList.remove('show'); }
+/* ===== 秒更新 ===== */
+(function () {
+  var v = __ver;
+  function check() {
+    fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.v && d.v !== v) { location.reload(); }
+      })
+      .catch(function () {});
+  }
+  setInterval(check, 3000);
+})();
 </script>
-
 <script src="assets/kefu.js?v=v20261002113533"></script>
-<!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
-<script>
-(function(){
-  var __ver='v20261003160000';
-  var k='tl_rv_'+__ver;
-  function chk(){
-    fetch('version.json?r='+Date.now(),{cache:'no-store'})
-      .then(function(r){return r.json()})
-      .then(function(j){
-        if(j && j.v && j.v!==__ver){
-          if(sessionStorage.getItem(k)===j.v){return;}
-          sessionStorage.setItem(k,j.v);
-          try{location.reload(true)}catch(e){location.href=location.href}
-        }
-      }).catch(function(){});
-  }
-  setInterval(chk, 3000);
-  setTimeout(chk, 1200);
-})();
-</script>
-
 </body>
 </html>
