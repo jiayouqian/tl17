@@ -111,11 +111,11 @@
   .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 5; pointer-events: none; background: linear-gradient(90deg, transparent 6%, var(--gold) 35%, var(--gold-hi) 50%, var(--gold-dk) 65%, transparent 94%); opacity: .85; }
   .hero-dots { position: absolute; bottom: 10px; left: 0; right: 0; z-index: 99; display: flex; justify-content: center; gap: 8px; padding: 8px 12px; width: fit-content; margin: 0 auto; background: transparent; pointer-events: auto; }
   .hero-dots button {
-    width: 6px; height: 6px; border-radius: 3px; border: none; cursor: pointer;
-    background: rgba(233,226,208,.35); transition: all .3s;
-    padding: 8px; background-clip: content-box; box-sizing: content-box;
+    width: 8px; height: 8px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,.30); transition: all .3s;
+    padding: 0; margin: 0 2px;
   }
-  .hero-dots button.on { width: 18px; background: var(--gold-hi); }
+  .hero-dots button.on { background: rgba(255,255,255,.88); }
 
   /* ===== 卖点细线区 ===== */
   .pitch {
@@ -798,7 +798,7 @@
 </div>
 
 <script>
-var __ver='v20261003171955';
+var __ver='v20261003172755';
 function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -869,7 +869,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var dots = hero.querySelectorAll('.hero-dots .hd');
   var idx = 0, timer = null, idleTimer = null, interacting = false;
   function cur() { var w = scroller.clientWidth || 1; return Math.round(scroller.scrollLeft / w); }
-  function startAuto() { stopAuto(); timer = setInterval(function () { go(idx + 1); }, 3000); }
+  function startAuto() { stopAuto(); timer = setInterval(function () { go(idx + 1); }, 2500); }
   function stopAuto() { clearInterval(timer); timer = null; }
   function go(n) {
     idx = (n + slides.length) % slides.length;
