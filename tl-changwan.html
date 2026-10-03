@@ -165,39 +165,6 @@
     position: relative; z-index: 2;
   }
 
-  /* ===== 底部常驻操作栏 ===== */
-  .cta-bar {
-    position: fixed; bottom: 55px; left: 0; right: 0; z-index: 99;
-    max-width: 480px; margin: 0 auto;
-    background: rgba(10,13,16,.97); backdrop-filter: blur(16px);
-    border-top: 1px solid var(--line);
-    padding: 9px 12px 11px;
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
-  }
-  .cta-btn {
-    display: block; text-align: center; text-decoration: none;
-    border-radius: 9px; padding: 13px 4px; font-size: 13.5px;
-    font-weight: 600; letter-spacing: 2px; position: relative; overflow: hidden;
-    transition: transform .14s ease;
-    font-family: "Noto Sans SC", sans-serif;
-  }
-  .cta-btn:active { transform: scale(.95); }
-  .cta-gold {
-    background: linear-gradient(135deg, #e0bd7c 0%, #c9a45c 45%, #a07d3d 100%);
-    color: #14100a;
-    box-shadow: 0 6px 18px rgba(201,164,92,.28), inset 0 1px 0 rgba(255,255,255,.45);
-  }
-  .cta-cinnabar {
-    background: linear-gradient(135deg, #c9472f 0%, #b03a2e 55%, #8c2b22 100%);
-    color: #fdf3ec;
-    box-shadow: 0 6px 18px rgba(176,58,46,.3), inset 0 1px 0 rgba(255,255,255,.22);
-  }
-  .cta-ghost {
-    background: transparent;
-    border: 1px solid var(--line-strong);
-    color: var(--gold-hi);
-  }
-
   /* ===== 按钮 ===== */
   .btn {
     display: block; text-align: center; text-decoration: none;
@@ -328,17 +295,18 @@
   }
   .back-btn svg { width: 15px; height: 15px; stroke: var(--gold); }
 
-  /* ===== 底部导航 ===== */
+  /* ===== 底部导航 + 操作（一条合并栏） ===== */
   .tabbar {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
     background: rgba(10,13,16,.97); backdrop-filter: blur(16px);
     border-top: 1px solid var(--line);
-    display: flex; max-width: 480px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr;
+    max-width: 480px; margin: 0 auto; padding: 8px 8px 9px; gap: 6px;
   }
   .tabbar button {
-    flex: 1; padding: 10px 5px 9px; background: none; border: none; cursor: pointer;
+    padding: 8px 3px 7px; background: none; border: none; cursor: pointer;
     color: var(--ink-faint); font-size: 10px; letter-spacing: 2px; position: relative;
-    transition: color .2s;
+    transition: color .2s; border-radius: 8px;
   }
   .tabbar button.active { color: var(--gold-hi); }
   .tabbar button.active::before {
@@ -346,7 +314,24 @@
     width: 22px; height: 2px; border-radius: 2px;
     background: linear-gradient(90deg, var(--gold-dk), var(--gold-hi), var(--gold-dk));
   }
-  .tabbar button .icon { width: 19px; height: 19px; display: block; margin: 0 auto 3px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .tabbar button .icon, .tabbar .op .icon {
+    width: 18px; height: 18px; display: block; margin: 0 auto 3px;
+    stroke: currentColor; fill: none; stroke-width: 1.6;
+  }
+  .tabbar .op {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-decoration: none; border-radius: 9px;
+    font-size: 10.5px; letter-spacing: 1.5px; font-weight: 600;
+  }
+  .tabbar .op-reg {
+    border: 1px solid rgba(201,164,92,.45); color: var(--gold-hi);
+    background: rgba(201,164,92,.07);
+  }
+  .tabbar .op-dl {
+    background: linear-gradient(135deg, #c9472f 0%, #b03a2e 55%, #8c2b22 100%);
+    color: #fdf3ec;
+    box-shadow: 0 6px 16px rgba(176,58,46,.3), inset 0 1px 0 rgba(255,255,255,.22);
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .page.active { animation: none; }
@@ -398,13 +383,6 @@
     </div>
 
     <div class="tip">注册账号密码需"小写字母+数字"组合，不可纯数字；邀请码 PPAP 已自动填好。</div>
-  </div>
-
-  <!-- ===== 底部常驻操作栏（注册/下载/后台，全站通用） ===== -->
-  <div class="cta-bar">
-    <a class="cta-btn cta-gold" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
-    <a class="cta-btn cta-cinnabar" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载</a>
-    <a class="cta-btn cta-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">充值后台</a>
   </div>
 
   <!-- ===== 礼包码页 ===== -->
@@ -554,10 +532,18 @@
     <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
     游戏手册
   </button>
+  <a class="op op-reg" href="http://tlbb.hfynxx.top/PPAP" target="_blank">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+    注册·后台
+  </a>
+  <a class="op op-dl" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+    立即下载
+  </a>
 </div>
 
 <script>
-var __ver='v20261003200000';
+var __ver='v20261003210000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
