@@ -302,34 +302,34 @@
   .guide-tab { flex: none; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--line); background: rgba(201,164,92,.07); color: var(--ink); font-size: 12px; letter-spacing: .5px; cursor: pointer; white-space: nowrap; transition: all .2s; }
   .guide-tab.on { background: linear-gradient(180deg, rgba(201,164,92,.28), rgba(201,164,92,.12)); border-color: rgba(201,164,92,.55); color: var(--gold-hi); }
   .sec-head.foldable { cursor: pointer; user-select: none; }
-  /* ===== 攻略大区标题（浅金底+紧凑） ===== */
+  /* ===== 攻略大区标题（金棕底+白金字+紧凑） ===== */
   .sec-head.guide-sec {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 8px;
     margin: 6px 0 10px; padding: 9px 12px 9px 16px;
-    background: linear-gradient(180deg, rgba(201,164,92,.12), rgba(201,164,92,.04));
-    border: 1px solid rgba(201,164,92,.28); border-radius: 8px;
+    background: linear-gradient(180deg, rgba(201,164,92,.24), rgba(201,164,92,.09));
+    border: 1px solid rgba(201,164,92,.45); border-radius: 8px;
     position: relative; overflow: hidden;
   }
   .sec-head.guide-sec::before {
     content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-    background: linear-gradient(180deg, var(--gold-hi), var(--gold-dk));
+    background: linear-gradient(180deg, #f0d9a0, var(--gold-dk));
   }
   .sec-head.guide-sec::after { content: none; }
   .sec-head.guide-sec h2 {
-    font-family: "Noto Serif SC", serif; font-size: 19px; font-weight: 700; letter-spacing: 3px;
-    color: var(--gold-hi); background: none; -webkit-text-fill-color: currentColor;
+    font-family: "Noto Serif SC", serif; font-size: 19px; font-weight: 700; letter-spacing: 1.5px;
+    color: #f0d9a0; background: none; -webkit-text-fill-color: currentColor;
     line-height: 1.3;
   }
   .sec-head.guide-sec h2::before, .sec-head.guide-sec h2::after { content: none; }
-  .sec-head.guide-sec .more { font-size: 10px; letter-spacing: 1px; opacity: .8; }
+  .sec-head.guide-sec .more { margin-left: 0; font-size: 10px; letter-spacing: 1px; color: #cbb280; opacity: 1; }
   .sec-head.guide-sec .ar {
-    flex: none; width: 24px; height: 24px; margin-left: 2px;
-    border: 1px solid rgba(201,164,92,.6); border-radius: 50%;
-    background: rgba(201,164,92,.12); color: var(--gold-hi);
+    flex: none; width: 24px; height: 24px; margin-left: auto;
+    border: 1px solid rgba(240,217,160,.65); border-radius: 50%;
+    background: rgba(240,217,160,.12); color: #f0d9a0;
     display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: 700; transition: transform .25s;
   }
-  .sec-head.guide-sec.folded { background: linear-gradient(180deg, rgba(201,164,92,.06), rgba(201,164,92,.02)); border-color: rgba(201,164,92,.18); }
+  .sec-head.guide-sec.folded { background: linear-gradient(180deg, rgba(201,164,92,.10), rgba(201,164,92,.03)); border-color: rgba(201,164,92,.28); }
   .sec-head.guide-sec.folded .ar { transform: rotate(90deg); }
   .menpai-chips { display: flex; gap: 7px; overflow-x: auto; padding: 2px 0 10px; margin-bottom: 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .menpai-chips::-webkit-scrollbar { display: none; }
@@ -876,7 +876,7 @@
 </div>
 
 <script>
-var __ver='v20261003191913';
+var __ver='v20261003192423';
 function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
