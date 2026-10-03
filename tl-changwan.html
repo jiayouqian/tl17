@@ -272,6 +272,9 @@
   .fold-body { display: none; padding: 12px 16px 14px; background: rgba(18,22,28,.5); font-size: 12.5px; line-height: 1.95; color: #cfc5a8; border-radius: 0 0 10px 10px; border: 1px solid var(--line); border-top: none; margin-top: -1px; }
   .fold-body.open { display: block; animation: fadeIn .2s ease; }
   .fold-body b { color: var(--gold-hi); font-weight: 600; }
+  .card-car{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:2px 2px 10px;scrollbar-width:none}
+  .card-car::-webkit-scrollbar{display:none}
+  .card-car img{width:86%;flex:none;scroll-snap-align:center;border-radius:12px;border:1px solid rgba(201,164,92,.35);box-shadow:0 6px 18px rgba(0,0,0,.4);background:#171209}
   .fold-body .sub {
     margin-top: 9px; background: rgba(201,164,92,.05); border-left: 2px solid var(--gold-dk);
     border-radius: 0 8px 8px 0; padding: 9px 12px; font-size: 12px; color: var(--ink-dim);
@@ -754,9 +757,17 @@
   <!-- ===== 充值套餐页 ===== -->
   <div class="page" id="page-recharge-old">
     <a class="back-btn" href="#" onclick="switchPage('old');return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
-    <div class="sec"><div class="sec-head"><h2>充值套餐</h2><span class="more">国庆礼包 · 终身卡 · 系统价</span></div></div>
+    <div class="sec"><div class="sec-head"><h2>充值套餐</h2><span class="more">BOSS盲盒 · 卡套餐 + 预算推荐</span></div></div>
     <div class="sec" style="padding:0 18px;">
-  <div class="sec-head" style="margin-top:18px;"><h2>充值预算推荐表</h2><span class="more">战力分=元宝等价+稀有道具估值 · 算法最优解</span></div>
+  <div class="sec-head" style="margin-top:14px;"><h2>BOSS盲盒 · 卡套餐</h2><span class="more">尊享 · 终身 · 月卡 · 周卡 · 惊喜（左右滑动）</span></div>
+  <div class="card-car">
+    <img src="https://aka.doubaocdn.com/s/avQchwMYSe" alt="BOSS盲盒尊享卡篇" loading="lazy">
+    <img src="https://aka.doubaocdn.com/s/YlBjrS1U7D" alt="BOSS盲盒终身卡篇" loading="lazy">
+    <img src="https://aka.doubaocdn.com/s/K48yxAUAfM" alt="BOSS盲盒月卡篇" loading="lazy">
+    <img src="https://aka.doubaocdn.com/s/ZHCg2MtLfM" alt="BOSS盲盒周卡篇" loading="lazy">
+    <img src="https://aka.doubaocdn.com/s/92496LDT7V" alt="BOSS盲盒惊喜篇" loading="lazy">
+  </div>
+  <div class="fold" style="margin-top:6px;"><button class="fold-head" type="button"><span class="t">充值预算推荐表</span><span class="ar">›</span></button><div class="fold-body">
   <p style="margin:6px 0 10px;color:#8a7a58;font-size:11px;">按预算档位直接买：限购款优先拿满，战力分/元越高涨战力越快。数据源：充值后台127款套餐明细。</p>
   
 <div class="ticket"><div class="head"><span class="name">0元起号 · 白嫖快起</span><span class="badge">0元</span></div><ul><li>开局豪礼1100万绑元+100万元宝+5重楼+6神兽；兑换码 VIP666/VIP888/TL666(五重楼)/TL888；30天签到+地宫挂机刷绑元+镜湖18880元宝</li></ul></div>
@@ -859,7 +870,7 @@
 <li>98元超值特惠满1/2/ ×3（¥98×3=¥294）</li>
 <li>188元超值特惠满1/2 ×1（¥188×1=¥188）</li>
 <li>388元超值特惠满1/2 ×1（¥388×1=¥388）</li></ul></div>
-</div>
+</div></div>
   </div>
 </div>
 
@@ -878,7 +889,7 @@
 </div>
 
 <script>
-var __ver='v20261003200127';
+var __ver='v20261003201300';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -1023,13 +1034,23 @@ document.addEventListener('DOMContentLoaded', function () {
   var hero = document.getElementById('hero-old');
   if (!hero) return;
   var ctaBar = document.querySelector('.cta-bar');
-  function fitHero() {
+  /* 首屏锁定高度：移动端地址栏/键盘伸缩(<18%)不重算，杜绝页面跳动 */
+  var baseH = null, fitTimer = null;
+  function calcHeroH() {
     var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-    hero.style.height = (vh - ctaBar.offsetHeight) + 'px';
+    return vh - ctaBar.offsetHeight;
   }
+  function fitHero() {
+    var cur = calcHeroH();
+    if (baseH === null) { baseH = cur; }
+    else if (Math.abs(cur - baseH) / baseH > 0.18) { baseH = cur; }
+    else { return; }
+    hero.style.height = baseH + 'px';
+  }
+  function fitHeroThrottled() { clearTimeout(fitTimer); fitTimer = setTimeout(fitHero, 200); }
   fitHero();
-  window.addEventListener('resize', fitHero);
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHero);
+  window.addEventListener('resize', fitHeroThrottled);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHeroThrottled);
   var scroller = hero.querySelector('.hero-slides');
   var slides = scroller.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
@@ -1088,6 +1109,6 @@ document.addEventListener('DOMContentLoaded', function () {
   setInterval(check, 3000);
 })();
 </script>
-<script src="assets/kefu.js?v=v20261003200127"></script>
+<script src="assets/kefu.js?v=v2026100320130020261003200127"></script>
 </body>
 </html>
