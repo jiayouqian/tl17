@@ -416,9 +416,9 @@
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 5a2 2 0 0 1 2-2h14v18H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h14"/></svg>
           <b>游戏手册</b><span>17门派攻略</span>
         </a>
-        <a class="q-card" href="http://tlbb.hfynxx.top/PPAP" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 3l2.2 4.9 5.3.6-4 3.7 1.1 5.2L12 15l-4.6 2.4 1.1-5.2-4-3.7 5.3-.6z"/><path d="M12 8.5v6.5"/></svg>
-          <b>开局豪礼</b><span>注册即领</span>
+        <a class="q-card" href="#" onclick="switchPage('recharge-old');return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M9 12h6M12 9v6"/></svg>
+          <b>充值套餐</b><span>全档位</span>
         </a>
       </div>
     </div>
@@ -555,6 +555,39 @@
 <div class="man-img"><img src="assets/tl-cw-full/cw_g12.jpg" alt="手册长图12" loading="lazy"></div>
     </div>
   </div>
+
+  <!-- ===== 充值套餐页 ===== -->
+  <div class="page" id="page-recharge-old">
+    <a class="back-btn" href="#" onclick="switchPage('old');return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
+    <div class="sec"><div class="sec-head"><h2>充值套餐</h2><span class="more">BOSS卡 · 25元-10000元全档位</span></div></div>
+    <div class="sec" style="padding:0 18px;">
+      <div class="ticket">
+        <div class="head"><span class="name">BOSS周卡</span><span class="badge">188元</span></div>
+        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>周卡周期 · 每日自动发放</li></ul>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">BOSS月卡</span><span class="badge">488元</span></div>
+        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>月卡周期 · 每日自动发放</li></ul>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">BOSS终身卡</span><span class="badge">1288元</span></div>
+        <ul><li>终身每日领取：188888元宝 + 随机BOSS召唤卡2张</li><li>一次性购买 · 永久生效</li></ul>
+      </div>
+      <div class="sec-head" style="margin-top:18px;"><h2>全档位充值</h2><span class="more">25元-10000元</span></div>
+      <div class="ticket"><div class="head"><span class="name">25元档</span><span class="badge">5万元宝</span></div><ul><li>地煞精华×50 · 洗练丹×50</li><li>龙魂元神×5 · 妖虎元神×5 · 蓝田玉令×3</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">50元档</span><span class="badge">10万元宝</span></div><ul><li>地煞精华×100 · 洗练丹×100</li><li>龙魂元神×5 · 妖虎元神×5 · 蓝田玉令×3</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">100元档</span><span class="badge">20万元宝</span></div><ul><li>地煞精华×150 · 洗练丹×200</li><li>九天玄女 · 五色神石×99 · 蓝田玉令×4</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">150元档</span><span class="badge">30万元宝</span></div><ul><li>地煞精华×200 · 七级血精石×1</li><li>啸月魔虎 · 蓝田玉令×4 · 暗器修炼石×99</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">250元档</span><span class="badge">50万元宝</span></div><ul><li>潜能果×200 · 乔峰×1</li><li>暗器修炼石×99 · 保星符自选福袋×10 · 紫髓玉令×5</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">500元档</span><span class="badge">100万元宝</span></div><ul><li>龙魂元神×10 · 玄凤元神×10 · 妖虎元神×10</li><li>紫髓玉令×10 · 宝石提升符×5</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">1000元档</span><span class="badge">200万元宝</span></div><ul><li>天渊帝麟 · 紫髓玉令×15 · 天命神符×1</li><li>玄凤元神×10 · 妖虎元神×10</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">2500元档</span><span class="badge">500万元宝</span></div><ul><li>天命神符×1 · 雕龙玉令×20</li><li>麒麟元神×10 · 鲲鹏元神×10 · 玄武元神×10</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">5000元档</span><span class="badge">1000万元宝</span></div><ul><li>雕龙玉令×30 · 天命神符×1</li><li>玄武元神×15 · 鲲鹏元神×15 · 麒麟元神×15</li></ul></div>
+      <div class="ticket"><div class="head"><span class="name">10000元档</span><span class="badge">2000万元宝</span></div><ul><li>溟海逸霄鲲（永久）×1 · 鲲鹏玉令×20</li><li>保星符自选福袋×99 · 绑元18880×388 · 天命神符×1</li></ul></div>
+      <div class="man-img" style="margin-top:16px;"><img src="assets/tl-cw-full/hero_cz01.jpg" alt="畅玩充值福利"></div>
+      <div class="tip">充值请在游戏内/充值后台完成 · 注册填写代理码 PPAP 领开局豪礼</div>
+    </div>
+  </div>
 </div>
 
 <!-- ===== 底部导航 ===== -->
@@ -572,7 +605,7 @@
 </div>
 
 <script>
-var __ver='v20261003590000';
+var __ver='v20261003600000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
