@@ -272,9 +272,8 @@
   .fold-body { display: none; padding: 12px 16px 14px; background: rgba(18,22,28,.5); font-size: 12.5px; line-height: 1.95; color: #cfc5a8; border-radius: 0 0 10px 10px; border: 1px solid var(--line); border-top: none; margin-top: -1px; }
   .fold-body.open { display: block; animation: fadeIn .2s ease; }
   .fold-body b { color: var(--gold-hi); font-weight: 600; }
-  .card-car{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:2px 2px 10px;scrollbar-width:none}
-  .card-car::-webkit-scrollbar{display:none}
-  .card-car img{width:86%;flex:none;scroll-snap-align:center;border-radius:12px;border:1px solid rgba(201,164,92,.35);box-shadow:0 6px 18px rgba(0,0,0,.4);background:#171209}
+  .card-car{display:block;padding:2px 0 4px}
+  .card-car img{width:100%;display:block;margin:0 0 12px;border-radius:12px;border:1px solid rgba(201,164,92,.35);box-shadow:0 6px 18px rgba(0,0,0,.4);background:#171209}
   .fold-body .sub {
     margin-top: 9px; background: rgba(201,164,92,.05); border-left: 2px solid var(--gold-dk);
     border-radius: 0 8px 8px 0; padding: 9px 12px; font-size: 12px; color: var(--ink-dim);
@@ -759,7 +758,7 @@
     <a class="back-btn" href="#" onclick="switchPage('old');return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
     <div class="sec"><div class="sec-head"><h2>充值套餐</h2><span class="more">BOSS盲盒 · 卡套餐 + 预算推荐</span></div></div>
     <div class="sec" style="padding:0 18px;">
-  <div class="sec-head" style="margin-top:14px;"><h2>BOSS盲盒 · 卡套餐</h2><span class="more">尊享 · 终身 · 月卡 · 周卡 · 惊喜（左右滑动）</span></div>
+  <div class="sec-head" style="margin-top:14px;"><h2>BOSS盲盒 · 卡套餐</h2><span class="more">尊享 · 终身 · 月卡 · 周卡 · 惊喜 · 下滑查看全部</span></div>
   <div class="card-car">
     <img src="https://aka.doubaocdn.com/s/avQchwMYSe" alt="BOSS盲盒尊享卡篇" loading="lazy">
     <img src="https://aka.doubaocdn.com/s/YlBjrS1U7D" alt="BOSS盲盒终身卡篇" loading="lazy">
@@ -889,7 +888,7 @@
 </div>
 
 <script>
-var __ver='v20261003201300';
+var __ver='v20261003201550';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -1109,6 +1108,6 @@ document.addEventListener('DOMContentLoaded', function () {
   setInterval(check, 3000);
 })();
 </script>
-<script src="assets/kefu.js?v=v2026100320130020261003200127"></script>
+<script src="assets/kefu.js?v=v202610032015502026100320130020261003200127"></script>
 </body>
 </html>
