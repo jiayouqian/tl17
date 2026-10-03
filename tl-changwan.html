@@ -317,6 +317,14 @@
   .q-card b { font-size: 13px; color: var(--ink); letter-spacing: 1px; }
   .q-card span { font-size: 9.5px; color: var(--ink-faint); letter-spacing: .5px; }
 
+  /* ===== 充值紧凑卡 ===== */
+  .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .mini { background: linear-gradient(160deg, var(--surface2), var(--surface)); border: 1px solid var(--line); border-radius: 10px; padding: 10px 10px 9px; }
+  .mini .mh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+  .mini .mh b { font-size: 12.5px; color: var(--ink); letter-spacing: .5px; font-family: "Noto Serif SC", serif; }
+  .mini .mh span { font-size: 10px; color: var(--gold-hi); background: rgba(201,164,92,.1); border: 1px solid var(--line-strong); border-radius: 6px; padding: 1px 7px; letter-spacing: 1px; }
+  .mini p { font-size: 10px; color: #b7ad94; line-height: 1.7; margin: 0; }
+
   /* ===== 底部代理码条 ===== */
   .agent-line { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 6px 0 7px; margin-bottom: 6px; border-bottom: 1px solid rgba(201,164,92,.14); background: rgba(201,164,92,.06); cursor: pointer; }
   .agent-line span { font-size: 11px; color: var(--ink-dim); letter-spacing: 1px; }
@@ -561,15 +569,33 @@
     <div class="sec" style="padding:0 18px;">
       <div class="ticket">
         <div class="head"><span class="name">BOSS周卡</span><span class="badge">188元</span></div>
-        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>周卡周期 · 每日自动发放</li></ul>
+        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡2张 + 镜湖BOSS召唤卡2张</li><li>7天叠加购买 · 只增天数</li></ul>
       </div>
       <div class="ticket">
         <div class="head"><span class="name">BOSS月卡</span><span class="badge">488元</span></div>
-        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>月卡周期 · 每日自动发放</li></ul>
+        <ul><li>每日领取：88888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡1张 + 镜湖BOSS召唤卡1张</li><li>30天叠加购买 · 只增天数</li></ul>
       </div>
       <div class="ticket">
         <div class="head"><span class="name">BOSS终身卡</span><span class="badge">1288元</span></div>
-        <ul><li>终身每日领取：188888元宝 + 随机BOSS召唤卡2张</li><li>一次性购买 · 永久生效</li></ul>
+        <ul><li>终身每日领取：188888元宝 + 随机BOSS召唤卡2张</li><li>+ 荣和古镇BOSS卡1张 + 镜湖BOSS召唤卡1张</li><li>一次性购买 · 永久生效</li></ul>
+      </div>
+      <div class="sec-head" style="margin-top:18px;"><h2>BOSS天卡</h2><span class="more">每天限购一次</span></div>
+      <div class="mini-grid">
+        <div class="mini"><div class="mh"><b>30元天卡</b><span>888888元宝</span></div><p>随机BOSS召唤卡3张</p></div>
+        <div class="mini"><div class="mh"><b>99元天卡</b><span>188888元宝</span></div><p>镜湖1 + 荣和1 + 随机5</p></div>
+        <div class="mini"><div class="mh"><b>299元天卡</b><span>120万元宝</span></div><p>镜湖3 + 荣和3 + 随机15</p></div>
+        <div class="mini"><div class="mh"><b>699元天卡</b><span>250万元宝</span></div><p>镜湖6 + 荣和6 + 随机35</p></div>
+        <div class="mini"><div class="mh"><b>1099元天卡</b><span>500万元宝</span></div><p>镜湖10 + 荣和10 + 随机60</p></div>
+        <div class="mini"><div class="mh"><b>1888元天卡</b><span>1000万元宝</span></div><p>镜湖10 + 荣和10 + 随机100</p></div>
+      </div>
+      <div class="sec-head" style="margin-top:18px;"><h2>特惠终身卡</h2><span class="more">激活后每日领终身礼包</span></div>
+      <div class="ticket">
+        <div class="head"><span class="name">188元特惠终身卡</span><span class="badge">限购1次</span></div>
+        <ul><li>首充：100万元宝 + 18880绑元×100 + 10珍珠×1000 + 玄元/麒麟元神精魄×188</li><li>每日领：18880绑元×30 + 玄元/麒麟精魄×10 + 10珍珠×100 + 炼器师修炼石×55</li></ul>
+      </div>
+      <div class="ticket">
+        <div class="head"><span class="name">888元进阶特惠终身卡</span><span class="badge">限购1次</span></div>
+        <ul><li>首充：400万元宝 + 18880绑元×300 + 御雪雷芒(永久) + 龙魂精魄×288 + 玄元宝箱×288</li><li>每日领：18880绑元×100 + 玄元精魄×30 + 铸纹血玉×50 + 炼器石×88 + 玄武宝箱×20</li></ul>
       </div>
       <div class="sec-head" style="margin-top:18px;"><h2>全档位充值</h2><span class="more">25元-10000元</span></div>
       <div class="ticket"><div class="head"><span class="name">25元档</span><span class="badge">5万元宝</span></div><ul><li>地煞精华×50 · 洗练丹×50</li><li>龙魂元神×5 · 妖虎元神×5 · 蓝田玉令×3</li></ul></div>
@@ -582,6 +608,33 @@
       <div class="ticket"><div class="head"><span class="name">2500元档</span><span class="badge">500万元宝</span></div><ul><li>天命神符×1 · 雕龙玉令×20</li><li>麒麟元神×10 · 鲲鹏元神×10 · 玄武元神×10</li></ul></div>
       <div class="ticket"><div class="head"><span class="name">5000元档</span><span class="badge">1000万元宝</span></div><ul><li>雕龙玉令×30 · 天命神符×1</li><li>玄武元神×15 · 鲲鹏元神×15 · 麒麟元神×15</li></ul></div>
       <div class="ticket"><div class="head"><span class="name">10000元档</span><span class="badge">2000万元宝</span></div><ul><li>溟海逸霄鲲（永久）×1 · 鲲鹏玉令×20</li><li>保星符自选福袋×99 · 绑元18880×388 · 天命神符×1</li></ul></div>
+      <div class="sec-head" style="margin-top:18px;"><h2>福利天卡</h2><span class="more">买三送一 · 每天限购一次</span></div>
+      <div class="mini-grid">
+        <div class="mini"><div class="mh"><b>8元天卡</b><span>3万元宝</span></div><p>18880绑元×25 + 暗器修炼石×288 + 灵魂碎片·青×40 + 降灵石×60</p></div>
+        <div class="mini"><div class="mh"><b>38元天卡</b><span>15万元宝</span></div><p>18880×30 + 地煞精华×400 + 初阶战勋令牌×30 + 新莽神符×50</p></div>
+        <div class="mini"><div class="mh"><b>68元天卡</b><span>27万元宝</span></div><p>18880×60 + 自选保星符福袋×388 + 宝石提升符×66 + 天命神符×2</p></div>
+        <div class="mini"><div class="mh"><b>128元天卡</b><span>51万元宝</span></div><p>18880×120 + 自选天赐万灵宝箱×188 + 唤灵液×188 + 地煞精华×400</p></div>
+        <div class="mini"><div class="mh"><b>168元天卡</b><span>67万元宝</span></div><p>18880×150 + 千淬神玉×288 + 灵魂碎片·橙×288 + 武德星君珍兽蛋9星×38</p></div>
+        <div class="mini"><div class="mh"><b>188元天卡</b><span>75万元宝</span></div><p>18880×180 + 宝石提升符×188 + 初阶战勋令牌×58 + 铸纹血玉×400</p></div>
+        <div class="mini"><div class="mh"><b>258元天卡</b><span>103万元宝</span></div><p>18880×200 + 紫髓玉令×38 + 1500要诀残页×20 + 九天灵珀×88</p></div>
+        <div class="mini"><div class="mh"><b>288元天卡</b><span>115万元宝</span></div><p>18880×300 + 天命神符×5 + 寒冰星屑×88 + 幻形玉×20</p></div>
+        <div class="mini"><div class="mh"><b>388元天卡</b><span>155万元宝</span></div><p>18880×380 + 中阶战勋令牌×30 + 灵魂碎片·赤×88 + 铸纹血玉×888</p></div>
+        <div class="mini"><div class="mh"><b>488元天卡</b><span>195万元宝</span></div><p>18880×500 + 雕龙玉令×30 + 天罡强化精华×666 + 混元元神精魄×188</p></div>
+        <div class="mini"><div class="mh"><b>588元天卡</b><span>235万元宝</span></div><p>18880×680 + 唤灵液×666 + 幻形玉×40 + 1500要诀残页×30</p></div>
+        <div class="mini"><div class="mh"><b>888元天卡</b><span>355万元宝</span></div><p>18880×780 + 寒冰星屑×88 + 突破丹×68 + 保星符福袋×888</p></div>
+        <div class="mini"><div class="mh"><b>1288元天卡</b><span>515万元宝</span></div><p>18880×880 + 唤灵液×888 + 高阶战勋令牌×58 + 凤灵玉×100</p></div>
+        <div class="mini"><div class="mh"><b>1588元天卡</b><span>635万元宝</span></div><p>18880×880 + 鲲鹏玉令×38 + 突破丹×38 + 幻形玉×80</p></div>
+        <div class="mini"><div class="mh"><b>1888元天卡</b><span>755万元宝</span></div><p>18880×880 + 灵魂碎片·橙×888 + 鲲鹏玉令×58 + 千淬神玉×888</p></div>
+      </div>
+      <div class="sec-head" style="margin-top:18px;"><h2>龙元礼包</h2><span class="more">258元 · 永久限购</span></div>
+      <div class="mini-grid">
+        <div class="mini"><div class="mh"><b>龙元·电跃</b><span>258元</span></div><p>龙元×2 + 105万元宝 + 18880×200 + 铸纹血玉×666 + 凤灵引×20</p></div>
+        <div class="mini"><div class="mh"><b>龙元·掠夺</b><span>258元</span></div><p>龙元×2 + 105万元宝 + 18880×200 + 铸纹血玉×666 + 千淬神玉×100</p></div>
+        <div class="mini"><div class="mh"><b>龙元·御反</b><span>258元</span></div><p>龙元×2 + 105万元宝 + 18880×200 + 铸纹血玉×666 + 中阶战勋令牌×20</p></div>
+        <div class="mini"><div class="mh"><b>龙元·反击</b><span>258元</span></div><p>龙元×2 + 105万元宝 + 18880×200 + 铸纹血玉×666 + 灵魂碎片·赤×66</p></div>
+        <div class="mini"><div class="mh"><b>龙元·化劲</b><span>258元</span></div><p>龙元×2 + 105万元宝 + 18880×200 + 铸纹血玉×666 + 幻彩玉×20</p></div>
+        <div class="mini"><div class="mh"><b>龙元·化炁</b><span>258元</span></div><p>龙元×2 + 105万元宝 + 18880×200 + 铸纹血玉×666 + 唤灵液×333</p></div>
+      </div>
       <div class="sec-head" style="margin-top:18px;"><h2>神兽炼魂卡</h2><span class="more">399 / 1999元</span></div>
       <div class="man-img"><img src="assets/tl-cw-full/cw_g05.jpg" alt="神兽炼魂卡充值礼包" loading="lazy"></div>
       <div class="sec-head" style="margin-top:18px;"><h2>充值活动详情</h2><span class="more">首充 · 终身卡 · 7日连充</span></div>
@@ -606,7 +659,7 @@
 </div>
 
 <script>
-var __ver='v20261003610000';
+var __ver='v20261003620000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
