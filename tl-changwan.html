@@ -264,6 +264,7 @@
     background: linear-gradient(180deg, #f0d9a0, var(--gold-dk));
   }
   .fold-head .t { flex: 1; }
+  .fold-head em { font-style: normal; font-size: 11px; color: #a8956a; margin-right: 2px; white-space: nowrap; }
   .fold-head .ar {
     transition: transform .22s; color: var(--gold); font-size: 14px; font-weight: 300;
   }
@@ -756,7 +757,7 @@
     <a class="back-btn" href="#" onclick="switchPage('old');return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
     <div class="sec"><div class="sec-head"><h2>充值套餐</h2><span class="more">国庆礼包 · 终身卡 · 系统价</span></div></div>
     <div class="sec" style="padding:0 18px;">
-  <div class="fold" style="margin-top:6px;"><button class="fold-head" type="button"><span class="t">充值预算推荐表</span><span class="ar">›</span></button><div class="fold-body">
+  <div class="fold" style="margin-top:6px;"><button class="fold-head" type="button"><span class="t">充值预算推荐表</span><em>限购优先 · 涨战力最快</em><span class="ar">›</span></button><div class="fold-body">
   <p style="margin:6px 0 10px;color:#8a7a58;font-size:11px;">按预算档位直接买：限购款优先拿满，战力分/元越高涨战力越快。数据源：充值后台127款套餐明细。</p>
   
 <div class="ticket"><div class="head"><span class="name">0元起号 · 白嫖快起</span><span class="badge">0元</span></div><ul><li>开局豪礼1100万绑元+100万元宝+5重楼+6神兽；兑换码 VIP666/VIP888/TL666(五重楼)/TL888；30天签到+地宫挂机刷绑元+镜湖18880元宝</li></ul></div>
@@ -878,7 +879,7 @@
 </div>
 
 <script>
-var __ver='v20261003201842';
+var __ver='v20261003202136';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -1098,6 +1099,6 @@ document.addEventListener('DOMContentLoaded', function () {
   setInterval(check, 3000);
 })();
 </script>
-<script src="assets/kefu.js?v=v20261003201842202610032015502026100320130020261003200127"></script>
+<script src="assets/kefu.js?v=v2026100320213620261003201842202610032015502026100320130020261003200127"></script>
 </body>
 </html>
