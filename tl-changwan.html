@@ -798,13 +798,24 @@
 </div>
 
 <script>
-var __ver='v20261003805000';
-function switchPage(name) {
+var __ver='v20261003806000';
+function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
   if (el) el.classList.add('active');
   window.scrollTo(0, 0);
 }
+function switchPage(name) {
+  if (name !== 'old') { try { history.pushState({ p: name }, ''); } catch (e) {} }
+  showPage(name);
+}
+window.addEventListener('popstate', function (e) {
+  var p = e.state && e.state.p;
+  var cur = document.querySelector('.page.active');
+  var curName = cur ? cur.id.replace('page-', '') : 'old';
+  if (p && document.getElementById('page-' + p)) { showPage(p); }
+  else if (curName !== 'old') { showPage('old'); }
+});
 (function () { switchPage('old'); })();
 
 /* 复制 */
