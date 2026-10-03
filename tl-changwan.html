@@ -32,7 +32,7 @@
     min-height: 100vh;
     font-weight: 400;
   }
-  .wrap { max-width: 480px; margin: 0 auto; padding-bottom: 78px; position: relative; }
+  .wrap { max-width: 480px; margin: 0 auto; padding-bottom: 150px; position: relative; }
 
   /* ===== 顶部品牌条 ===== */
   .topbar {
@@ -79,12 +79,12 @@
   }
   .sec-head .more { margin-left: auto; font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; font-weight: 300; }
 
-  /* ===== Hero 轮播 ===== */
-  .hero { position: relative; height: 300px; overflow: hidden; background: var(--bg); }
+  /* ===== Hero 全屏长图轮播 ===== */
+  .hero { position: relative; height: 320px; overflow: hidden; background: var(--bg); transition: height .5s ease; }
   .hero-slides, .hero-slide { position: absolute; inset: 0; }
   .hero-slide { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
   .hero-slide.on { opacity: 1; pointer-events: auto; }
-  .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .hero-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
@@ -148,7 +148,39 @@
     text-shadow: 0 0 18px rgba(201,164,92,.35);
   }
   .pass .divider { height: 1px; margin: 15px 0; background: linear-gradient(90deg, var(--line), transparent); }
-  .cta-stack { display: flex; flex-direction: column; gap: 11px; position: relative; z-index: 2; }
+
+  /* ===== 底部常驻操作栏 ===== */
+  .cta-bar {
+    position: fixed; bottom: 55px; left: 0; right: 0; z-index: 99;
+    max-width: 480px; margin: 0 auto;
+    background: rgba(10,13,16,.97); backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    padding: 9px 12px 11px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+  }
+  .cta-btn {
+    display: block; text-align: center; text-decoration: none;
+    border-radius: 9px; padding: 13px 4px; font-size: 13.5px;
+    font-weight: 600; letter-spacing: 2px; position: relative; overflow: hidden;
+    transition: transform .14s ease;
+    font-family: "Noto Sans SC", sans-serif;
+  }
+  .cta-btn:active { transform: scale(.95); }
+  .cta-gold {
+    background: linear-gradient(135deg, #e0bd7c 0%, #c9a45c 45%, #a07d3d 100%);
+    color: #14100a;
+    box-shadow: 0 6px 18px rgba(201,164,92,.28), inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .cta-cinnabar {
+    background: linear-gradient(135deg, #c9472f 0%, #b03a2e 55%, #8c2b22 100%);
+    color: #fdf3ec;
+    box-shadow: 0 6px 18px rgba(176,58,46,.3), inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  .cta-ghost {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--gold-hi);
+  }
 
   /* ===== 按钮 ===== */
   .btn {
@@ -165,16 +197,6 @@
     transition: left .5s ease;
   }
   .btn:active::after { left: 130%; }
-  .btn-gold {
-    background: linear-gradient(135deg, #e0bd7c 0%, #c9a45c 45%, #a07d3d 100%);
-    color: #14100a;
-    box-shadow: 0 8px 22px rgba(201,164,92,.3), inset 0 1px 0 rgba(255,255,255,.45);
-  }
-  .btn-cinnabar {
-    background: linear-gradient(135deg, #c9472f 0%, #b03a2e 55%, #8c2b22 100%);
-    color: #fdf3ec;
-    box-shadow: 0 8px 22px rgba(176,58,46,.32), inset 0 1px 0 rgba(255,255,255,.22);
-  }
   .btn-ghost {
     background: transparent;
     border: 1px solid var(--line-strong);
@@ -368,12 +390,6 @@
             <b>PPAP</b>
           </div>
         </div>
-        <div class="divider"></div>
-        <div class="cta-stack">
-          <a class="btn btn-gold" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
-          <a class="btn btn-cinnabar" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载游戏</a>
-          <a class="btn btn-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">玩家后台 / 充值</a>
-        </div>
         <div class="copy-fallback">
           <button onclick="showCopyModalOld()">按钮点不开？点这里复制链接</button>
         </div>
@@ -396,6 +412,13 @@
     </div>
 
     <div class="tip">注册账号密码需"小写字母+数字"组合，不可纯数字；邀请码 PPAP 已自动填好。</div>
+  </div>
+
+  <!-- ===== 底部常驻操作栏（注册/下载/后台，全站通用） ===== -->
+  <div class="cta-bar">
+    <a class="cta-btn cta-gold" href="http://tlbb.hfynxx.top/PPAP" target="_blank">注册账号</a>
+    <a class="cta-btn cta-cinnabar" href="https://hftl.jinkeyan.wang/HFTL.html" target="_blank">立即下载</a>
+    <a class="cta-btn cta-ghost" href="http://tlbb.hfynxx.top/PPAP" target="_blank">玩家后台</a>
   </div>
 
   <!-- ===== 礼包码页 ===== -->
@@ -564,7 +587,7 @@
 </div>
 
 <script>
-var __ver='v20261003170000';
+var __ver='v20261003180000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -629,16 +652,17 @@ document.addEventListener('DOMContentLoaded', function () {
   var slides = hero.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
   var idx = 0, timer = null;
-  function fit(im) {
+  function setH(im) {
+    if (!im.naturalWidth) return;
     var r = im.naturalHeight / im.naturalWidth;
-    im.style.objectFit = (r >= 0.8) ? 'contain' : 'cover';
-    im.style.background = 'var(--bg)';
+    hero.style.height = Math.round(hero.clientWidth * r) + 'px';
   }
   slides.forEach(function (s) {
     var im = s.querySelector('img');
     if (!im) return;
-    if (im.complete && im.naturalWidth) fit(im);
-    else im.addEventListener('load', function () { fit(im); });
+    im.style.objectFit = 'contain';
+    if (im.complete && im.naturalWidth) setH(im);
+    else im.addEventListener('load', function () { setH(im); });
   });
   function go(n) {
     slides[idx].classList.remove('on');
@@ -646,6 +670,8 @@ document.addEventListener('DOMContentLoaded', function () {
     idx = (n + slides.length) % slides.length;
     slides[idx].classList.add('on');
     dots[idx].classList.add('on');
+    var im = slides[idx].querySelector('img');
+    if (im && im.naturalWidth) setH(im);
   }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); restart(); }); });
   function restart() { clearInterval(timer); timer = setInterval(function () { go(idx + 1); }, 3000); }
