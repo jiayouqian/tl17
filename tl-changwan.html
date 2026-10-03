@@ -17,10 +17,10 @@
     --gold-dk: #8a6a35;
     --cinnabar: #b03a2e;
     --cinnabar-hi: #d95c44;
-    --bg: #0a0d10;
-    --bg2: #0e1217;
-    --surface: #12161c;
-    --surface2: #171d24;
+    --bg: #0d0a06;
+    --bg2: #141009;
+    --surface: #171209;
+    --surface2: #1d1810;
     --ink: #e9e2d0;
     --ink-dim: #8f8b7c;
     --ink-faint: #5c5a52;
@@ -757,7 +757,7 @@
     <a class="back-btn" href="#" onclick="switchPage('old');return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
     <div class="sec"><div class="sec-head"><h2>充值套餐</h2><span class="more">国庆礼包 · 终身卡 · 系统价</span></div></div>
     <div class="sec" style="padding:0 18px;">
-  <div class="fold" style="margin-top:6px;"><button class="fold-head" type="button"><span class="t">充值预算推荐表</span><em>限购优先 · 涨战力最快</em><span class="ar">›</span></button><div class="fold-body">
+  <div class="fold" style="margin-top:6px;"><button class="fold-head open" type="button"><span class="t">充值预算推荐表</span><em>限购优先 · 涨战力最快</em><span class="ar">›</span></button><div class="fold-body open">
   <p style="margin:6px 0 10px;color:#8a7a58;font-size:11px;">按预算档位直接买：限购款优先拿满，战力分/元越高涨战力越快。数据源：充值后台127款套餐明细。</p>
   
 <div class="ticket"><div class="head"><span class="name">0元起号 · 白嫖快起</span><span class="badge">0元</span></div><ul><li>开局豪礼1100万绑元+100万元宝+5重楼+6神兽；兑换码 VIP666/VIP888/TL666(五重楼)/TL888；30天签到+地宫挂机刷绑元+镜湖18880元宝</li></ul></div>
@@ -879,20 +879,28 @@
 </div>
 
 <script>
-var __ver='v20261003202925';
+var __ver='v20261003211550';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
   if (el) el.classList.add('active');
   if (!preserveScroll) window.scrollTo(0, 0);
 }
+var __cwInit = true;   // 初始化阶段（IIFE switchPage('old')）不触发后退
 function switchPage(name) {
   if (name === 'old') {
-    /* 返回首页：修正历史栈，防止手机返回键又跳回旧页 */
-    try { history.replaceState({ p: 'old' }, ''); } catch (e) {}
-    showPage('old');
+    if (__cwInit) {
+      /* 初始化：盖章当前栈顶为 old，不后退 */
+      try { history.replaceState({ p: 'old' }, ''); } catch (e) {}
+      showPage('old');
+    } else {
+      /* 用户点页面内"返回首页"：直接后退弹掉刚才 push 的页签，栈不残留连续 {old} */
+      showPage('old');
+      try { history.back(); } catch (e) {}
+    }
     return;
   }
+  __cwInit = false;
   try { history.pushState({ p: name }, ''); } catch (e) {}
   showPage(name);
 }
@@ -900,11 +908,20 @@ function curPageName() {
   var cur = document.querySelector('.page.active');
   return cur ? cur.id.replace('page-', '') : 'old';
 }
-/* 全站折叠返回栈：大区 + 二级折叠统一逐层返回 */
+/* 全站折叠返回栈：大区 + 二级折叠统一逐层返回（只收集当前可见页，避免跨页错收空按） */
 function collectOpenFolds() {
   var list = [];
-  document.querySelectorAll('.sec-head.guide-sec:not(.folded)').forEach(function (h) { list.push(h); });
-  document.querySelectorAll('.fold-head.open, .pitem-head.open').forEach(function (h) { list.push(h); });
+  var activePage = document.querySelector('.page.active');
+  var scope = activePage || document;
+  /* 只收集【用户交互展开】的折叠（__cwOpenFolds 栈），且必须在当前可见页内；
+     默认展开的折叠（如充值推荐表）不入栈、不参与返回键，避免误收/空按/跨页错收 */
+  var st = window.__cwOpenFolds || [];
+  st.forEach(function (h) {
+    if (!document.body.contains(h)) return;
+    if (!scope.contains(h)) return;
+    var open = h.classList.contains('sec-head') ? !h.classList.contains('folded') : h.classList.contains('open');
+    if (open) list.push(h);
+  });
   return list;
 }
 window.addEventListener('popstate', function (e) {
@@ -968,7 +985,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var wasOpen = h.classList.contains('open');
       h.classList.toggle('open');
       if (body) body.classList.toggle('open');
-      if (!wasOpen) { try { history.pushState({ p: curPageName() }, ''); } catch (e) {} }
+      if (!wasOpen) {
+        try { history.pushState({ p: curPageName() }, ''); } catch (e) {}
+        (window.__cwOpenFolds = window.__cwOpenFolds || []).push(h);
+      } else {
+        var st = window.__cwOpenFolds || [];
+        var i = st.indexOf(h); if (i >= 0) st.splice(i, 1);
+      }
     });
   });
   /* 攻略顶部 Tab 导航 */
@@ -1003,6 +1026,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (more) more.textContent = folded ? '点击展开' : more.dataset.t;
       if (!folded) {
         try { history.pushState({ p: curPageName() }, ''); } catch (e) {}
+        (window.__cwOpenFolds = window.__cwOpenFolds || []).push(h);
+      } else {
+        var st = window.__cwOpenFolds || [];
+        var i = st.indexOf(h); if (i >= 0) st.splice(i, 1);
       }
     });
   });
@@ -1083,6 +1110,13 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 /* ===== 秒更新 ===== */
+function cwFoldList(pageEl){
+  return pageEl ? pageEl.querySelectorAll('.fold-head,.pitem-head,.sec-head.foldable') : [];
+}
+function cwFoldIsOpen(f){
+  if (f.classList.contains('sec-head')) return !f.classList.contains('folded');
+  return f.classList.contains('open');
+}
 (function () {
   var v = __ver;
   function check() {
@@ -1090,10 +1124,13 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (d.v && d.v > v) {
-          /* 仅当检测到【更新】版本才带版本号跳转（绕过 CDN 缓存键）；旧缓存版本不跳，防自动跳转/循环 */
-          /* 保存当前滚动位置与所在菜单，刷新后原位恢复，杜绝"跳动丢位置" */
+          /* 保存滚动位置 + 所在菜单 + 当前页展开的折叠索引，刷新后原位恢复 */
           try {
-            sessionStorage.setItem('cw_pos', JSON.stringify({ y: window.scrollY, p: curPageName(), v: d.v }));
+            var act = document.querySelector('.page.active');
+            var folds = cwFoldList(act);
+            var openIdx = [];
+            folds.forEach(function (f, i) { if (cwFoldIsOpen(f)) openIdx.push(i); });
+            sessionStorage.setItem('cw_pos', JSON.stringify({ y: window.scrollY, p: curPageName(), v: d.v, openIdx: openIdx }));
           } catch (e) {}
           var q = (location.search ? location.search + '&' : '?') + 'ver=' + d.v;
           location.replace(location.pathname + q);
@@ -1103,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   setInterval(check, 3000);
 })();
-/* 版本刷新后原位恢复：菜单 + 滚动位置（深绑定返回体验） */
+/* 版本刷新后原位恢复：菜单 + 折叠展开态 + 滚动位置（深绑定返回体验） */
 (function () {
   try {
     var saved = JSON.parse(sessionStorage.getItem('cw_pos') || 'null');
@@ -1113,13 +1150,26 @@ document.addEventListener('DOMContentLoaded', function () {
       if (el) {
         document.querySelectorAll('.page').forEach(function (x) { x.classList.remove('active'); });
         el.classList.add('active');
+        /* 重开刷新前展开的折叠 */
+        var folds = cwFoldList(el);
+        (saved.openIdx || []).forEach(function (i) {
+          var f = folds[i]; if (!f) return;
+          if (f.classList.contains('sec-head')) {
+            f.classList.remove('folded');
+            var b = document.getElementById(f.getAttribute('data-sec')); if (b) b.style.display = '';
+          } else {
+            f.classList.add('open');
+            var body = f.nextElementSibling; if (body) body.classList.add('open');
+          }
+        });
       }
       window.scrollTo(0, saved.y || 0);
+      try { history.replaceState({ p: saved.p || 'old' }, ''); } catch (e) {}  // 修正 state，防首次返回误踢回 old
       sessionStorage.removeItem('cw_pos');
     }
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v202610032029252026100320213620261003201842202610032015502026100320130020261003200127"></script>
+<script src="assets/kefu.js?v=v20261003211550"></script>
 </body>
 </html>
