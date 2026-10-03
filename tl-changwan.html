@@ -91,11 +91,11 @@
   .sec-head .more { margin-left: auto; font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; font-weight: 300; }
 
   /* ===== Hero 全屏长图轮播 ===== */
-  .hero { position: relative; height: calc(100dvh - 46px); overflow: hidden; background: var(--bg); }
+  .hero { position: relative; overflow: hidden; background: var(--bg); transition: height .5s ease; }
   .hero-slides, .hero-slide { position: absolute; inset: 0; }
   .hero-slide { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
   .hero-slide.on { opacity: 1; pointer-events: auto; }
-  .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .hero-slide img { width: 100%; height: 100%; object-fit: contain; object-position: top center; display: block; }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
@@ -112,22 +112,22 @@
   /* ===== 卖点细线区 ===== */
   .pitch {
     display: grid; grid-template-columns: 1fr 1fr 1fr;
-    margin: -22px 18px 24px; position: relative; z-index: 6;
+    margin: 14px 18px 22px; position: relative; z-index: 6;
     background: var(--surface); border: 1px solid var(--line);
     border-radius: 12px; overflow: hidden;
     box-shadow: 0 14px 34px rgba(0,0,0,.42);
   }
-  .pitch .p { padding: 16px 4px 14px; text-align: center; position: relative; }
+  .pitch .p { padding: 12px 4px 10px; text-align: center; position: relative; }
   .pitch .p + .p::before {
     content: ""; position: absolute; left: 0; top: 20%; bottom: 20%;
     width: 1px; background: linear-gradient(180deg, transparent, var(--line-strong), transparent);
   }
   .pitch .p b {
     display: block; font-family: "Noto Serif SC", serif;
-    font-size: 16px; font-weight: 900; color: var(--gold-hi);
+    font-size: 15px; font-weight: 900; color: var(--gold-hi);
     letter-spacing: .5px;
   }
-  .pitch .p span { font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; display: block; margin-top: 3px; }
+  .pitch .p span { font-size: 9.5px; color: var(--ink-faint); letter-spacing: 1px; display: block; margin-top: 2px; }
 
   /* ===== 通行令主卡 ===== */
   .pass {
@@ -362,11 +362,11 @@
   <div class="page active" id="page-old">
     <div class="hero" id="hero-old">
       <div class="hero-slides">
-        <div class="hero-slide on"><img class="hero-img" src="assets/tl-cw-full/cw_hero_wide.jpg" alt="天龙畅玩版17职业"></div>
-        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/XlDeSqa71V" alt="畅玩17职业福利拉满"></div>
-        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/beMp9VAXP8" alt="双节同庆福利双行"></div>
-        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/Teu2T0CJGJ" alt="畅玩攻略"></div>
-        <div class="hero-slide"><img class="hero-img" src="https://aka.doubaocdn.com/s/m38fSojhO8" alt="畅玩版游戏实景"></div>
+        <div class="hero-slide on"><img class="hero-img" src="assets/tl-cw-full/0_hero.jpg" alt="天龙畅玩版开服"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/1_free.jpg" alt="畅玩免费福利"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/2_648.jpg" alt="畅玩充值豪礼"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/4_qiri.jpg" alt="畅玩七日豪礼"></div>
+        <div class="hero-slide"><img class="hero-img" src="assets/tl-cw-full/6_pipao.jpg" alt="畅玩披风系统"></div>
       </div>
       <div class="hero-dots"><button class="hd on" data-i="0" type="button" aria-label="第1张"></button><button class="hd" data-i="1" type="button" aria-label="第2张"></button><button class="hd" data-i="2" type="button" aria-label="第3张"></button><button class="hd" data-i="3" type="button" aria-label="第4张"></button><button class="hd" data-i="4" type="button" aria-label="第5张"></button></div>
     </div>
@@ -541,7 +541,7 @@
 </div>
 
 <script>
-var __ver='v20261003280000';
+var __ver='v20261003290000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -591,12 +591,25 @@ document.addEventListener('DOMContentLoaded', function () {
   var slides = hero.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
   var idx = 0, timer = null;
+  function setH(im) {
+    if (!im.naturalWidth) return;
+    var r = im.naturalHeight / im.naturalWidth;
+    hero.style.height = Math.round(hero.clientWidth * r) + 'px';
+  }
+  slides.forEach(function (s) {
+    var im = s.querySelector('img');
+    if (!im) return;
+    if (im.complete && im.naturalWidth) setH(im);
+    else im.addEventListener('load', function () { setH(im); });
+  });
   function go(n) {
     slides[idx].classList.remove('on');
     dots[idx].classList.remove('on');
     idx = (n + slides.length) % slides.length;
     slides[idx].classList.add('on');
     dots[idx].classList.add('on');
+    var im = slides[idx].querySelector('img');
+    if (im && im.naturalWidth) setH(im);
   }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); restart(); }); });
   function restart() { clearInterval(timer); timer = setInterval(function () { go(idx + 1); }, 3000); }
