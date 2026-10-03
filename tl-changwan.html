@@ -877,15 +877,21 @@
 </div>
 
 <script>
-var __ver='v20261003194246';
-function showPage(name) {
+var __ver='v20261003194656';
+function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
   if (el) el.classList.add('active');
-  window.scrollTo(0, 0);
+  if (!preserveScroll) window.scrollTo(0, 0);
 }
 function switchPage(name) {
-  if (name !== 'old') { try { history.pushState({ p: name }, ''); } catch (e) {} }
+  if (name === 'old') {
+    /* 返回首页：修正历史栈，防止手机返回键又跳回旧页 */
+    try { history.replaceState({ p: 'old' }, ''); } catch (e) {}
+    showPage('old');
+    return;
+  }
+  try { history.pushState({ p: name }, ''); } catch (e) {}
   showPage(name);
 }
 function curPageName() {
@@ -919,7 +925,11 @@ window.addEventListener('popstate', function (e) {
   }
   var p = e.state && e.state.p;
   var curName = curPageName();
-  if (p && document.getElementById('page-' + p)) { showPage(p); }
+  if (p && document.getElementById('page-' + p)) {
+    /* 目标页即当前页：不重渲染、不滚动，防止页面跳顶 */
+    if (p === curName) return;
+    showPage(p);
+  }
   else if (curName !== 'old') { showPage('old'); }
 });
 (function () { switchPage('old'); })();
