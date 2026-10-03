@@ -235,6 +235,18 @@
   .ticket ul { list-style: none; margin-top: 11px; padding-top: 11px; border-top: 1px dashed rgba(143,139,124,.22); }
   .ticket ul li { font-size: 12px; color: #b7ad94; padding: 3px 0; line-height: 1.8; }
   .ticket ul li::before { content: "·"; color: var(--gold); font-weight: 700; margin-right: 7px; }
+  .ticket.ticket-hero {
+    background: linear-gradient(150deg, rgba(201,164,92,.16), var(--surface2) 55%);
+    border: 1px solid rgba(201,164,92,.55);
+    box-shadow: 0 0 0 3px rgba(201,164,92,.10), 0 6px 18px rgba(0,0,0,.25);
+  }
+  .ticket.ticket-hero .code-box {
+    background: rgba(10,13,16,.85);
+    font-size: 26px; letter-spacing: 6px;
+    border-color: rgba(201,164,92,.65);
+  }
+  .ticket-hero .tip-line { margin-top: 10px; font-size: 11.5px; color: var(--gold-hi); letter-spacing: 1px; }
+  .gift-note { margin: 2px 0 16px; padding: 10px 14px; background: rgba(201,164,92,.08); border: 1px dashed rgba(201,164,92,.35); border-radius: 10px; font-size: 12px; color: var(--ink); line-height: 1.6; }
 
   /* ===== 折叠攻略 ===== */
   .fold { margin-bottom: 10px; }
@@ -449,12 +461,13 @@
     </div>
 
     <div class="sec" style="padding:0 18px;">
-      <div class="ticket">
-        <div class="head"><span class="name">基础CDK礼包</span><span class="badge">6个1</span></div>
+      <div class="ticket ticket-hero">
+        <div class="head"><span class="name">基础CDK·万能码</span><span class="badge">一个码领全部</span></div>
         <div class="code-row">
           <div class="code-box">111111</div>
           <button class="copy-btn" onclick="copyText('111111', this)">复制</button>
         </div>
+        <div class="tip-line">输入 111111，一次性领取全部新手礼包</div>
       </div>
       <div class="ticket">
         <div class="head"><span class="name">重楼材料礼包</span><span class="badge">6个6</span></div>
@@ -494,6 +507,10 @@
         </div>
         <ul><li>地煞精华×50 + 新莽神符×10 + 100万绑元</li></ul>
       </div>
+    </div>
+
+    <div class="sec" style="padding:0 18px;">
+      <div class="gift-note">💡 分码各领对应套餐；不想挑的话，一个 <b>111111</b> 全搞定</div>
     </div>
 
     <div class="sec">
@@ -798,7 +815,7 @@
 </div>
 
 <script>
-var __ver='v20261003181321';
+var __ver='v20261003183034';
 function showPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
