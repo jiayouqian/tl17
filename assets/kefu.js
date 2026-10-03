@@ -4,9 +4,10 @@
   window.__fkInjected = true;
   var css = [
     '.fk{position:fixed;right:14px;bottom:118px;z-index:9999;font-family:system-ui,sans-serif}',
-    '.fk-btn{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#e8b64c,#c9942e);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.45);border:2px solid #f5d489;user-select:none}',
-    '.fk-btn svg{width:24px;height:24px;fill:#1a120b}',
-    '.fk-btn span{font-size:11px;font-weight:700;color:#1a120b;letter-spacing:1px}',
+    '.fk-btn{width:56px;height:56px;border-radius:50%;background:rgba(18,12,4,.32);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.35);border:2px solid rgba(232,182,76,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);user-select:none;transition:background .25s}',
+    '.fk-btn:hover{background:rgba(232,182,76,.28)}',
+    '.fk-btn svg{width:24px;height:24px;fill:#f5d489}',
+    '.fk-btn span{font-size:11px;font-weight:700;color:#f5d489;letter-spacing:1px;text-shadow:0 1px 3px rgba(0,0,0,.6)}',
     '.fk-panel{display:none;position:absolute;right:0;bottom:70px;width:232px;background:#1e160d;border:1px solid rgba(232,182,76,.45);border-radius:14px;padding:14px;box-shadow:0 10px 32px rgba(0,0,0,.6)}',
     '.fk-panel.open{display:block}',
     '.fk-panel h4{margin:0 0 10px;color:#e8b64c;font-size:14px;font-weight:700;text-align:left}',
