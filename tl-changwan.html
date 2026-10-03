@@ -879,7 +879,7 @@
 </div>
 
 <script>
-var __ver='v20261003202136';
+var __ver='v20261003202925';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -930,7 +930,8 @@ window.addEventListener('popstate', function (e) {
   if (p && document.getElementById('page-' + p)) {
     /* 目标页即当前页：不重渲染、不滚动，防止页面跳顶 */
     if (p === curName) return;
-    showPage(p);
+    /* 返回切页保留滚动位置：深绑定返回键，不跳顶 */
+    showPage(p, true);
   }
   else if (curName !== 'old') { showPage('old'); }
 });
@@ -1090,6 +1091,10 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (d) {
         if (d.v && d.v > v) {
           /* 仅当检测到【更新】版本才带版本号跳转（绕过 CDN 缓存键）；旧缓存版本不跳，防自动跳转/循环 */
+          /* 保存当前滚动位置与所在菜单，刷新后原位恢复，杜绝"跳动丢位置" */
+          try {
+            sessionStorage.setItem('cw_pos', JSON.stringify({ y: window.scrollY, p: curPageName(), v: d.v }));
+          } catch (e) {}
           var q = (location.search ? location.search + '&' : '?') + 'ver=' + d.v;
           location.replace(location.pathname + q);
         }
@@ -1098,7 +1103,23 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   setInterval(check, 3000);
 })();
+/* 版本刷新后原位恢复：菜单 + 滚动位置（深绑定返回体验） */
+(function () {
+  try {
+    var saved = JSON.parse(sessionStorage.getItem('cw_pos') || 'null');
+    if (saved && saved.v === __ver) {
+      var p = saved.p;
+      var el = document.getElementById('page-' + p);
+      if (el) {
+        document.querySelectorAll('.page').forEach(function (x) { x.classList.remove('active'); });
+        el.classList.add('active');
+      }
+      window.scrollTo(0, saved.y || 0);
+      sessionStorage.removeItem('cw_pos');
+    }
+  } catch (e) {}
+})();
 </script>
-<script src="assets/kefu.js?v=v2026100320213620261003201842202610032015502026100320130020261003200127"></script>
+<script src="assets/kefu.js?v=v202610032029252026100320213620261003201842202610032015502026100320130020261003200127"></script>
 </body>
 </html>
