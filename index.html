@@ -82,7 +82,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
       slides[i].classList.add('on'); dots[i].classList.add('on');
     }
     function next(){ go(i + 1); }
-    function start(){ clearInterval(timer); timer = setInterval(next, 2500); }
+    function start(){ clearInterval(timer); timer = setInterval(next, 2000); }
     // 预加载 + 按比例自适应: 横图填满cover(主体居中), 方形/竖图完整contain(不裁内容)
     slides.forEach(function(s, idx){
       var real = s.querySelector('img');
@@ -129,11 +129,11 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 })();
 })();
 </script>
-<script src="assets/kefu.js?v=v20261003760000"></script>
+<script src="assets/kefu.js?v=v20261003200127"></script>
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261003195602';
+  var __ver='v20261003200127';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
