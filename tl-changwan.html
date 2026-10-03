@@ -91,8 +91,7 @@
   .sec-head .more { margin-left: auto; font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; font-weight: 300; }
 
   /* ===== Hero 全屏长图轮播 ===== */
-  .hero { position: relative; height: 100dvh; overflow: hidden; background: var(--bg); }
-  .hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(transparent, rgba(8,10,13,.5)); pointer-events: none; z-index: 3; }
+  .hero { position: relative; height: calc(100dvh - 66px); overflow: hidden; background: var(--bg); }
   .hero-slides, .hero-slide { position: absolute; inset: 0; }
   .hero-slide { opacity: 0; transition: opacity .6s ease; pointer-events: none; }
   .hero-slide.on { opacity: 1; pointer-events: auto; }
@@ -542,7 +541,7 @@
 </div>
 
 <script>
-var __ver='v20261003340000';
+var __ver='v20261003350000';
 function switchPage(name) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -589,6 +588,12 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   var hero = document.getElementById('hero-old');
   if (!hero) return;
+  var ctaBar = document.querySelector('.cta-bar');
+  function fitHero() {
+    hero.style.height = (window.innerHeight - ctaBar.offsetHeight) + 'px';
+  }
+  fitHero();
+  window.addEventListener('resize', fitHero);
   var slides = hero.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
   var idx = 0, timer = null;
