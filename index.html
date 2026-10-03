@@ -133,15 +133,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261003230000';
+  var __ver='v20261003240000';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
       .then(function(j){
         if(j && j.v && j.v!==__ver){
-          if(sessionStorage.getItem(k)===j.v){return;}
-          sessionStorage.setItem(k,j.v);
-          try{location.reload(true)}catch(e){location.href=location.href}
+          var q=(location.search?location.search+'&':'?')+'ver='+j.v;
+          location.replace(location.pathname+q);
         }
       }).catch(function(){});
   }

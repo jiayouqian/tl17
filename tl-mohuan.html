@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>天龙魔幻版 · 17职业国际服</title>
 <style>html,body{margin:0;background:#120e08;min-height:100vh}#ld{color:#c9a961;text-align:center;padding:60px 20px;font-family:system-ui,sans-serif;font-size:14px;letter-spacing:2px}</style>
 </head>
@@ -47,15 +50,14 @@
 <!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
 <script>
 (function(){
-  var __ver='v20261003230000';
+  var __ver='v20261003240000';
   function chk(){
     fetch('version.json?r='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.json()})
       .then(function(j){
         if(j && j.v && j.v!==__ver){
-          if(sessionStorage.getItem(k)===j.v){return;}
-          sessionStorage.setItem(k,j.v);
-          try{location.reload(true)}catch(e){location.href=location.href}
+          var q=(location.search?location.search+'&':'?')+'ver='+j.v;
+          location.replace(location.pathname+q);
         }
       }).catch(function(){});
   }
