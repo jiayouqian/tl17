@@ -3,7 +3,7 @@
   if (window.__fkInjected) { return; }
   window.__fkInjected = true;
   var css = [
-    '.fk{position:fixed;right:14px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:9999;font-family:system-ui,sans-serif}',
+    '.fk{position:fixed;right:16px;bottom:calc(128px + env(safe-area-inset-bottom,0px));z-index:9999;font-family:system-ui,sans-serif}',
     '.fk-btn{width:56px;height:56px;border-radius:50%;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;box-shadow:none;border:2px solid rgba(232,182,76,.85);user-select:none;touch-action:none;-webkit-touch-callout:none;transition:background .25s}',
     '.fk-btn:hover{background:rgba(232,182,76,.2)}',
     '.fk-btn svg{width:24px;height:24px;fill:#f5d489;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}',
