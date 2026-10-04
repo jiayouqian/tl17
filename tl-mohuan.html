@@ -15,7 +15,7 @@
 <script>
 (function(){
   /* 三段并行下载(不阻塞首屏渲染)，拿到后按 B64A/B64B/B64C 顺序拼接解码 */
-  var v = 'v20261005002000';
+  var v = 'v20261005002500';
   var files = ['index_d1.js?v=' + v, 'index_d2.js?v=' + v, 'index_d3.js?v=' + v];
   function fail(e){
     var el = document.getElementById('ld');
@@ -50,7 +50,7 @@
   /* 首载盖章：把当前版本写入 URL ?ver= 一次（replace，不入栈）。
      真实页据此得到 curVer，首访不触发自刷白屏；后续秒更新一律由真实页 URL ver 比较法负责，
      壳层不再做轮询，避免与真实页双重检测、也避免发版忘改 __ver 时每 3 秒死循环 reload。 */
-  var __ver='v20261005002000';
+  var __ver='v20261005002500';
   if(!location.search.match(/[?&]ver=/)){
     try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver); }catch(e){}
   }
