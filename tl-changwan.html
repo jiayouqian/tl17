@@ -90,7 +90,8 @@
   .sec-head .more { margin-left: auto; font-size: 10px; color: var(--ink-faint); letter-spacing: 1px; font-weight: 300; }
 
   /* ===== Hero 全屏长图轮播 ===== */
-  .hero { position: relative; height: calc(100dvh - 66px); overflow: hidden; background: var(--bg); touch-action: pan-y; cursor: grab; }
+  /* 首帧兜底用保守短值(100dvh-150px)：任何设备第一帧都不盖底部常驻栏；JS 首帧立即补到精确高度(vh-常驻栏真实高) */
+  .hero { position: relative; height: calc(100dvh - 150px); min-height: 360px; overflow: hidden; background: var(--bg); touch-action: pan-y; cursor: grab; }
   .hero.dragging { cursor: grabbing; }
   .hero-slides { position: absolute; inset: 6px 12px 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
   .hero-slides::-webkit-scrollbar { display: none; }
@@ -878,7 +879,7 @@
 </div>
 
 <script>
-var __ver='v20261004081815';
+var __ver='v20261004082413';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -1172,6 +1173,6 @@ function cwFoldIsOpen(f){
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v20261004081815"></script>
+<script src="assets/kefu.js?v=v20261004082413"></script>
 </body>
 </html>
