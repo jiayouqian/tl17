@@ -879,7 +879,7 @@
 </div>
 
 <script>
-var __ver='v20261004082413';
+var __ver='v20261004083739';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -987,7 +987,7 @@ document.addEventListener('DOMContentLoaded', function () {
       h.classList.toggle('open');
       if (body) body.classList.toggle('open');
       if (!wasOpen) {
-        try { history.pushState({ p: curPageName() }, ''); } catch (e) {}
+        /* 折叠不入历史栈：返回键按 __cwOpenFolds 逐层收起，杜绝幽灵记录错位 */
         (window.__cwOpenFolds = window.__cwOpenFolds || []).push(h);
       } else {
         var st = window.__cwOpenFolds || [];
@@ -1026,7 +1026,7 @@ document.addEventListener('DOMContentLoaded', function () {
       body.style.display = folded ? 'none' : '';
       if (more) more.textContent = folded ? '点击展开' : more.dataset.t;
       if (!folded) {
-        try { history.pushState({ p: curPageName() }, ''); } catch (e) {}
+        /* 折叠不入历史栈：返回键按 __cwOpenFolds 逐层收起，杜绝幽灵记录错位 */
         (window.__cwOpenFolds = window.__cwOpenFolds || []).push(h);
       } else {
         var st = window.__cwOpenFolds || [];
@@ -1153,10 +1153,11 @@ function cwFoldIsOpen(f){
       if (el) {
         document.querySelectorAll('.page').forEach(function (x) { x.classList.remove('active'); });
         el.classList.add('active');
-        /* 重开刷新前展开的折叠 */
+        /* 重开刷新前展开的折叠（同时重建返回栈，返回键才能逐层收起） */
         var folds = cwFoldList(el);
         (saved.openIdx || []).forEach(function (i) {
           var f = folds[i]; if (!f) return;
+          (window.__cwOpenFolds = window.__cwOpenFolds || []).push(f);
           if (f.classList.contains('sec-head')) {
             f.classList.remove('folded');
             var b = document.getElementById(f.getAttribute('data-sec')); if (b) b.style.display = '';
@@ -1173,6 +1174,6 @@ function cwFoldIsOpen(f){
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v20261004082413"></script>
+<script src="assets/kefu.js?v=v20261004083739"></script>
 </body>
 </html>
