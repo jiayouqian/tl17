@@ -127,25 +127,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 })();
 })();
 </script>
-<script src="assets/kefu.js?v=v20261003214652"></script>
-<!-- 秒更新: 自动检测版本变化强制刷新(防循环) -->
-<script>
-(function(){
-  var __ver='v20261003214652';
-  function chk(){
-    fetch('version.json?r='+Date.now(),{cache:'no-store'})
-      .then(function(r){return r.json()})
-      .then(function(j){
-        if(j && j.v && j.v>__ver){ /* 仅新版本跳转，旧缓存不跳 */
-          var q=(location.search?location.search+'&':'?')+'ver='+j.v;
-          location.replace(location.pathname+q);
-        }
-      }).catch(function(){});
-  }
-  setInterval(chk, 3000);
-  setTimeout(chk, 1200);
-})();
-</script>
+<script src="assets/kefu.js?v=v20261004080609"></script>
 
 </body>
 </html>
