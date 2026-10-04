@@ -891,7 +891,7 @@
 </div>
 
 <script>
-var __ver='v20261004111500';
+var __ver='v20261004113000';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -1119,16 +1119,8 @@ document.addEventListener('DOMContentLoaded', function () {
   hero.style.height = calcHeroH() + 'px';  /* 首帧直接写入精确高度 */
   window.addEventListener('resize', fitHeroThrottled);
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHeroThrottled);
-  /* 地址栏/工具栏动画实时补偿：fixed 底栏跟随视觉视口即时落位，杜绝"隔1秒才跳上来"的滞后 */
-  if (window.visualViewport && ctaBar) {
-    var vv = window.visualViewport, barOff = -1, barRaf = 0;
-    function compBar() {
-      var off = window.innerHeight - vv.height; if (off < 0) off = 0;
-      if (off !== barOff) { barOff = off; ctaBar.style.transform = off > 0 ? 'translateY(' + (-off) + 'px)' : ''; }
-    }
-    vv.addEventListener('resize', function () { cancelAnimationFrame(barRaf); barRaf = requestAnimationFrame(compBar); });
-    vv.addEventListener('scroll', function () { cancelAnimationFrame(barRaf); barRaf = requestAnimationFrame(compBar); });
-  }
+  /* 常驻栏保持原生 fixed bottom:0：地址栏收起/展开由浏览器(interactive-widget=resizes-content)平滑重排，
+     不再用 translateY 实时平移——滚动中平移与浏览器原生定位双重位移会在长图与底栏交界处闪出"镂空"（用户实测：上拉露、下拉不露） */
   var scroller = hero.querySelector('.hero-slides');
   var slides = scroller.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
@@ -1237,6 +1229,6 @@ function cwFoldIsOpen(f){
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v20261004111500"></script>
+<script src="assets/kefu.js?v=v20261004113000"></script>
 </body>
 </html>
