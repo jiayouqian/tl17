@@ -930,6 +930,9 @@ window.addEventListener('popstate', function (e) {
   var openFolds = collectOpenFolds();
   if (openFolds.length) {
     var el = openFolds[openFolds.length - 1];
+    /* 同步从展开栈移除，保持数组与真实展开一致 */
+    var st = window.__cwOpenFolds || [];
+    var si = st.indexOf(el); if (si >= 0) st.splice(si, 1);
     if (el.classList.contains('guide-sec')) {
       el.classList.add('folded');
       var b = document.getElementById(el.getAttribute('data-sec'));
