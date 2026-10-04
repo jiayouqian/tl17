@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: blob: https:">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>游戏专区 · 传奇 & 天龙</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{background:#0d0a06;color:#f2e7cf;font-family:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;height:100vh;overflow:hidden}
+.wrap{max-width:1600px;margin:0 auto;padding:0 10px 0;height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid #33271a;margin-bottom:14px;flex:none}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px;color:#c9a45c}
+.logo svg{width:26px;height:26px}
+.logo small{display:block;font-size:10px;font-weight:400;color:#8a7a5e;letter-spacing:3px}
+/* 双轮播：最大化 */
+.dual{flex:1;display:grid;grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:14px;min-height:0}
+@media(min-width:900px){.dual{grid-template-columns:1fr 1fr;grid-template-rows:1fr}}
+.zc{position:relative;background:#171209;border-radius:14px;overflow:hidden;min-width:0;display:flex;flex-direction:column;min-height:0}
+.zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px 0;flex:none}
+.zc-hd b{font-family:"Noto Serif SC",serif;font-size:16px;color:#e8cf9a;font-weight:900}
+.zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;white-space:nowrap}
+.enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none;transition:.2s}
+.enter:hover{color:#c9a45c;border-color:#c9a45c}
+/* 轮播：高度随图自适应，全图展示 */
+.carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease;overflow:hidden;flex:1;min-height:0}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
+.slide.on{opacity:1;pointer-events:auto}
+.slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:38px 14px 34px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.55) 34%,rgba(8,5,2,.95) 100%)}
+.sl-badge{display:inline-block;font-size:10px;color:#191209;background:#c9a45c;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
+.sl-badge.tl{background:#d34b3a;color:#fff}
+.sl-cap b{display:block;font-size:16px;font-weight:800;color:#f2e7cf;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.sl-cap p{font-size:12px;color:#c9b890;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 指示点 */
+.dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px}
+.dot{width:18px;height:4px;border-radius:2px;border:none;background:rgba(242,231,207,.35);background-clip:content-box;padding:11px 13px;cursor:pointer;transition:.25s}
+.dot.on{background:#c9a45c}
+.zc.tl .dot.on{background:#c9a45c}
+.foot{text-align:center;color:#8a7a5e;font-size:11px;margin-top:10px;flex:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><svg viewBox="0 0 24 24"><path d="M12 2l2.2 5.2L19.5 9l-5.3 1.8L12 16l-2.2-5.2L4.5 9l5.3-1.8z" fill="#c9a45c"/></svg><div>游戏专区<small>传奇 · 天龙</small></div></div>
+  </header>
+
+  <div class="dual">
+    <div class="zc ct">
+      <div class="zc-hd"><b>传奇手游专区</b><em>41 款 · 点图进入</em><a class="enter" href="cq.html">进入传奇 ›</a></div>
+      <div class="carousel" data-href="cq.html">
+        <div class="slide on"><img src="assets/home-carousel/c_kuangbao_xiyou.jpg" alt="狂暴西游"><div class="sl-cap"><span class="sl-badge">十倍返利</span><b>狂暴西游</b><p>西游题材传奇 · 女神盲盒 · 十倍返利代币服</p></div></div><div class="slide"><img src="assets/home-carousel/c1_hengchang.jpg" alt="恒游传奇"><div class="sl-cap"><span class="sl-badge">三职业</span><b>恒游传奇</b><p>三职业经典传奇 · 隐藏探索 装备精致 · 经典三职业</p></div></div><div class="slide"><img src="assets/home-carousel/c2_kuangdao.jpg" alt="狂刀万古"><div class="sl-cap"><span class="sl-badge">攻速专属</span><b>狂刀万古</b><p>1.76复古攻速专属 · 散人白嫖可通关 · 攻速复古</p></div></div><div class="slide"><img src="assets/home-carousel/c3_bingxue.jpg" alt="冰雪归来"><div class="sl-cap"><span class="sl-badge">10倍返利</span><b>冰雪归来</b><p>三职业冰雪复古 · 游戏内充值10倍返利 · 冰雪版本</p></div></div><div class="slide"><img src="assets/home-carousel/c4_zhanguo.jpg" alt="战国传奇"><div class="sl-cap"><span class="sl-badge">180复古</span><b>战国传奇</b><p>战国传奇·三职业多流派180复古 装备靠打散人逆袭 · 经典复古</p></div></div><div class="slide"><img src="assets/home-carousel/c5_wuhuang.jpg" alt="武皇江湖（群攻版）"><div class="sl-cap"><span class="sl-badge">武侠MMO</span><b>武皇江湖（群攻版）</b><p>青春武侠MMORPG · 排兵布阵 指尖胜负 · 特色服</p></div></div><div class="slide"><img src="assets/home-carousel/c6_jiyin.jpg" alt="羁绊觉醒"><div class="sl-cap"><span class="sl-badge">传奇</span><b>羁绊觉醒</b><p>水墨风传奇 · 羁绊觉醒 战力飙升 · 经典三职业</p></div></div>
+        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button><button class="dot" data-i="5" type="button" aria-label="第6张"></button><button class="dot" data-i="6" type="button" aria-label="第7张"></button></div>
+      </div>
+    </div>
+    <div class="zc tl">
+      <div class="zc-hd"><b>天龙手游专区</b><em>17职业国际服 · 点图进入</em><a class="enter" href="tianlong.html">进入天龙 ›</a></div>
+      <div class="carousel" data-href="tianlong.html">
+        <div class="slide on"><img src="https://aka.doubaocdn.com/s/QQifNDXeon" alt="天龙八部手游"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>天龙八部 · 官方正版</b><p>水墨神龙 · 正版授权</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/U0IYl7aEuF" alt="天龙游戏实景"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>游戏实景 · 桃花岛</b><p>武侠世界 · 实景体验</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/gVW2qz6PLA" alt="天龙珍兽天命玄凤"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>珍兽系统 · 天命玄凤</b><p>104级洪荒超鸿蒙兽</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/vPdNPsvjXN" alt="天龙珍兽北溟玄龟"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>珍兽系统 · 北溟玄龟</b><p>94级逆天超神兽</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/0aFH5gxQQQ" alt="天龙时装风雨惊梦"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>时装系统 · 风雨惊梦</b><p>同门乱斗限定时装</p></div></div><div class="slide"><img src="https://aka.doubaocdn.com/s/43wKIkwXQT" alt="天龙累计登录奖励"><div class="sl-cap"><span class="sl-badge tl">天龙</span><b>累计登录 · 7天豪礼</b><p>登录领时装坐骑珍兽</p></div></div>        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button><button class="dot" data-i="5" type="button" aria-label="第6张"></button></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">游戏专区门户 · 传奇专区 + 魔幻天龙国际服</p>
+</div>
+<script>
+var __ver='v20261004113946';
+(function(){
+  function initCarousel(root){
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
+    var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
+    var i = 0, timer = null;
+    function fitH(){ }
+    function go(n){
+      slides[i].classList.remove('on'); dots[i].classList.remove('on');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('on'); dots[i].classList.add('on');
+    }
+    function next(){ go(i + 1); }
+    function start(){ clearInterval(timer); timer = setInterval(next, 2000); }
+    // 预加载 + 按比例自适应: 横图填满cover(主体居中), 方形/竖图完整contain(不裁内容)
+    slides.forEach(function(s, idx){
+      var real = s.querySelector('img');
+      function setFit(){
+        if(real.naturalWidth){
+          var r = real.naturalHeight / real.naturalWidth;
+          real.style.objectFit = (r >= 0.8) ? 'contain' : 'cover';
+          if(real.src.indexOf('c6_jiyin') > -1){
+            real.style.height = '90%';
+          } else {
+            real.style.height = '100%';
+          }
+        }
+      }
+      if(real.complete){ setFit(); } else { real.addEventListener('load', setFit); }
+      var im = new Image();
+      im.onload = function(){ setFit(); if(idx === i) fitH(); };
+      im.src = real.src;
+    });
+    dots.forEach(function(dot){
+      dot.addEventListener('click', function(){
+        go(parseInt(this.dataset.i, 10)); start();
+      });
+    });
+    root.addEventListener('click', function(e){
+      if(e.target.closest('.dot')) return;
+      window.location.href = root.dataset.href;
+    });
+    window.addEventListener('resize', fitH);
+    fitH();
+    start();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.carousel'), initCarousel);
+})();
+</script>
+<script>
+(function(){
+  (function(){
+  if(!location.search.match(/rv=([^&]+)/)){
+    fetch('version.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+      if(d&&d.v){ try{history.replaceState(null,'','?rv='+d.v);}catch(e){} }
+    }).catch(function(){});
+  }
+})();
+})();
+</script>
+<script src="assets/kefu.js?v=v20261004125000"></script>
+
+</body>
+</html>
