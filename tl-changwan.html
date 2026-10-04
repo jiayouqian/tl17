@@ -1082,6 +1082,16 @@ document.addEventListener('DOMContentLoaded', function () {
   hero.style.height = calcHeroH() + 'px';  /* 首帧直接写入精确高度 */
   window.addEventListener('resize', fitHeroThrottled);
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHeroThrottled);
+  /* 地址栏/工具栏动画实时补偿：fixed 底栏跟随视觉视口即时落位，杜绝"隔1秒才跳上来"的滞后 */
+  if (window.visualViewport && ctaBar) {
+    var vv = window.visualViewport, barOff = -1, barRaf = 0;
+    function compBar() {
+      var off = window.innerHeight - vv.height; if (off < 0) off = 0;
+      if (off !== barOff) { barOff = off; ctaBar.style.transform = off > 0 ? 'translateY(' + (-off) + 'px)' : ''; }
+    }
+    vv.addEventListener('resize', function () { cancelAnimationFrame(barRaf); barRaf = requestAnimationFrame(compBar); });
+    vv.addEventListener('scroll', function () { cancelAnimationFrame(barRaf); barRaf = requestAnimationFrame(compBar); });
+  }
   var scroller = hero.querySelector('.hero-slides');
   var slides = scroller.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
