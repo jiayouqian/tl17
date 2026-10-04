@@ -878,7 +878,7 @@
 </div>
 
 <script>
-var __ver='v20261004080609';
+var __ver='v20261004081815';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -1051,11 +1051,13 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   var hero = document.getElementById('hero-old');
   if (!hero) return;
-  /* 首屏高度：与 CSS calc(100dvh - 66px) 同一公式，首帧对齐不跳；只认宽度变化(地址栏/键盘伸缩不重算) */
+  /* 首屏高度：底边与底部常驻栏(注册/下载/后台)顶边对齐，窗口不覆盖按钮；
+     首帧同步写入(脚本在首帧渲染前执行，无可见跳动)；只认宽度变化(地址栏/键盘伸缩不重算) */
+  var ctaBar = document.querySelector('.cta-bar');
   var lastW = window.innerWidth;
   function calcHeroH() {
     var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-    return vh - 66;
+    return vh - (ctaBar ? ctaBar.offsetHeight : 66);
   }
   function fitHero() {
     if (window.innerWidth === lastW) return;  /* 宽度没变：地址栏伸缩一律不动高度 */
@@ -1063,7 +1065,7 @@ document.addEventListener('DOMContentLoaded', function () {
     hero.style.height = calcHeroH() + 'px';
   }
   function fitHeroThrottled() { clearTimeout(fitTimer); fitTimer = setTimeout(fitHero, 200); }
-  hero.style.height = calcHeroH() + 'px';  /* 首帧直接写入与 CSS 相同的值，杜绝打开瞬间二次改写跳动 */
+  hero.style.height = calcHeroH() + 'px';  /* 首帧直接写入精确高度 */
   window.addEventListener('resize', fitHeroThrottled);
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHeroThrottled);
   var scroller = hero.querySelector('.hero-slides');
@@ -1170,6 +1172,6 @@ function cwFoldIsOpen(f){
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v20261004080609"></script>
+<script src="assets/kefu.js?v=v20261004081815"></script>
 </body>
 </html>
