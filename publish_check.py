@@ -24,6 +24,8 @@ REPO = os.path.dirname(os.path.abspath(__file__))
 os.chdir(REPO)
 
 HTML_FILES = ['index.html', 'tianlong.html', 'tl-changwan.html', 'tl-mohuan.html', 'cq.html']
+# 壳层页：页面内容在 base64+gzip 数据段内，真实页自带 version.json 秒更新，结构校验跳过其 version.json 引用检查
+SHELL_PAGES = {'cq.html', 'tl-mohuan.html'}
 DATA_SEGS = {
     'cq':        {'files': ['chuangqi_d1.js', 'chuangqi_d2.js'],       'vars': ['B64A', 'B64B'], 'kind': 'games'},
     'tl-mohuan': {'files': ['index_d1.js', 'index_d2.js', 'index_d3.js'], 'vars': ['B64A', 'B64B', 'B64C'], 'kind': 'page'},
@@ -100,7 +102,7 @@ def check_structure():
         cl = s.count('</script>')
         if op != cl:
             fail(f"{f}: script 标签不闭合 {op} vs {cl}")
-        if 'version.json' not in s:
+        if f not in SHELL_PAGES and 'version.json' not in s:
             fail(f"{f}: 缺少 version.json 秒更新引用")
         if '__ver' not in s:
             fail(f"{f}: 缺少 __ver")
