@@ -426,12 +426,11 @@
     display: flex; flex-direction: column;
   }
   .cta-btn {
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; text-decoration: none;
-    border-radius: 9px; height: 42px; padding: 0 4px; font-size: 13.5px;
+    display: block; text-align: center; text-decoration: none;
+    border-radius: 9px; padding: 10px 4px; font-size: 13.5px;
     font-weight: 600; letter-spacing: 2px; position: relative; overflow: hidden;
     transition: transform .14s ease; line-height: 1.2;
-    font-family: "PingFang SC", system-ui, sans-serif;
+    font-family: "PingFang SC", system-ui, sans-serif; touch-action: manipulation;
   }
   .cta-btn:active { transform: scale(.95); }
   .cta-gold {
