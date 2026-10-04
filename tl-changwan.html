@@ -17,17 +17,16 @@
     --gold-dk: #8a6a35;
     --cinnabar: #b03a2e;
     --cinnabar-hi: #d95c44;
-    --bg: #0d0a06;
-    --bg2: #141009;
-    --surface: #171209;
-    --surface2: #1d1810;
+    --bg: #0a0d10;
+    --bg2: #131722;
+    --surface: #161a26;
+    --surface2: #1c2130;
     --ink: #e9e2d0;
     --ink-dim: #8f8b7c;
     --ink-faint: #5c5a52;
     --line: rgba(201,164,92,.16);
     --line-strong: rgba(201,164,92,.4);
   }
-  html { scroll-behavior:smooth; }
   body {
     background: var(--bg); color: var(--ink);
     font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -389,7 +388,7 @@
   .mini p { font-size: 10px; color: #b7ad94; line-height: 1.7; margin: 0; }
 
   /* ===== 底部代理码条 ===== */
-  .agent-line { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 6px 0 7px; margin-bottom: 6px; border-bottom: 1px solid rgba(201,164,92,.14); background: rgba(201,164,92,.06); cursor: pointer; }
+  .agent-line { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 6px 0 7px; margin-bottom: 10px; border-bottom: 1px solid rgba(201,164,92,.14); background: rgba(201,164,92,.06); cursor: pointer; }
   .agent-line span { font-size: 11px; color: var(--ink-dim); letter-spacing: 1px; }
   .agent-line b { font-size: 15px; letter-spacing: 3px; color: var(--gold-hi); font-family: "Noto Serif SC", serif; }
   .agent-line i { font-style: normal; font-size: 10px; color: var(--gold); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 8px; }
@@ -879,7 +878,7 @@
 </div>
 
 <script>
-var __ver='v20261003214652';
+var __ver='v20261004080609';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -925,6 +924,7 @@ function collectOpenFolds() {
   return list;
 }
 window.addEventListener('popstate', function (e) {
+  if (e.state && e.state.fk) return;  /* 客服面板压的返回栈：只关面板(kefu.js 处理)，不动折叠/页面，防一次返回退两层 */
   /* 优先：手机返回键逐层收起展开的折叠（大区/二级标题） */
   var openFolds = collectOpenFolds();
   if (openFolds.length) {
@@ -1051,22 +1051,19 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   var hero = document.getElementById('hero-old');
   if (!hero) return;
-  var ctaBar = document.querySelector('.cta-bar');
-  /* 首屏锁定高度：移动端地址栏/键盘伸缩(<18%)不重算，杜绝页面跳动 */
-  var baseH = null, fitTimer = null;
+  /* 首屏高度：与 CSS calc(100dvh - 66px) 同一公式，首帧对齐不跳；只认宽度变化(地址栏/键盘伸缩不重算) */
+  var lastW = window.innerWidth;
   function calcHeroH() {
     var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-    return vh - ctaBar.offsetHeight;
+    return vh - 66;
   }
   function fitHero() {
-    var cur = calcHeroH();
-    if (baseH === null) { baseH = cur; }
-    else if (Math.abs(cur - baseH) / baseH > 0.18) { baseH = cur; }
-    else { return; }
-    hero.style.height = baseH + 'px';
+    if (window.innerWidth === lastW) return;  /* 宽度没变：地址栏伸缩一律不动高度 */
+    lastW = window.innerWidth;
+    hero.style.height = calcHeroH() + 'px';
   }
   function fitHeroThrottled() { clearTimeout(fitTimer); fitTimer = setTimeout(fitHero, 200); }
-  fitHero();
+  hero.style.height = calcHeroH() + 'px';  /* 首帧直接写入与 CSS 相同的值，杜绝打开瞬间二次改写跳动 */
   window.addEventListener('resize', fitHeroThrottled);
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHeroThrottled);
   var scroller = hero.querySelector('.hero-slides');
@@ -1085,9 +1082,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function go(n) {
     idx = n % TOTAL;
     stopAuto();
-    scroller.scrollTo({ left: idx * scroller.clientWidth, behavior: 'smooth' });
+    scroller.scrollLeft = idx * scroller.clientWidth;  /* 瞬移切页：避免 smooth 与 scroll-snap 拉扯，自动轮播不抖 */
     clearTimeout(idleTimer);
-    idleTimer = setTimeout(startAuto, 650);
+    idleTimer = setTimeout(startAuto, 1200);  /* 动画间隙拉长：切完再自动，不抢手滑 */
   }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
   scroller.addEventListener('pointerdown', function () { interacting = true; stopAuto(); clearTimeout(idleTimer); }, { passive: true });
@@ -1123,7 +1120,10 @@ function cwFoldIsOpen(f){
     fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        if (d.v && d.v > v) {
+        if (!d || !d.v) return;
+        var inUrl = (location.search.match(/[?&]ver=([^&]+)/) || [])[1];
+        /* 版本不一致且链接还没带该版本才跳：URL 已带同版本不再跳，杜绝发版忘改 __ver 时死循环 reload */
+        if (d.v !== v && d.v !== inUrl) {
           /* 保存滚动位置 + 所在菜单 + 当前页展开的折叠索引，刷新后原位恢复 */
           try {
             var act = document.querySelector('.page.active');
@@ -1138,7 +1138,7 @@ function cwFoldIsOpen(f){
       })
       .catch(function () {});
   }
-  setInterval(check, 3000);
+  setInterval(check, 60000);  /* 3s→60s：弱网不再高频请求 */
 })();
 /* 版本刷新后原位恢复：菜单 + 折叠展开态 + 滚动位置（深绑定返回体验） */
 (function () {
@@ -1170,6 +1170,6 @@ function cwFoldIsOpen(f){
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v20261003214652"></script>
+<script src="assets/kefu.js?v=v20261004080609"></script>
 </body>
 </html>

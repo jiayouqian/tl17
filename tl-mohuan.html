@@ -11,29 +11,37 @@
 </head>
 <body>
 <div id="ld">天龙魔幻版 · 加载中…</div>
-<script src="index_d1.js?v=v20261003214652"></script>
-<script src="index_d2.js?v=v20261003214652"></script>
-<script src="index_d3.js?v=v20261003214652"></script>
 <script>
 (function(){
-  if(typeof B64A === 'undefined' || typeof B64B === 'undefined' || typeof B64C === 'undefined'){ fail('数据加载失败'); return; }
-  var B64 = B64A + B64B + B64C;
-  try{
+  /* 三段并行下载(不阻塞首屏渲染)，拿到后按 B64A/B64B/B64C 顺序拼接解码 */
+  var v = 'v20261004080609';
+  var files = ['index_d1.js?v=' + v, 'index_d2.js?v=' + v, 'index_d3.js?v=' + v];
+  function fail(e){
+    var el = document.getElementById('ld');
+    if (el) el.textContent = '加载失败，请刷新重试';
+    console.error(e);
+  }
+  Promise.all(files.map(function (f) {
+    return fetch(f, { cache: 'no-store' }).then(function (r) { return r.text(); }).catch(function () { return ''; });
+  })).then(function (ts) {
+    var parts = [];
+    ts.forEach(function (t) {
+      var m = t.match(/var\s+B64[ABC]="([^"]*)"/);
+      parts.push(m ? m[1] : '');
+    });
+    var B64 = parts.join('');
+    if (B64.length < 100) { fail('数据加载失败'); return; }
     var bin = atob(B64);
     var u8 = new Uint8Array(bin.length);
-    for(var i=0;i<bin.length;i++){ u8[i]=bin.charCodeAt(i); }
+    for (var i = 0; i < bin.length; i++) { u8[i] = bin.charCodeAt(i); }
     var ds = new DecompressionStream('gzip');
     var stream = new Blob([u8]).stream().pipeThrough(ds);
-    new Response(stream).text().then(function(txt){
+    new Response(stream).text().then(function (txt) {
       document.open();
       document.write(txt);
       document.close();
     }).catch(fail);
-  }catch(e){ fail(e); }
-  function fail(e){
-    document.getElementById('ld').textContent='加载失败，请刷新重试';
-    console.error(e);
-  }
+  }).catch(fail);
 })();
 </script>
 <script>
@@ -41,7 +49,7 @@
   /* 首载盖章：把当前版本写入 URL ?ver= 一次（replace，不入栈）。
      真实页据此得到 curVer，首访不触发自刷白屏；后续秒更新一律由真实页 URL ver 比较法负责，
      壳层不再做轮询，避免与真实页双重检测、也避免发版忘改 __ver 时每 3 秒死循环 reload。 */
-  var __ver='v20261003214652';
+  var __ver='v20261004080609';
   if(!location.search.match(/[?&]ver=/)){
     try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver); }catch(e){}
   }
