@@ -396,7 +396,7 @@
   .mini p { font-size: 10px; color: #b7ad94; line-height: 1.7; margin: 0; }
 
   /* ===== 底部代理码条 ===== */
-  .agent-line { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 4px 0 3px; margin-bottom: 4px; border: none; background: transparent; cursor: pointer; }
+  .agent-line { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 4px 0 3px; margin-bottom: 4px; border: none; background: transparent; cursor: pointer; line-height: 1.2; }
   .agent-line span { font-size: 11px; color: var(--ink-dim); letter-spacing: 1px; }
   .agent-line b { font-size: 15px; letter-spacing: 3px; color: var(--gold-hi); font-family: "Noto Serif SC", serif; }
   .agent-line i { font-style: normal; font-size: 10px; color: var(--gold); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 8px; }
@@ -426,11 +426,12 @@
     display: flex; flex-direction: column;
   }
   .cta-btn {
-    display: block; text-align: center; text-decoration: none;
-    border-radius: 9px; padding: 10px 4px; font-size: 13.5px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; text-decoration: none;
+    border-radius: 9px; height: 42px; padding: 0 4px; font-size: 13.5px;
     font-weight: 600; letter-spacing: 2px; position: relative; overflow: hidden;
-    transition: transform .14s ease;
-    font-family: "Noto Sans SC", sans-serif;
+    transition: transform .14s ease; line-height: 1.2;
+    font-family: "PingFang SC", system-ui, sans-serif;
   }
   .cta-btn:active { transform: scale(.95); }
   .cta-gold {
