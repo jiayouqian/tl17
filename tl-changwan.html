@@ -12,6 +12,7 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   :root {
+    --cta-h: 110px;   /* 底部常驻栏高度（hero 兜底对齐用，JS 实测后同步覆盖） */
     --gold: #c9a45c;
     --gold-hi: #e8cf9a;
     --gold-dk: #8a6a35;
@@ -92,7 +93,7 @@
 
   /* ===== Hero 全屏长图轮播 ===== */
   /* 首帧兜底用保守短值(100dvh-150px)：任何设备第一帧都不盖底部常驻栏；JS 首帧立即补到精确高度(vh-常驻栏真实高) */
-  .hero { position: relative; height: calc(100dvh - 150px); min-height: 360px; overflow: hidden; background: var(--bg); touch-action: pan-y; cursor: grab; }
+  .hero { position: relative; height: calc(100dvh - var(--cta-h, 110px)); min-height: 360px; overflow: hidden; background: var(--bg); touch-action: pan-y; cursor: grab; }
   .hero.dragging { cursor: grabbing; }
   .hero-slides { position: absolute; inset: 6px 12px 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
   .hero-slides::-webkit-scrollbar { display: none; }
@@ -350,7 +351,11 @@
 
   /* ===== 手册长图 ===== */
   .man-img { margin-bottom: 14px; }
-  .man-img img { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--line); }
+  .man-img img { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--line); cursor: zoom-in; }
+  /* 手册长图全屏预览（lightbox）：看攻略图不再被底部常驻栏遮挡 */
+  .lb { position: fixed; inset: 0; z-index: 999; background: rgba(3,5,9,.96); display: none; flex-direction: column; align-items: center; overflow: auto; -webkit-overflow-scrolling: touch; }
+  .lb img { width: auto; max-width: 100%; margin: 44px auto 60px; display: block; border-radius: 6px; }
+  .lb-close { position: fixed; top: calc(10px + env(safe-area-inset-top,0px)); right: 14px; z-index: 1000; width: 40px; height: 40px; border-radius: 50%; background: rgba(0,0,0,.55); border: 1px solid rgba(232,182,76,.45); color: var(--gold-hi); font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
   /* ===== 提示条 ===== */
   .tip {
@@ -394,7 +399,7 @@
   .agent-line span { font-size: 11px; color: var(--ink-dim); letter-spacing: 1px; }
   .agent-line b { font-size: 15px; letter-spacing: 3px; color: var(--gold-hi); font-family: "Noto Serif SC", serif; }
   .agent-line i { font-style: normal; font-size: 10px; color: var(--gold); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 8px; }
-  .cta-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
   /* ===== 顶部入口导航 ===== */
   .topnav {
@@ -738,16 +743,16 @@
     </div>
 <div class="sec"><div class="fold"><button class="fold-head" type="button">完整手册 · 10张长图<span class="ar">›</span></button><div class="fold-body"></div>
     <div class="sec" style="padding:0 18px;">
-<div class="man-img"><img src="assets/tl-cw-full/cw_g01.jpg" alt="手册长图1" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g02.jpg" alt="手册长图2" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g03.jpg" alt="手册长图3" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g06.jpg" alt="手册长图6" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g07.jpg" alt="手册长图7" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g08.jpg" alt="手册长图8" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g09.jpg" alt="手册长图9" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g10.jpg" alt="手册长图10" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g11.jpg" alt="手册长图11" loading="lazy"></div>
-<div class="man-img"><img src="assets/tl-cw-full/cw_g12.jpg" alt="手册长图12" loading="lazy"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g01.jpg" alt="手册长图1" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g02.jpg" alt="手册长图2" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g03.jpg" alt="手册长图3" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g06.jpg" alt="手册长图6" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g07.jpg" alt="手册长图7" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g08.jpg" alt="手册长图8" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g09.jpg" alt="手册长图9" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g10.jpg" alt="手册长图10" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g11.jpg" alt="手册长图11" loading="lazy" onclick="lbOpen(this.src)"></div>
+<div class="man-img"><img src="assets/tl-cw-full/cw_g12.jpg" alt="手册长图12" loading="lazy" onclick="lbOpen(this.src)"></div>
     </div>
     </div>
     </div>
@@ -865,6 +870,12 @@
   </div>
 </div>
 
+<!-- ===== 手册长图全屏预览 ===== -->
+<div class="lb" id="imgLightbox" onclick="if(event.target===this)lbClose()">
+  <button class="lb-close" onclick="lbClose()" type="button" aria-label="关闭预览">×</button>
+  <img id="lbImg" src="" alt="手册长图">
+</div>
+
 <!-- ===== 底部导航 ===== -->
 <div class="cta-bar">
   <div class="agent-line" onclick="copyText('PPAP',this)" role="button" tabindex="0" aria-label="复制代理码">
@@ -880,7 +891,7 @@
 </div>
 
 <script>
-var __ver='v20261004084542';
+var __ver='v20261004102500';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -931,6 +942,13 @@ function collectOpenFolds() {
 }
 window.addEventListener('popstate', function (e) {
   if (e.state && e.state.fk) return;  /* 客服面板压的返回栈：只关面板(kefu.js 处理)，不动折叠/页面，防一次返回退两层 */
+  /* 手册长图全屏预览：返回键先关预览，重占位不消费历史，防一次返回退两层 */
+  var lbEl = document.getElementById('imgLightbox');
+  if (lbEl && lbEl.style.display !== 'none') {
+    lbClose();
+    try { history.pushState({ cw: 1 }, ''); } catch (e2) {}
+    return;
+  }
   /* 优先：手机返回键逐层收起展开的折叠（大区/二级标题） */
   var openFolds = collectOpenFolds();
   if (openFolds.length) {
@@ -984,6 +1002,20 @@ function legacyCopy(txt, btn) {
 function flash(btn) {
   var old = btn.textContent; btn.textContent = '已复制';
   setTimeout(function () { btn.textContent = old; }, 1400);
+}
+/* 手册长图全屏预览（lightbox） */
+function lbOpen(src) {
+  var b = document.getElementById('imgLightbox'), i = document.getElementById('lbImg');
+  if (!b || !i) return;
+  i.src = src; b.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  try { history.pushState({ cw: 1 }, ''); } catch (e) {}  /* 占位：手机返回键先关预览，不进页面栈 */
+}
+function lbClose() {
+  var b = document.getElementById('imgLightbox');
+  if (!b) return;
+  b.style.display = 'none';
+  document.body.style.overflow = '';
 }
 function copyInvite(card) {
   var code = card.querySelector('.pass-code b');
@@ -1068,14 +1100,19 @@ document.addEventListener('DOMContentLoaded', function () {
   /* 首屏高度：底边与底部常驻栏(注册/下载/后台)顶边对齐，窗口不覆盖按钮；
      首帧同步写入(脚本在首帧渲染前执行，无可见跳动)；只认宽度变化(地址栏/键盘伸缩不重算) */
   var ctaBar = document.querySelector('.cta-bar');
-  var lastW = window.innerWidth;
+  var lastW = window.innerWidth, lastVH = 0;
   function calcHeroH() {
     var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-    return vh - (ctaBar ? ctaBar.offsetHeight : 66);
+    var h = vh - (ctaBar ? ctaBar.offsetHeight : 66);
+    /* 实测常驻栏高度同步进 CSS 变量：CSS 兜底与 JS 永远一致，hero 底边永不对齐错位 */
+    try { document.documentElement.style.setProperty('--cta-h', (ctaBar ? ctaBar.offsetHeight : 66) + 'px'); } catch (e) {}
+    return h;
   }
   function fitHero() {
-    if (window.innerWidth === lastW) return;  /* 宽度没变：地址栏伸缩一律不动高度 */
-    lastW = window.innerWidth;
+    var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+    /* 宽度与视口高度都未变才跳过：地址栏伸缩（高度变化）时 hero 跟随重算，杜绝底部错位/镂空 */
+    if (window.innerWidth === lastW && vh === lastVH) return;
+    lastW = window.innerWidth; lastVH = vh;
     hero.style.height = calcHeroH() + 'px';
   }
   function fitHeroThrottled() { clearTimeout(fitTimer); fitTimer = setTimeout(fitHero, 200); }
@@ -1200,6 +1237,6 @@ function cwFoldIsOpen(f){
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v20261004084542"></script>
+<script src="assets/kefu.js?v=v20261004102500"></script>
 </body>
 </html>
