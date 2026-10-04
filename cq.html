@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: blob: https:">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>传奇专区 · 游戏列表</title>
+<style>html,body{margin:0;background:#120e08;min-height:100vh}#ld{color:#c9a961;text-align:center;padding:60px 20px;font-family:system-ui,sans-serif;font-size:14px;letter-spacing:2px}</style>
+</head>
+<body>
+<div id="ld">传奇专区 · 加载中…</div>
+<script>
+(function(){
+  // 每次打开强制回源加载最新数据（cache:'no-store' 绕过浏览器缓存，时间戳参数绕过 CDN 缓存）→ 秒更新
+  function fetchText(u){ return fetch(u, {cache:'no-store'}).then(function(r){ return r.text(); }); }
+  function extractVar(txt, name){
+    var m = txt.match(new RegExp('var\\s+' + name + '\\s*=\\s*"([^"]+)"'));
+    if(!m){ throw new Error('数据段缺失: '+name); }
+    return m[1];
+  }
+  function fail(e){
+    document.getElementById('ld').textContent = '加载失败，请刷新重试';
+    console.error(e);
+  }
+  var ts = Date.now();
+  Promise.all([
+    fetchText('chuangqi_d1.js?ts='+ts),
+    fetchText('chuangqi_d2.js?ts='+ts)
+  ]).then(function(rs){
+    var B64 = extractVar(rs[0], 'B64A') + extractVar(rs[1], 'B64B');
+    var bin = atob(B64);
+    var u8 = new Uint8Array(bin.length);
+    for(var i=0;i<bin.length;i++){ u8[i]=bin.charCodeAt(i); }
+    var ds = new DecompressionStream('gzip');
+    var stream = new Blob([u8]).stream().pipeThrough(ds);
+    return new Response(stream).text();
+  }).then(function(txt){
+    document.open();
+    document.write(txt);
+    document.close();
+  }).catch(fail);
+})();
+</script>
+<script>
+(function(){
+  /* 首载盖章：把当前版本写入 URL ?ver= 一次（replace，不入栈）。
+     真实页据此得到 curVer，首访不触发自刷白屏；后续秒更新一律由真实页 URL ver 比较法负责，
+     壳层不再做轮询，避免与真实页双重检测、也避免发版忘改 __ver 时每 3 秒死循环 reload。 */
+  var __ver='v20261004113946';
+  if(!location.search.match(/[?&]ver=/)){
+    try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver); }catch(e){}
+  }
+})();
+</script>
+
+</body>
+</html>
