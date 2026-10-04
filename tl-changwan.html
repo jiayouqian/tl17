@@ -879,7 +879,7 @@
 </div>
 
 <script>
-var __ver='v20261004083739';
+var __ver='v20261004084542';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -887,21 +887,25 @@ function showPage(name, preserveScroll) {
   if (!preserveScroll) window.scrollTo(0, 0);
 }
 var __cwInit = true;   // 初始化阶段（IIFE switchPage('old')）不触发后退
+var __cwPages = [];    // JS 页面层级栈：返回键逐级回退的唯一依据（历史栈只放占位记录）
 function switchPage(name) {
   if (name === 'old') {
     if (__cwInit) {
-      /* 初始化：盖章当前栈顶为 old，不后退 */
-      try { history.replaceState({ p: 'old' }, ''); } catch (e) {}
+      /* 初始化：盖章栈顶为占位记录 + 压一条占位，保证系统返回键始终有记录可弹 */
+      try { history.replaceState({ cw: 1 }, ''); } catch (e) {}
+      try { history.pushState({ cw: 1 }, ''); } catch (e) {}
+      __cwPages = [];
       showPage('old');
     } else {
-      /* 用户点页面内"返回首页"：直接后退弹掉刚才 push 的页签，栈不残留连续 {old} */
+      /* 用户点页面内"返回首页"：直接切页并清空层级栈（明确意图，不走返回链、不吞栈） */
+      __cwPages = [];
+      (window.__cwOpenFolds = window.__cwOpenFolds || []).length = 0;
       showPage('old');
-      try { history.back(); } catch (e) {}
     }
     return;
   }
   __cwInit = false;
-  try { history.pushState({ p: name }, ''); } catch (e) {}
+  __cwPages.push(name);          /* 页面层级入 JS 栈，不再 pushState */
   showPage(name);
 }
 function curPageName() {
@@ -944,17 +948,22 @@ window.addEventListener('popstate', function (e) {
       var body = el.nextElementSibling;
       if (body) body.classList.remove('open');
     }
+    /* 重新占位：折叠层级不消费真实历史，下一次返回仍有记录可弹 */
+    try { history.pushState({ cw: 1 }, ''); } catch (e) {}
     return;
   }
   var p = e.state && e.state.p;
   var curName = curPageName();
-  if (p && document.getElementById('page-' + p)) {
-    /* 目标页即当前页：不重渲染、不滚动，防止页面跳顶 */
-    if (p === curName) return;
-    /* 返回切页保留滚动位置：深绑定返回键，不跳顶 */
-    showPage(p, true);
+  if (__cwPages.length) {
+    /* 切回上一页：JS 栈弹出，保留滚动位置，不跳顶 */
+    var prev = __cwPages.pop();
+    showPage(prev, true);
+    /* 重新占位：下一次返回仍有记录可弹，UI 层级不消费真实历史 */
+    try { history.pushState({ cw: 1 }, ''); } catch (e) {}
+    return;
   }
-  else if (curName !== 'old') { showPage('old'); }
+  /* 无折叠、无上级页：不重占位，交给浏览器原生后退（退出文档/回上一站） */
+  else if (curName !== 'old' && p === undefined) { showPage('old'); }
 });
 (function () { switchPage('old'); })();
 
@@ -1136,7 +1145,7 @@ function cwFoldIsOpen(f){
             var folds = cwFoldList(act);
             var openIdx = [];
             folds.forEach(function (f, i) { if (cwFoldIsOpen(f)) openIdx.push(i); });
-            sessionStorage.setItem('cw_pos', JSON.stringify({ y: window.scrollY, p: curPageName(), v: d.v, openIdx: openIdx }));
+            sessionStorage.setItem('cw_pos', JSON.stringify({ y: window.scrollY, p: curPageName(), v: d.v, openIdx: openIdx, pages: window.__cwPages || [] }));
           } catch (e) {}
           var q = (location.search ? location.search + '&' : '?') + 'ver=' + d.v;
           location.replace(location.pathname + q);
@@ -1171,12 +1180,15 @@ function cwFoldIsOpen(f){
         });
       }
       window.scrollTo(0, saved.y || 0);
-      try { history.replaceState({ p: saved.p || 'old' }, ''); } catch (e) {}  // 修正 state，防首次返回误踢回 old
+      /* 重建页面层级栈（占位记录模式），返回键继续逐级可用 */
+      window.__cwPages = saved.pages || [];
+      try { history.replaceState({ cw: 1 }, ''); } catch (e) {}
+      try { history.pushState({ cw: 1 }, ''); } catch (e) {}
       sessionStorage.removeItem('cw_pos');
     }
   } catch (e) {}
 })();
 </script>
-<script src="assets/kefu.js?v=v20261004083739"></script>
+<script src="assets/kefu.js?v=v20261004084542"></script>
 </body>
 </html>
