@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: blob: https:">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -68,6 +69,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
   <p class="foot">游戏专区门户 · 传奇专区 + 魔幻天龙国际服</p>
 </div>
 <script>
+var __ver='v20261004113946';
 (function(){
   function initCarousel(root){
     var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
