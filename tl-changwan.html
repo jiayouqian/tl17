@@ -905,7 +905,7 @@ function switchPage(name) {
     return;
   }
   __cwInit = false;
-  __cwPages.push(name);          /* 页面层级入 JS 栈，不再 pushState */
+  __cwPages.push(curPageName());  /* 压入【来源页】（返回键切回的对象），非当前进入页 */
   showPage(name);
 }
 function curPageName() {
