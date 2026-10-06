@@ -7,14 +7,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>天龙魔幻版 · 17职业国际服</title>
+<title>魔幻天龙 · 17职业国际服</title>
 <style>html,body{margin:0;background:#120e08;min-height:100vh}#ld{color:#c9a961;text-align:center;padding:60px 20px;font-family:system-ui,sans-serif;font-size:14px;letter-spacing:2px}</style>
 </head>
 <body>
-<div id="ld">天龙魔幻版 · 加载中… v20261006200500</div>
+<div id="ld">魔幻天龙 · 加载中… v20261006200500</div>
 <script>
 (function(){
-  /* 三段并行下载(不阻塞首屏渲染)，拿到后按 B64A/B64B/B64C 顺序拼接解码 */
   var v = 'v20261006200500';
   var files = ['index_d1.js?v=' + v, 'index_d2.js?v=' + v, 'index_d3.js?v=' + v];
   function fail(e){
@@ -41,12 +40,10 @@
       document.open();
       document.write(txt);
       document.close();
-      /* 页面渲染后再更新URL，确保ver参数正确 */
       try{ history.replaceState(null,'', location.pathname + '?ver=' + v); }catch(e){}
     }).catch(fail);
   }).catch(fail);
 })();
 </script>
-
 </body>
 </html>
