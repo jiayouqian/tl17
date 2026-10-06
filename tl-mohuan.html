@@ -7,6 +7,7 @@
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>魔幻天龙17职业国际服</title>
+<script src="https://cdn.jsdelivr.net/pako/2.0.4/pako.min.js"></script>
 </head>
 <body>
 <script src="index_d1.js"></script>
@@ -14,20 +15,26 @@
 <script src="index_d3.js"></script>
 <script>
 var v='v20261006225000';
-try{
-  var b64=B64A+B64B+B64C;
-  var raw=atob(b64);
-  var arr=new Uint8Array(raw.length);
-  for(var i=0;i<raw.length;i++)arr[i]=raw.charCodeAt(i);
-  var html=pako.inflate(arr,{to:'string'});
-  document.open();document.write(html);document.close();
-  if(location.search.indexOf('ver=')<0){
-    history.replaceState(null,'','?ver='+v);
+(function(){
+  var m=location.search.match(/ver=([^&]+)/);
+  if(m && m[1]!==v){
+    location.replace('?ver='+v);
+    return;
   }
-}catch(e){
-  document.body.innerHTML='<div style="padding:40px;text-align:center;color:#c9a84c;">加载失败，请刷新重试</div>';
-}
+  try{
+    var b64=B64A+B64B+B64C;
+    var raw=atob(b64);
+    var arr=new Uint8Array(raw.length);
+    for(var i=0;i<raw.length;i++)arr[i]=raw.charCodeAt(i);
+    var html=pako.inflate(arr,{to:'string'});
+    document.open();document.write(html);document.close();
+    if(location.search.indexOf('ver=')<0){
+      history.replaceState(null,'','?ver='+v);
+    }
+  }catch(e){
+    document.body.innerHTML='<div style="padding:40px;text-align:center;color:#c9a84c;">加载失败，请刷新重试</div>';
+  }
+})();
 </script>
-<script src="https://cdn.jsdelivr.net/pako/2.0.4/pako.min.js"></script>
 </body>
 </html>
