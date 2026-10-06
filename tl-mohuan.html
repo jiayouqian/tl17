@@ -11,11 +11,11 @@
 <style>html,body{margin:0;background:#120e08;min-height:100vh}#ld{color:#c9a961;text-align:center;padding:60px 20px;font-family:system-ui,sans-serif;font-size:14px;letter-spacing:2px}</style>
 </head>
 <body>
-<div id="ld">天龙魔幻版 · 加载中… v20261006194500</div>
+<div id="ld">天龙魔幻版 · 加载中… v20261006195500</div>
 <script>
 (function(){
   /* 三段并行下载(不阻塞首屏渲染)，拿到后按 B64A/B64B/B64C 顺序拼接解码 */
-  var v = 'v20261006194500';
+  var v = 'v20261006195500';
   var files = ['index_d1.js?v=' + v, 'index_d2.js?v=' + v, 'index_d3.js?v=' + v];
   function fail(e){
     var el = document.getElementById('ld');
@@ -49,7 +49,7 @@
 (function(){
   /* 首载盖章：总是把当前版本写入 URL ?ver=（replace，不入栈）。
      无论URL中是否已有旧ver参数，都强制更新为最新版本，避免用户看到旧版本号。 */
-  var __ver='v20261006194500';
+  var __ver='v20261006195500';
   try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver); }catch(e){}
 })();
 </script>
