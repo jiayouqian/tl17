@@ -2,16 +2,16 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: blob: https:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://tlbb.hfynxx.top; frame-ancestors 'none'; form-action 'self'; base-uri 'self';">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>澶╅緳榄斿够鐗?路 17鑱屼笟鍥介檯鏈?/title>
+<title>魔幻天龙17职业国际服</title>
 <style>html,body{margin:0;background:#120e08;min-height:100vh}#ld{color:#c9a961;text-align:center;padding:60px 20px;font-family:system-ui,sans-serif;font-size:14px;letter-spacing:2px}</style>
 </head>
 <body>
-<div id="ld">澶╅緳榄斿够鐗?路 鍔犺浇涓€?v20261005130000</div>
+<div id="ld">魔幻天龙 · 加载中… v20261005130000</div>
 <script>
 (function(){
   /* 涓夋骞惰涓嬭浇(涓嶉樆濉為灞忔覆鏌?锛屾嬁鍒板悗鎸?B64A/B64B/B64C 椤哄簭鎷兼帴瑙ｇ爜 */
@@ -19,7 +19,7 @@
   var files = ['index_d1_v5.js?v=' + v, 'index_d2_v5.js?v=' + v, 'index_d3_v5.js?v=' + v];
   function fail(e){
     var el = document.getElementById('ld');
-    if (el) el.textContent = '鍔犺浇澶辫触锛岃鍒锋柊閲嶈瘯';
+    if (el) el.textContent = '加载失败，请刷新重试';
     console.error(e);
   }
   Promise.all(files.map(function (f) {
@@ -31,7 +31,7 @@
       parts.push(m ? m[1] : '');
     });
     var B64 = parts.join('');
-    if (B64.length < 100) { fail('鏁版嵁鍔犺浇澶辫触'); return; }
+    if (B64.length < 100) { fail('数据加载失败'); return; }
     var bin = atob(B64);
     var u8 = new Uint8Array(bin.length);
     for (var i = 0; i < bin.length; i++) { u8[i] = bin.charCodeAt(i); }
