@@ -13,12 +13,17 @@
 
 </script>
 </head>
-<body>
-<script src="index_d1.js?v=v20261008000000"></script>
-<script src="index_d2.js?v=v20261008000000"></script>
-<script src="index_d3.js?v=v20261008000000"></script>
+<body style="margin:0;background:linear-gradient(160deg,#0d1f15 0%,#07120c 100%);min-height:100vh">
+<div id="loader" style="position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;background:linear-gradient(160deg,#0d1f15 0%,#07120c 100%)">
+<div style="width:48px;height:48px;border:3px solid rgba(196,168,118,.2);border-top-color:#c4a876;border-radius:50%;animation:spin 1s linear infinite"></div>
+<div style="margin-top:20px;color:#c9a84c;font-size:14px;letter-spacing:3px;font-family:system-ui,sans-serif">魔幻天龙 · 加载中</div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+<script src="index_d1.js?v=v20261008003000"></script>
+<script src="index_d2.js?v=v20261008003000"></script>
+<script src="index_d3.js?v=v20261008003000"></script>
 <script>
-var v='v20261008000000';
+var v='v20261008003000';
 (function(){
   var m=location.search.match(/ver=([^&]+)/);
   if(m && m[1]!==v){
