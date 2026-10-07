@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -94,12 +94,12 @@
 
   /* ===== Hero 全屏长图轮播 ===== */
   /* 首帧兜底用保守短值(100dvh-150px)：任何设备第一帧都不盖底部常驻栏；JS 首帧立即补到精确高度(vh-常驻栏真实高) */
-  .hero { position: relative; height: calc(100dvh - var(--cta-h, 110px)); min-height: 360px; overflow: hidden; background: var(--bg); touch-action: pan-y; cursor: grab; }
+  .hero { position: relative; height: calc(100dvh - var(--cta-h, 110px)); min-height: 360px; overflow: hidden; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); touch-action: pan-y; cursor: grab; }
   .hero.dragging { cursor: grabbing; }
   .hero-slides { position: absolute; inset: 0 12px 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
   .hero-slides::-webkit-scrollbar { display: none; }
-  .hero-slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; }
-  .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; border-radius: 18px 18px 10px 10px; border: 1px solid rgba(201,164,92,.55); box-shadow:
+  .hero-slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); }
+  .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); border-radius: 18px 18px 10px 10px; border: 1px solid rgba(201,164,92,.55); box-shadow:
       0 0 0 2px rgba(201,164,92,.20),
       0 22px 46px rgba(0,0,0,.62),
       0 3px 0 rgba(122,92,42,.55),
@@ -1558,30 +1558,9 @@ document.addEventListener('DOMContentLoaded', function () {
 (function () {
   var hero = document.getElementById('hero-old');
   if (!hero) return;
-  /* 首屏高度：底边与底部常驻栏(注册/下载/后台)顶边对齐，窗口不覆盖按钮；
-     首帧同步写入(脚本在首帧渲染前执行，无可见跳动)；只认宽度变化(地址栏/键盘伸缩不重算) */
+  /* 只设置--cta-h变量供CSS使用，hero高度由CSS的100dvh自动处理，避免JS重复设置导致跳动 */
   var ctaBar = document.querySelector('.cta-bar');
-  var lastW = window.innerWidth, lastVH = 0;
-  function calcHeroH() {
-    var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-    var h = vh - (ctaBar ? ctaBar.offsetHeight : 66);
-    /* 实测常驻栏高度同步进 CSS 变量：CSS 兜底与 JS 永远一致，hero 底边永不对齐错位 */
-    try { document.documentElement.style.setProperty('--cta-h', (ctaBar ? ctaBar.offsetHeight : 66) + 'px'); } catch (e) {}
-    return h;
-  }
-  function fitHero() {
-    var vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-    /* 宽度与视口高度都未变才跳过：地址栏伸缩（高度变化）时 hero 跟随重算，杜绝底部错位/镂空 */
-    if (window.innerWidth === lastW && vh === lastVH) return;
-    lastW = window.innerWidth; lastVH = vh;
-    hero.style.height = calcHeroH() + 'px';
-  }
-  function fitHeroThrottled() { clearTimeout(fitTimer); fitTimer = setTimeout(fitHero, 200); }
-  hero.style.height = calcHeroH() + 'px';  /* 首帧直接写入精确高度 */
-  window.addEventListener('resize', fitHeroThrottled);
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', fitHeroThrottled);
-  /* 常驻栏保持原生 fixed bottom:0：地址栏收起/展开由浏览器(interactive-widget=resizes-content)平滑重排，
-     不再用 translateY 实时平移——滚动中平移与浏览器原生定位双重位移会在长图与底栏交界处闪出"镂空"（用户实测：上拉露、下拉不露） */
+  try { document.documentElement.style.setProperty('--cta-h', (ctaBar ? ctaBar.offsetHeight : 66) + 'px'); } catch (e) {}
   var scroller = hero.querySelector('.hero-slides');
   var slides = scroller.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
@@ -1693,3 +1672,4 @@ function cwFoldIsOpen(f){
 <script src="assets/kefu.js?v=v20261004125000"></script>
 </body>
 </html>
+
