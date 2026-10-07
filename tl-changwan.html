@@ -94,7 +94,7 @@
 
   /* ===== Hero 全屏长图轮播 ===== */
   /* 首帧兜底用保守短值(100dvh-150px)：任何设备第一帧都不盖底部常驻栏；JS 首帧立即补到精确高度(vh-常驻栏真实高) */
-  .hero { position: relative; height: calc(100dvh - var(--cta-h, 110px)); min-height: 360px; overflow: hidden; background: var(--bg); touch-action: pan-y; cursor: grab; }
+  .hero { position: relative; height: calc(100dvh - var(--cta-h, 110px)); min-height: 360px; overflow: hidden; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); touch-action: pan-y; cursor: grab; }
   .hero.dragging { cursor: grabbing; }
   .hero-slides { position: absolute; inset: 0 12px 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
   .hero-slides::-webkit-scrollbar { display: none; }
