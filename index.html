@@ -30,7 +30,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 .carousel{position:relative;width:100%;margin-top:6px;transition:height .5s ease;overflow:hidden;flex:1;min-height:0}
 .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
-.slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.slide img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
 .sl-cap{position:absolute;left:0;right:0;bottom:0;padding:38px 14px 34px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.55) 34%,rgba(8,5,2,.95) 100%)}
 .sl-badge{display:inline-block;font-size:10px;color:#191209;background:#c9a45c;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
 .sl-badge.tl{background:#d34b3a;color:#fff}
@@ -83,18 +83,13 @@ var __ver='v20261004113946';
     }
     function next(){ go(i + 1); }
     function start(){ clearInterval(timer); timer = setInterval(next, 2000); }
-    // 预加载 + 按比例自适应: 横图填满cover(主体居中), 方形/竖图完整contain(不裁内容)
+    // 预加载 + 按比例自适应: 全部contain完整显示不裁切
     slides.forEach(function(s, idx){
       var real = s.querySelector('img');
       function setFit(){
         if(real.naturalWidth){
-          var r = real.naturalHeight / real.naturalWidth;
-          real.style.objectFit = (r >= 0.8) ? 'contain' : 'cover';
-          if(real.src.indexOf('c6_jiyin') > -1){
-            real.style.height = '90%';
-          } else {
-            real.style.height = '100%';
-          }
+          real.style.objectFit = 'contain';
+          real.style.height = '100%';
         }
       }
       if(real.complete){ setFit(); } else { real.addEventListener('load', setFit); }
