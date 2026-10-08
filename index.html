@@ -110,14 +110,16 @@ var __ver='v20261004113946';
     });
     root.addEventListener('click', function(e){
       if(e.target.closest('.dot')) return;
+      if(justMoved){ justMoved = false; return; }
       window.location.href = root.dataset.href;
     });
     // 触摸左右滑动切换
-    var touchStartX = 0, touchStartY = 0, touchMoved = false;
+    var touchStartX = 0, touchStartY = 0, touchMoved = false, justMoved = false;
     root.addEventListener('touchstart', function(e){
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
       touchMoved = false;
+      justMoved = false;
     }, {passive:true});
     root.addEventListener('touchmove', function(e){
       var dx = e.touches[0].clientX - touchStartX;
@@ -130,8 +132,10 @@ var __ver='v20261004113946';
       if(!touchMoved) return;
       var dx = e.changedTouches[0].clientX - touchStartX;
       if(Math.abs(dx) > 50){
+        justMoved = true;
         if(dx < 0){ go(i + 1); } else { go(i - 1); }
         start();
+        setTimeout(function(){ justMoved = false; }, 300);
       }
     }, {passive:true});
     window.addEventListener('resize', fitH);
