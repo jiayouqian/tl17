@@ -96,12 +96,10 @@
   /* 首帧兜底用保守短值(100dvh-150px)：任何设备第一帧都不盖底部常驻栏；JS 首帧立即补到精确高度(vh-常驻栏真实高) */
   .hero { position: relative; height: auto; overflow: hidden; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); touch-action: pan-y; cursor: grab; }
   .hero.dragging { cursor: grabbing; }
-  .hero-slides { position: relative; margin: 0 12px; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+  .hero-slides { position: relative; margin: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
   .hero-slides::-webkit-scrollbar { display: none; }
   .hero-slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); }
-  .hero-slide img { width: 100%; height: auto; display: block; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); border-radius: 14px 14px 8px 8px; border: 1px solid rgba(201,164,92,.30); box-shadow:
-      0 14px 32px rgba(0,0,0,.55),
-      inset 0 1px 0 rgba(255,255,255,.06); }
+  .hero-slide img { width: 100%; height: auto; display: block; object-fit: cover; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
