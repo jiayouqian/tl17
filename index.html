@@ -19,18 +19,17 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 .logo{display:flex;align-items:center;gap:10px;font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px;color:#c9a45c}
 .logo svg{width:26px;height:26px}
 .logo small{display:block;font-size:10px;font-weight:400;color:#8a7a5e;letter-spacing:3px}
-/* 双轮播：移动端上下等分填满，多余空间全给轮播框，不留黑带 */
-.dual{flex:1;display:grid;grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:14px;min-height:0}
-@media(min-width:900px){.dual{grid-template-columns:1fr 1fr;grid-template-rows:auto;align-content:center}}
+/* 双轮播：框按图源 16:9 零裁切，剩余空间均分为留白 */
+.dual{flex:1;display:grid;grid-template-columns:1fr;gap:14px;min-height:0;align-content:space-evenly}
+@media(min-width:900px){.dual{grid-template-columns:1fr 1fr;align-content:center}}
 .zc{position:relative;background:#171209;border-radius:14px;overflow:hidden;min-width:0;display:flex;flex-direction:column;min-height:0}
 .zc-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px 0;flex:none}
 .zc-hd b{font-family:"Noto Serif SC",serif;font-size:16px;color:#e8cf9a;font-weight:900}
 .zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;white-space:nowrap}
 .enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none;transition:.2s}
 .enter:hover{color:#c9a45c;border-color:#c9a45c}
-/* 轮播：移动端弹性拉伸填满卡片，桌面端维持 16:9 */
-.carousel{position:relative;width:100%;margin-top:6px;overflow:hidden;flex:1;min-height:120px;background:#171209}
-@media(min-width:900px){.carousel{aspect-ratio:16/9;flex:none;min-height:0}}
+/* 轮播：图源统一 16:9，框按 16:9 零裁切 */
+.carousel{position:relative;width:100%;margin-top:6px;overflow:hidden;aspect-ratio:16/9;flex:none;background:#171209}
 .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
 .slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
