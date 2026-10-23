@@ -1,7 +1,7 @@
 /* 畅玩版页面主逻辑：分页/返回栈、复制、手册长图预览、折叠、Hero 轮播、版本秒更新
    事件绑定全部走 addEventListener / 事件委托，页面内不再有内联事件属性（配合 CSP 无 unsafe-inline） */
 (function () {
-var __ver = 'v20261004113946';
+var __ver = 'v20261023220000';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
@@ -232,6 +232,18 @@ document.addEventListener('DOMContentLoaded', function () {
   var ctaBar = document.querySelector('.cta-bar');
   try { document.documentElement.style.setProperty('--cta-h', (ctaBar ? ctaBar.offsetHeight : 66) + 'px'); } catch (e) {}
   var scroller = hero.querySelector('.hero-slides');
+  /* 首屏只加载第一张，其余轮播图在空闲时补载，避免 ~2MB 图片抢占首屏带宽 */
+  (function () {
+    function loadRest() {
+      var imgs = scroller.querySelectorAll('img[data-src]');
+      for (var i = 0; i < imgs.length; i++) {
+        imgs[i].src = imgs[i].getAttribute('data-src');
+        imgs[i].removeAttribute('data-src');
+      }
+    }
+    if ('requestIdleCallback' in window) { requestIdleCallback(loadRest, { timeout: 2500 }); }
+    else { setTimeout(loadRest, 800); }
+  })();
   var slides = scroller.querySelectorAll('.hero-slide');
   var dots = hero.querySelectorAll('.hero-dots .hd');
   var N = slides.length;

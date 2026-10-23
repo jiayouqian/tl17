@@ -1,5 +1,5 @@
 
-var v='v20261023120000';
+var v='v20261023220000';
 (function(){
   var m=location.search.match(/ver=([^&]+)/);
   if(m && m[1]!==v){
@@ -13,7 +13,7 @@ var v='v20261023120000';
     for(var i=0;i<raw.length;i++)arr[i]=raw.charCodeAt(i);
     var html=pako.inflate(arr,{to:'string'});
     /* document.open() 会清空壳层 <head>，CSP 必须随解码内容一起写回，否则运行时完全失效 */
-    var csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://miaoda.feishu.cn; img-src 'self' data: blob:; font-src https://miaoda.feishu.cn; connect-src 'self' https://tlbb.hfynxx.top; form-action 'self'; base-uri 'self';";
+    var csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://tlbb.hfynxx.top; frame-ancestors 'none'; form-action 'self'; base-uri 'self';";
     html=html.replace(/<head([^>]*)>/i,'<head$1><meta http-equiv="Content-Security-Policy" content="'+csp+'"><meta name="referrer" content="strict-origin-when-cross-origin">');
     document.open();document.write(html);document.close();
     setTimeout(function(){var l=document.getElementById('loader');if(l)l.remove();},0);

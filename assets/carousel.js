@@ -7,15 +7,14 @@
     if (!slides.length) return;
     var i = 0, timer = null;
 
-    function imgAt(k) {
-      var s = slides[((k % slides.length) + slides.length) % slides.length];
-      return s ? s.querySelector('img') : null;
-    }
     function ensure(k) {
-      var im = imgAt(k);
-      if (!im) return;
-      var ds = im.getAttribute('data-src');
-      if (ds) { im.removeAttribute('data-src'); im.src = ds; }
+      var s = slides[((k % slides.length) + slides.length) % slides.length];
+      if (!s) return;
+      var ims = s.querySelectorAll('img[data-src]');
+      for (var n = 0; n < ims.length; n++) {
+        ims[n].src = ims[n].getAttribute('data-src');
+        ims[n].removeAttribute('data-src');
+      }
     }
 
     function go(n) {

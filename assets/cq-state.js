@@ -46,7 +46,7 @@
         }
       }).catch(function(){});
   }
-  setInterval(check, 3000);
+  setInterval(check, 60000);
   setTimeout(check, 1200);
   /* 版本刷新后原位恢复：分类 + 滚动位置 + 详情视图 */
   try {

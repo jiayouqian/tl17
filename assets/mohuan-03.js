@@ -128,6 +128,42 @@
   window.addEventListener('load', doRestore);
 })();
 
+/* 懒加载补载：图片祖先曾在 display:none 内时 native lazy 不会触发，可见后强制补载 */
+(function () {
+  var lazy = document.querySelectorAll('img[loading="lazy"]');
+  if (!lazy.length) return;
+  function force(img) {
+    if (!img.getAttribute('loading')) return;
+    if (img.naturalWidth) { img.removeAttribute('loading'); return; }
+    img.removeAttribute('loading');
+    var s = img.getAttribute('src');
+    if (s) img.src = s;
+  }
+  function forceVisible(root) {
+    var arr = (root || document).querySelectorAll('img[loading="lazy"]');
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].getClientRects().length) force(arr[i]);
+    }
+  }
+  window.__mlLoadLazy = forceVisible;
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        force(entries[i].target);
+        io.unobserve(entries[i].target);
+      }
+    }, { rootMargin: '300px 0px' });
+    for (var j = 0; j < lazy.length; j++) io.observe(lazy[j]);
+  } else {
+    forceVisible(document);
+  }
+  /* 兜底：折叠展开/分区切换/页签切换后补扫一次 */
+  document.addEventListener('toggle', function (e) {
+    if (e.target.tagName === 'DETAILS' && e.target.open) setTimeout(function () { forceVisible(e.target); }, 80);
+  }, true);
+})();
+
 /* 内联事件属性委托（严格 CSP 下 inline handler 会被拦截） */
 document.addEventListener('click', function (e) {
   var t = e.target;
@@ -142,7 +178,10 @@ document.addEventListener('click', function (e) {
     e.preventDefault();
     if (typeof go === 'function') go(el.getAttribute('data-go'));
     var sec = el.getAttribute('data-section');
-    if (sec) setTimeout(function () { if (typeof showSection === 'function') showSection(sec); }, 300);
+    if (sec) setTimeout(function () {
+      if (typeof showSection === 'function') showSection(sec);
+      if (window.__mlLoadLazy) window.__mlLoadLazy();
+    }, 300);
     return;
   }
   if ((el = t.closest('[data-tab]'))) {
@@ -152,6 +191,7 @@ document.addEventListener('click', function (e) {
     if (grp === 'dazao') switchDazaoTab(key);
     else if (grp === 'menpai') switchMenpaiTab(key);
     else if (grp === 'huanhua') switchHuanhuaTab(key);
+    if (window.__mlLoadLazy) setTimeout(function () { window.__mlLoadLazy(); }, 60);
     return;
   }
   if ((el = t.closest('[data-copy]'))) {
