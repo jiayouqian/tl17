@@ -1,7 +1,7 @@
 /* 畅玩版页面主逻辑：分页/返回栈、复制、手册长图预览、折叠、Hero 轮播、版本秒更新
    事件绑定全部走 addEventListener / 事件委托，页面内不再有内联事件属性（配合 CSP 无 unsafe-inline） */
 (function () {
-var __ver = 'v20261023230000';
+var __ver = 'v20261023240000';
 function showPage(name, preserveScroll) {
   document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
   var el = document.getElementById('page-' + name);
