@@ -3,9 +3,11 @@
   var hero = document.querySelector('.hero');
   if (!hero) return;
   var ctaBar = document.querySelector('.cta-bar');
-  /* 只设置--cta-h变量，hero高度由CSS的100dvh自动适配，避免JS与CSS冲突导致手机滑动跳动 */
+  var hdr = document.querySelector('.header');
+  /* 只设置--cta-h/--hdr-h变量，hero高度由CSS的100dvh自动适配，避免JS与CSS冲突导致手机滑动跳动 */
   function setCtaH() {
     try { document.documentElement.style.setProperty('--cta-h', (ctaBar ? ctaBar.offsetHeight : 66) + 'px'); } catch (e) {}
+    try { document.documentElement.style.setProperty('--hdr-h', (hdr ? hdr.offsetHeight : 104) + 'px'); } catch (e) {}
   }
   setCtaH();
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(setCtaH); }
