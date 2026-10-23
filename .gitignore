@@ -1,4 +1,5 @@
 _shots/
+.private/
 _agent_output/
 _backup/
 _backup_*.html

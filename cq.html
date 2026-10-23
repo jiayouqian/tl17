@@ -2,7 +2,9 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src * data: blob:; connect-src 'self' https://tlbb.hfynxx.top; frame-ancestors 'none'; form-action 'self'; base-uri 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://miaoda.feishu.cn; img-src 'self' data: blob:; font-src https://miaoda.feishu.cn; connect-src 'self' https://tlbb.hfynxx.top; frame-ancestors 'none'; form-action 'self'; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script>if(window.top!==window.self){document.documentElement.style.display='none';try{window.top.location.href=window.self.location.href}catch(e){}}</script>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -39,6 +41,9 @@
     var stream = new Blob([u8]).stream().pipeThrough(ds);
     return new Response(stream).text();
   }).then(function(txt){
+    /* document.open() 会清空壳层 <head>，CSP 必须随解码内容一起写回，否则运行时完全失效 */
+    var csp="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://miaoda.feishu.cn; img-src 'self' data: blob:; font-src https://miaoda.feishu.cn; connect-src 'self' https://tlbb.hfynxx.top; form-action 'self'; base-uri 'self';";
+    txt=txt.replace(/<head([^>]*)>/i,'<head$1><meta http-equiv="Content-Security-Policy" content="'+csp+'"><meta name="referrer" content="strict-origin-when-cross-origin">');
     document.open();
     document.write(txt);
     document.close();
