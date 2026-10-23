@@ -36,7 +36,7 @@ function flash(btn) {
 }
 function sharePage(){
   if(navigator.share){
-    navigator.share({title:'魔幻天龙17职业国际服',text:'上线领全套毕业福利，0氪也能玩！代理码MZSP',url:location.href}).then(function(){},function(){
+    navigator.share({title:'魔幻天龙正版0.01折',text:'上线领全套毕业福利，0氪也能玩！代理码MZSP',url:location.href}).then(function(){},function(){
       copyLink();
     });
   }else{
