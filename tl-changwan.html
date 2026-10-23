@@ -99,8 +99,9 @@
   .hero.dragging { cursor: grabbing; }
   .hero-slides { position: relative; margin: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
   .hero-slides::-webkit-scrollbar { display: none; }
-  .hero-slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); }
-  .hero-slide img { width: 100%; height: auto; display: block; object-fit: cover; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); }
+  .hero-slide { flex: 0 0 100%; scroll-snap-align: start; position: relative; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); display: flex; align-items: center; justify-content: center; }
+  /* 图片双向适配：宽不超过容器、高不超过(视口高-底部常驻栏)，任何设备整幅落在栏上方，不放大不裁切 */
+  .hero-slide img { width: auto; max-width: 100%; height: auto; max-height: calc(100dvh - var(--cta-h)); display: block; margin: 0 auto; background: linear-gradient(160deg,#1a1a1a 0%,#0d0d0d 100%); }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
