@@ -32,6 +32,22 @@
     ensure(i);
     ensure(i + 1);
 
+    /* 等全部轮播图就绪后再开始自动切换，避免切换瞬间出现黑屏空帧 */
+    var imgs = Array.prototype.slice.call(root.querySelectorAll('.slide img'));
+    var pending = imgs.length, started = false;
+    function boot() {
+      if (started) return;
+      started = true;
+      start();
+    }
+    function one() { if (--pending <= 0) boot(); }
+    imgs.forEach(function (im) {
+      if (im.complete && im.naturalWidth) { one(); return; }
+      im.addEventListener('load', one);
+      im.addEventListener('error', one);
+    });
+    setTimeout(boot, 2500);
+
     dots.forEach(function (dot) {
       dot.addEventListener('click', function (e) {
         e.stopPropagation();
@@ -71,7 +87,6 @@
 
     root.addEventListener('mouseenter', function () { clearInterval(timer); });
     root.addEventListener('mouseleave', start);
-    start();
   }
   Array.prototype.forEach.call(document.querySelectorAll('.carousel'), initCarousel);
 })();

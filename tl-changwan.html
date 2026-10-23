@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://tlbb.hfynxx.top; frame-ancestors 'none'; form-action 'self'; base-uri 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<script src="assets/frame-guard.js?v=v20261023220000"></script>
+<script src="assets/frame-guard.js?v=v20261023230000"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -455,6 +455,13 @@
   .fold-body .pkg li{font-size:12px;color:#d8c8a8;line-height:1.85;padding:0 0 0 12px;position:relative}
   .fold-body .pkg li::before{content:'·';position:absolute;left:0;color:#c9a45c}
   .fold-body .pkg b{color:#f5d489;font-weight:600}
+
+  /* 桌面端按视口高度反推列宽：首屏 hero(720x1328)完整落在常驻栏之上，不裁切、无黑边 */
+  @media (min-width: 901px) {
+    .wrap, .cta-bar {
+      max-width: min(480px, calc((100vh - var(--cta-h) - 10px) * 0.542));
+    }
+  }
 </style>
 </head>
 <body>
@@ -1347,8 +1354,8 @@
   </div>
 </div>
 
-<script src="assets/tl-changwan.js?v=v20261023220000"></script>
-<script src="assets/kefu.js?v=v20261023220000"></script>
+<script src="assets/tl-changwan.js?v=v20261023230000"></script>
+<script src="assets/kefu.js?v=v20261023230000"></script>
 </body>
 </html>
 
