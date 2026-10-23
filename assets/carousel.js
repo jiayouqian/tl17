@@ -5,7 +5,7 @@
     var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
     var dots = Array.prototype.slice.call(root.querySelectorAll('.dot'));
     if (!slides.length) return;
-    var i = 0, timer = null;
+    var i = 0, timer = null, justMoved = false;
 
     function ensure(k) {
       var s = slides[((k % slides.length) + slides.length) % slides.length];
@@ -62,7 +62,7 @@
 
     /* 触摸左右滑动切换（仅在声明 data-swipe 的轮播启用） */
     if (root.hasAttribute('data-swipe')) {
-      var touchStartX = 0, touchStartY = 0, touchMoved = false, justMoved = false;
+      var touchStartX = 0, touchStartY = 0, touchMoved = false;
       root.addEventListener('touchstart', function (e) {
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
