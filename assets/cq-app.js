@@ -63,15 +63,25 @@
     'color:#c9a961;display:none;align-items:center;justify-content:center;cursor:pointer;padding:0}' +
     '.cq-search-x.on{display:flex}' +
     '.cq-search-x:active{background:rgba(201,169,97,.3)}' +
-    /* UX：回到顶部悬浮按钮（仅列表页、滚动超600px显示） */
-    '#cqTopBtn{position:fixed;left:14px;bottom:calc(48px + env(safe-area-inset-bottom,0px));z-index:59;' +
+    /* UX：回到顶部悬浮按钮（仅列表页、滚动超600px显示）；层级：回顶 50 < CTA 60 < toast 100 < 客服 9999 */
+    '#cqTopBtn{position:fixed;left:14px;bottom:calc(48px + env(safe-area-inset-bottom,0px));z-index:50;' +
     'width:42px;height:42px;border-radius:50%;border:1px solid rgba(201,169,97,.4);background:rgba(22,16,9,.92);' +
     'color:#e8b64c;cursor:pointer;display:none;align-items:center;justify-content:center;' +
     'box-shadow:0 4px 14px rgba(0,0,0,.5)}' +
     '#cqTopBtn.on{display:flex}' +
     /* UX：攻略列表行距收紧、行高优化 */
     '.sec-coll .sec-body ul{margin:0;padding-left:20px}' +
-    '.sec-coll .sec-body li{margin:8px 0;line-height:1.7}';
+    '.sec-coll .sec-body li{margin:8px 0;line-height:1.7}' +
+    /* P2：分类浮层展开时锁定背景滚动，避免手机端误触滚走列表 */
+    'body.cat-open{overflow:hidden !important}' +
+    /* P2：横版 Logo 不再被 46×46 方框裁切，留黑底保证辨识 */
+    '.row-thumb{object-fit:contain !important;background:#0a0704}' +
+    /* P2：详情页卖点限两行，长文案不再把下载/充值按钮顶出首屏 */
+    '.detail-info .slogan{display:-webkit-box !important;-webkit-box-orient:vertical;' +
+    '-webkit-line-clamp:2;overflow:hidden;line-height:1.6}' +
+    /* P2：页脚声明提高字号与对比度；底部留白避开「回到顶部/客服」悬浮钮 */
+    'footer{font-size:13px !important;color:#a99a7c !important;line-height:1.7;' +
+    'padding-bottom:96px !important}';
   document.head.appendChild(s);
 })();
 
@@ -146,9 +156,7 @@ function renderCatFold(){
   panel.querySelectorAll('.cat-item').forEach(function(b){
     b.addEventListener('click', function(){
       filterCat = this.dataset.cat;
-      foldOpen = false;
-      document.getElementById('catFold').classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
+      setFold(false);
       renderCatFold();
       renderList();
     });
@@ -156,21 +164,26 @@ function renderCatFold(){
 }
 
 var foldOpen = false;
+/* 统一开合入口：同步 body.cat-open 锁定/解锁背景滚动 */
+function setFold(open){
+  foldOpen = open;
+  document.getElementById('catFold').classList.toggle('open', open);
+  document.getElementById('catFoldBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.body.classList.toggle('cat-open', open);
+}
 document.getElementById('catFoldBtn').addEventListener('click', function(){
-  foldOpen = !foldOpen;
-  document.getElementById('catFold').classList.toggle('open', foldOpen);
-  this.setAttribute('aria-expanded', foldOpen ? 'true' : 'false');
+  setFold(!foldOpen);
   if (foldOpen) {   // 展开分类浮层入栈，手机返回键可收起
     if(window.__cqUndo) window.__cqUndo.push({kind:'cat'});
     try { history.pushState({cq:1}, ''); } catch(e){}
   }
 });
 document.addEventListener('click', function(e){
-  if(!e.target.closest('.cat-fold') && foldOpen){
-    foldOpen = false;
-    document.getElementById('catFold').classList.remove('open');
-    document.getElementById('catFoldBtn').setAttribute('aria-expanded','false');
-  }
+  if(!e.target.closest('.cat-fold') && foldOpen){ setFold(false); }
+});
+// 手机返回键收起浮层时同步解锁背景滚动（cq-state.js 的 popstate 只改类名）
+window.addEventListener('popstate', function(){
+  if(foldOpen){ setFold(false); }
 });
 // 详情页折叠分区：点击标题展开/收起
 document.addEventListener('click', function(e){
