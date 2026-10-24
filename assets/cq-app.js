@@ -34,18 +34,29 @@
     '.gal-cap{padding:9px 12px !important;font-size:12px}' +
     /* 修复：分类浮层 open 类加在容器上，原 payload CSS 只认 panel 自身的 open 类，导致面板永不显示 */
     '.cat-fold.open .cat-fold-panel{display:block}' +
-    /* UX：详情页吸底CTA栏（下载+充值常驻底部，提升转化） */
-    '#cqCtaBar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;gap:12px;' +
+    /* UX：详情页吸底CTA栏——仅在页内按钮滚出屏幕后出现，避免首屏重复两组按钮 */
+    '#cqCtaBar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:12px;' +
     'padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));' +
-    'background:rgba(13,10,6,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(201,169,97,.25)}' +
-    '#cqCtaBar.on{display:flex}' +
+    'background:rgba(13,10,6,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(201,169,97,.25);' +
+    'transform:translateY(110%);transition:transform .24s ease;pointer-events:none}' +
+    '#cqCtaBar.on{transform:translateY(0);pointer-events:auto}' +
     '#cqCtaBar button{flex:1;padding:12px 0;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}' +
     '#cqCtaDl{background:linear-gradient(135deg,#c8352c,#8f1d16);color:#fff;box-shadow:0 4px 14px rgba(200,53,44,.35)}' +
     '#cqCtaPay{background:linear-gradient(135deg,#e8b64c,#c9973a);color:#1a120b;box-shadow:0 4px 14px rgba(232,182,76,.3)}' +
     '#cqCtaBar button:active{transform:scale(.97)}' +
-    /* UX：详情页客服悬浮钮上移到吸底栏上方，避免遮挡充值按钮；内容底部留白防遮挡 */
-    'body.cq-detail .fk{bottom:calc(128px + env(safe-area-inset-bottom,0px)) !important}' +
-    'body.cq-detail{padding-bottom:76px}' +
+    /* 客服悬浮钮仅在吸底栏出现时上移，其余时间保持原位 */
+    'body.cq-cta-on .fk{bottom:calc(128px + env(safe-area-inset-bottom,0px)) !important}' +
+    'body.cq-cta-on{padding-bottom:80px}' +
+    /* P0：图库竖版海报不再被 16:9 裁切（JS 依据原图比例回填，超长图限 1:2 并 contain 保真） */
+    '.gal-frame.gal-contain img{object-fit:contain !important;background:#0a0704}' +
+    /* P1：搜索框一键清除 */
+    '.cq-search-wrap{position:relative;flex:1 1 100%;min-width:0;display:flex}' +
+    '.cq-search-wrap .search{padding-right:38px}' +
+    '.cq-search-x{position:absolute;right:6px;top:50%;transform:translateY(-50%);' +
+    'width:26px;height:26px;border-radius:50%;border:none;background:rgba(201,169,97,.16);' +
+    'color:#c9a961;display:none;align-items:center;justify-content:center;cursor:pointer;padding:0}' +
+    '.cq-search-x.on{display:flex}' +
+    '.cq-search-x:active{background:rgba(201,169,97,.3)}' +
     /* UX：回到顶部悬浮按钮（仅列表页、滚动超600px显示） */
     '#cqTopBtn{position:fixed;left:14px;bottom:calc(48px + env(safe-area-inset-bottom,0px));z-index:59;' +
     'width:42px;height:42px;border-radius:50%;border:1px solid rgba(201,169,97,.4);background:rgba(22,16,9,.92);' +
@@ -197,6 +208,27 @@ function renderList(){
   }
 }
 
+/* 图库自适应：按原图长宽比回填画框，竖版海报/横版截图都不裁切、不留黑边。
+   超长图（比 1:2 更瘦）限制为 1:2 并改用 contain，避免单图占满整屏。 */
+function fitGallery(root){
+  var frames = root.querySelectorAll('.gal-frame');
+  Array.prototype.forEach.call(frames, function(fr){
+    if(fr.classList.contains('gal-video')){ return; }
+    var img = fr.querySelector('img');
+    if(!img){ return; }
+    function apply(){
+      var w = img.naturalWidth, h = img.naturalHeight;
+      if(!w || !h){ return; }
+      var r = w / h;
+      if(r < 0.5){ fr.style.setProperty('aspect-ratio','1 / 2','important'); fr.classList.add('gal-contain'); }
+      else if(r > 2.4){ fr.style.setProperty('aspect-ratio','2.4 / 1','important'); fr.classList.add('gal-contain'); }
+      else { fr.style.setProperty('aspect-ratio', w + ' / ' + h, 'important'); }
+    }
+    if(img.complete && img.naturalWidth){ apply(); }
+    else { img.addEventListener('load', apply, {once:true}); }
+  });
+}
+
 function renderDetail(id){
   var g = null;
   GAMES.forEach(function(x){ if(x.id === id) g = x; });
@@ -276,6 +308,7 @@ function renderDetail(id){
     html += secColl(s.title, body);
   });
   document.getElementById('dBody').innerHTML = html;
+  fitGallery(document.getElementById('dBody'));
 }
 
 function router(){
@@ -339,9 +372,21 @@ document.addEventListener('click', function (e) {
     var pay = document.getElementById('dRecharge');
     openUrl(pay && pay.dataset.url, '该游戏暂未开放充值通道');
   });
-  // 视图联动：详情页显示吸底栏（hashchange 在 router 之后注册，保证先完成渲染）
-  function syncCta(){ cta.classList.toggle('on', viewDetail.classList.contains('on')); }
+  // 吸底 CTA：仅在页内下载/充值按钮滚出屏幕后才出现（详情页首屏不重复两组按钮）
+  function syncCta(){
+    var inDetail = viewDetail.classList.contains('on');
+    var row = document.querySelector('.btn-row');
+    var passed = false;
+    if(row){
+      var r = row.getBoundingClientRect();
+      passed = r.bottom < 0;   // 页内按钮已滚出视口顶部
+    }
+    var show = inDetail && passed;
+    cta.classList.toggle('on', show);
+    document.body.classList.toggle('cq-cta-on', show);
+  }
   window.addEventListener('hashchange', function(){ setTimeout(syncCta, 0); });
+  window.addEventListener('scroll', syncCta, {passive:true});
   syncCta();
 
   // 回到顶部：仅列表页、滚动超过 600px 显示
@@ -357,4 +402,28 @@ document.addEventListener('click', function (e) {
   window.addEventListener('scroll', function(){
     topBtn.classList.toggle('on', viewList.classList.contains('on') && window.scrollY > 600);
   }, {passive:true});
+
+  // 搜索框一键清除：输错关键词时不必手动全选删除
+  var input = document.getElementById('search');
+  if(input){
+    var wrap = document.createElement('div');
+    wrap.className = 'cq-search-wrap';
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    var clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'cq-search-x';
+    clearBtn.setAttribute('aria-label', '清除搜索');
+    clearBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    wrap.appendChild(clearBtn);
+    function syncX(){ clearBtn.classList.toggle('on', !!input.value); }
+    input.addEventListener('input', syncX);
+    clearBtn.addEventListener('click', function(){
+      input.value = '';
+      syncX();
+      renderList();
+      try { input.focus(); } catch(e) {}
+    });
+    syncX();
+  }
 })();

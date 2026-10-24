@@ -15,7 +15,9 @@
     '.fk-item .lb{font-size:12px;color:#d8c8a8;white-space:nowrap}',
     '.fk-item .vl{font-size:13px;color:#f5d489;font-weight:600;white-space:nowrap}',
     '.fk-cp{font-size:11px;color:#1a120b;background:#e8b64c;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-weight:600}',
-    '.fk-x{position:absolute;top:6px;right:9px;color:#a08040;font-size:15px;cursor:pointer;background:none;border:none;line-height:1}'
+    '.fk-x{position:absolute;top:6px;right:9px;color:#a08040;font-size:15px;cursor:pointer;background:none;border:none;line-height:1}',
+    '.fk-toast{position:absolute;right:66px;bottom:16px;background:#e8b64c;color:#1a120b;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;white-space:nowrap;opacity:0;transform:translateX(6px);transition:opacity .2s,transform .2s;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}',
+    '.fk-toast.on{opacity:1;transform:translateX(0)}'
   ].join('');
   var style = document.createElement('style');
   style.textContent = css;
@@ -34,7 +36,8 @@
     '<div class="fk-item"><span class="lb">玩家QQ群</span><span class="vl">680598747</span><button class="fk-cp" data-fk-copy="680598747">复制</button></div>' +
     '<div class="fk-item"><span class="lb">代理QQ</span><span class="vl">354261705</span><button class="fk-cp" data-fk-copy="354261705">复制</button></div>' +
     '<div class="fk-item"><span class="lb">微信</span><span class="vl">qun680598747</span><button class="fk-cp" data-fk-copy="qun680598747">复制</button></div>' +
-    '</div>';
+    '</div>' +
+    '<div class="fk-toast" id="fkToast"></div>';
   document.body.appendChild(w);
   /* 内联 onclick 已改为 data 属性 + 事件委托（严格 CSP 下 inline handler 会被浏览器拦截） */
   w.addEventListener('click', function (e) {
@@ -77,23 +80,34 @@
     if (p && p.classList.contains('open')) { p.classList.remove('open'); }
     __fkPushed = false;
   });
+  var fkToastTimer = 0;
+  function fkToast(msg){
+    var t = document.getElementById('fkToast');
+    if (!t) { return; }
+    t.textContent = msg;
+    t.classList.add('on');
+    clearTimeout(fkToastTimer);
+    fkToastTimer = setTimeout(function(){ t.classList.remove('on'); }, 1800);
+  }
   window.fkCopy = function (v) {
-    var ok = false;
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(v);
-        ok = true;
-      }
-    } catch (e) {}
-    if (!ok) {
+    function done(){ fkToast('已复制：' + v); }
+    function fallback(){
       var t = document.createElement('textarea');
       t.value = v;
+      t.setAttribute('readonly', '');
+      t.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
       document.body.appendChild(t);
       t.select();
-      try { document.execCommand('copy'); } catch (e) {}
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
       document.body.removeChild(t);
+      fkToast(ok ? '已复制：' + v : '复制失败，请长按选择');
     }
-    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(v).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
   };
   document.addEventListener('click', function (e) {
     if (!e.target.closest('#fkWidget')) {
