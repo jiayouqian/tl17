@@ -33,7 +33,28 @@
     '.gal-video video{object-fit:cover !important}' +
     '.gal-cap{padding:9px 12px !important;font-size:12px}' +
     /* 修复：分类浮层 open 类加在容器上，原 payload CSS 只认 panel 自身的 open 类，导致面板永不显示 */
-    '.cat-fold.open .cat-fold-panel{display:block}';
+    '.cat-fold.open .cat-fold-panel{display:block}' +
+    /* UX：详情页吸底CTA栏（下载+充值常驻底部，提升转化） */
+    '#cqCtaBar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;gap:12px;' +
+    'padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));' +
+    'background:rgba(13,10,6,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(201,169,97,.25)}' +
+    '#cqCtaBar.on{display:flex}' +
+    '#cqCtaBar button{flex:1;padding:12px 0;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}' +
+    '#cqCtaDl{background:linear-gradient(135deg,#c8352c,#8f1d16);color:#fff;box-shadow:0 4px 14px rgba(200,53,44,.35)}' +
+    '#cqCtaPay{background:linear-gradient(135deg,#e8b64c,#c9973a);color:#1a120b;box-shadow:0 4px 14px rgba(232,182,76,.3)}' +
+    '#cqCtaBar button:active{transform:scale(.97)}' +
+    /* UX：详情页客服悬浮钮上移到吸底栏上方，避免遮挡充值按钮；内容底部留白防遮挡 */
+    'body.cq-detail .fk{bottom:calc(128px + env(safe-area-inset-bottom,0px)) !important}' +
+    'body.cq-detail{padding-bottom:76px}' +
+    /* UX：回到顶部悬浮按钮（仅列表页、滚动超600px显示） */
+    '#cqTopBtn{position:fixed;left:14px;bottom:calc(48px + env(safe-area-inset-bottom,0px));z-index:59;' +
+    'width:42px;height:42px;border-radius:50%;border:1px solid rgba(201,169,97,.4);background:rgba(22,16,9,.92);' +
+    'color:#e8b64c;cursor:pointer;display:none;align-items:center;justify-content:center;' +
+    'box-shadow:0 4px 14px rgba(0,0,0,.5)}' +
+    '#cqTopBtn.on{display:flex}' +
+    /* UX：攻略列表行距收紧、行高优化 */
+    '.sec-coll .sec-body ul{margin:0;padding-left:20px}' +
+    '.sec-coll .sec-body li{margin:8px 0;line-height:1.7}';
   document.head.appendChild(s);
 })();
 
@@ -168,7 +189,7 @@ function renderList(){
     // 筛选 / 搜索：平铺
     var list = GAMES.filter(function(g){
       var catOk = (filterCat === '全部' || g.category === filterCat);
-      var kwOk = !kw || g.name.toLowerCase().indexOf(kw) > -1;
+      var kwOk = !kw || (g.name + ' ' + (g.slogan||'') + ' ' + (g.badge||'') + ' ' + g.category).toLowerCase().indexOf(kw) > -1;
       return catOk && kwOk;
     });
     if(!list.length){ grid.innerHTML = emptyHTML(); }
@@ -182,6 +203,7 @@ function renderDetail(id){
   if(!g){
     viewList.classList.add('on');
     viewDetail.classList.remove('on');
+    document.body.classList.remove('cq-detail');
     return;
   }
   document.getElementById('dName').textContent = g.name;
@@ -262,11 +284,13 @@ function router(){
   if(m){
     viewList.classList.remove('on');
     viewDetail.classList.add('on');
+    document.body.classList.add('cq-detail');
     renderDetail(decodeURIComponent(m[1]));
     window.scrollTo(0,0);
   } else {
     viewDetail.classList.remove('on');
     viewList.classList.add('on');
+    document.body.classList.remove('cq-detail');
     renderCatFold();
     renderList();
   }
@@ -296,3 +320,41 @@ document.addEventListener('click', function (e) {
   var v = e.target.closest && e.target.closest('video[data-vp]');
   if (v) { try { v.play(); } catch (err) {} }
 });
+
+/* === UX 增强：详情页吸底CTA栏 + 列表页回到顶部 === */
+(function(){
+  // 吸底 CTA：复用详情页下载/充值按钮的 data-url，行为与页内按钮一致
+  var cta = document.createElement('div');
+  cta.id = 'cqCtaBar';
+  cta.innerHTML = '<button type="button" id="cqCtaDl">下载游戏</button><button type="button" id="cqCtaPay">充值</button>';
+  document.body.appendChild(cta);
+  function openUrl(url, tip){
+    if(url && url !== '#'){ window.open(url, '_blank', 'noopener'); }
+    else { toast(tip); }
+  }
+  document.getElementById('cqCtaDl').addEventListener('click', function(){
+    openUrl(document.getElementById('dRegister').dataset.url, '占位按钮：真实链接待填充');
+  });
+  document.getElementById('cqCtaPay').addEventListener('click', function(){
+    var pay = document.getElementById('dRecharge');
+    openUrl(pay && pay.dataset.url, '该游戏暂未开放充值通道');
+  });
+  // 视图联动：详情页显示吸底栏（hashchange 在 router 之后注册，保证先完成渲染）
+  function syncCta(){ cta.classList.toggle('on', viewDetail.classList.contains('on')); }
+  window.addEventListener('hashchange', function(){ setTimeout(syncCta, 0); });
+  syncCta();
+
+  // 回到顶部：仅列表页、滚动超过 600px 显示
+  var topBtn = document.createElement('button');
+  topBtn.id = 'cqTopBtn';
+  topBtn.type = 'button';
+  topBtn.setAttribute('aria-label', '回到顶部');
+  topBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  document.body.appendChild(topBtn);
+  topBtn.addEventListener('click', function(){
+    try { window.scrollTo({top:0, behavior:'smooth'}); } catch(e) { window.scrollTo(0,0); }
+  });
+  window.addEventListener('scroll', function(){
+    topBtn.classList.toggle('on', viewList.classList.contains('on') && window.scrollY > 600);
+  }, {passive:true});
+})();

@@ -40,6 +40,7 @@
      壳层不再做轮询，避免与真实页双重检测、也避免发版忘改 __ver 时每 3 秒死循环 reload。 */
   var __ver='v20261024130000';
   if(!location.search.match(/[?&]ver=/)){
-    try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver); }catch(e){}
+    /* 保留 location.hash：#/game/xxx 深链直达详情页，否则 replaceState 会丢 hash */
+    try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver + location.hash); }catch(e){}
   }
 })();
