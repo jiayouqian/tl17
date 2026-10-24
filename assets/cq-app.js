@@ -44,6 +44,10 @@ function esc(s){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
   });
 }
+/* agentCode 仅允许 <b> 标签（数据受控，先全量转义再仅还原 b 标签，杜绝注入） */
+function safeAgent(s){
+  return esc(String(s)).replace(/&lt;(\/?)b&gt;/g, '<$1b>');
+}
 
 var filterCat = '全部';
 var searchEl = null;
@@ -161,7 +165,9 @@ function renderDetail(id){
   document.getElementById('dSlogan').textContent = g.slogan;
   document.getElementById('dBadges').innerHTML = '<span class="badge">' + esc(g.badge) + '</span>';
   document.getElementById('dRegister').dataset.url = g.regLink || '#';
-  document.getElementById('dAgent').innerHTML = '进服注册：' + g.agentCode;
+  var payBtn = document.getElementById('dRecharge');
+  if(payBtn){ payBtn.dataset.url = g.payLink || '#'; payBtn.style.display = (g.payLink && g.payLink !== '#') ? '' : 'none'; }
+  document.getElementById('dAgent').innerHTML = '进服注册：' + safeAgent(g.agentCode);
   (function(){
       var ph = document.getElementById('dPoster');
       ph.style.setProperty('--poster-ratio','3/4');
@@ -246,9 +252,18 @@ function router(){
 // 下载按钮：真实链接到位后由 data-url 直跳；当前给占位提示
 document.getElementById('dRegister').addEventListener('click', function(){
   var url = this.dataset.url;
-  if(url && url !== '#'){ window.open(url, '_blank'); }
+  if(url && url !== '#'){ window.open(url, '_blank', 'noopener'); }
   else { toast('占位按钮：真实链接待填充，填好后自动跳转'); }
 });
+// 充值按钮：复用 payLink 数据，无链接时隐藏
+var dRecharge = document.getElementById('dRecharge');
+if(dRecharge){
+  dRecharge.addEventListener('click', function(){
+    var url = this.dataset.url;
+    if(url && url !== '#'){ window.open(url, '_blank', 'noopener'); }
+    else { toast('该游戏暂未开放充值通道'); }
+  });
+}
 
 window.addEventListener('hashchange', router);
 router();
