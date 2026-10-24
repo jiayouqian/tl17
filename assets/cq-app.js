@@ -18,10 +18,16 @@
 (function(){
   var s = document.createElement('style');
   s.textContent =
-    '.detail-poster-ph{aspect-ratio:3/4 !important;border-radius:14px !important;' +
+    /* P0：海报不再锁死 3:4，改为原图比例自然撑高，彻底消除上下 letterbox 黑边 */
+    '.detail-poster-ph{aspect-ratio:auto !important;max-height:none !important;display:block !important;' +
+    'border-radius:14px !important;' +
     'box-shadow:0 10px 32px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,97,.22) !important;' +
     'background:linear-gradient(135deg,#2a2012,#0d0a06 70%) !important}' +
-    '.poster-img{object-fit:contain !important;object-position:center}' +
+    '.poster-img{width:100% !important;height:auto !important;display:block;' +
+    'object-fit:contain !important;object-position:center}' +
+    /* P0：列表卖点由单行截断改为两行，保留"单职业/几大陆/几倍返利"等关键词 */
+    '.row-info p{white-space:normal !important;display:-webkit-box !important;-webkit-box-orient:vertical;' +
+    '-webkit-line-clamp:2;overflow:hidden !important;line-height:1.5}' +
     '.gallery{gap:14px !important;margin-top:16px !important}' +
     '.gal-item{border-radius:14px !important;overflow:hidden !important;' +
     'box-shadow:0 4px 16px rgba(0,0,0,.45),0 0 0 1px rgba(201,169,97,.08) !important;' +
@@ -245,19 +251,7 @@ function renderDetail(id){
   var payBtn = document.getElementById('dRecharge');
   if(payBtn){ payBtn.dataset.url = g.payLink || '#'; payBtn.style.display = (g.payLink && g.payLink !== '#') ? '' : 'none'; }
   document.getElementById('dAgent').innerHTML = '进服注册：' + safeAgent(g.agentCode);
-  (function(){
-      var ph = document.getElementById('dPoster');
-      ph.style.setProperty('--poster-ratio','3/4');
-      if(g.hero){
-        var img = new Image();
-        img.onload = function(){
-          if(img.naturalWidth && img.naturalHeight)
-            ph.style.setProperty('--poster-ratio',(img.naturalWidth/img.naturalHeight).toFixed(4));
-        };
-        img.src = g.hero;
-      }
-    })();
-    document.getElementById('dPoster').innerHTML = g.hero
+  document.getElementById('dPoster').innerHTML = g.hero
     ? '<img class="poster-img" src="' + g.hero + '" alt="' + esc(g.name) + '">'
     : '【宣传海报位】';
 
