@@ -31,7 +31,9 @@
     '.gal-frame img{object-fit:cover !important;object-position:center;transition:transform .45s ease}' +
     '.gal-item:hover .gal-frame img{transform:scale(1.06)}' +
     '.gal-video video{object-fit:cover !important}' +
-    '.gal-cap{padding:9px 12px !important;font-size:12px}';
+    '.gal-cap{padding:9px 12px !important;font-size:12px}' +
+    /* 修复：分类浮层 open 类加在容器上，原 payload CSS 只认 panel 自身的 open 类，导致面板永不显示 */
+    '.cat-fold.open .cat-fold-panel{display:block}';
   document.head.appendChild(s);
 })();
 
