@@ -14,6 +14,27 @@
    当前为示例占位数据，真实游戏内容到位后逐条替换。
    ============================================================ */
 
+/* === 视觉美化：统一图库与海报比例，消除黑边，提升质感 === */
+(function(){
+  var s = document.createElement('style');
+  s.textContent =
+    '.detail-poster-ph{aspect-ratio:3/4 !important;border-radius:14px !important;' +
+    'box-shadow:0 10px 32px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,97,.22) !important;' +
+    'background:linear-gradient(135deg,#2a2012,#0d0a06 70%) !important}' +
+    '.poster-img{object-fit:contain !important;object-position:center}' +
+    '.gallery{gap:14px !important;margin-top:16px !important}' +
+    '.gal-item{border-radius:14px !important;overflow:hidden !important;' +
+    'box-shadow:0 4px 16px rgba(0,0,0,.45),0 0 0 1px rgba(201,169,97,.08) !important;' +
+    'transition:transform .28s ease,box-shadow .28s ease}' +
+    '.gal-item:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.6),0 0 0 1px rgba(201,169,97,.28) !important}' +
+    '.gal-frame{aspect-ratio:16/9 !important;background:#0a0704 !important}' +
+    '.gal-frame img{object-fit:cover !important;object-position:center;transition:transform .45s ease}' +
+    '.gal-item:hover .gal-frame img{transform:scale(1.06)}' +
+    '.gal-video video{object-fit:cover !important}' +
+    '.gal-cap{padding:9px 12px !important;font-size:12px}';
+  document.head.appendChild(s);
+})();
+
 var CATEGORIES = ["热门推荐", "经典复古", "复古微变", "攻速复古", "合击", "冰雪版本", "传世元神", "经典三职业", "特殊职业", "特色服"];
 
 /* 分区占位：用于演示分类结构（正式内容到位后替换为真实数据） */
