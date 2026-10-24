@@ -256,8 +256,8 @@ function renderDetail(id){
     : '【宣传海报位】';
 
   var html = '';
-  function secColl(title, body){
-    return '<div class="sec-coll"><button class="sec-head" type="button" aria-expanded="false">' + esc(title) +
+  function secColl(title, body, open){
+    return '<div class="sec-coll' + (open ? ' open' : '') + '"><button class="sec-head" type="button" aria-expanded="' + (open ? 'true' : 'false') + '">' + esc(title) +
       '<svg class="sh-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button>' +
       '<div class="sec-body">' + body + '</div></div>';
   }
@@ -269,7 +269,8 @@ function renderDetail(id){
               '<span class="code-items">' + c.items.map(esc).join(' · ') + '</span></div>';
     });
     codesBody += '</div>';
-    html += secColl('进服礼包码', codesBody);
+    // 礼包码是强转化信息，默认展开，少一步点击
+    html += secColl('进服礼包码', codesBody, true);
   }
   // 分区：上线福利
   if(g.benefits && g.benefits.length){
@@ -277,27 +278,36 @@ function renderDetail(id){
       '<ul>' + g.benefits.map(function(b){ return '<li>' + esc(b) + '</li>'; }).join('') + '</ul>');
   }
   // 分区：攻略正文（含图片画廊）
+  var heroKey = (g.hero || '').split('?')[0];
   (g.sections || []).forEach(function(s){
     var body = '<ul>' + s.items.map(function(i){ return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>';
     if(s.imgs && s.imgs.length){
-      body += '<div class="gallery">';
-      s.imgs.forEach(function(u, idx){
-        var url = u, cap = '';
-        if(typeof u === 'object' && u.video){
-          cap = u.cap || '';
-          body += '<figure class="gal-item">' +
-            '<div class="gal-frame gal-video"><video controls playsinline preload="none" poster="' + (u.poster||'') + '" data-vp src="' + u.video + '"></video></div>' +
-            '<figcaption class="gal-cap"><i>' + esc(s.title) + '</i><span>' + (cap || ('视频 ' + (idx+1) + ' / ' + s.imgs.length)) + '</span></figcaption>' +
-            '</figure>';
-          return;
-        }
-        if(typeof u === 'object' && u.url){ url = u.url; cap = u.cap || ''; }
-        body += '<figure class="gal-item">' +
-          '<div class="gal-frame"><img src="' + url + '" alt="' + esc(s.title) + '" loading="lazy"></div>' +
-          '<figcaption class="gal-cap"><i>' + esc(s.title) + '</i><span>' + (cap || ('图 ' + (idx+1) + ' / ' + s.imgs.length)) + '</span></figcaption>' +
-          '</figure>';
+      // 顶部海报已展示的图不再进图库，避免同一张图重复出现
+      var kept = s.imgs.filter(function(u){
+        if(typeof u === 'object' && u.video){ return true; }
+        var uu = (typeof u === 'object' && u.url) ? u.url : u;
+        return !(heroKey && String(uu).split('?')[0] === heroKey);
       });
-      body += '</div>';
+      if(kept.length){
+        var shots = '';
+        kept.forEach(function(u, idx){
+          var total = kept.length, url = u, cap = '';
+          if(typeof u === 'object' && u.video){
+            cap = u.cap || '';
+            shots += '<figure class="gal-item">' +
+              '<div class="gal-frame gal-video"><video controls playsinline preload="none" poster="' + (u.poster||'') + '" data-vp src="' + u.video + '"></video></div>' +
+              '<figcaption class="gal-cap"><i>' + esc(s.title) + '</i><span>' + (cap || ('视频 ' + (idx+1) + ' / ' + total)) + '</span></figcaption>' +
+              '</figure>';
+            return;
+          }
+          if(typeof u === 'object' && u.url){ url = u.url; cap = u.cap || ''; }
+          shots += '<figure class="gal-item">' +
+            '<div class="gal-frame"><img src="' + url + '" alt="' + esc(s.title) + '" loading="lazy"></div>' +
+            '<figcaption class="gal-cap"><i>' + esc(s.title) + '</i><span>' + (cap || ('图 ' + (idx+1) + ' / ' + total)) + '</span></figcaption>' +
+            '</figure>';
+        });
+        body += '<div class="gallery">' + shots + '</div>';
+      }
     }
     html += secColl(s.title, body);
   });
@@ -366,21 +376,29 @@ document.addEventListener('click', function (e) {
     var pay = document.getElementById('dRecharge');
     openUrl(pay && pay.dataset.url, '该游戏暂未开放充值通道');
   });
-  // 吸底 CTA：仅在页内下载/充值按钮滚出屏幕后才出现（详情页首屏不重复两组按钮）
+  // 吸底 CTA：仅在页内下载/充值按钮完全滚出屏幕后才出现（详情页首屏不重复两组按钮）
+  // 滞回阈值：显示需滚出 48px 以上、隐藏需按钮重新进入视口，避免临界处反复闪隐
+  var ctaShown = false;
   function syncCta(){
     var inDetail = viewDetail.classList.contains('on');
     var row = document.querySelector('.btn-row');
-    var passed = false;
+    var want = ctaShown;
     if(row){
       var r = row.getBoundingClientRect();
-      passed = r.bottom < 0;   // 页内按钮已滚出视口顶部
+      if(!ctaShown && r.bottom < -48){ want = true; }
+      else if(ctaShown && r.bottom > 0){ want = false; }
     }
-    var show = inDetail && passed;
+    // 客服面板展开时让位，避免与吸底按钮抢同一片点击区
+    var fkP = document.getElementById('fkPanel');
+    var show = inDetail && want && !(fkP && fkP.classList.contains('open'));
+    ctaShown = show;
     cta.classList.toggle('on', show);
     document.body.classList.toggle('cq-cta-on', show);
   }
   window.addEventListener('hashchange', function(){ setTimeout(syncCta, 0); });
   window.addEventListener('scroll', syncCta, {passive:true});
+  // 客服面板开合（kefu.js 后加载，用点击后回调同步状态）
+  document.addEventListener('click', function(){ setTimeout(syncCta, 0); }, true);
   syncCta();
 
   // 回到顶部：仅列表页、滚动超过 600px 显示
