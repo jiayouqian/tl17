@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://miaoda.feishu.cn; img-src 'self' data: blob: https://*.byteimg.com; font-src https://miaoda.feishu.cn; connect-src 'self' https://tlbb.hfynxx.top; frame-ancestors 'none'; form-action 'self'; base-uri 'self';">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<script src="assets/frame-guard.js?v=v20261026200000"></script>
+<script src="assets/frame-guard.js?v=v20261026210000"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -28,8 +28,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 .zc-hd em{font-style:normal;font-size:11px;color:#8a7a5e;white-space:nowrap}
 .enter{font-size:12px;color:#b6a584;text-decoration:none;border:1px solid #33271a;border-radius:999px;padding:3px 10px;flex:none;transition:.2s}
 .enter:hover{color:#c9a45c;border-color:#c9a45c}
-/* 轮播：框体维持 4:3；图源为无虚化垫底的 16:9 原图，cover 居中填满（左右各裁约 12%） */
-.carousel{position:relative;width:100%;margin-top:6px;overflow:hidden;aspect-ratio:4/3;flex:none;background:#171209}
+/* 轮播：框体 3:2；图源为 16:9 原图，contain 完整不裁，上下各约 5% 深色边 */
+.carousel{position:relative;width:100%;margin-top:6px;overflow:hidden;aspect-ratio:3/2;flex:none;background:#171209}
 .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden}
 .slide.on{opacity:1;pointer-events:auto}
 .slide img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
@@ -55,23 +55,23 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
     <div class="zc ct">
       <div class="zc-hd"><b>传奇手游专区</b><em>41 款 · 点图进入</em><a class="enter" href="cq.html">进入传奇 ›</a></div>
       <div class="carousel" data-swipe data-href="cq.html">
-        <div class="slide on"><img src="assets/home-carousel/c_kuangbao_xiyou.webp?v=v20261026200000" alt="狂暴西游"></div><div class="slide"><img data-src="assets/home-carousel/c_feijian_jianghu.webp?v=v20261026200000" alt="飞剑江湖" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_shensu_chuanqi.webp?v=v20261026200000" alt="神速传奇" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_bingxue_guilai.webp?v=v20261026200000" alt="冰雪归来" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_zhanguo_chuanqi.webp?v=v20261026200000" alt="战国传奇" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_liehuo_zhange.webp?v=v20261026200000" alt="烈火战歌" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_shacheng_fengyun.webp?v=v20261026200000" alt="沙城风云" decoding="async"></div>
+        <div class="slide on"><img src="assets/home-carousel/c_kuangbao_xiyou.webp?v=v20261026210000" alt="狂暴西游"></div><div class="slide"><img data-src="assets/home-carousel/c_feijian_jianghu.webp?v=v20261026210000" alt="飞剑江湖" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_shensu_chuanqi.webp?v=v20261026210000" alt="神速传奇" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_bingxue_guilai.webp?v=v20261026210000" alt="冰雪归来" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_zhanguo_chuanqi.webp?v=v20261026210000" alt="战国传奇" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_liehuo_zhange.webp?v=v20261026210000" alt="烈火战歌" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/c_shacheng_fengyun.webp?v=v20261026210000" alt="沙城风云" decoding="async"></div>
         <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button><button class="dot" data-i="5" type="button" aria-label="第6张"></button><button class="dot" data-i="6" type="button" aria-label="第7张"></button></div>
       </div>
     </div>
     <div class="zc tl">
-      <div class="zc-hd"><b>天龙手游专区</b><em>17职业国际服 · 点图进入</em><a class="enter" href="tianlong.html?v=v20261026200000">进入天龙 ›</a></div>
-      <div class="carousel" data-swipe data-href="tianlong.html?v=v20261026200000">
-        <div class="slide on"><img src="assets/home-carousel/tl_official_logo_uni.webp?v=v20261026200000" alt="天龙八部手游"></div><div class="slide"><img data-src="assets/home-carousel/tl_taohuadao_uni.webp?v=v20261026200000" alt="天龙游戏实景" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_tianmingxuanfeng_uni.webp?v=v20261026200000" alt="天龙珍兽天命玄凤" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_beimingxuanwu_uni.webp?v=v20261026200000" alt="天龙珍兽北溟玄龟" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_fengyujingmeng_uni.webp?v=v20261026200000" alt="天龙时装风雨惊梦" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_tayanjinshi_uni.webp?v=v20261026200000" alt="天龙累计登录奖励" decoding="async"></div>        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button><button class="dot" data-i="5" type="button" aria-label="第6张"></button></div>
+      <div class="zc-hd"><b>天龙手游专区</b><em>17职业国际服 · 点图进入</em><a class="enter" href="tianlong.html?v=v20261026210000">进入天龙 ›</a></div>
+      <div class="carousel" data-swipe data-href="tianlong.html?v=v20261026210000">
+        <div class="slide on"><img src="assets/home-carousel/tl_official_logo_uni.webp?v=v20261026210000" alt="天龙八部手游"></div><div class="slide"><img data-src="assets/home-carousel/tl_taohuadao_uni.webp?v=v20261026210000" alt="天龙游戏实景" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_tianmingxuanfeng_uni.webp?v=v20261026210000" alt="天龙珍兽天命玄凤" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_beimingxuanwu_uni.webp?v=v20261026210000" alt="天龙珍兽北溟玄龟" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_fengyujingmeng_uni.webp?v=v20261026210000" alt="天龙时装风雨惊梦" decoding="async"></div><div class="slide"><img data-src="assets/home-carousel/tl_tayanjinshi_uni.webp?v=v20261026210000" alt="天龙累计登录奖励" decoding="async"></div>        <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button><button class="dot" data-i="5" type="button" aria-label="第6张"></button></div>
       </div>
     </div>
   </div>
 
   <p class="foot">游戏专区门户 · 传奇专区 + 魔幻天龙国际服</p>
 </div>
-<script src="assets/carousel.js?v=v20261026200000"></script>
-<script src="assets/rv-check.js?v=v20261026200000"></script>
-<script src="assets/kefu.js?v=v20261026200000"></script>
+<script src="assets/carousel.js?v=v20261026210000"></script>
+<script src="assets/rv-check.js?v=v20261026210000"></script>
+<script src="assets/kefu.js?v=v20261026210000"></script>
 
 </body>
 </html>
