@@ -202,7 +202,7 @@ function renderList(){
   if(!searchEl){ searchEl = document.getElementById('search'); searchEl.addEventListener('input', renderList); }
   var kw = (searchEl.value || '').trim().toLowerCase();
   var grid = document.getElementById('gameGrid');
-  document.getElementById('zoneCount').textContent = '共 ' + GAMES.length + ' 款 · 分类筛选 / 搜索定位';
+  document.getElementById('zoneCount').textContent = '共 ' + GAMES.length + ' 款';
 
   if(filterCat === '全部' && !kw){
     // 全部：按分类分组展示
