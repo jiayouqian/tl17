@@ -39,7 +39,7 @@
     '.gal-cap{padding:9px 12px !important;font-size:12px}' +
     /* 修复：分类浮层 open 类加在容器上，原 payload CSS 只认 panel 自身的 open 类，导致面板永不显示 */
     '.cat-fold.open .cat-fold-panel{display:block}' +
-    /* UX：详情页吸底CTA栏——仅在页内按钮滚出屏幕后出现，避免首屏重复两组按钮 */
+    /* UX：详情页吸底CTA栏——详情页唯一下载入口，始终固定可见 */
     '#cqCtaBar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:12px;' +
     'padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));' +
     'background:rgba(13,10,6,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(201,169,97,.25);' +
@@ -50,7 +50,7 @@
     '#cqCtaBar button:active{transform:scale(.97)}' +
     /* 客服悬浮钮仅在吸底栏出现时上移，其余时间保持原位 */
     'body.cq-cta-on .fk{bottom:calc(128px + env(safe-area-inset-bottom,0px)) !important}' +
-    'body.cq-cta-on{padding-bottom:80px}' +
+    'body.cq-cta-on{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}' +
     /* P0：图库竖版海报不再被 16:9 裁切（JS 依据原图比例回填，超长图限 1:2 并 contain 保真） */
     '.gal-frame.gal-contain img{object-fit:contain !important;background:#0a0704}' +
     /* P1：搜索框一键清除 */
@@ -98,6 +98,7 @@ var GAMES = [{"id": "wxcm", "name": "五行沉默", "slogan": "独家单职业 �
 var gridEl = document.getElementById('gameGrid');
 var viewList = document.getElementById('view-list');
 var viewDetail = document.getElementById('view-detail');
+var detailUrl = '#';
 var toastEl = document.getElementById('toast');
 var toastTimer = null;
 
@@ -258,8 +259,8 @@ function renderDetail(id){
   document.getElementById('dName').textContent = g.name;
   document.getElementById('dSlogan').textContent = g.slogan;
   document.getElementById('dBadges').innerHTML = '<span class="badge">' + esc(g.badge) + '</span>';
-  document.getElementById('dRegister').dataset.url = g.regLink || '#';
   document.getElementById('dAgent').innerHTML = '进服注册：' + safeAgent(g.agentCode);
+  detailUrl = g.regLink || '#';
   document.getElementById('dPoster').innerHTML = g.hero
     ? '<img class="poster-img" src="' + g.hero + '" alt="' + esc(g.name) + '">'
     : '【宣传海报位】';
@@ -342,13 +343,6 @@ function router(){
   }
 }
 
-// 下载按钮：真实链接到位后由 data-url 直跳；当前给占位提示
-document.getElementById('dRegister').addEventListener('click', function(){
-  var url = this.dataset.url;
-  if(url && url !== '#'){ window.open(url, '_blank', 'noopener'); }
-  else { toast('占位按钮：真实链接待填充，填好后自动跳转'); }
-});
-
 window.addEventListener('hashchange', router);
 router();
 
@@ -360,7 +354,7 @@ document.addEventListener('click', function (e) {
 
 /* === UX 增强：详情页吸底CTA栏 + 列表页回到顶部 === */
 (function(){
-  // 吸底 CTA：复用详情页下载按钮的 data-url，行为与页内按钮一致（传奇均在游戏内充值，不设充值入口）
+  // 吸底 CTA：详情页唯一下载入口（传奇均在游戏内充值，不设充值入口）
   var cta = document.createElement('div');
   cta.id = 'cqCtaBar';
   cta.innerHTML = '<button type="button" id="cqCtaDl">下载游戏</button>';
@@ -370,29 +364,18 @@ document.addEventListener('click', function (e) {
     else { toast(tip); }
   }
   document.getElementById('cqCtaDl').addEventListener('click', function(){
-    openUrl(document.getElementById('dRegister').dataset.url, '占位按钮：真实链接待填充');
+    openUrl(detailUrl, '占位按钮：真实链接待填充');
   });
-  // 吸底 CTA：仅在页内下载按钮完全滚出屏幕后才出现（详情页首屏不重复两组按钮）
-  // 滞回阈值：显示需滚出 48px 以上、隐藏需按钮重新进入视口，避免临界处反复闪隐
-  var ctaShown = false;
+  // 详情页恒显示吸底按钮：长页面无需回滚，入口始终可见
   function syncCta(){
     var inDetail = viewDetail.classList.contains('on');
-    var row = document.querySelector('.btn-row');
-    var want = ctaShown;
-    if(row){
-      var r = row.getBoundingClientRect();
-      if(!ctaShown && r.bottom < -48){ want = true; }
-      else if(ctaShown && r.bottom > 0){ want = false; }
-    }
     // 客服面板展开时让位，避免与吸底按钮抢同一片点击区
     var fkP = document.getElementById('fkPanel');
-    var show = inDetail && want && !(fkP && fkP.classList.contains('open'));
-    ctaShown = show;
+    var show = inDetail && !(fkP && fkP.classList.contains('open'));
     cta.classList.toggle('on', show);
     document.body.classList.toggle('cq-cta-on', show);
   }
   window.addEventListener('hashchange', function(){ setTimeout(syncCta, 0); });
-  window.addEventListener('scroll', syncCta, {passive:true});
   // 客服面板开合（kefu.js 后加载，用点击后回调同步状态）
   document.addEventListener('click', function(){ setTimeout(syncCta, 0); }, true);
   syncCta();

@@ -38,7 +38,7 @@
   /* 首载盖章：把当前版本写入 URL ?ver= 一次（replace，不入栈）。
      真实页据此得到 curVer，首访不触发自刷白屏；后续秒更新一律由真实页 URL ver 比较法负责，
      壳层不再做轮询，避免与真实页双重检测、也避免发版忘改 __ver 时每 3 秒死循环 reload。 */
-  var __ver='v20261025200000';
+  var __ver='v20261025230000';
   if(!location.search.match(/[?&]ver=/)){
     /* 保留 location.hash：#/game/xxx 深链直达详情页，否则 replaceState 会丢 hash */
     try{ history.replaceState(null,'', location.pathname + '?ver=' + __ver + location.hash); }catch(e){}
