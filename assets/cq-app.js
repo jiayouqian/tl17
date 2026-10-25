@@ -17,12 +17,12 @@
 (function(){
   var s = document.createElement('style');
   s.textContent =
-    /* P0：海报不再锁死 3:4，改为原图比例自然撑高，彻底消除上下 letterbox 黑边 */
-    '.detail-poster-ph{aspect-ratio:auto !important;max-height:none !important;display:block !important;' +
+    /* P0：海报按原图比例展示（不锁 3:4），超高竖图限 62vh，避免把下载按钮顶出首屏 */
+    '.detail-poster-ph{aspect-ratio:auto !important;max-height:62vh !important;display:block !important;' +
     'border-radius:14px !important;' +
     'box-shadow:0 10px 32px rgba(0,0,0,.6),inset 0 0 0 1px rgba(201,169,97,.22) !important;' +
     'background:linear-gradient(135deg,#2a2012,#0d0a06 70%) !important}' +
-    '.poster-img{width:100% !important;height:auto !important;display:block;' +
+    '.poster-img{width:100% !important;height:auto !important;max-height:62vh !important;display:block;' +
     'object-fit:contain !important;object-position:center}' +
     /* P0：列表卖点由单行截断改为两行，保留"单职业/几大陆/几倍返利"等关键词 */
     '.row-info p{white-space:normal !important;display:-webkit-box !important;-webkit-box-orient:vertical;' +
@@ -39,7 +39,7 @@
     '.gal-cap{padding:9px 12px !important;font-size:12px}' +
     /* 修复：分类浮层 open 类加在容器上，原 payload CSS 只认 panel 自身的 open 类，导致面板永不显示 */
     '.cat-fold.open .cat-fold-panel{display:block}' +
-    /* UX：详情页吸底CTA栏——详情页唯一下载入口，始终固定可见 */
+    /* UX：详情页吸底CTA栏——页内下载按钮滚出屏幕后接管，全站长页面统一 */
     '#cqCtaBar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:12px;' +
     'padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));' +
     'background:rgba(13,10,6,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(201,169,97,.25);' +
@@ -346,6 +346,16 @@ function router(){
 window.addEventListener('hashchange', router);
 router();
 
+/* 下载入口：页内按钮与吸底按钮共用同一链接（真实链接待填充时给占位提示） */
+function openUrl(url, tip){
+  if(url && url !== '#'){ window.open(url, '_blank', 'noopener'); }
+  else { toast(tip); }
+}
+function downloadGame(){
+  openUrl(detailUrl, '占位按钮：真实链接待填充');
+}
+document.getElementById('dRegister').addEventListener('click', downloadGame);
+
 /* 内联 onclick="this.play()" 的委托替代（严格 CSP 下 inline handler 会被拦截） */
 document.addEventListener('click', function (e) {
   var v = e.target.closest && e.target.closest('video[data-vp]');
@@ -354,28 +364,26 @@ document.addEventListener('click', function (e) {
 
 /* === UX 增强：详情页吸底CTA栏 + 列表页回到顶部 === */
 (function(){
-  // 吸底 CTA：详情页唯一下载入口（传奇均在游戏内充值，不设充值入口）
+  // 吸底 CTA：页内下载按钮滚出屏幕后接管，保证长页面入口始终可见；两者不会同时出现
   var cta = document.createElement('div');
   cta.id = 'cqCtaBar';
   cta.innerHTML = '<button type="button" id="cqCtaDl">下载游戏</button>';
   document.body.appendChild(cta);
-  function openUrl(url, tip){
-    if(url && url !== '#'){ window.open(url, '_blank', 'noopener'); }
-    else { toast(tip); }
-  }
-  document.getElementById('cqCtaDl').addEventListener('click', function(){
-    openUrl(detailUrl, '占位按钮：真实链接待填充');
-  });
-  // 详情页恒显示吸底按钮：长页面无需回滚，入口始终可见
+  document.getElementById('cqCtaDl').addEventListener('click', downloadGame);
+  var ctaShown = false;
   function syncCta(){
     var inDetail = viewDetail.classList.contains('on');
+    // 页内按钮完整滚出视野后才出现，避免同一屏出现两个下载按钮
+    var reg = document.getElementById('dRegister');
+    var passed = !reg || reg.getBoundingClientRect().bottom <= -8;
     // 客服面板展开时让位，避免与吸底按钮抢同一片点击区
     var fkP = document.getElementById('fkPanel');
-    var show = inDetail && !(fkP && fkP.classList.contains('open'));
+    var show = inDetail && passed && !(fkP && fkP.classList.contains('open'));
     cta.classList.toggle('on', show);
     document.body.classList.toggle('cq-cta-on', show);
   }
   window.addEventListener('hashchange', function(){ setTimeout(syncCta, 0); });
+  window.addEventListener('scroll', syncCta, {passive:true});
   // 客服面板开合（kefu.js 后加载，用点击后回调同步状态）
   document.addEventListener('click', function(){ setTimeout(syncCta, 0); }, true);
   syncCta();
