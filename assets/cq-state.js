@@ -41,8 +41,10 @@
       .then(function(d){
         if (d.v && d.v !== curVer) {
           try { sessionStorage.setItem('cq_pos', JSON.stringify(snapState())); } catch(e){}
-          var q = (location.search ? location.search + '&' : '?') + 'ver=' + d.v;
-          location.replace(location.pathname + q);
+          /* 覆盖已有的 ver 参数而不是追加，避免出现 ?ver=旧&ver=新 后 curVer 永远读到旧值造成刷新死循环 */
+          var usp = new URLSearchParams(location.search);
+          usp.set('ver', d.v);
+          location.replace(location.pathname + '?' + usp.toString() + (location.hash || ''));
         }
       }).catch(function(){});
   }
