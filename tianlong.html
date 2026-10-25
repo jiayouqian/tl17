@@ -32,14 +32,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
 .slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity .7s ease;pointer-events:none;overflow:hidden;background:#171209}
 .slide.on{opacity:1;pointer-events:auto}
 .slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
-/* 文字叠加帧 */
-.sl-cap{position:absolute;left:0;right:0;bottom:0;padding:20px 14px 26px;background:linear-gradient(180deg,transparent 0%,rgba(8,5,2,.35) 45%,rgba(8,5,2,.9) 100%)}
-.sl-badge{display:inline-block;font-size:10px;color:#191209;background:#c9a45c;border-radius:4px;padding:1px 8px;font-weight:700;margin-bottom:5px}
-.sl-badge.m{background:#d34b3a;color:#fff}
-.sl-cap b{display:block;font-size:17px;font-weight:800;color:#f2e7cf;text-shadow:0 1px 4px rgba(0,0,0,.55)}
-.sl-cap p{font-size:12px;color:#c9b890;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 底部文字压层已移除：宣传图自带文案，磨砂遮罩反而遮挡画面 */
 .dots{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:6px}
-.dot{width:6px;height:6px;border-radius:50%;border:none;background:rgba(255,255,255,.3);padding:0;margin:0 2px;cursor:pointer;transition:.25s}
+.dot{width:6px;height:6px;border-radius:50%;border:none;background:rgba(255,255,255,.45);padding:0;margin:0 2px;cursor:pointer;transition:.25s;box-shadow:0 0 4px rgba(0,0,0,.6)}
 .dot.on{background:rgba(255,255,255,.9)}
 .zc.ml .dot.on{background:rgba(255,255,255,.9)}
 .foot{text-align:center;color:#8a7a5e;font-size:11px;margin:10px 0 6px;flex:none}
@@ -57,18 +52,18 @@ header{display:flex;align-items:center;justify-content:space-between;padding:8px
     <div class="zc cw-zc">
       <div class="zc-hd"><b>畅玩版</b><em>经典天龙八部</em><a class="enter" href="tl-changwan.html?v=v20261024130000">进入畅玩版 ›</a></div>
       <div class="carousel cw-car" data-href="tl-changwan.html">
-        <div class="slide on"><img src="assets/home-carousel/cw_17profession_43.webp?v=v20261024130000" alt="畅玩天龙17职业"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 17职业</b><p>同步官方1比1 · 万人大区 · 福利拉满</p></div></div><div class="slide"><img src="assets/home-carousel/cw_gonglue_43.webp?v=v20261024130000" alt="畅玩天龙游戏攻略" decoding="async"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 游戏攻略</b><p>详细攻略 · 新手快速上手</p></div></div><div class="slide"><img src="assets/home-carousel/cw_xinwanfa_43.webp?v=v20261024130000" alt="畅玩天龙更新全新玩法" decoding="async"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 全新玩法</b><p>更新上线 · 玩法全面升级</p></div></div><div class="slide"><img src="assets/home-carousel/cw_emei_43.webp?v=v20261024130000" alt="畅玩天龙峨眉门派" decoding="async"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>畅玩天龙 · 门派焕新</b><p>峨眉门派 · 更新全新玩法</p></div></div><div class="slide"><img src="assets/home-carousel/cw_shuangjie_43.webp?v=v20261024130000" alt="畅玩天龙双节同庆" decoding="async"><div class="sl-cap"><span class="sl-badge">畅玩版</span><b>双节同庆 · 福利双行</b><p>节日福利 · 礼包限购返代币</p></div></div><div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button></div>
+        <div class="slide on"><img src="assets/home-carousel/cw_17profession_43.webp?v=v20261024130000" alt="畅玩天龙17职业"></div><div class="slide"><img src="assets/home-carousel/cw_gonglue_43.webp?v=v20261024130000" alt="畅玩天龙游戏攻略" decoding="async"></div><div class="slide"><img src="assets/home-carousel/cw_xinwanfa_43.webp?v=v20261024130000" alt="畅玩天龙更新全新玩法" decoding="async"></div><div class="slide"><img src="assets/home-carousel/cw_emei_43.webp?v=v20261024130000" alt="畅玩天龙峨眉门派" decoding="async"></div><div class="slide"><img src="assets/home-carousel/cw_shuangjie_43.webp?v=v20261024130000" alt="畅玩天龙双节同庆" decoding="async"></div><div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button></div>
       </div>
     </div>
     <!-- 魔幻版滚动区 -->
     <div class="zc ml">
       <div class="zc-hd"><b>魔幻版</b><em>17职业国际服</em><a class="enter" href="tl-mohuan.html?ver=v20261024130000">进入魔幻版 ›</a></div>
       <div class="carousel ml-car" data-href="tl-mohuan.html?ver=v20261024130000">
-        <div class="slide on"><img src="assets/home-carousel/ml_001zhe_43.webp?v=v20261024130000" alt="0.01折江湖钜惠令"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>0.01折 · 江湖钜惠令</b><p>魔幻天龙17职业 · 一文抵百金</p></div></div>
-        <div class="slide"><img src="assets/home-carousel/ml_gongce_43.webp?v=v20261024130000" alt="天龙公测江湖充值帖" decoding="async"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>天龙公测 · 江湖充值帖</b><p>首充豪礼 · 成长补给 · 终生限购</p></div></div>
-        <div class="slide"><img src="assets/home-carousel/ml_chonglou_43.webp?v=v20261024130000" alt="七日寻重楼连充献礼" decoding="async"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>七日寻重楼 · 连充献礼</b><p>日行寻玉充 · 重楼至宝赠</p></div></div>
-        <div class="slide"><img src="assets/home-carousel/ml_free_43.webp?v=v20261024130000" alt="免费福利馈赠" decoding="async"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>免费福利馈赠</b><p>每日免费派送 · 升级领充值</p></div></div>
-        <div class="slide"><img src="assets/home-carousel/ml_libao_43.webp?v=v20261024130000" alt="魔幻天龙福利礼包" decoding="async"><div class="sl-cap"><span class="sl-badge m">魔幻版</span><b>魔幻天龙 · 福利礼包</b><p>小资中资礼包 · 终身一次</p></div></div>
+        <div class="slide on"><img src="assets/home-carousel/ml_001zhe_43.webp?v=v20261024130000" alt="0.01折江湖钜惠令"></div>
+        <div class="slide"><img src="assets/home-carousel/ml_gongce_43.webp?v=v20261024130000" alt="天龙公测江湖充值帖" decoding="async"></div>
+        <div class="slide"><img src="assets/home-carousel/ml_chonglou_43.webp?v=v20261024130000" alt="七日寻重楼连充献礼" decoding="async"></div>
+        <div class="slide"><img src="assets/home-carousel/ml_free_43.webp?v=v20261024130000" alt="免费福利馈赠" decoding="async"></div>
+        <div class="slide"><img src="assets/home-carousel/ml_libao_43.webp?v=v20261024130000" alt="魔幻天龙福利礼包" decoding="async"></div>
         <div class="dots"><button class="dot on" data-i="0" type="button" aria-label="第1张"></button><button class="dot" data-i="1" type="button" aria-label="第2张"></button><button class="dot" data-i="2" type="button" aria-label="第3张"></button><button class="dot" data-i="3" type="button" aria-label="第4张"></button><button class="dot" data-i="4" type="button" aria-label="第5张"></button></div>
       </div></div>
     </div>
