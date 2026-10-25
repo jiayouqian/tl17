@@ -39,18 +39,6 @@
     '.gal-cap{padding:9px 12px !important;font-size:12px}' +
     /* 修复：分类浮层 open 类加在容器上，原 payload CSS 只认 panel 自身的 open 类，导致面板永不显示 */
     '.cat-fold.open .cat-fold-panel{display:block}' +
-    /* UX：详情页吸底CTA栏——页内下载按钮滚出屏幕后接管，全站长页面统一 */
-    '#cqCtaBar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:12px;' +
-    'padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));' +
-    'background:rgba(13,10,6,.96);backdrop-filter:blur(8px);border-top:1px solid rgba(201,169,97,.25);' +
-    'transform:translateY(110%);transition:transform .24s ease;pointer-events:none}' +
-    '#cqCtaBar.on{transform:translateY(0);pointer-events:auto}' +
-    '#cqCtaBar button{flex:1;padding:12px 0;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}' +
-    '#cqCtaDl{background:linear-gradient(135deg,#c8352c,#8f1d16);color:#fff;box-shadow:0 4px 14px rgba(200,53,44,.35)}' +
-    '#cqCtaBar button:active{transform:scale(.97)}' +
-    /* 客服悬浮钮仅在吸底栏出现时上移，其余时间保持原位 */
-    'body.cq-cta-on .fk{bottom:calc(128px + env(safe-area-inset-bottom,0px)) !important}' +
-    'body.cq-cta-on{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}' +
     /* P0：图库竖版海报不再被 16:9 裁切（JS 依据原图比例回填，超长图限 1:2 并 contain 保真） */
     '.gal-frame.gal-contain img{object-fit:contain !important;background:#0a0704}' +
     /* P1：搜索框一键清除 */
@@ -61,7 +49,7 @@
     'color:#c9a961;display:none;align-items:center;justify-content:center;cursor:pointer;padding:0}' +
     '.cq-search-x.on{display:flex}' +
     '.cq-search-x:active{background:rgba(201,169,97,.3)}' +
-    /* UX：回到顶部悬浮按钮（仅列表页、滚动超600px显示）；层级：回顶 50 < CTA 60 < toast 100 < 客服 9999 */
+    /* UX：回到顶部悬浮按钮（仅列表页、滚动超600px显示）；层级：回顶 50 < toast 100 < 客服 9999 */
     '#cqTopBtn{position:fixed;left:14px;bottom:calc(48px + env(safe-area-inset-bottom,0px));z-index:50;' +
     'width:42px;height:42px;border-radius:50%;border:1px solid rgba(201,169,97,.4);background:rgba(22,16,9,.92);' +
     'color:#e8b64c;cursor:pointer;display:none;align-items:center;justify-content:center;' +
@@ -362,32 +350,8 @@ document.addEventListener('click', function (e) {
   if (v) { try { v.play(); } catch (err) {} }
 });
 
-/* === UX 增强：详情页吸底CTA栏 + 列表页回到顶部 === */
+/* === UX 增强：列表页回到顶部 === */
 (function(){
-  // 吸底 CTA：页内下载按钮滚出屏幕后接管，保证长页面入口始终可见；两者不会同时出现
-  var cta = document.createElement('div');
-  cta.id = 'cqCtaBar';
-  cta.innerHTML = '<button type="button" id="cqCtaDl">下载游戏</button>';
-  document.body.appendChild(cta);
-  document.getElementById('cqCtaDl').addEventListener('click', downloadGame);
-  var ctaShown = false;
-  function syncCta(){
-    var inDetail = viewDetail.classList.contains('on');
-    // 页内按钮完整滚出视野后才出现，避免同一屏出现两个下载按钮
-    var reg = document.getElementById('dRegister');
-    var passed = !reg || reg.getBoundingClientRect().bottom <= -8;
-    // 客服面板展开时让位，避免与吸底按钮抢同一片点击区
-    var fkP = document.getElementById('fkPanel');
-    var show = inDetail && passed && !(fkP && fkP.classList.contains('open'));
-    cta.classList.toggle('on', show);
-    document.body.classList.toggle('cq-cta-on', show);
-  }
-  window.addEventListener('hashchange', function(){ setTimeout(syncCta, 0); });
-  window.addEventListener('scroll', syncCta, {passive:true});
-  // 客服面板开合（kefu.js 后加载，用点击后回调同步状态）
-  document.addEventListener('click', function(){ setTimeout(syncCta, 0); }, true);
-  syncCta();
-
   // 回到顶部：仅列表页、滚动超过 600px 显示
   var topBtn = document.createElement('button');
   topBtn.id = 'cqTopBtn';
