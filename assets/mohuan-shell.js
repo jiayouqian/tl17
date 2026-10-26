@@ -1,5 +1,5 @@
 
-var v='v20261024130000';
+var v='v20261026230000';
 (function(){
   var m=location.search.match(/ver=([^&]+)/);
   if(m && m[1]!==v){
